@@ -1,0 +1,36 @@
+body {
+	background-color: #E9EDAD;
+	background-image: linear-gradient(#E9EDAD, #B0EDA0);
+	color: #342A45;
+	font-family: 'Roboto Mono', sans-serif;
+}
+
+.hello-world {
+	margin: 100vh 0;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	height: 300vh;
+}
+
+h1 {
+	width: 100%;
+	font-size: 8vw;
+	text-align: center;
+}
+
+h1 > span {
+	position: relative;
+	display: inline-block;
+	width: 7%;
+}
+
+.parallax-el-wrapper {
+	position: relative;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.parallax-el {
+	position: relative;
+	border: 2px solid rgba(0, 0, 0, 0.5);
+}
