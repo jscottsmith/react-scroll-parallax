@@ -8,12 +8,10 @@ LINKS GO HERE
 
 ## Usage
 
-Import and execute `parallaxScrollListener` on the client side. This will create the **global** `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
+Import `ParallaxScrollListener` on the client side. This will self invoke and create the **global** `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
 
 ```
-import { parallaxScrollListener } from 'react-scroll-parallax';
-
-parallaxScrollListener();
+import 'react-scroll-parallax/libs/ParallaxScrollListener';
 ```
 
 Import the `Parallax` component...
