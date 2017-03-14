@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import HelloWorld from './components/HelloWorld';
-import Parallax from '../src/react-scroll-parallax';
+
+import 'react-scroll-parallax/libs/ParallaxScrollListener';
 
 const root = document.getElementById('root');
 
