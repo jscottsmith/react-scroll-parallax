@@ -17,6 +17,12 @@ const clientConfig = {
     PRODUCTION && new MinifierPlugin(),
   ].filter(e => e),
 
+  resolve: {
+    alias: {
+      'react-scroll-parallax': path.resolve('./src/'),
+    },
+  },
+
   module: {
     rules: [
       {
@@ -52,6 +58,12 @@ const serverConfig = {
   plugins: [
     PRODUCTION && new MinifierPlugin(),
   ].filter(e => e),
+
+  resolve: {
+    alias: {
+      'react-scroll-parallax': path.resolve('./src/'),
+    },
+  },
 
   module: {
     rules: [
