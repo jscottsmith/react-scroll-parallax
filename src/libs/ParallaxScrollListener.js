@@ -216,7 +216,7 @@ import {
 
             const topInView     = top    >= 0 && top    <= windowHeight;
             const bottomInView  = bottom >= 0 && bottom <= windowHeight;
-            const covering = top <= windowHeight && bottom >= 0;
+            const covering = top <= 0 && bottom >= windowHeight;
 
             const isInView = topInView || bottomInView || covering;
 
