@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import ReactDOM from 'react-dom';
 
 export default class Parallax extends Component {
 
@@ -62,8 +61,6 @@ export default class Parallax extends Component {
         const {
             children,
             className,
-            offsetYMax,
-            offsetYMin,
             tag: Tag,
         } = this.props;
 
