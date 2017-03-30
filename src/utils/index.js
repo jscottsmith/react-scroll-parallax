@@ -46,7 +46,7 @@ export function parseValueAndUnit(value) {
         };
     } else if (isString && value.slice(-1) === '%') {
         // remove % then parse
-        value = parseInt( value.slice(0, -1), 10);
+        value = parseInt(value.slice(0, -1), 10);
 
         return {
             value,
