@@ -64,7 +64,7 @@ export default class Parallax extends Component {
             tag: Tag,
         } = this.props;
 
-        const rootClass = 'parallax-outer' + ` ${className}`;
+        const rootClass = 'parallax-outer' + (className ? ` ${className}` : '');
 
         return (
             <Tag
