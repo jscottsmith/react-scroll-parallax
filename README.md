@@ -1,6 +1,6 @@
 # React Scroll Parallax
 
-A React component and single global scroll listener to add **vertical** scroll based movements to elements based on their position in the viewport. Works with server side rendering and universal react apps.
+Provides a React component and single global passive scroll listener to add **vertical** scroll based offsets to elements based on their position in the viewport. Works with server side rendering and universal react apps.
 
 ## Examples
 
