@@ -1,0 +1,48 @@
+//
+// Marquee
+// ---------------------------
+
+@import '../../styles/colors';
+
+:local(.root) {
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: space-around;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin-bottom: 100vh;
+}
+
+:local(.hr) {
+    position: absolute;
+    top: -30%;
+    transform: skewY(-10deg);
+}
+
+:local(.container) {
+    position: relative;
+    width: 40em;
+}
+
+:local(.boxOutline) {
+    position: absolute;
+    top: 20%;
+    right: 7%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+:local(.boxBg) {
+    width: 100%;
+}
+
+:local(.text) {
+    position: absolute;
+    top: 28%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}

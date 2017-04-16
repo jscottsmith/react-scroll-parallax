@@ -41,7 +41,7 @@ body {
 
 h1 {
     width: 100%;
-    font-size: 10vw;
+    font-size: 30vw;
     text-align: center;
 }
 
@@ -59,6 +59,7 @@ h1 > span {
 .parallax-inner {
     position: relative;
     will-change: transform;
+    background-color: rgba(255, 0, 0, 0.3);
 }
 
 .parallax-outer::after {
@@ -69,6 +70,10 @@ h1 > span {
     right: 0;
     bottom: 0;
     border: 2px solid orangered;
+}
+
+.is-in-view .parallax-inner {
+    background-color: rgba(0, 255, 0, 0.3);
 }
 
 .parallax-inner::after {
