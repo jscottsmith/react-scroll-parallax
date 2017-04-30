@@ -8,8 +8,8 @@ import boxOutline from '!!raw-loader!./box-outline.svg';
 const Marquee = () => (
     <div className={style.root}>
         <Parallax
-            offsetYMax={-20}
-            offsetYMin={20}
+            offsetYMax={20}
+            offsetYMin={-20}
             slowerScrollRate
         >
             <hr className={style.hr} />
@@ -21,19 +21,19 @@ const Marquee = () => (
             />
             <Parallax
                 className={style.text}
-                offsetYMax={-70}
-                offsetYMin={70}
+                offsetYMax={70}
+                offsetYMin={-70}
                 offsetXMax={-20}
                 offsetXMin={20}
             >
                 <h1>
-                    Scroll
+                    Slide
                 </h1>
             </Parallax>
             <Parallax
                 className={style.boxOutline}
-                offsetYMax={-35}
-                offsetYMin={35}
+                offsetYMax={35}
+                offsetYMin={-35}
             >
                 <Svg svg={boxOutline} />
             </Parallax>
