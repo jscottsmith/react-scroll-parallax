@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { offsetMin, offsetMax } from '../utils/propValidation';
 
 export default class Parallax extends Component {
 
@@ -18,8 +19,8 @@ export default class Parallax extends Component {
         disabled: PropTypes.bool.isRequired,
         offsetXMax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         offsetXMin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        offsetYMax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        offsetYMin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        offsetYMax: offsetMax,
+        offsetYMin: offsetMin,
         slowerScrollRate: PropTypes.bool.isRequired,
         tag: PropTypes.string.isRequired,
     };
