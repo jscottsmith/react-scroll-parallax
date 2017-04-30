@@ -4,16 +4,11 @@ import { Svg } from 'components';
 import { Parallax } from 'react-scroll-parallax';
 import boxBg from '!!raw-loader!./box-bg.svg';
 import boxOutline from '!!raw-loader!./box-outline.svg';
+import divider from '!!raw-loader!../shared/divider.svg';
 
 const Marquee = () => (
     <div className={style.root}>
-        <Parallax
-            offsetYMax={20}
-            offsetYMin={-20}
-            slowerScrollRate
-        >
-            <hr className={style.hr} />
-        </Parallax>
+        <Svg svg={divider} className={style.divider} />
         <div className={style.container}>
             <Svg
                 svg={boxBg}

@@ -8,17 +8,15 @@
     position: relative;
     display: flex;
     flex-flow: column wrap;
-    align-items: space-around;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 50vh;
-    margin-bottom: 100vh;
+    margin-bottom: 25vh;
 }
 
-:local(.hr) {
-    position: absolute;
-    top: -30%;
-    transform: skewY(-10deg);
+:local(.divider) {
+    display: block;
+    width: 100%;
 }
 
 :local(.container) {
