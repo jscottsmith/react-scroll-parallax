@@ -1,0 +1,31 @@
+//
+// Intro Copy
+// ---------------------------
+
+@import '../../styles/colors';
+
+:local(.root) {
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: space-around;
+    justify-content: center;
+    align-items: center;
+    paddin-top: 25vh;
+    z-index: 1;
+}
+
+:local(.container) {
+    position: relative;
+    width: 30em;
+}
+
+:local(.circle) {
+}
+
+:local(.circleRings) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
