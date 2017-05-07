@@ -3,6 +3,7 @@ import {
 	Intro,
 	IntroCopy,
     Marquee,
+    TriangleGrid,
 } from 'components';
 import style from './ParallaExample.scss';
 
@@ -14,6 +15,7 @@ export default class ParallaxExample extends Component {
                 <Intro />
                 <IntroCopy />
                 <Marquee />
+                <TriangleGrid />
             </div>
         );
     }

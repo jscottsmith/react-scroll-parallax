@@ -1,0 +1,40 @@
+//
+// Marquee
+// ---------------------------
+
+@import '../../styles/colors';
+
+:local(.root) {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 25vh 2em;
+    background-color: $plum;
+}
+
+:local(.container) {
+    position: relative;
+    width: 25em;
+}
+
+:local(.angleTop) {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+}
+
+:local(.trianglesPurple) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+:local(.trianglesWhite) {
+    svg {
+
+    }
+}
