@@ -4,5 +4,9 @@
 
 :local(.root) {
 	display: block;
-	height: auto;
+	svg {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
 }

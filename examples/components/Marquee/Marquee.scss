@@ -10,13 +10,14 @@
     flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
-    height: 50vh;
-    margin-bottom: 25vh;
+    min-height: 50vh;
+    margin-bottom: 50vh;
 }
 
 :local(.divider) {
     display: block;
     width: 100%;
+    margin-bottom: 25vh;
 }
 
 :local(.container) {

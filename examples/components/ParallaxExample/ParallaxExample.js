@@ -5,8 +5,13 @@ import {
     Marquee,
     TriangleGrid,
     Overlap,
+    Svg,
 } from 'components';
+
 import style from './ParallaExample.scss';
+
+import noisePattern from '!!raw-loader!../shared/noise-pattern.svg';
+import dotPattern from '!!raw-loader!../shared/dot-pattern.svg';
 
 export default class ParallaxExample extends Component {
 
@@ -18,6 +23,9 @@ export default class ParallaxExample extends Component {
                 <Marquee />
                 <Overlap />
                 <TriangleGrid />
+
+                <Svg svg={noisePattern} />
+                <Svg svg={dotPattern} />
             </div>
         );
     }

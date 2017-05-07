@@ -18,11 +18,11 @@ const Marquee = () => (
                 className={style.text}
                 offsetYMax={70}
                 offsetYMin={-70}
-                offsetXMax={-20}
-                offsetXMin={20}
+                offsetXMax={-30}
+                offsetXMin={30}
             >
                 <h1>
-                    Slide
+                    Horizontal
                 </h1>
             </Parallax>
             <Parallax
