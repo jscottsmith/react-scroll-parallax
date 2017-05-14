@@ -6,6 +6,7 @@ import {
     TriangleGrid,
     Overlap,
     Svg,
+    ShapeField,
 } from 'components';
 
 import style from './ParallaExample.scss';
@@ -20,6 +21,7 @@ export default class ParallaxExample extends Component {
             <div className={style.root}>
                 <Intro />
                 <IntroCopy />
+                <ShapeField />
                 <Marquee />
                 <Overlap />
                 <TriangleGrid />
