@@ -120,6 +120,8 @@ import {
                 xMin,
             } = element.offsets;
 
+            const { slowerScrollRate } = element.props;
+
             // NOTE: Many of these cause layout and reflow so don't
             // do this on every frame, instead the values are cached
             // to access later
@@ -147,11 +149,11 @@ import {
             const xMinPx = xPercent ? (xMin.value * w100) : xMin.value; // negative value
 
             // NOTE: must add the current scroll position when the
-            // element is checked so that we get it's absolute position
+            // element is checked so that we get its absolute position
             // relative to the document and not the viewport then
             // add the min/max offsets calculated above
-            const top = rect.top + scrollY + yMinPx;
-            const bottom = rect.bottom + scrollY + yMaxPx;
+            const top = rect.top + scrollY + (slowerScrollRate ? yMinPx : yMaxPx * -1);
+            const bottom = rect.bottom + scrollY + (slowerScrollRate ? yMaxPx : yMinPx * -1);
 
             // Total distance the element will move from when
             // the top enters the view to the bottom leaving
@@ -192,6 +194,7 @@ import {
             const xMin = parseValueAndUnit(offsetXMax);
             const xMax = parseValueAndUnit(offsetXMin);
 
+            // @TODO: Move error to component proptypes
             if (xMin.unit !== xMax.unit || yMin.unit !== yMax.unit) {
                 throw new Error('Must provide matching units for the min and max offset values of each axis.');
             }
@@ -216,10 +219,9 @@ import {
 
             const topInView     = top    >= 0 && top    <= windowHeight;
             const bottomInView  = bottom >= 0 && bottom <= windowHeight;
-            const covering = top <= 0 && bottom >= windowHeight;
+            const covering      = top    <= 0 && bottom >= windowHeight;
 
             const isInView = topInView || bottomInView || covering;
-
             // console.log('top', topInView, 'bottom', bottomInView, 'covering', covering);
 
             return isInView;
@@ -232,8 +234,7 @@ import {
                 totalDist,
             } = element.attributes;
 
-            // Percent the element has moved based on current and total
-            // distance to move clamped to keep within range 0-100%
+            // Percent the element has moved based on current and total distance to move
             const percentMoved = (top * -1 + windowHeight) / totalDist * 100;
 
             // Scale percentMoved to min/max percent determined by offset props
