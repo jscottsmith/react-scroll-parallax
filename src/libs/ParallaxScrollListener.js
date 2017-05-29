@@ -122,9 +122,10 @@ import {
 
             const { slowerScrollRate } = element.props;
 
-            // NOTE: Many of these cause layout and reflow so don't
-            // do this on every frame, instead the values are cached
-            // to access later
+            // NOTE: Many of these cause layout and reflow so we're not
+            // calculating them on every frame -- instead these values
+            // are cached on the element to access later when determining
+            // the element's position and offset.
             const el = element._outer;
             const rect = el.getBoundingClientRect();
             const html = document.documentElement;
