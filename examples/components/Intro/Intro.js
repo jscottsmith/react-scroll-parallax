@@ -20,7 +20,7 @@ const Intro = () => (
                 offsetYMax={50}
                 className={style.circle}
             >
-                <div />
+                <div className={style.circleInner}/>
             </Parallax>
             <Svg
                 className={style.hemispheres}
