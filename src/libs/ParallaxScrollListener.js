@@ -141,20 +141,40 @@ import {
             const yPercent = yMax.unit === '%' || yMin.unit === '%';
             const xPercent = xMax.unit === '%' || xMin.unit === '%';
 
-            const h100 = elHeight / 100;
-            const yMaxPx = yPercent ? (yMax.value * h100) : yMax.value;
-            const yMinPx = yPercent ? (yMin.value * h100) : yMin.value; // negative value
+            // X offsets
+            let yMinPx = yMin.value;
+            let yMaxPx = yMax.value;
 
-            const w100 = elWidth / 100;
-            const xMaxPx = xPercent ? (xMax.value * w100) : xMax.value;
-            const xMinPx = xPercent ? (xMin.value * w100) : xMin.value; // negative value
+            if (yPercent) {
+                const h100 = elHeight / 100;
+                yMaxPx = yMax.value * h100;
+                yMinPx = yMin.value * h100; // negative value
+            }
+
+            // Y offsets
+            let xMinPx = xMax.value;
+            let xMaxPx = xMin.value;
+
+            if (xPercent) {
+                const w100 = elWidth / 100;
+                xMaxPx = xMax.value * w100;
+                xMinPx = xMin.value * w100; // negative value
+            }
 
             // NOTE: must add the current scroll position when the
             // element is checked so that we get its absolute position
             // relative to the document and not the viewport then
             // add the min/max offsets calculated above
-            const top = rect.top + scrollY + (slowerScrollRate ? yMinPx : yMaxPx * -1);
-            const bottom = rect.bottom + scrollY + (slowerScrollRate ? yMaxPx : yMinPx * -1);
+            let top = 0;
+            let bottom = 0;
+
+            if (slowerScrollRate) {
+                top = rect.top + scrollY + yMinPx;
+                bottom = rect.bottom + scrollY + yMaxPx;
+            } else {
+                top = rect.top + scrollY + (yMaxPx * -1);
+                bottom = rect.bottom + scrollY + (yMinPx * -1);
+            }
 
             // Total distance the element will move from when
             // the top enters the view to the bottom leaving
