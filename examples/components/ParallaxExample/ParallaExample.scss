@@ -26,4 +26,13 @@
         background-color: #fff;
         border: none;
     }
+
+    .visually-hidden {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
 }
