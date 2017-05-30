@@ -25,7 +25,7 @@ export default class ParallaxExample extends Component {
                 <Marquee />
                 <Overlap />
                 <TriangleGrid />
-                
+
                 {/** Shared SVG patterns */}
                 <div className="visually-hidden">
                     <Svg svg={noisePattern} />

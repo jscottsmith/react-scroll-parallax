@@ -8,11 +8,11 @@ import { ParallaxExample } from 'components';
 
 const app = express();
 
-app.use('/static', express.static(path.resolve(__dirname, '../dist')));
-app.use('/static', express.static(__dirname));
+app.use('/static', express.static(path.resolve(__dirname, './')));
+// app.use('/static', express.static(__dirname));
 
 app.get('*', (req, res) => {
-    const html = fs.readFileSync(path.resolve(__dirname, './index.html')).toString();
+    const html = fs.readFileSync(path.resolve(__dirname, '../index.html')).toString();
     const markup = ReactServer.renderToString(<ParallaxExample />);
 
     res.send(html.replace('$react', markup));
