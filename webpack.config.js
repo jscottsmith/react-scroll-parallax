@@ -6,10 +6,12 @@ const createBabelConfig = require('./babelrc');
 const nodeExternals = require('webpack-node-externals');
 const MinifierPlugin = webpack.optimize.UglifyJsPlugin;
 
+const exampleRoot = './examples/parallax-example/';
+
 const clientConfig = {
-    entry: path.resolve('./examples/client.js'),
+    entry: path.resolve(exampleRoot + 'client.js'),
     output: {
-        path: path.resolve('./dist'),
+        path: path.resolve(exampleRoot + 'dist'),
         filename: 'bundle.js',
     },
 
@@ -19,8 +21,8 @@ const clientConfig = {
 
     resolve: {
         alias: {
-            'react-scroll-parallax': path.resolve('./src/'),
-            'components': path.resolve('./examples/components/'),
+            'react-scroll-parallax': path.resolve('./src'),
+            'components': path.resolve(exampleRoot + 'components'),
         },
     },
 
@@ -29,8 +31,8 @@ const clientConfig = {
             {
                 test: /\.js$/,
                 include: [
+                    path.resolve(exampleRoot),
                     path.resolve('./src'),
-                    path.resolve('./examples'),
                 ],
                 loader: 'babel-loader',
                 query: createBabelConfig(),
@@ -39,13 +41,13 @@ const clientConfig = {
                 test: /\.(png|jpg|jpeg|gif|svg|cur)$/,
                 loader: 'url-loader',
                 include: [
-                    path.resolve('./src'),
+                    path.resolve(exampleRoot),
                 ],
             },
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve('./examples'),
+                    path.resolve(exampleRoot),
                 ],
                 loaders: [
                     'style-loader',
@@ -80,9 +82,9 @@ const serverConfig = {
         __dirname: true,
     },
 
-    entry: path.resolve('./examples/server.js'),
+    entry: path.resolve(exampleRoot + 'server.js'),
     output: {
-        path: path.resolve('./dist'),
+        path: path.resolve(exampleRoot + 'dist'),
         filename: 'server.js',
     },
 
@@ -92,8 +94,8 @@ const serverConfig = {
 
     resolve: {
         alias: {
-            'react-scroll-parallax': path.resolve('./src/'),
-            'components': path.resolve('./examples/components/'),
+            'react-scroll-parallax': path.resolve('./src'),
+            'components': path.resolve(exampleRoot + 'components'),
         },
     },
 
@@ -102,8 +104,8 @@ const serverConfig = {
             {
                 test: /\.js$/,
                 include: [
+                    path.resolve(exampleRoot),
                     path.resolve('./src'),
-                    path.resolve('./examples'),
                 ],
                 loader: 'babel-loader',
                 query: createBabelConfig({ server: true }),
@@ -111,7 +113,7 @@ const serverConfig = {
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve('./examples'),
+                    path.resolve(exampleRoot),
                 ],
                 loaders: [
                     {
