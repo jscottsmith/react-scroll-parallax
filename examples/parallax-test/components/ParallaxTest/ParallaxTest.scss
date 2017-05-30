@@ -1,0 +1,101 @@
+:global {
+    body {
+        background-color: #222;
+        background-image: 
+            linear-gradient(0deg, 
+                    transparent 24%, 
+                    #333 25%, 
+                    #333 26%, 
+                    transparent 27%,
+                    transparent 74%, 
+                    #333 75%, 
+                    #333 76%,
+                    transparent 77%,
+                    transparent), 
+            linear-gradient(90deg, transparent 24%, 
+                    #333 25%, 
+                    #333 26%,
+                    transparent 27%,
+                    transparent 74%, 
+                    #333 75%, 
+                    #333 76%,
+                    transparent 77%,
+                    transparent);
+
+        background-size: 50px 50px;
+        color: #342A45;
+        font-family: 'Roboto Mono', sans-serif;
+        font-style: normal;
+        color: #eee;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .hello-world {
+        margin: 100vh 0;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        height: 300vh;
+    }
+
+    h1 {
+        width: 100%;
+        font-size: 10vw;
+        text-align: center;
+    }
+
+    h1 > span {
+        position: relative;
+        display: inline-block;
+        width: auto;
+    }
+
+    .parallax-outer {
+        position: relative;
+        will-change: transform;
+    }
+
+    .parallax-inner {
+        position: relative;
+        will-change: transform;
+        background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    .parallax-outer::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid orangered;
+    }
+
+    .is-in-view .parallax-inner {
+        background-color: rgba(0, 255, 0, 0.3);
+    }
+
+    .parallax-inner::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid green;
+    }
+
+    .test {
+        height: 400vh;
+    }
+
+    .buttons {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
