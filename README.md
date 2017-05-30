@@ -98,11 +98,11 @@ Install node modules and start webpack:
 
 `npm i`
 
-`npm run build`
+`npm run dev`
 
-Run example server:
+Run dev server:
 
-`node ./dist/server.js`
+`npm run dev-server`
 
 
 ## Optimizations to reduce Jank and keep scrolling smooth
