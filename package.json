@@ -4,8 +4,7 @@
   "description": "React component to create parallax scrolling effects",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --colors --watch",
-    "build:prod": "cross-env NODE_ENV=production webpack"
+    "dev": "webpack --progress --colors --watch"
   },
   "keywords": [
     "react",
