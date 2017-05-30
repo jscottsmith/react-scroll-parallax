@@ -2,6 +2,10 @@
   "name": "react-scroll-parallax",
   "version": "1.0.0",
   "description": "React component to create parallax scrolling effects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jscottsmith/react-scroll-parallax"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "webpack --progress --colors --watch",
