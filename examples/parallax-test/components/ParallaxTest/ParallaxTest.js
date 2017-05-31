@@ -2,37 +2,41 @@ import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import style from './ParallaxTest.scss';
 
+const INC_AMOUNT = 10;
+
 export default class ParallaxTest extends React.Component {
 
     state = {
-        amount: [1],
-        offset: 50,
-        slowerScrollRate: true,
+        amount: new Array(10).fill(null).map((x, i) => i),
+        offsetY: INC_AMOUNT,
+        slowerScrollRate: false,
+        unitPercent: false,
     };
 
     mapToParallax() {
-        const offset = this.state.offset;
+        const offsetY = this.state.offsetY;
         const slowerScrollRate = this.state.slowerScrollRate;
 
         return this.state.amount.map((number, i) => {
-            const offsetYMin = offset * -1 * i;
-            const offsetYMax = offset * i;
-            // console.log('min', offsetYMin, 'max', offsetYMax, 'slowerScrollRate', slowerScrollRate);
+            const unit = this.state.unitPercent ? '%' : 'px';
+            const offsetYMin = offsetY * -1 * i + unit;
+            const offsetYMax = offsetY * i + unit;
+
             return (
                 <Parallax
                     key={i}
                     tag="span"
                     disabled={false}
-                    offsetYMax={offset * i + 'px'}
-                    offsetYMin={offset * -1 * i + 'px'}
+                    offsetYMax={offsetYMax}
+                    offsetYMin={offsetYMin}
                     offsetXMax={0}
                     offsetXMin={0}
-                    className="image"
+                    className={style.item}
                     slowerScrollRate={slowerScrollRate}
                 >
                     {number}
                 </Parallax>
-            )
+            );
         });
     }
 
@@ -50,42 +54,71 @@ export default class ParallaxTest extends React.Component {
         });
     };
 
-    increaseOffset = () => {
-        const offset = this.state.offset + 50;
-        // console.log('increase', offset);
+    increaseOffsetY = () => {
+        const offsetY = this.state.offsetY + INC_AMOUNT;
         this.setState({
-            offset,
+            offsetY,
         });
     };
 
-    decreaseOffset = () => {
-        const offset = this.state.offset - 50 < 0 ? 0 : this.state.offset - 50;
-        // console.log('decrease', offset);
+    decreaseOffsetY = () => {
+        const offsetY = this.state.offsetY - INC_AMOUNT < 0 ? 0 : this.state.offsetY - INC_AMOUNT;
         this.setState({
-            offset,
+            offsetY,
         });
     };
 
     toggleSpeed = () => {
         const slowerScrollRate = !this.state.slowerScrollRate;
-        // console.log('slower scroll rate', slowerScrollRate);
         this.setState({
             slowerScrollRate,
         });
     };
 
+    toggleValue = () => {
+        const unitPercent = !this.state.unitPercent;
+        this.setState({
+            unitPercent,
+        });
+    };
+
     render() {
         return (
-            <div className="hello-world">
-                <h1>
+            <div className={style.parallaxTest}>
+                <h1 className={style.h1}>
                     {this.mapToParallax()}
                 </h1>
-                <div className="buttons">
-                    <button onClick={this.handleAdd}>Add</button>
-                    <button onClick={this.handleRemove}>Remove</button>
-                    <button onClick={this.increaseOffset}>Increase</button>
-                    <button onClick={this.decreaseOffset}>Decrease</button>
-                    <button onClick={this.toggleSpeed}>{this.state.slowerScrollRate ? 'Faster' : 'Slower'}</button>
+                <div className={style.buttons}>
+                    <div className={style.currentState}>
+                        <h4>
+                            Parallax Elements:
+                            <span className="value">{this.state.amount.length}</span>
+                        </h4>
+                        <button onClick={this.handleAdd}>Add</button>
+                        <button onClick={this.handleRemove}>Remove</button>
+                    </div>
+                    <div className={style.currentState}>
+                        <h4>
+                            Y Offsets:
+                            <span className="value">{this.state.offsetY}</span>
+                        </h4>
+                        <button onClick={this.increaseOffsetY}>Increase</button>
+                        <button onClick={this.decreaseOffsetY}>Decrease</button>
+                    </div>
+                    <div className={style.currentState}>
+                        <h4>
+                            Speed:
+                            <span className="value">{this.state.slowerScrollRate ? 'Slower' : 'Faster'}</span>
+                        </h4>
+                        <button onClick={this.toggleSpeed}>{this.state.slowerScrollRate ? 'Faster' : 'Slower'}</button>
+                    </div>
+                    <div className={style.currentState}>
+                        <h4>
+                            Unit:
+                            <span className="value">{this.state.unitPercent ? 'Percent' : 'Pixels'}</span>
+                        </h4>
+                        <button onClick={this.toggleValue}>{this.state.unitPercent ? 'Pixels' : 'Percent'}</button>
+                    </div>
                 </div>
             </div>
         );
