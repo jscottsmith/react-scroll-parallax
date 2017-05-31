@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --progress --colors --watch",
-    "dev-server": "node ./examples/parallax-example/dist/server"
+    "dev-server": "node ./examples/parallax-example/dist/server",
+    "gh-pages": "NODE_ENV=production webpack --progress --colors"
   },
   "keywords": [
     "react",

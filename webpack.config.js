@@ -4,20 +4,17 @@ const path = require('path');
 const webpack = require('webpack');
 const createBabelConfig = require('./babelrc');
 const nodeExternals = require('webpack-node-externals');
-const MinifierPlugin = webpack.optimize.UglifyJsPlugin;
 
 const exampleRoot = './examples/parallax-example/';
 
 const clientConfig = {
     entry: path.resolve(exampleRoot + 'client.js'),
     output: {
-        path: path.resolve(exampleRoot + 'dist'),
+        path: path.resolve(
+            PRODUCTION ? exampleRoot + 'static' : exampleRoot + 'dist'
+        ),
         filename: 'bundle.js',
     },
-
-    plugins: [
-        PRODUCTION && new MinifierPlugin(),
-    ].filter(e => e),
 
     resolve: {
         alias: {
@@ -84,13 +81,11 @@ const serverConfig = {
 
     entry: path.resolve(exampleRoot + 'server.js'),
     output: {
-        path: path.resolve(exampleRoot + 'dist'),
+        path: path.resolve(
+            PRODUCTION ? exampleRoot + 'static' : exampleRoot + 'dist'
+        ),
         filename: 'server.js',
     },
-
-    plugins: [
-        PRODUCTION && new MinifierPlugin(),
-    ].filter(e => e),
 
     resolve: {
         alias: {
@@ -135,4 +130,4 @@ const serverConfig = {
     },
 };
 
-module.exports = [clientConfig, serverConfig];
+module.exports = PRODUCTION ? [clientConfig] : [clientConfig, serverConfig];
