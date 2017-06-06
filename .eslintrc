@@ -1,6 +1,8 @@
 {
   "globals" : {
     "ParallaxScrollListener": true,
+    "test": true,
+    "expect": true
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
