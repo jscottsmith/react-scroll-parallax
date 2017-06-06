@@ -1,11 +1,11 @@
 import {
-    scaleBetween,
-    testForPassiveScroll,
+    getParallaxOffsets,
     parseValueAndUnit,
+    testForPassiveScroll,
 } from '../utils/index';
 
 (function(window, document) {
-    
+
     function ParallaxScrollListener() {
 
         // All parallax elements to be updated
@@ -260,34 +260,16 @@ import {
 
             // Scale percentMoved to min/max percent determined by offset props
             const { slowerScrollRate } = element.props;
-            const {
-                xUnit,
-                yUnit,
-                yMin,
-                yMax,
-                xMin,
-                xMax,
-            } = element.offsets;
 
-            // sets parallax to faster or slower than the rate of scroll
-            let x = 0;
-            let y = 0;
-
-            if (slowerScrollRate) {
-                x = scaleBetween(percentMoved, xMin.value, xMax.value, 0, 100);
-                y = scaleBetween(percentMoved, yMin.value, yMax.value, 0, 100);
-            } else {
-                // flipped max/min
-                x = scaleBetween(percentMoved, xMax.value, xMin.value, 0, 100);
-                y = scaleBetween(percentMoved, yMax.value, yMin.value, 0, 100);
-            }
+            // Get the parallax X and Y offsets
+            const offsets = getParallaxOffsets(element.offsets, percentMoved, slowerScrollRate);
 
             // Apply styles
             const el = element._inner;
             el.style.cssText =
                `will-change:transform;
                 position:relative;
-                transform:translate3d(${x}${xUnit}, ${y}${yUnit}, 0)`;
+                transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
         }
 
         function _resetStyles(element) {
