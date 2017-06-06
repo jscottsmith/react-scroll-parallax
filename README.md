@@ -106,6 +106,10 @@ Run dev server:
 
 `npm run dev-server`
 
+Run Jest tests:
+
+`npm run test`
+
 
 ## Optimizations to reduce Jank and keep scrolling smooth
 
