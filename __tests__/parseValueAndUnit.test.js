@@ -6,7 +6,7 @@ test('Parse a string to get the value and unit in either pixels or percent', () 
     expect(parseValueAndUnit('52%'))
         .toEqual({ unit: '%', value: 52 });
     expect(parseValueAndUnit(13.333))
-        .toEqual({ unit: null, value: 13.333 });
+        .toEqual({ unit: '%', value: 13.333 });
     expect(parseValueAndUnit('75.8%'))
         .toEqual({ unit: '%', value: 75 });
     expect(parseValueAndUnit('23.1px'))
