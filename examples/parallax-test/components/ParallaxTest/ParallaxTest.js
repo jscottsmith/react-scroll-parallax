@@ -3,54 +3,28 @@ import { Parallax } from 'react-scroll-parallax';
 import style from './ParallaxTest.scss';
 
 const INC_AMOUNT = 10;
+const START_NUM_ELEMENTS = 10;
 
 export default class ParallaxTest extends React.Component {
 
     state = {
-        amount: new Array(10).fill(null).map((x, i) => i),
+        elements: new Array(START_NUM_ELEMENTS).fill(null).map((x, i) => i),
         offsetY: INC_AMOUNT,
         slowerScrollRate: false,
         unitPercent: false,
     };
 
-    mapToParallax() {
-        const offsetY = this.state.offsetY;
-        const slowerScrollRate = this.state.slowerScrollRate;
-
-        return this.state.amount.map((number, i) => {
-            const unit = this.state.unitPercent ? '%' : 'px';
-            const offsetYMin = offsetY * -1 * i + unit;
-            const offsetYMax = offsetY * i + unit;
-
-            return (
-                <Parallax
-                    key={i}
-                    tag="span"
-                    disabled={false}
-                    offsetYMax={offsetYMax}
-                    offsetYMin={offsetYMin}
-                    offsetXMax={0}
-                    offsetXMin={0}
-                    className={style.item}
-                    slowerScrollRate={slowerScrollRate}
-                >
-                    {number}
-                </Parallax>
-            );
-        });
-    }
-
     handleAdd = () => {
-        const amount = [...this.state.amount, this.state.amount.length + 1];
+        const elements = [...this.state.elements, this.state.elements.length];
         this.setState({
-            amount,
+            elements,
         });
     };
 
     handleRemove = () => {
-        const amount = this.state.amount.slice(0, this.state.amount.length - 1);
+        const elements = this.state.elements.slice(0, this.state.elements.length - 1);
         this.setState({
-            amount,
+            elements,
         });
     };
 
@@ -82,6 +56,33 @@ export default class ParallaxTest extends React.Component {
         });
     };
 
+    mapToParallax() {
+        const offsetY = this.state.offsetY;
+        const slowerScrollRate = this.state.slowerScrollRate;
+
+        return this.state.elements.map((number, i) => {
+            const unit = this.state.unitPercent ? '%' : 'px';
+            const offsetYMin = offsetY * -1 * i + unit;
+            const offsetYMax = offsetY * i + unit;
+
+            return (
+                <Parallax
+                    key={i}
+                    tag="span"
+                    disabled={false}
+                    offsetYMax={offsetYMax}
+                    offsetYMin={offsetYMin}
+                    offsetXMax={0}
+                    offsetXMin={0}
+                    className={style.item}
+                    slowerScrollRate={slowerScrollRate}
+                >
+                    {number}
+                </Parallax>
+            );
+        });
+    }
+
     render() {
         return (
             <div className={style.parallaxTest}>
@@ -92,7 +93,7 @@ export default class ParallaxTest extends React.Component {
                     <div className={style.currentState}>
                         <h4>
                             Parallax Elements:
-                            <span className="value">{this.state.amount.length}</span>
+                            <span className="value">{this.state.elements.length}</span>
                         </h4>
                         <button onClick={this.handleAdd}>Add</button>
                         <button onClick={this.handleRemove}>Remove</button>
