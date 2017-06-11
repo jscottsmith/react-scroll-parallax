@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/jscottsmith/react-scroll-parallax"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "dev": "jest && webpack --progress --colors --watch",
     "dev-server": "node ./examples/parallax-example/dist/server",
