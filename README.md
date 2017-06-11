@@ -10,8 +10,6 @@ Provides a React component and single global passive scroll listener to add **ve
 
 ## Install
 
-Install
-
 ```
 npm i react-scroll-parallax
 ```
