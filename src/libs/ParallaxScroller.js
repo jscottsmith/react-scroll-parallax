@@ -4,7 +4,7 @@ import {
     testForPassiveScroll,
 } from '../utils/index';
 
-(function(window, document) {
+const ParallaxScroller = (function() {
 
     function ParallaxScrollListener() {
 
@@ -349,10 +349,19 @@ import {
 
         // Initialize the Parallax scroll listener
         _addListeners();
-
     }
 
-    window.ParallaxScrollListener = new ParallaxScrollListener();
+    return {
+        // Return the singleton instance if one exists
+        // or create one if it doesn't
+        init: function() {
+            if (!window.ParallaxScrollListener) {
+                window.ParallaxScrollListener = new ParallaxScrollListener();
+            }
+            return window.ParallaxScrollListener;
+        },
+    };
+})();
 
-})(window, document);
+export default ParallaxScroller;
 
