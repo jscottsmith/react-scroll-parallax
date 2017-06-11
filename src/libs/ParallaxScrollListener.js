@@ -45,7 +45,7 @@ import {
             const prevScrollY = scrollY;
 
             // Save current scroll
-            scrollY = window.scrollY;
+            scrollY = window.pageYOffset; // Supports IE 9 and up.
 
             // direction
             scrollDown = scrollY > prevScrollY;
@@ -132,7 +132,7 @@ import {
             const windowHeight = window.innerHeight || html.clientHeight;
             const elHeight = el.offsetHeight;
             const elWidth = el.offsetWidth;
-            const scrollY = window.scrollY;
+            const scrollY = window.pageYOffset;
 
             // NOTE: offsetYMax and offsetYMin are percents
             // based of the height of the element. They must be
