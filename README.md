@@ -10,6 +10,12 @@ Provides a React component and single global passive scroll listener to add **ve
 
 ## Usage
 
+Install
+
+```
+npm i react-scroll-parallax
+```
+
 Import `ParallaxScrollListener` on the client side. This will self invoke and create the **global** `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
 
 ```
