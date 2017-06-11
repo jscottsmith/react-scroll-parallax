@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ParallaxExample } from 'components';
+import { ParallaxScroller } from 'react-scroll-parallax';
 
-import 'react-scroll-parallax/libs/ParallaxScrollListener';
+ParallaxScroller.init();
 
 const root = document.getElementById('root');
 
