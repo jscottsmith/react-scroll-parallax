@@ -8,7 +8,7 @@ Provides a React component and single global passive scroll listener to add **ve
 
 [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-test/)
 
-## Usage
+## Install
 
 Install
 
@@ -16,10 +16,14 @@ Install
 npm i react-scroll-parallax
 ```
 
-Import `ParallaxScrollListener` on the client side. This will self invoke and create the **global** `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
+## Usage
+
+Import `ParallaxScroller` on the client side and call `ParallaxScroller.init()` to create the global singleton `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
 
 ```
-import 'react-scroll-parallax/libs/ParallaxScrollListener';
+import { ParallaxScroller } from 'react-scroll-parallax';
+
+ParallaxScroller.init();
 ```
 
 Import the `Parallax` component...
