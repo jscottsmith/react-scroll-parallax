@@ -11,10 +11,13 @@
     "dev": "jest && webpack --progress --colors --watch",
     "dev-server": "node ./examples/parallax-example/dist/server",
     "gh-pages": "NODE_ENV=production webpack --progress --colors",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports"
   },
   "jest": {
-    "modulePaths": ["<rootDir>/src/"]
+    "modulePaths": [
+      "<rootDir>/src/"
+    ]
   },
   "keywords": [
     "react",
@@ -30,9 +33,11 @@
     "react-proptypes": "^1.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.23.1",
     "babel-jest": "^20.0.3",
     "babel-loader": "^6.3.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.1.8",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.23.0",
