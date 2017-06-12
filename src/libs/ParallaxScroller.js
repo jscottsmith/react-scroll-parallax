@@ -243,7 +243,6 @@ const ParallaxScroller = (function() {
             const covering      = top    <= 0 && bottom >= windowHeight;
 
             const isInView = topInView || bottomInView || covering;
-            // console.log('top', topInView, 'bottom', bottomInView, 'covering', covering);
 
             return isInView;
         }
@@ -292,7 +291,7 @@ const ParallaxScroller = (function() {
             const id = _createID();
             const element = {
                 id,
-                ...options
+                ...options,
             };
 
             elements.push(element);
@@ -302,7 +301,6 @@ const ParallaxScroller = (function() {
         };
 
         this.removeElement = function(element) {
-            // console.log('remove element')
             const index = elements.indexOf(element);
             if (index !== -1) {
                 elements.splice(index, 1);
@@ -310,7 +308,6 @@ const ParallaxScroller = (function() {
         };
 
         this.updateElement = function(id, options) {
-            // console.log('update element')
             // update props of a given element
             const index = elements.findIndex(el => el.id === id);
 
