@@ -14,6 +14,9 @@ const ParallaxScroller = (function() {
         // Tracks current scroll y distance
         let scrollY = 0;
 
+        // Window inner height
+        let windowHeight = 0;
+
         // ID to increment for elements
         let id = 0;
 
@@ -37,8 +40,8 @@ const ParallaxScroller = (function() {
         }
 
         /**
-         * Window scroll handler
-         * sets the scrollY and then calls updateElementPositions()
+         * Window scroll handler sets the scrollY
+         * and then calls updateElementPositions()
          */
         function _handleScroll() {
             // reference to prev scroll y
@@ -60,9 +63,11 @@ const ParallaxScroller = (function() {
 
         /**
          * Window resize handler
-         * calls update() which update parallax element attributes and positions
+         * Sets new window inner height then updates
+         * parallax element attributes and positions
          */
         function _handleResize() {
+            _setWindowHeight();
             _updateElementAttributes();
             _updateElementPositions();
         }
@@ -106,6 +111,11 @@ const ParallaxScroller = (function() {
             });
         }
 
+        function _setWindowHeight() {
+            const html = document.documentElement;
+            windowHeight = window.innerHeight || html.clientHeight;
+        }
+
         /**
          * Takes a parallax element and caches important values
          * as an attribute object on the element
@@ -128,8 +138,6 @@ const ParallaxScroller = (function() {
             // the element's position and offset.
             const el = element._outer;
             const rect = el.getBoundingClientRect();
-            const html = document.documentElement;
-            const windowHeight = window.innerHeight || html.clientHeight;
             const elHeight = el.offsetHeight;
             const elWidth = el.offsetWidth;
             const scrollY = window.pageYOffset;
@@ -191,7 +199,6 @@ const ParallaxScroller = (function() {
                 xMaxPx,
                 xMinPx,
                 totalDist,
-                windowHeight,
             };
         }
 
@@ -234,7 +241,6 @@ const ParallaxScroller = (function() {
         }
 
         function _isElementInView(element) {
-            const { windowHeight } = element.attributes;
             const top = element.attributes.top - scrollY;
             const bottom = element.attributes.bottom - scrollY;
 
@@ -249,10 +255,7 @@ const ParallaxScroller = (function() {
 
         function _setParallaxStyles(element) {
             const top = element.attributes.top - scrollY;
-            const {
-                windowHeight,
-                totalDist,
-            } = element.attributes;
+            const { totalDist } = element.attributes;
 
             // Percent the element has moved based on current and total distance to move
             const percentMoved = (top * -1 + windowHeight) / totalDist * 100;
@@ -324,6 +327,7 @@ const ParallaxScroller = (function() {
          * Updates all parallax element attributes and postitions
          */
         this.update = function() {
+            _setWindowHeight();
             _updateElementAttributes();
             _updateElementPositions();
         };
