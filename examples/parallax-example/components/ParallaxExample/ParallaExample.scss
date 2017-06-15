@@ -10,6 +10,7 @@
         font-family: 'Roboto Mono', san-serif;
         color: $tan;
         font-size: 12px;
+        font-weight: 300;
     }
 
     h1 {
@@ -29,7 +30,8 @@
     }
 
     p {
-        font-size: 1.4em;
+        margin: 2em 0;
+        font-size: 1.2em;
     }
 
     * {
@@ -55,6 +57,13 @@
         display: inline-block;
         border: 2px solid $purple;
         padding: 0.6em 1em;
+        color: $purple;
+        font-weight: 500;
+
+        &:hover {
+            background-color: $purple;
+            color: $tan;
+        }
     }
 
     .visually-hidden {
