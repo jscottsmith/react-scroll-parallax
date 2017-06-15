@@ -71,8 +71,8 @@ export default class ShapeField extends Component {
 
                 <div className={style.shapeCluster03}>
                     <Parallax
-                        offsetYMax={30}
-                        offsetYMin={-30}
+                        offsetYMax={60}
+                        offsetYMin={-20}
                         className="triangle-top"
                         slowerScrollRate
                     >
@@ -84,10 +84,9 @@ export default class ShapeField extends Component {
                         className="triangle-top"
                     />
                     <Parallax
-                        offsetYMax={30}
-                        offsetYMin={-30}
+                        offsetYMax={60}
+                        offsetYMin={-60}
                         className="triangle-big"
-                        slowerScrollRate
                     >
                         <Svg svg={cluster03TriangleBig} />
                     </Parallax>
@@ -99,10 +98,9 @@ export default class ShapeField extends Component {
                         className="square"
                     />
                     <Parallax
-                        offsetYMax={30}
-                        offsetYMin={-30}
+                        offsetYMax={60}
+                        offsetYMin={-60}
                         className="triangle"
-                        slowerScrollRate
                     >
                         <Svg svg={cluster04Triangle} />
                     </Parallax>
@@ -110,7 +108,6 @@ export default class ShapeField extends Component {
                         offsetYMax={30}
                         offsetYMin={-30}
                         className="hemi-right"
-                        slowerScrollRate
                     >
                         <Svg svg={cluster04HemiRight} />
                     </Parallax>

@@ -9,6 +9,8 @@ const Overlap = () => (
     <div className={style.root}>
         <div className={style.container}>
             <Parallax
+                offsetYMax={150}
+                offsetYMin={-50}
                 offsetXMax={-40}
                 offsetXMin={20}
                 className={style.circle}
@@ -18,6 +20,8 @@ const Overlap = () => (
                 />
             </Parallax>
             <Parallax
+                offsetYMax={150}
+                offsetYMin={-50}
                 offsetXMax={40}
                 offsetXMin={-20}
                 className={style.circleRings}
