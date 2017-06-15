@@ -1,26 +1,29 @@
-const PRODUCTION = process.env.NODE_ENV === 'production';
+// Change this root to point to the desired example when
+const EXAMPLE_ROOT = './examples/parallax-example/';
 
+const createBabelConfig = require('./babelrc');
+const merge = require('webpack-merge');
+const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 const webpack = require('webpack');
-const createBabelConfig = require('./babelrc');
-const nodeExternals = require('webpack-node-externals');
 
-const exampleRoot = './examples/parallax-example/';
-
-const clientConfig = {
-    entry: path.resolve(exampleRoot + 'client.js'),
-    output: {
-        path: path.resolve(
-            PRODUCTION ? exampleRoot + 'static' : exampleRoot + 'dist'
-        ),
-        filename: 'bundle.js',
-    },
-
+const baseConfig = {
     resolve: {
         alias: {
             'react-scroll-parallax': path.resolve('./src'),
-            'components': path.resolve(exampleRoot + 'components'),
+            'components': path.resolve(EXAMPLE_ROOT + 'components'),
         },
+    },
+};
+
+const clientConfig = merge(baseConfig, {
+    entry: path.resolve(EXAMPLE_ROOT + 'client.js'),
+
+    output: {
+        path: path.resolve(
+            EXAMPLE_ROOT + 'dist'
+        ),
+        filename: 'bundle.js',
     },
 
     module: {
@@ -28,7 +31,7 @@ const clientConfig = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(exampleRoot),
+                    path.resolve(EXAMPLE_ROOT),
                     path.resolve('./src'),
                 ],
                 loader: 'babel-loader',
@@ -38,13 +41,13 @@ const clientConfig = {
                 test: /\.(png|jpg|jpeg|gif|svg|cur)$/,
                 loader: 'url-loader',
                 include: [
-                    path.resolve(exampleRoot),
+                    path.resolve(EXAMPLE_ROOT),
                 ],
             },
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve(exampleRoot),
+                    path.resolve(EXAMPLE_ROOT),
                 ],
                 loaders: [
                     'style-loader',
@@ -66,9 +69,9 @@ const clientConfig = {
             },
         ],
     },
-};
+});
 
-const serverConfig = {
+const serverConfig = merge(baseConfig, {
     target: 'node',
 
     watch: true,
@@ -79,19 +82,13 @@ const serverConfig = {
         __dirname: true,
     },
 
-    entry: path.resolve(exampleRoot + 'server.js'),
+    entry: path.resolve(EXAMPLE_ROOT + 'server.js'),
+
     output: {
         path: path.resolve(
-            PRODUCTION ? exampleRoot + 'static' : exampleRoot + 'dist'
+            EXAMPLE_ROOT + 'dist'
         ),
         filename: 'server.js',
-    },
-
-    resolve: {
-        alias: {
-            'react-scroll-parallax': path.resolve('./src'),
-            'components': path.resolve(exampleRoot + 'components'),
-        },
     },
 
     module: {
@@ -99,7 +96,7 @@ const serverConfig = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(exampleRoot),
+                    path.resolve(EXAMPLE_ROOT),
                     path.resolve('./src'),
                 ],
                 loader: 'babel-loader',
@@ -108,7 +105,7 @@ const serverConfig = {
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve(exampleRoot),
+                    path.resolve(EXAMPLE_ROOT),
                 ],
                 loaders: [
                     {
@@ -128,6 +125,6 @@ const serverConfig = {
             },
         ],
     },
-};
+});
 
-module.exports = PRODUCTION ? [clientConfig] : [clientConfig, serverConfig];
+module.exports = [clientConfig, serverConfig];

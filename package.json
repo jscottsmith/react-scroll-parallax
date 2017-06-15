@@ -55,6 +55,7 @@
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
+    "webpack-merge": "^4.1.0",
     "webpack-node-externals": "^1.5.4"
   }
 }
