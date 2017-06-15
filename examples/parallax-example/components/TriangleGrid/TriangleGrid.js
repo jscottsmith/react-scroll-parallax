@@ -12,6 +12,14 @@ const TriangleGrid = () => (
             svg={angleTop}
             className={style.angleTop}
         />
+        <article className={style.copy}>
+            <p>
+                <code>npm i react-scroll-parallax</code>
+            </p>
+            <p>
+                <a className="btn" href="https://github.com/jscottsmith/react-scroll-parallax">View on GitHub</a>
+            </p>
+        </article>
         <div className={style.container}>
             <Parallax
                 offsetYMax={25}

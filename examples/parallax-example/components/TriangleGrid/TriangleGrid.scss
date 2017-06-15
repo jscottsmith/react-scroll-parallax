@@ -7,7 +7,7 @@
 :local(.root) {
     position: relative;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: flex-end;
     align-items: center;
     padding: 25vh 2em;
@@ -17,6 +17,8 @@
 :local(.container) {
     position: relative;
     width: 25em;
+    margin-right: 10vw;
+    flex-shrink: 0;
 }
 
 :local(.angleTop) {
@@ -24,6 +26,12 @@
     bottom: 100%;
     left: 0;
     right: 0;
+}
+
+:local(.copy) {
+    margin-right: 5em;
+    flex-grow: 1;
+    text-align: center;
 }
 
 :local(.trianglesPurple) {

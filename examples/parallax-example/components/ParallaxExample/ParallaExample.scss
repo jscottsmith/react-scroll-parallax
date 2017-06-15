@@ -8,16 +8,40 @@
     body {
         margin: 0;
         font-family: 'Roboto Mono', san-serif;
-        font-style: italic;
+        color: $tan;
+        font-size: 12px;
     }
+
     h1 {
         text-transform: uppercase;
         font-size: 4em;
+        font-weight: 700;
+        font-style: italic;
         letter-spacing: 0.3em;
         color: $plum;
     }
+
+    code {
+        font-family: 'Roboto Mono', san-serif;
+        background-color: lighten($plum, 10%);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+
+    p {
+        font-size: 1.4em;
+    }
+
     * {
         box-sizing: border-box;
+    }
+
+    a {
+        color: $tan;
+        text-decoration: none;
+        &:hover {
+            color: $purple;
+        }
     }
 
     hr {
@@ -25,6 +49,12 @@
         height: 3em;
         background-color: #fff;
         border: none;
+    }
+
+    .btn {
+        display: inline-block;
+        border: 2px solid $purple;
+        padding: 0.6em 1em;
     }
 
     .visually-hidden {
