@@ -12,6 +12,15 @@
     height: 100vh;
 }
 
+:local(.scroll) {
+    position: absolute;
+    bottom: 5em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $plum;
+    font-weight: 500;
+}
+
 :local(.container) {
     position: relative;
     width: 25em;

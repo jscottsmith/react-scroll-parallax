@@ -27,6 +27,7 @@ const Intro = () => (
                 svg={hemispheres}
             />
         </div>
+        <p className={style.scroll}>Scroll</p>
     </div>
 );
 
