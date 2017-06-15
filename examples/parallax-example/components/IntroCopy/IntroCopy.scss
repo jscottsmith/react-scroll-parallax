@@ -10,7 +10,6 @@
     align-items: space-around;
     justify-content: center;
     align-items: center;
-    margin-top: 25vh;
     height: 50vh;
 }
 
@@ -32,9 +31,8 @@
     composes: barTop;
     margin-left: 0;
     margin-right: 0.8em;
-    // border-color: $purple;
 }
- 
+
 :local(.letter) {
     display: inline-block;
 }
