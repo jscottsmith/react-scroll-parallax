@@ -10,7 +10,8 @@ Provides a React component and single global passive scroll listener to add **ve
 
 ## Install
 
-⚠️**Warning: This is an alpha pre-release**
+⚠️ **Warning: This is an alpha pre-release**
+
 Please anticipate the possibility of breaking changes in future releases before using this package.
 
 ```
