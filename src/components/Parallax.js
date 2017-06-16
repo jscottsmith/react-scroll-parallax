@@ -33,8 +33,8 @@ export default class Parallax extends Component {
         }
         // create a new parallax element and save the reference
         this.element = ParallaxScrollListener.createElement({
-            _inner: this._inner,
-            _outer: this._outer,
+            elInner: this._inner,
+            elOuter: this._outer,
             props: this.props,
         });
     }

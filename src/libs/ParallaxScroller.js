@@ -136,7 +136,7 @@ const ParallaxScroller = (function() {
             // calculating them on every frame -- instead these values
             // are cached on the element to access later when determining
             // the element's position and offset.
-            const el = element._outer;
+            const el = element.elOuter;
             const rect = el.getBoundingClientRect();
             const elHeight = el.offsetHeight;
             const elWidth = el.offsetWidth;
@@ -267,7 +267,7 @@ const ParallaxScroller = (function() {
             const offsets = getParallaxOffsets(element.offsets, percentMoved, slowerScrollRate);
 
             // Apply styles
-            const el = element._inner;
+            const el = element.elInner;
             el.style.cssText =
                `will-change:transform;
                 position:relative;
@@ -277,7 +277,7 @@ const ParallaxScroller = (function() {
         function _resetStyles(element) {
             // Resets any styles that may be left over when
             // resizing from desktop to mobile apply styles
-            const el = element._inner;
+            const el = element.elInner;
             el.style.cssText =
                `will-change:none;
                 position:relative;
