@@ -324,6 +324,13 @@ const ParallaxScroller = (function() {
         };
 
         /**
+         * Remove element styles
+         */
+        this.resetElementStyles = function(element) {
+            _resetStyles(element);
+        };
+
+        /**
          * Updates all parallax element attributes and postitions
          */
         this.update = function() {
