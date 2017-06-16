@@ -109,7 +109,7 @@ export default class ParallaxTest extends React.Component {
                     <div className={style.currentState}>
                         <h4>
                             Y Offsets:
-                            <span className="value">{this.state.offsetY}</span>
+                            <span className="value">{this.state.offsetY}{this.state.unitPercent ? '%' : 'px'}</span>
                         </h4>
                         <button onClick={this.increaseOffsetY}>Increase</button>
                         <button onClick={this.decreaseOffsetY}>Decrease</button>
