@@ -12,6 +12,7 @@ export default class ParallaxTest extends React.Component {
         offsetY: INC_AMOUNT,
         slowerScrollRate: false,
         unitPercent: false,
+        disabled: false,
     };
 
     handleAdd = () => {
@@ -56,6 +57,13 @@ export default class ParallaxTest extends React.Component {
         });
     };
 
+    toggleDisabled = () => {
+        const disabled = !this.state.disabled;
+        this.setState({
+            disabled,
+        });
+    };
+
     mapToParallax() {
         const offsetY = this.state.offsetY;
         const slowerScrollRate = this.state.slowerScrollRate;
@@ -69,7 +77,7 @@ export default class ParallaxTest extends React.Component {
                 <Parallax
                     key={i}
                     tag="span"
-                    disabled={false}
+                    disabled={this.state.disabled}
                     offsetYMax={offsetYMax}
                     offsetYMin={offsetYMin}
                     offsetXMax={0}
@@ -119,6 +127,13 @@ export default class ParallaxTest extends React.Component {
                             <span className="value">{this.state.unitPercent ? 'Percent' : 'Pixels'}</span>
                         </h4>
                         <button onClick={this.toggleValue}>{this.state.unitPercent ? 'Pixels' : 'Percent'}</button>
+                    </div>
+                    <div className={style.currentState}>
+                        <h4>
+                            Disabled:
+                            <span className="value">{this.state.disabled ? 'True' : 'False'}</span>
+                        </h4>
+                        <button onClick={this.toggleDisabled}>{this.state.disabled ? 'Enable' : 'Disable'}</button>
                     </div>
                 </div>
             </div>
