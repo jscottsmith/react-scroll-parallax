@@ -39,10 +39,14 @@ export default class Parallax extends Component {
         });
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props !== prevProps) {
-            // updates the elements props when changed
-            ParallaxScrollListener.updateElement(this.element.id, { props: this.props });
+    componentWillReceiveProps(nextProps) {
+        // updates the elements props when changed
+        if (this.props !== nextProps) {
+            ParallaxScrollListener.updateElement(this.element.id, { props: nextProps });
+        }
+        // resets element styles when disabled
+        if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+            ParallaxScrollListener.resetElementStyles(this.element);
         }
     }
 
