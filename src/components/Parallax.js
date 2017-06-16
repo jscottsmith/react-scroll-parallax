@@ -29,7 +29,7 @@ export default class Parallax extends Component {
     componentDidMount() {
         // add this Parallax element to the global listener
         if (typeof ParallaxScrollListener === 'undefined') {
-            throw new Error('Must import/require the global ParallaxScrollListener before adding React Parallax components.');
+            throw new Error('Must initialize the ParallaxScroller before adding React Parallax components.');
         }
         // create a new parallax element and save the reference
         this.element = ParallaxScrollListener.createElement({
