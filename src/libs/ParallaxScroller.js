@@ -24,7 +24,7 @@ const ParallaxScroller = (function() {
         let ticking = false;
 
         // Scroll direction
-        let scrollDown = null;
+        // let scrollDown = null;
 
         // Passive support
         const supportsPassive = testForPassiveScroll();
@@ -51,7 +51,7 @@ const ParallaxScroller = (function() {
             scrollY = window.pageYOffset; // Supports IE 9 and up.
 
             // direction
-            scrollDown = scrollY > prevScrollY;
+            // scrollDown = scrollY > prevScrollY;
 
             // Only called if the last animation request has been
             // completed and there are parallax elements to update
