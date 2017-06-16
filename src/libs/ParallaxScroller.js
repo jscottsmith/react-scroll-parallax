@@ -310,15 +310,12 @@ const ParallaxScroller = (function() {
             }
         };
 
-        this.updateElement = function(id, options) {
+        this.updateElement = function(element, options) {
             // update props of a given element
-            const index = elements.findIndex(el => el.id === id);
+            const index = elements.findIndex(el => el.id === element.id);
 
-            // create new element with options
-            const element = Object.assign({}, elements[index], options);
-
-            // replace old
-            elements[index] = element;
+            // create new element with options and replace old
+            elements[index] = Object.assign({}, elements[index], options);
 
             this.update();
         };
