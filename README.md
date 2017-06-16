@@ -2,6 +2,8 @@
 
 Provides a React component and single global passive scroll listener to add **vertical** scroll based offsets to elements based on their position in the viewport. Works with server side rendering and universal react apps.
 
+[View on NPM](https://www.npmjs.com/package/react-scroll-parallax)
+
 ## Examples
 
 🔗 [Example](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-example/)
