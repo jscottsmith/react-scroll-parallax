@@ -342,13 +342,6 @@ const ParallaxScroller = (function() {
         /**
          * Removes listeners, resets all styles, nullifies self
          */
-        this.reset = function() {
-            _removeParallaxStyles();
-        };
-
-        /**
-         * Removes listeners, resets all styles, nullifies self
-         */
         this.destroy = function() {
             _removeListeners();
             _removeParallaxStyles();
