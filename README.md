@@ -109,7 +109,17 @@ Determines whether the scroll rate of the parallax component will move faster or
 
 Optionally pass a tag name to be applied to the outer most parallax element. For example: `<Parallax tag="figure" />`.
 
+## Parallax Controller
 
+The following are public methods available on the `ParallaxController` global:
+
+**`update()`**
+
+Updates all cached attributes for parallax elements then updates their postitions.
+
+**`destroy()`**
+
+Removes window scroll and resize listeners, resets all styles applied to parallax elements, and sets the global `ParallaxController` to `null`.
 
 ## Development
 
@@ -127,7 +137,6 @@ Run Jest tests:
 
 `npm run test`
 
-
 ## Optimizations to reduce Jank and keep scrolling smooth
 
 React Scroll Parallax uses a single [passive scroll listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners) (dependent on browser support) with the minimal amount of work done on the scroll event to prevent [jank](http://jankfree.org/) (calculations that cause layout, reflow and paint are cached initially and only updated when layout changes). Request animation frame is then used to decouple the scroll handler and further reduce jank. All offsets are applied with 3D transforms to utilize the GPU and prevent paints. If you have ideas to further optimize scrolling please PR or post an issue.
@@ -135,6 +144,3 @@ React Scroll Parallax uses a single [passive scroll listener](https://developer.
 **PSA**
 
 It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keep images small and optimized. Reduce the number of moving elements in view and on the page. Disable scroll effects on mobile devices. Just keep things performant and animation silky smooth.
-
-
-
