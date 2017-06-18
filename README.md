@@ -24,7 +24,7 @@ npm i react-scroll-parallax
 
 Import `ParallaxController` on the client side and call `ParallaxController.init()` to create the global `ParallaxController` which will handle updating all parallax elements on scroll.
 
-```
+```javascript
 import { ParallaxController } from 'react-scroll-parallax';
 
 ParallaxController.init();
@@ -32,13 +32,13 @@ ParallaxController.init();
 
 Import the `Parallax` component...
 
-```
+```javascript
 import { Parallax } from 'react-scroll-parallax';
 ```
 
 ... then use it like so:
 
-```
+```jsx
 <Parallax
     className="custom-class"
     offsetYMax={20}
