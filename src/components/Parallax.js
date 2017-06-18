@@ -28,11 +28,11 @@ export default class Parallax extends Component {
 
     componentDidMount() {
         // add this Parallax element to the global listener
-        if (typeof ParallaxScrollListener === 'undefined') {
-            throw new Error('Must initialize the ParallaxScroller before adding React Parallax components.');
+        if (typeof ParallaxController === 'undefined') {
+            throw new Error('Must initialize the ParallaxController before adding React Parallax components.');
         }
         // create a new parallax element and save the reference
-        this.element = ParallaxScrollListener.createElement({
+        this.element = ParallaxController.createElement({
             elInner: this._inner,
             elOuter: this._outer,
             props: this.props,
@@ -42,16 +42,16 @@ export default class Parallax extends Component {
     componentWillReceiveProps(nextProps) {
         // updates the elements props when changed
         if (this.props !== nextProps) {
-            ParallaxScrollListener.updateElement(this.element, { props: nextProps });
+            ParallaxController.updateElement(this.element, { props: nextProps });
         }
         // resets element styles when disabled
         if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
-            ParallaxScrollListener.resetElementStyles(this.element);
+            ParallaxController.resetElementStyles(this.element);
         }
     }
 
     componentWillUnmount() {
-        ParallaxScrollListener.removeElement(this.element);
+        ParallaxController.removeElement(this.element);
     }
 
     // refs

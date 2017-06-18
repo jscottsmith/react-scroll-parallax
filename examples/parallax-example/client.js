@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ParallaxExample } from 'components';
-import { ParallaxScroller } from 'react-scroll-parallax';
+import { ParallaxController } from 'react-scroll-parallax';
 
-ParallaxScroller.init();
+ParallaxController.init();
 
 const root = document.getElementById('root');
 

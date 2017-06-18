@@ -1,2 +1,2 @@
 export Parallax from './components/Parallax';
-export ParallaxScroller from './libs/ParallaxScroller';
+export ParallaxController from './libs/ParallaxController';
