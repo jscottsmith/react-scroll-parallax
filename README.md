@@ -22,12 +22,12 @@ npm i react-scroll-parallax
 
 ## Usage
 
-Import `ParallaxScroller` on the client side and call `ParallaxScroller.init()` to create the global singleton `ParallaxScrollListener` which will handle updating all parallax elements on scroll.
+Import `ParallaxController` on the client side and call `ParallaxController.init()` to create the global `ParallaxController` which will handle updating all parallax elements on scroll.
 
 ```
-import { ParallaxScroller } from 'react-scroll-parallax';
+import { ParallaxController } from 'react-scroll-parallax';
 
-ParallaxScroller.init();
+ParallaxController.init();
 ```
 
 Import the `Parallax` component...
