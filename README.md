@@ -50,62 +50,65 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-## Parallax Component API
+## Parallax Component Props
+
+The following are all props that can be passed to the React `<Parallax />` component:
 
 **`className`**
 
-- string
+- type: `String`
 
-Optionally pass additional class names to be added to the parallax element.
+Optionally pass additional class names to be added to the outer parallax element.
 
 **`disabled`**
 
-- boolean
-- default `false`
+- type: `Boolean`
+- default: `false`
 
 Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated.
 
 **`offsetXMax`**
 
-- number or string
-- default `0`
+- type: `Number` or `String`
+- default: `0`
 
 Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
 
 **`offsetXMin`**
 
-- number or string
-- default `0`
+- type: `Number` or `String`
+- default: `0`
 
 Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
 
 **`offsetYMax`**
 
-- number or string
-- default `0`
+- type: `Number` or `String`
+- default: `0`
 
 Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
 
 **`offsetYMin`**
 
-- number or string
-- default `0`
+- type: `Number` or `String`
+- default: `0`
 
 Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
 
 **`slowerScrollRate`**
 
-- boolean
+- type: `Boolean`
 - default `false`
 
-Determines whether the scroll rate of the component will move faster or slower than the default rate of scroll.
+Determines whether the scroll rate of the parallax component will move faster or slower than the default rate of scroll.
 
 **`tag`**
 
-- string
+- type: `String`
 - default `div`
 
-Optionally pass a tag name to be applied to the outer most parallax element.
+Optionally pass a tag name to be applied to the outer most parallax element. For example: `<Parallax tag="figure" />`.
+
 
 
 ## Development
