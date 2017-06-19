@@ -4,6 +4,15 @@ import {
     testForPassiveScroll,
 } from '../utils/index';
 
+/**
+ *
+ * The global controller for setting up window scroll/resize
+ * listeners, managing and caching parallax element positions,
+ * determining which elements are inside the viewport based on
+ * scroll position, and then updating parallax element styles
+ * based on min/max offsets and current scroll position.
+ *
+ */
 function ParallaxController() {
 
     // All parallax elements to be updated
