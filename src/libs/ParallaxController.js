@@ -5,6 +5,9 @@ import {
 } from '../utils/index';
 
 /**
+ * -------------------------------------------------------
+ * Parallax Controller
+ * -------------------------------------------------------
  *
  * The global controller for setting up window scroll/resize
  * listeners, managing and caching parallax element positions,
@@ -81,13 +84,19 @@ function ParallaxController() {
     }
 
     /**
-     * Creates a unique ID
+     * Creates a unique id to distinguish parallax elements.
+     * @return {Number}
      */
     function _createID() {
         ++id;
         return id;
     }
 
+    /**
+     * Update element positions.
+     * Determines if the element is in view based on the cached
+     * attributes, if so set the elements parallax styles.
+     */
     function _updateElementPositions() {
         elements.forEach(element => {
             if (element.props.disabled) return;
@@ -103,6 +112,12 @@ function ParallaxController() {
         });
     }
 
+    /**
+     * Update element attributes.
+     * Sets up the elements offsets based on the props passed from
+     * the component then caches the elements current position and
+     * other important attributes.
+     */
     function _updateElementAttributes() {
         elements.forEach(element => {
             if (element.props.disabled) return;
@@ -113,21 +128,27 @@ function ParallaxController() {
         });
     }
 
+    /**
+     * Remove parallax styles from all elements.
+     */
     function _removeParallaxStyles() {
         elements.forEach(element => {
             _resetStyles(element);
         });
     }
 
+    /**
+     * Cache the window height.
+     */
     function _setWindowHeight() {
         const html = document.documentElement;
         windowHeight = window.innerHeight || html.clientHeight;
     }
 
     /**
-     * Takes a parallax element and caches important values
-     * as an attribute object on the element
-     *
+     * Takes a parallax element and caches important values that
+     * cause layout reflow and paints. Stores the values as an
+     * attribute object accesible on the parallax element.
      * @param {object} element
      */
     function _cacheAttributes(element) {
@@ -180,7 +201,7 @@ function ParallaxController() {
         // NOTE: must add the current scroll position when the
         // element is checked so that we get its absolute position
         // relative to the document and not the viewport then
-        // add the min/max offsets calculated above
+        // add the min/max offsets calculated above.
         let top = 0;
         let bottom = 0;
 
@@ -192,9 +213,9 @@ function ParallaxController() {
             bottom = rect.bottom + scrollY + (yMinPx * -1);
         }
 
-        // Total distance the element will move from when
+        // NOTE: Total distance the element will move from when
         // the top enters the view to the bottom leaving
-        // accounting for elements height and max/min offsets
+        // accounting for elements height and max/min offsets.
         const totalDist = windowHeight + (elHeight + Math.abs(yMinPx) + yMaxPx);
 
         element.attributes = {
@@ -211,10 +232,8 @@ function ParallaxController() {
     }
 
     /**
-     * Takes a parallax element and parses the offset props
-     * to get the value and unit (if any). Sets these offsets
-     * on the element
-     *
+     * Takes a parallax element and parses the offset props to get the value
+     * and unit. Sets these values as offset object accessible on the element.
      * @param {object} element
      */
     function _setupOffsets(element) {
@@ -230,7 +249,6 @@ function ParallaxController() {
         const xMin = parseValueAndUnit(offsetXMax);
         const xMax = parseValueAndUnit(offsetXMin);
 
-        // @TODO: Move error to component proptypes
         if (xMin.unit !== xMax.unit || yMin.unit !== yMax.unit) {
             throw new Error('Must provide matching units for the min and max offset values of each axis.');
         }
@@ -248,6 +266,13 @@ function ParallaxController() {
         };
     }
 
+    /**
+     * Takes a parallax element and returns whether the element
+     * is in view based on the cached position of the element,
+     * current scroll position and the window height.
+     * @param {object} element
+     * @return {boolean} isInView
+     */
     function _isElementInView(element) {
         const top = element.attributes.top - scrollY;
         const bottom = element.attributes.bottom - scrollY;
@@ -261,6 +286,11 @@ function ParallaxController() {
         return isInView;
     }
 
+    /**
+     * Takes a parallax element and set the styles based on the
+     * offsets and percent the element has moved though the viewport.
+     * @param {object} element
+     */
     function _setParallaxStyles(element) {
         const top = element.attributes.top - scrollY;
         const { totalDist } = element.attributes;
@@ -282,9 +312,11 @@ function ParallaxController() {
             transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
     }
 
+    /**
+     * Takes a parallax element and removes parallax offset styles.
+     * @param {object} element
+     */
     function _resetStyles(element) {
-        // Resets any styles that may be left over when
-        // resizing from desktop to mobile apply styles
         const el = element.elInner;
         el.style.cssText =
            `will-change:none;
@@ -293,11 +325,17 @@ function ParallaxController() {
     }
 
     /**
-     * --------------------------------------
+     * -------------------------------------------------------
      * Public methods
-     * --------------------------------------
+     * -------------------------------------------------------
      */
 
+    /**
+     * Creates a new parallax element object with new id
+     * and options to store in the 'elements' array.
+     * @param {object} options
+     * @return {object} element
+     */
     this.createElement = function(options) {
         const id = _createID();
         const element = {
@@ -311,6 +349,11 @@ function ParallaxController() {
         return element;
     };
 
+    /**
+     * Creates a new parallax element object with new id
+     * and options to store in the 'elements' array.
+     * @param {object} element
+     */
     this.removeElement = function(element) {
         const index = elements.indexOf(element);
         if (index !== -1) {
@@ -318,25 +361,32 @@ function ParallaxController() {
         }
     };
 
+    /**
+     * Updates an existing parallax element object with new options.
+     * @param {object} element
+     * @param {object} options
+     */
     this.updateElement = function(element, options) {
-        // update props of a given element
+        // gets the index of the element to update based on id
         const index = elements.findIndex(el => el.id === element.id);
 
-        // create new element with options and replace old
+        // create new element with options and replaces the old
         elements[index] = Object.assign({}, elements[index], options);
 
+        // call update to set attributes and positions based on the new options
         this.update();
     };
 
     /**
-     * Remove element styles
+     * Remove element styles.
+     * @param {object} element
      */
     this.resetElementStyles = function(element) {
         _resetStyles(element);
     };
 
     /**
-     * Updates all parallax element attributes and postitions
+     * Updates all parallax element attributes and postitions.
      */
     this.update = function() {
         _setWindowHeight();
@@ -345,7 +395,7 @@ function ParallaxController() {
     };
 
     /**
-     * Removes listeners, resets all styles, nullifies self
+     * Removes listeners, reset all styles then nullifies the global ParallaxController.
      */
     this.destroy = function() {
         _removeListeners();
@@ -355,8 +405,9 @@ function ParallaxController() {
 }
 
 /**
- * Static method to instantiate the ParallaxController
- * @returns {ParallaxController} A new or existing instance of the ParallaxController
+ * Static method to instantiate the ParallaxController.
+ * Returns a new or existing instance of the ParallaxController.
+ * @returns {Object} ParallaxController
  */
 ParallaxController.init = function() {
     if (!window.ParallaxController) {
@@ -366,4 +417,3 @@ ParallaxController.init = function() {
 };
 
 export default ParallaxController;
-
