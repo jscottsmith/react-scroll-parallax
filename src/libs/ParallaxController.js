@@ -49,8 +49,8 @@ function ParallaxController() {
     _addListeners();
 
     /**
-     * Window scroll handler sets the scrollY
-     * and then calls updateElementPositions()
+     * Window scroll handler. Sets the 'scrollY'
+     * and then calls '_updateElementPositions()'.
      */
     function _handleScroll() {
         // reference to prev scroll y
@@ -71,9 +71,8 @@ function ParallaxController() {
     }
 
     /**
-     * Window resize handler
-     * Sets new window inner height then updates
-     * parallax element attributes and positions
+     * Window resize handler. Sets the new window inner height
+     * then updates parallax element attributes and positions.
      */
     function _handleResize() {
         _setWindowHeight();
