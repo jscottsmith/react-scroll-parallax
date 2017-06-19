@@ -43,7 +43,7 @@ function ParallaxController() {
      */
     function _handleScroll() {
         // reference to prev scroll y
-        const prevScrollY = scrollY;
+        // const prevScrollY = scrollY;
 
         // Save current scroll
         scrollY = window.pageYOffset; // Supports IE 9 and up.
