@@ -36,15 +36,17 @@ function ParallaxController() {
     // Passive support
     const supportsPassive = testForPassiveScroll();
 
+    function _addListeners() {
+        window.addEventListener('scroll', _handleScroll, supportsPassive ? { passive: true } : false);
+        window.addEventListener('resize', _handleResize, false);
+    }
+
     function _removeListeners() {
         window.removeEventListener('scroll', _handleScroll, supportsPassive ? { passive: true } : false);
         window.removeEventListener('resize', _handleResize, false);
     }
 
-    function _addListeners() {
-        window.addEventListener('scroll', _handleScroll, supportsPassive ? { passive: true } : false);
-        window.addEventListener('resize', _handleResize, false);
-    }
+    _addListeners();
 
     /**
      * Window scroll handler sets the scrollY
@@ -351,9 +353,6 @@ function ParallaxController() {
         _removeParallaxStyles();
         window.ParallaxController = null;
     };
-
-    // Initialize the Parallax scroll listener
-    _addListeners();
 }
 
 /**
