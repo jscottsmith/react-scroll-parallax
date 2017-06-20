@@ -35,14 +35,30 @@ export default class Parallax extends Component {
         this.element = ParallaxController.createElement({
             elInner: this._inner,
             elOuter: this._outer,
-            props: this.props,
+            props: {
+                disabled: this.props.disabled,
+                offsetXMax: this.props.offsetXMax,
+                offsetXMin: this.props.offsetXMin,
+                offsetYMax: this.props.offsetYMax,
+                offsetYMin: this.props.offsetYMin,
+                slowerScrollRate: this.props.slowerScrollRate,
+            },
         });
     }
 
     componentWillReceiveProps(nextProps) {
         // updates the elements props when changed
         if (this.props !== nextProps) {
-            ParallaxController.updateElement(this.element, { props: nextProps });
+            ParallaxController.updateElement(this.element, {
+                props: {
+                    disabled: nextProps.disabled,
+                    offsetXMax: nextProps.offsetXMax,
+                    offsetXMin: nextProps.offsetXMin,
+                    offsetYMax: nextProps.offsetYMax,
+                    offsetYMin: nextProps.offsetYMin,
+                    slowerScrollRate: nextProps.slowerScrollRate,
+                },
+            });
         }
         // resets element styles when disabled
         if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
