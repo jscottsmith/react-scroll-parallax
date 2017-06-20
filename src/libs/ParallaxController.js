@@ -1,5 +1,6 @@
 import {
     getParallaxOffsets,
+    isElementInView,
     parseValueAndUnit,
     testForPassiveScroll,
 } from '../utils/index';
@@ -102,7 +103,7 @@ function ParallaxController() {
             if (element.props.disabled) return;
 
             // check if the element is in view then
-            const isInView = _isElementInView(element);
+            const isInView = isElementInView(element, windowHeight, scrollY);
 
             // set styles if it is
             if (isInView) _setParallaxStyles(element);
@@ -264,26 +265,6 @@ function ParallaxController() {
             xMin,
             xMax,
         };
-    }
-
-    /**
-     * Takes a parallax element and returns whether the element
-     * is in view based on the cached position of the element,
-     * current scroll position and the window height.
-     * @param {object} element
-     * @return {boolean} isInView
-     */
-    function _isElementInView(element) {
-        const top = element.attributes.top - scrollY;
-        const bottom = element.attributes.bottom - scrollY;
-
-        const topInView     = top    >= 0 && top    <= windowHeight;
-        const bottomInView  = bottom >= 0 && bottom <= windowHeight;
-        const covering      = top    <= 0 && bottom >= windowHeight;
-
-        const isInView = topInView || bottomInView || covering;
-
-        return isInView;
     }
 
     /**
