@@ -1,6 +1,6 @@
 # React Scroll Parallax
 
-Provides a React component and single global passive scroll listener to add **vertical** scroll based offsets to elements based on their position in the viewport. Works with server side rendering and universal react apps.
+Provides a React component and single global passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with server-side rendering and universal React apps.
 
 [View on NPM](https://www.npmjs.com/package/react-scroll-parallax)
 
@@ -12,9 +12,9 @@ Provides a React component and single global passive scroll listener to add **ve
 
 ## Install
 
-⚠️ **Warning: This is an alpha pre-release**
+⚠️ **Warning: This is a beta pre-release**
 
-Please anticipate the possibility of breaking changes in future releases before using this package.
+[1.0.0 Release goals](https://github.com/jscottsmith/react-scroll-parallax/issues/3)
 
 ```
 npm i react-scroll-parallax
@@ -115,7 +115,7 @@ The following are public methods available on the `ParallaxController` global:
 
 **`update()`**
 
-Updates all cached attributes for parallax elements then updates their postitions.
+Updates all cached attributes for parallax elements then updates their positions.
 
 **`destroy()`**
 
@@ -139,10 +139,10 @@ Run Jest tests:
 
 `npm run test`
 
-## Optimizations to reduce Jank and keep scrolling smooth
+## Optimizations to Reduce Jank
 
 React Scroll Parallax uses a single [passive scroll listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners) (dependent on browser support) with the minimal amount of work done on the scroll event to prevent [jank](http://jankfree.org/) (calculations that cause layout, reflow and paint are cached initially and only updated when layout changes). Request animation frame is then used to decouple the scroll handler and further reduce jank. All offsets are applied with 3D transforms to utilize the GPU and prevent paints. If you have ideas to further optimize scrolling please PR or post an issue.
 
 **PSA**
 
-It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keep images small and optimized. Reduce the number of moving elements in view and on the page. Disable scroll effects on mobile devices. Just keep things performant and animation silky smooth.
+It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should help achieve silky smooth animations and minimize annoying visitors.
