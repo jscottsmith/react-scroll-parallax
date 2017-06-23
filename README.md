@@ -17,7 +17,7 @@ Provides a React component and single global passive scroll listener to add **ve
 [1.0.0 Release goals](https://github.com/jscottsmith/react-scroll-parallax/issues/3)
 
 ```
-npm i react-scroll-parallax
+npm i --save react-scroll-parallax@beta
 ```
 
 ## Usage
