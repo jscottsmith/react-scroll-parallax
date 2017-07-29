@@ -6,7 +6,9 @@ Provides a React component and single global passive scroll listener to add **ve
 
 ## Examples
 
-🔗 [Example](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-example/)
+🔗 [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
+
+🔗 [Example Site](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-example/)
 
 🔗 [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-test/)
 
