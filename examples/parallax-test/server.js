@@ -6,6 +6,8 @@ import React from 'react';
 import ReactServer from 'react-dom/server';
 import { ParallaxTest } from 'components';
 
+import 'babel-polyfill';
+
 const app = express();
 
 app.use('/static', express.static(path.resolve(__dirname, './dist')));
