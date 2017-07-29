@@ -125,6 +125,10 @@ Updates all cached attributes for parallax elements then updates their positions
 
 Removes window scroll and resize listeners, resets all styles applied to parallax elements, and sets the global `ParallaxController` to `null`.
 
+## Support
+
+React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari and Edge, as well as the following: iOS 9, iOS 10, Android 4 and IE11. If you encounter any errors for browsers that should be supported please post an issue.
+
 ## Development
 
 Install node modules and start webpack:
