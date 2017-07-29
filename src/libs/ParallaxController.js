@@ -288,8 +288,7 @@ function ParallaxController() {
         // Apply styles
         const el = element.elInner;
         el.style.cssText =
-           `will-change:transform;
-            position:relative;
+           `position:relative;
             transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
     }
 
@@ -300,8 +299,7 @@ function ParallaxController() {
     function _resetStyles(element) {
         const el = element.elInner;
         el.style.cssText =
-           `will-change:none;
-            position:relative;
+           `position:relative;
             transform:translate3d(0, 0, 0)`;
     }
 
