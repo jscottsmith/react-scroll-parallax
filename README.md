@@ -113,6 +113,10 @@ Optionally pass a tag name to be applied to the outer most parallax element. For
 
 The following are public methods available on the `ParallaxController` global:
 
+**`init()`**
+
+Initilize the `ParallaxController` on the client with the `init` static method.
+
 **`update()`**
 
 Updates all cached attributes for parallax elements then updates their positions.
