@@ -28,9 +28,9 @@
   "author": "J Scott Smith",
   "license": "ISC",
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-proptypes": "^1.0.0"
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
