@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'react-proptypes';
+import PropTypes from 'prop-types';
 import { offsetMin, offsetMax } from '../utils/propValidation';
 
 export default class Parallax extends Component {
