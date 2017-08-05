@@ -18,7 +18,6 @@ import {
  *
  */
 function ParallaxController() {
-
     // All parallax elements to be updated
     const elements = [];
 
@@ -41,12 +40,20 @@ function ParallaxController() {
     const supportsPassive = testForPassiveScroll();
 
     function _addListeners() {
-        window.addEventListener('scroll', _handleScroll, supportsPassive ? { passive: true } : false);
+        window.addEventListener(
+            'scroll',
+            _handleScroll,
+            supportsPassive ? { passive: true } : false
+        );
         window.addEventListener('resize', _handleResize, false);
     }
 
     function _removeListeners() {
-        window.removeEventListener('scroll', _handleScroll, supportsPassive ? { passive: true } : false);
+        window.removeEventListener(
+            'scroll',
+            _handleScroll,
+            supportsPassive ? { passive: true } : false
+        );
         window.removeEventListener('resize', _handleResize, false);
     }
 
@@ -153,12 +160,7 @@ function ParallaxController() {
      * @param {object} element
      */
     function _cacheAttributes(element) {
-        const {
-            yMin,
-            yMax,
-            xMax,
-            xMin,
-        } = element.offsets;
+        const { yMin, yMax, xMax, xMin } = element.offsets;
 
         const { slowerScrollRate } = element.props;
 
@@ -210,8 +212,8 @@ function ParallaxController() {
             top = rect.top + scrollY + yMinPx;
             bottom = rect.bottom + scrollY + yMaxPx;
         } else {
-            top = rect.top + scrollY + (yMaxPx * -1);
-            bottom = rect.bottom + scrollY + (yMinPx * -1);
+            top = rect.top + scrollY + yMaxPx * -1;
+            bottom = rect.bottom + scrollY + yMinPx * -1;
         }
 
         // NOTE: Total distance the element will move from when
@@ -251,7 +253,9 @@ function ParallaxController() {
         const xMax = parseValueAndUnit(offsetXMin);
 
         if (xMin.unit !== xMax.unit || yMin.unit !== yMax.unit) {
-            throw new Error('Must provide matching units for the min and max offset values of each axis.');
+            throw new Error(
+                'Must provide matching units for the min and max offset values of each axis.'
+            );
         }
 
         const xUnit = xMin.unit || '%';
@@ -283,12 +287,15 @@ function ParallaxController() {
         const { slowerScrollRate } = element.props;
 
         // Get the parallax X and Y offsets
-        const offsets = getParallaxOffsets(element.offsets, percentMoved, slowerScrollRate);
+        const offsets = getParallaxOffsets(
+            element.offsets,
+            percentMoved,
+            slowerScrollRate
+        );
 
         // Apply styles
         const el = element.elInner;
-        el.style.cssText =
-           `position:relative;
+        el.style.cssText = `position:relative;
             transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
     }
 
@@ -298,8 +305,7 @@ function ParallaxController() {
      */
     function _resetStyles(element) {
         const el = element.elInner;
-        el.style.cssText =
-           `position:relative;
+        el.style.cssText = `position:relative;
             transform:translate3d(0, 0, 0)`;
     }
 

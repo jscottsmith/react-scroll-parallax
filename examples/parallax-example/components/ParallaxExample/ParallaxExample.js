@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-	Intro,
-	IntroCopy,
+    Intro,
+    IntroCopy,
     Marquee,
     TriangleGrid,
     Overlap,
@@ -15,7 +15,6 @@ import noisePattern from '!!raw-loader!../shared/noise-pattern.svg';
 import dotPattern from '!!raw-loader!../shared/dot-pattern.svg';
 
 export default class ParallaxExample extends Component {
-
     render() {
         return (
             <div className={style.root}>
@@ -34,5 +33,4 @@ export default class ParallaxExample extends Component {
             </div>
         );
     }
-
 }

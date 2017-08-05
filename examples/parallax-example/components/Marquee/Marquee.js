@@ -10,10 +10,7 @@ const Marquee = () => (
     <div className={style.root}>
         <Svg svg={divider} className={style.divider} />
         <div className={style.container}>
-            <Svg
-                svg={boxBg}
-                className={style.boxBg}
-            />
+            <Svg svg={boxBg} className={style.boxBg} />
             <Parallax
                 className={style.text}
                 offsetYMax={70}

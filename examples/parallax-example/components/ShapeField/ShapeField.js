@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Parallax } from 'react-scroll-parallax';
-import {
-    Svg,
-} from 'components';
+import { Svg } from 'components';
 
 import style from './ShapeField.scss';
 
@@ -12,10 +10,12 @@ import cluster01Rect from '!!raw-loader!./cluster-01-rect.svg';
 
 import cluster02Hemi from '!!raw-loader!./cluster-02-hemi.svg';
 import cluster02TriangleBig from '!!raw-loader!./cluster-02-triangle-big.svg';
-import cluster02TriangleSmall from '!!raw-loader!./cluster-02-triangle-small.svg';
+import cluster02TriangleSmall
+    from '!!raw-loader!./cluster-02-triangle-small.svg';
 
 import cluster03TriangleTop from '!!raw-loader!./cluster-03-triangle-top.svg';
-import cluster03TriangleBottom from '!!raw-loader!./cluster-03-triangle-bottom.svg';
+import cluster03TriangleBottom
+    from '!!raw-loader!./cluster-03-triangle-bottom.svg';
 import cluster03TriangleBig from '!!raw-loader!./cluster-03-triangle-big.svg';
 
 import cluster04Triangle from '!!raw-loader!./cluster-04-triangle.svg';
@@ -23,7 +23,6 @@ import cluster04Square from '!!raw-loader!./cluster-04-square.svg';
 import cluster04HemiRight from '!!raw-loader!./cluster-04-hemi-right.svg';
 
 export default class ShapeField extends Component {
-
     render() {
         return (
             <div className={style.root}>
@@ -48,10 +47,7 @@ export default class ShapeField extends Component {
                 </div>
 
                 <div className={style.shapeCluster02}>
-                    <Svg
-                        svg={cluster02Hemi}
-                        className="hemi"
-                    />
+                    <Svg svg={cluster02Hemi} className="hemi" />
                     <Parallax
                         offsetYMax={30}
                         offsetYMin={-30}
@@ -93,10 +89,7 @@ export default class ShapeField extends Component {
                 </div>
 
                 <div className={style.shapeCluster04}>
-                    <Svg
-                        svg={cluster04Square}
-                        className="square"
-                    />
+                    <Svg svg={cluster04Square} className="square" />
                     <Parallax
                         offsetYMax={60}
                         offsetYMin={-60}
@@ -116,5 +109,4 @@ export default class ShapeField extends Component {
             </div>
         );
     }
-
 }

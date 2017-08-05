@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { offsetMin, offsetMax } from '../utils/propValidation';
 
 export default class Parallax extends Component {
-
     static defaultProps = {
         disabled: false,
         offsetYMax: 0,
@@ -29,7 +28,9 @@ export default class Parallax extends Component {
     componentDidMount() {
         // add this Parallax element to the global listener
         if (typeof ParallaxController === 'undefined') {
-            throw new Error('Must initialize the ParallaxController before adding React Parallax components.');
+            throw new Error(
+                'Must initialize the ParallaxController before adding React Parallax components.'
+            );
         }
         // create a new parallax element and save the reference
         this.element = ParallaxController.createElement({
@@ -80,23 +81,13 @@ export default class Parallax extends Component {
     };
 
     render() {
-        const {
-            children,
-            className,
-            tag: Tag,
-        } = this.props;
+        const { children, className, tag: Tag } = this.props;
 
         const rootClass = 'parallax-outer' + (className ? ` ${className}` : '');
 
         return (
-            <Tag
-                className={rootClass}
-                ref={this.mapRefOuter}
-            >
-                <div
-                    className="parallax-inner"
-                    ref={this.mapRefInner}
-                >
+            <Tag className={rootClass} ref={this.mapRefOuter}>
+                <div className="parallax-inner" ref={this.mapRefInner}>
                     {children}
                 </div>
             </Tag>

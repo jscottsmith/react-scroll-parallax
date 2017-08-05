@@ -6,7 +6,6 @@ const INC_AMOUNT = 10;
 const START_NUM_ELEMENTS = 10;
 
 export default class ParallaxTest extends React.Component {
-
     state = {
         elements: new Array(START_NUM_ELEMENTS).fill(null).map((x, i) => i),
         offsetY: INC_AMOUNT,
@@ -23,7 +22,10 @@ export default class ParallaxTest extends React.Component {
     };
 
     handleRemove = () => {
-        const elements = this.state.elements.slice(0, this.state.elements.length - 1);
+        const elements = this.state.elements.slice(
+            0,
+            this.state.elements.length - 1
+        );
         this.setState({
             elements,
         });
@@ -37,7 +39,9 @@ export default class ParallaxTest extends React.Component {
     };
 
     decreaseOffsetY = () => {
-        const offsetY = this.state.offsetY - INC_AMOUNT < 0 ? 0 : this.state.offsetY - INC_AMOUNT;
+        const offsetY = this.state.offsetY - INC_AMOUNT < 0
+            ? 0
+            : this.state.offsetY - INC_AMOUNT;
         this.setState({
             offsetY,
         });
@@ -101,7 +105,9 @@ export default class ParallaxTest extends React.Component {
                     <div className={style.currentState}>
                         <h4>
                             Parallax Elements:
-                            <span className="value">{this.state.elements.length}</span>
+                            <span className="value">
+                                {this.state.elements.length}
+                            </span>
                         </h4>
                         <button onClick={this.handleAdd}>Add</button>
                         <button onClick={this.handleRemove}>Remove</button>
@@ -109,7 +115,10 @@ export default class ParallaxTest extends React.Component {
                     <div className={style.currentState}>
                         <h4>
                             Y Offsets:
-                            <span className="value">{this.state.offsetY}{this.state.unitPercent ? '%' : 'px'}</span>
+                            <span className="value">
+                                {this.state.offsetY}
+                                {this.state.unitPercent ? '%' : 'px'}
+                            </span>
                         </h4>
                         <button onClick={this.increaseOffsetY}>Increase</button>
                         <button onClick={this.decreaseOffsetY}>Decrease</button>
@@ -117,23 +126,37 @@ export default class ParallaxTest extends React.Component {
                     <div className={style.currentState}>
                         <h4>
                             Speed:
-                            <span className="value">{this.state.slowerScrollRate ? 'Slower' : 'Faster'}</span>
+                            <span className="value">
+                                {this.state.slowerScrollRate
+                                    ? 'Slower'
+                                    : 'Faster'}
+                            </span>
                         </h4>
-                        <button onClick={this.toggleSpeed}>{this.state.slowerScrollRate ? 'Faster' : 'Slower'}</button>
+                        <button onClick={this.toggleSpeed}>
+                            {this.state.slowerScrollRate ? 'Faster' : 'Slower'}
+                        </button>
                     </div>
                     <div className={style.currentState}>
                         <h4>
                             Unit:
-                            <span className="value">{this.state.unitPercent ? 'Percent' : 'Pixels'}</span>
+                            <span className="value">
+                                {this.state.unitPercent ? 'Percent' : 'Pixels'}
+                            </span>
                         </h4>
-                        <button onClick={this.toggleValue}>{this.state.unitPercent ? 'Pixels' : 'Percent'}</button>
+                        <button onClick={this.toggleValue}>
+                            {this.state.unitPercent ? 'Pixels' : 'Percent'}
+                        </button>
                     </div>
                     <div className={style.currentState}>
                         <h4>
                             Disabled:
-                            <span className="value">{this.state.disabled ? 'True' : 'False'}</span>
+                            <span className="value">
+                                {this.state.disabled ? 'True' : 'False'}
+                            </span>
                         </h4>
-                        <button onClick={this.toggleDisabled}>{this.state.disabled ? 'Enable' : 'Disable'}</button>
+                        <button onClick={this.toggleDisabled}>
+                            {this.state.disabled ? 'Enable' : 'Disable'}
+                        </button>
                     </div>
                 </div>
             </div>
