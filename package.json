@@ -12,6 +12,7 @@
     "dev-server": "node ./examples/parallax-example/dist/server",
     "gh-pages": "NODE_ENV=production webpack --progress --colors",
     "test": "jest",
+    "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
     "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports"
   },
   "jest": {
