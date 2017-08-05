@@ -11,7 +11,9 @@ export default function parseValueAndUnit(value) {
     const isNumb = typeof value === 'number';
 
     if (isBool || isObject) {
-        throw new Error('Ivalid value provided. Must provide a value as a string with % or px units.');
+        throw new Error(
+            'Ivalid value provided. Must provide a value as a string with % or px units.'
+        );
     }
 
     if (isNumb) {

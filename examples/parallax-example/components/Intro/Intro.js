@@ -8,24 +8,13 @@ import hemispheres from '!!raw-loader!./hemispheres.svg';
 const Intro = () => (
     <div className={style.root}>
         <div className={style.container}>
-            <Parallax
-                offsetYMin={-100}
-                offsetYMax={100}
-                className={style.ring}
-            >
+            <Parallax offsetYMin={-100} offsetYMax={100} className={style.ring}>
                 <Svg svg={ring} />
             </Parallax>
-            <Parallax
-                offsetYMin={-50}
-                offsetYMax={50}
-                className={style.circle}
-            >
-                <div className={style.circleInner}/>
+            <Parallax offsetYMin={-50} offsetYMax={50} className={style.circle}>
+                <div className={style.circleInner} />
             </Parallax>
-            <Svg
-                className={style.hemispheres}
-                svg={hemispheres}
-            />
+            <Svg className={style.hemispheres} svg={hemispheres} />
         </div>
         <p className={style.scroll}>Scroll</p>
     </div>

@@ -15,9 +15,7 @@ const Overlap = () => (
                 offsetXMin={20}
                 className={style.circle}
             >
-                <Svg
-                    svg={circle}
-                />
+                <Svg svg={circle} />
             </Parallax>
             <Parallax
                 offsetYMax={150}
@@ -26,9 +24,7 @@ const Overlap = () => (
                 offsetXMin={-20}
                 className={style.circleRings}
             >
-                <Svg
-                    svg={circleRings}
-                />
+                <Svg svg={circleRings} />
             </Parallax>
         </div>
     </div>

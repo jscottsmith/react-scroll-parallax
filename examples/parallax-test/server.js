@@ -13,7 +13,9 @@ const app = express();
 app.use('/static', express.static(path.resolve(__dirname, './dist')));
 
 app.get('*', (req, res) => {
-    const html = fs.readFileSync(path.resolve(__dirname, './index.html')).toString();
+    const html = fs
+        .readFileSync(path.resolve(__dirname, './index.html'))
+        .toString();
     const markup = ReactServer.renderToString(<ParallaxTest />);
 
     res.send(html.replace('$react', markup));

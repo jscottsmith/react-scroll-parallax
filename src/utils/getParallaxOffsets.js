@@ -7,13 +7,12 @@ import { scaleBetween } from './index';
  * @returns {Object}
  */
 
-export default function getParallaxOffsets(offsets, percentMoved, slowerScrollRate) {
-    const {
-        yMin,
-        yMax,
-        xMin,
-        xMax,
-    } = offsets;
+export default function getParallaxOffsets(
+    offsets,
+    percentMoved,
+    slowerScrollRate
+) {
+    const { yMin, yMax, xMin, xMax } = offsets;
 
     const yUnit = yMax.unit;
     const xUnit = xMax.unit;
