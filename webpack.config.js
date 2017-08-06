@@ -1,6 +1,4 @@
-// Change this root to point to the desired example when
-const EXAMPLE_ROOT = './examples/parallax-example/';
-
+const ROOT = './example/';
 const createBabelConfig = require('./babelrc');
 const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
@@ -11,18 +9,16 @@ const baseConfig = {
     resolve: {
         alias: {
             'react-scroll-parallax': path.resolve('./src'),
-            'components': path.resolve(EXAMPLE_ROOT + 'components'),
+            components: path.resolve(ROOT + 'components'),
         },
     },
 };
 
 const clientConfig = merge(baseConfig, {
-    entry: path.resolve(EXAMPLE_ROOT + 'client.js'),
+    entry: path.resolve(ROOT + 'client.js'),
 
     output: {
-        path: path.resolve(
-            EXAMPLE_ROOT + 'dist'
-        ),
+        path: path.resolve(ROOT + 'dist'),
         filename: 'bundle.js',
     },
 
@@ -30,25 +26,13 @@ const clientConfig = merge(baseConfig, {
         rules: [
             {
                 test: /\.js$/,
-                include: [
-                    path.resolve(EXAMPLE_ROOT),
-                    path.resolve('./src'),
-                ],
+                include: [path.resolve(ROOT), path.resolve('./src')],
                 loader: 'babel-loader',
                 query: createBabelConfig(),
             },
             {
-                test: /\.(png|jpg|jpeg|gif|svg|cur)$/,
-                loader: 'url-loader',
-                include: [
-                    path.resolve(EXAMPLE_ROOT),
-                ],
-            },
-            {
                 test: /\.scss$/,
-                include: [
-                    path.resolve(EXAMPLE_ROOT),
-                ],
+                include: [path.resolve(ROOT)],
                 loaders: [
                     'style-loader',
                     {
@@ -82,12 +66,10 @@ const serverConfig = merge(baseConfig, {
         __dirname: true,
     },
 
-    entry: path.resolve(EXAMPLE_ROOT + 'server.js'),
+    entry: path.resolve(ROOT + 'server.js'),
 
     output: {
-        path: path.resolve(
-            EXAMPLE_ROOT + 'dist'
-        ),
+        path: path.resolve(ROOT + 'dist'),
         filename: 'server.js',
     },
 
@@ -95,18 +77,13 @@ const serverConfig = merge(baseConfig, {
         rules: [
             {
                 test: /\.js$/,
-                include: [
-                    path.resolve(EXAMPLE_ROOT),
-                    path.resolve('./src'),
-                ],
+                include: [path.resolve(ROOT), path.resolve('./src')],
                 loader: 'babel-loader',
                 query: createBabelConfig({ server: true }),
             },
             {
                 test: /\.scss$/,
-                include: [
-                    path.resolve(EXAMPLE_ROOT),
-                ],
+                include: [path.resolve(ROOT)],
                 loaders: [
                     {
                         loader: 'css-loader/locals',
@@ -115,7 +92,8 @@ const serverConfig = merge(baseConfig, {
                             sourceMap: false,
                         },
                     },
-                    'postcss-loader', {
+                    'postcss-loader',
+                    {
                         loader: 'sass-loader',
                         query: {
                             outputStyle: 'expanded',
