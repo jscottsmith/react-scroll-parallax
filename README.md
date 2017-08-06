@@ -8,9 +8,9 @@ Provides a React component and single global passive scroll listener to add **ve
 
 🔗 [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
 
-🔗 [Example Site](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-example/)
+🔗 [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
 
-🔗 [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax/examples/parallax-test/)
+🔗 [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
 
 ## Install
 
