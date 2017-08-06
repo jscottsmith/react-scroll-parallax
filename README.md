@@ -1,6 +1,6 @@
 # React Scroll Parallax
 
-Provides a React component and single global passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with server-side rendering and universal React apps.
+Provides a React component and single global passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with universal (server-side rendered)  React apps.
 
 [View on NPM](https://www.npmjs.com/package/react-scroll-parallax)
 
@@ -47,6 +47,8 @@ import { Parallax } from 'react-scroll-parallax';
     <img src="/image" />
 </Parallax>
 ```
+
+NOTE: `ParallaxController` caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps by images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this call the `update()` once every thing has loaded and ready.
 
 ## Parallax Component Props
 
@@ -151,4 +153,4 @@ React Scroll Parallax uses a single [passive scroll listener](https://developer.
 
 **PSA**
 
-It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should help achieve silky smooth animations and minimize annoying visitors.
+It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should help achieve silky smooth animations.
