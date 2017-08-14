@@ -20,7 +20,7 @@ npm i react-scroll-parallax --save
 
 ## Usage
 
-Import `ParallaxController` on the client side and call `ParallaxController.init()` to create the global `ParallaxController` which will handle updating all parallax elements on scroll.
+Import `ParallaxController` on the client side and call `ParallaxController.init()` to create the global `ParallaxController` on the `window` which will handle controlling all parallax elements on scroll. Ideally, this would be called at the root of your react app on the client.
 
 ```javascript
 import { ParallaxController } from 'react-scroll-parallax';
@@ -48,7 +48,7 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-NOTE: `ParallaxController` caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps by images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this call the `update()` once every thing has loaded and ready.
+**NOTE:** `ParallaxController` caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this call the `update()` from the global `ParallaxController` once every thing has loaded and is ready.
 
 ## Parallax Component Props
 
@@ -111,11 +111,13 @@ Optionally pass a tag name to be applied to the outer most parallax element. For
 
 ## Parallax Controller
 
-The following are public methods available on the `ParallaxController` global:
-
 **`init()`**
 
 Initilize the `ParallaxController` on the client with the `init` static method.
+
+**NOTE:** Calling `ParallaxController.init()` creates an instance of the controller on the `window` using the same name, e.g. `window.ParallaxController`.
+
+The following are public methods available on the `window.ParallaxController` global:
 
 **`update()`**
 
