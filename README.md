@@ -20,12 +20,22 @@ npm i react-scroll-parallax --save
 
 ## Usage
 
-Import `ParallaxController` on the client side and call `ParallaxController.init()` to create the global `ParallaxController` on the `window` which will handle controlling all parallax elements on scroll. Ideally, this would be called at the root of your react app on the client.
+Wrap your component tree that will contain `<Parallax />` components with the `<ParallaxProvider />`;
 
 ```javascript
-import { ParallaxController } from 'react-scroll-parallax';
+...
+import { ParallaxProvider } from 'react-scroll-parallax';
 
-ParallaxController.init();
+class App extends Component {
+    render() {
+        return (
+            <ParallaxProvider>
+                <StuffWithParallax />
+            </ParallaxProvider>
+        );
+    }
+}
+
 ```
 
 Import the `Parallax` component...
@@ -48,7 +58,7 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-**NOTE:** `ParallaxController` caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this call the `update()` from the global `ParallaxController` once every thing has loaded and is ready.
+**NOTE:** The Parallax Controller caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this you can call the `update()` method from any child component of the `<ParallaxProvider />` via context once every thing has loaded and is ready. More details on how here: [Parallax Controller Context](#parallax-controller-context)
 
 ## Parallax Component Props
 
@@ -109,15 +119,23 @@ Determines whether the scroll rate of the parallax component will move faster or
 
 Optionally pass a tag name to be applied to the outer most parallax element. For example: `<Parallax tag="figure" />`.
 
-## Parallax Controller
+## Parallax Controller Context
 
-**`init()`**
+Access the Parallax Controller via context in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
 
-Initilize the `ParallaxController` on the client with the `init` static method.
+```
+class Foo extends Component {
 
-**NOTE:** Calling `ParallaxController.init()` creates an instance of the controller on the `window` using the same name, e.g. `window.ParallaxController`.
+    static contextTypes = {
+        parallaxController: PropTypes.object.isRequired,
+    };
 
-The following are public methods available on the `window.ParallaxController` global:
+    ...
+```
+
+### Available Methods
+
+Access the following method via context such as `this.context.parallaxController`.
 
 **`update()`**
 
@@ -125,9 +143,9 @@ Updates all cached attributes for parallax elements then updates their positions
 
 **`destroy()`**
 
-Removes window scroll and resize listeners, resets all styles applied to parallax elements, and sets the global `ParallaxController` to `null`.
+Removes window scroll and resize listeners then resets all styles applied to parallax elements.
 
-## Support
+## Browser Support
 
 React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari and Edge, as well as the following: iOS 9, iOS 10, Android 4 and IE11. If you encounter any errors for browsers that should be supported please post an issue.
 
