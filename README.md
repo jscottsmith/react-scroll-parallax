@@ -1,6 +1,6 @@
 # React Scroll Parallax
 
-Provides a React component and single global passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with universal (server-side rendered)  React apps.
+Provides a React component and single passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with universal (server-side rendered) React apps.
 
 [View on NPM](https://www.npmjs.com/package/react-scroll-parallax)
 
@@ -22,7 +22,7 @@ npm i react-scroll-parallax --save
 
 Wrap your component tree that will contain `<Parallax />` components with the `<ParallaxProvider />`;
 
-```javascript
+```jsx
 ...
 import { ParallaxProvider } from 'react-scroll-parallax';
 
@@ -58,7 +58,7 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-**NOTE:** The Parallax Controller caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this you can call the `update()` method from any child component of the `<ParallaxProvider />` via context once every thing has loaded and is ready. More details on how here: [Parallax Controller Context](#parallax-controller-context)
+**NOTE:** The Parallax Controller caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via context once every thing has loaded and is ready. More details on how here: [Parallax Controller Context](#parallax-controller-context)
 
 ## Parallax Component Props
 
@@ -123,32 +123,32 @@ Optionally pass a tag name to be applied to the outer most parallax element. For
 
 Access the Parallax Controller via context in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
 
-```
+```jsx
 class Foo extends Component {
 
     static contextTypes = {
         parallaxController: PropTypes.object.isRequired,
     };
 
+    doSomething() {
+        // do stuff with this.context.parallaxController
+    }
+
     ...
 ```
 
-### Available Methods
+or for stateless functional components like:
 
-Access the following method via context such as `this.context.parallaxController`.
+```jsx
+const Bar = (props, context) => (
 
-**`update()`**
+    // do stuff with context.parallaxController
 
-Updates all cached attributes for parallax elements then updates their positions.
+    ...
+);
 
-**`destroy()`**
-
-Removes window scroll and resize listeners then resets all styles applied to parallax elements.
-
-## Browser Support
-
-React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari and Edge, as well as the following: iOS 9, iOS 10, Android 4 and IE11. If you encounter any errors for browsers that should be supported please post an issue.
-
+Bar.contextTypes = {
+    parallaxController: PropTypes.object.isRequired,
 ## Development
 
 Install node modules and start webpack:
@@ -166,6 +166,26 @@ Run dev server:
 Run Jest tests:
 
 `npm run test`
+
+};
+
+```
+
+### Available Methods
+
+Access the following methods on `parallaxController` via context:
+
+**`update()`**
+
+Updates all cached attributes for parallax elements then updates their positions.
+
+**`destroy()`**
+
+Removes window scroll and resize listeners then resets all styles applied to parallax elements.
+
+## Browser Support
+
+React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari and Edge, as well as the following: iOS 9, iOS 10, Android 4 and IE11. If you encounter any errors for browsers that should be supported please post an issue.
 
 ## Optimizations to Reduce Jank
 
