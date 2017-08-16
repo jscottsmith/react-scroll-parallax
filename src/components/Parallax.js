@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { offsetMin, offsetMax } from '../utils/propValidation';
+import { ParallaxController } from 'react-scroll-parallax';
 
 export default class Parallax extends Component {
     static defaultProps = {
@@ -25,15 +26,20 @@ export default class Parallax extends Component {
         tag: PropTypes.string.isRequired,
     };
 
+    static contextTypes = {
+        parallaxController: PropTypes.object, // not required because this could be rendered on the server.
+    };
+
     componentDidMount() {
-        // add this Parallax element to the global listener
-        if (typeof ParallaxController === 'undefined') {
+        // Make sure the provided context is an instance of the controller
+        if (!(this.context.parallaxController instanceof ParallaxController)) {
             throw new Error(
-                'Must initialize the ParallaxController before adding React Parallax components.'
+                "Must wrap your application's <Parallax /> components in a <ParallaxProvider />."
             );
         }
+
         // create a new parallax element and save the reference
-        this.element = ParallaxController.createElement({
+        this.element = this.context.parallaxController.createElement({
             elInner: this._inner,
             elOuter: this._outer,
             props: {
@@ -50,7 +56,7 @@ export default class Parallax extends Component {
     componentWillReceiveProps(nextProps) {
         // updates the elements props when changed
         if (this.props !== nextProps) {
-            ParallaxController.updateElement(this.element, {
+            this.context.parallaxController.updateElement(this.element, {
                 props: {
                     disabled: nextProps.disabled,
                     offsetXMax: nextProps.offsetXMax,
@@ -63,12 +69,12 @@ export default class Parallax extends Component {
         }
         // resets element styles when disabled
         if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
-            ParallaxController.resetElementStyles(this.element);
+            this.context.parallaxController.resetElementStyles(this.element);
         }
     }
 
     componentWillUnmount() {
-        ParallaxController.removeElement(this.element);
+        this.context.parallaxController.removeElement(this.element);
     }
 
     // refs
