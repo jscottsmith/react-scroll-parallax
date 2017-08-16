@@ -149,24 +149,6 @@ const Bar = (props, context) => (
 
 Bar.contextTypes = {
     parallaxController: PropTypes.object.isRequired,
-## Development
-
-Install node modules and start webpack:
-
-`npm i`
-
-Run webpack watch:
-
-`npm run dev`
-
-Run dev server:
-
-`npm run dev-server`
-
-Run Jest tests:
-
-`npm run test`
-
 };
 
 ```
