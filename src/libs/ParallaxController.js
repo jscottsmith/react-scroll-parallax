@@ -385,20 +385,16 @@ function ParallaxController() {
     this.destroy = function() {
         _removeListeners();
         _removeParallaxStyles();
-        window.ParallaxController = null;
     };
 }
 
 /**
  * Static method to instantiate the ParallaxController.
- * Returns a new or existing instance of the ParallaxController.
+ * Returns a new instance of the ParallaxController.
  * @returns {Object} ParallaxController
  */
 ParallaxController.init = function() {
-    if (!window.ParallaxController) {
-        window.ParallaxController = new ParallaxController();
-    }
-    return window.ParallaxController;
+    return new ParallaxController();
 };
 
 export default ParallaxController;
