@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { Parallax } from 'react-scroll-parallax';
 import style from './ParallaxTest.scss';
 
 const INC_AMOUNT = 10;
 const START_NUM_ELEMENTS = 10;
 
-export default class ParallaxTest extends React.Component {
+export default class ParallaxTest extends Component {
+    static contextTypes = {
+        parallaxController: PropTypes.object.isRequired,
+    };
+
     state = {
         elements: new Array(START_NUM_ELEMENTS).fill(null).map((x, i) => i),
         offsetY: INC_AMOUNT,
         slowerScrollRate: false,
         unitPercent: false,
         disabled: false,
+    };
+
+    triggerDestroy = () => {
+        this.context.parallaxController.destroy();
     };
 
     handleAdd = () => {
@@ -156,6 +165,14 @@ export default class ParallaxTest extends React.Component {
                         </h4>
                         <button onClick={this.toggleDisabled}>
                             {this.state.disabled ? 'Enable' : 'Disable'}
+                        </button>
+                    </div>
+                    <div className={style.currentState}>
+                        <h4>
+                            Destroys the ParallaxController. :-(
+                        </h4>
+                        <button onClick={this.triggerDestroy}>
+                            Destroy
                         </button>
                     </div>
                 </div>
