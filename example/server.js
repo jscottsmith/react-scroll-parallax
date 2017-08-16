@@ -4,23 +4,24 @@ import express from 'express';
 
 import React from 'react';
 import ReactServer from 'react-dom/server';
-import { ParallaxTest } from 'components';
+import { App } from 'components';
 
 import 'babel-polyfill';
 
-const app = express();
+const server = express();
 
-app.use('/static', express.static(path.resolve(__dirname, './dist')));
+server.use('/static', express.static(path.resolve(__dirname, './dist')));
 
-app.get('*', (req, res) => {
+server.get('*', (req, res) => {
     const html = fs
         .readFileSync(path.resolve(__dirname, './index.html'))
         .toString();
-    const markup = ReactServer.renderToString(<ParallaxTest />);
+
+    const markup = ReactServer.renderToString(<App />);
 
     res.send(html.replace('$react', markup));
 });
 
-app.listen(3000, () => {
+server.listen(3000, () => {
     console.log('Listening on: http://localhost:3000');
 });
