@@ -32,7 +32,7 @@ export default function withScrollPosition(WrappedComponent) {
         componentWillUnmount() {
             const { scrollController } = this.context;
             // @TODO: Implement and test
-            scrollController.unsubscribe();
+            scrollController.unsubscribe(this.updateScroll);
         }
 
         updateScroll = ({ scrollY }) => {
