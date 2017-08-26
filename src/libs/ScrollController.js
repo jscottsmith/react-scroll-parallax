@@ -68,8 +68,7 @@ class ScrollController {
     }
 
     unsubscribe(f) {
-        const idx = this.subscriptions.indexOf(f);
-        this.subscriptions = this.subscriptions.splice(idx, 1);
+        this.subscriptions = this.subscriptions.filter(x => f !== x);
     }
 }
 
