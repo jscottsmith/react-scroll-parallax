@@ -1,3 +1,3 @@
-export Parallax from './components/Parallax';
-export ParallaxProvider from './components/ParallaxProvider';
-export ParallaxController from './libs/ParallaxController';
+export ScrollPosition from './components/ScrollPosition';
+export ScrollProvider from './components/ScrollProvider';
+export ScrollController from './libs/ScrollController';
