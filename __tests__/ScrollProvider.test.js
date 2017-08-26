@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { ScrollProvider, ScrollPosition, ScrollController } from 'index';
+import { ScrollProvider, ScrollController } from 'index';
 import renderer from 'react-test-renderer';
 
 describe('A <ScrollProvider>', () => {
@@ -13,7 +13,7 @@ describe('A <ScrollProvider>', () => {
                 <img src="foo" alt="bar" />
             </ScrollProvider>
         );
-        let tree = component.toJSON();
+        const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
     });
 
