@@ -22,11 +22,19 @@ export default function withObserver(
             this.observe();
         }
 
+        componentWillUnmount() {
+            this.disconnectObserver();
+        }
+
         createObserver() {
             this.observer = new IntersectionObserver(
                 this.handleIntersection,
                 options
             );
+        }
+
+        disconnectObserver() {
+            this.observer.disconnect();
         }
 
         observe() {
