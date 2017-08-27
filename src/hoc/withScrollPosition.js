@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollController } from '../index.js';
 
 export default function withScrollPosition(WrappedComponent) {
-    return class WithScroll extends Component {
+    return class WithScroll extends PureComponent {
         static contextTypes = {
             scrollController: PropTypes.object, // not required because this could be rendered on the server.
+        };
+
+        static propTypes = {
+            isInView: PropTypes.bool,
         };
 
         constructor(props, context) {
@@ -54,14 +58,19 @@ export default function withScrollPosition(WrappedComponent) {
         }
 
         updateScroll = ({ scrollY }) => {
-            this.setState(() => ({
-                scrollY,
-            }));
+            const { isInView } = this.props;
+
+            // only updates the scrollY when the element is in view
+            if (isInView) {
+                this.setState(() => ({
+                    scrollY,
+                }));
+            }
         };
 
         render() {
             const { scrollY } = this.state;
-            return <WrappedComponent scrollY={scrollY} />;
+            return <WrappedComponent scrollY={scrollY} {...this.props} />;
         }
     };
 }
