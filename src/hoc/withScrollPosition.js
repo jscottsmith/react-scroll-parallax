@@ -9,29 +9,47 @@ export default function withScrollPosition(WrappedComponent) {
         };
 
         constructor(props, context) {
-            super();
-            const { scrollY } = context.scrollController.state;
-            this.state = {
-                scrollY,
-            };
+            super(props, context);
+
+            // So that we can render on the server without prop errors
+            const hasWindow = typeof window !== 'undefined';
+
+            if (hasWindow) {
+                const { scrollY } = context.scrollController.state;
+                this.state = {
+                    scrollY,
+                };
+            } else {
+                this.state = {
+                    scrollY: 0, // value for server so no required props throw
+                };
+            }
         }
 
         componentWillMount() {
             const { scrollController } = this.context;
+
+            // Make sure this is server safe
+            const hasWindow = typeof window !== 'undefined';
+
             // Make sure the provided context is an instance of the controller
-            if (!(scrollController instanceof ScrollController)) {
+            const hasController = scrollController instanceof ScrollController;
+
+            // if this has the window and no controller throw an error
+            if (hasWindow && !hasController) {
                 throw new Error(
-                    "Must wrap your application's <ScrollPosition /> components in a <ScrollProvider />."
+                    "No scrollController exist in context. Must wrap your application's [[ parallax ]] components in a <ScrollProvider />."
                 );
             }
 
-            // @TODO: Subscribe to scroll updates
-            scrollController.subscribe(this.updateScroll);
+            // Subscribe to scroll updates by passing a handler to setState of current scroll
+            if (hasWindow) scrollController.subscribe(this.updateScroll);
         }
 
         componentWillUnmount() {
             const { scrollController } = this.context;
-            // @TODO: Implement and test
+
+            // Unsubscribe to scroll updates by passing the subscribed scroll handler
             scrollController.unsubscribe(this.updateScroll);
         }
 
