@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ScrollController from '../libs/ScrollController.js';
+import { ScrollController } from '../index.js';
 
 export default class ScrollProvider extends Component {
     static propTypes = {

@@ -40,6 +40,11 @@ class ScrollController {
         };
 
         // update subscribers
+        // window.requestAnimationFrame(this._updateSubscribers);
+        this._updateSubscribers();
+    };
+
+    _updateSubscribers = () => {
         this.subscriptions.forEach(f => f(this.state));
     };
 
