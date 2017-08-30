@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { ScrollProvider, ScrollController } from 'index';
+import { ScrollProvider, ScrollController } from 'react-scroll-parallax';
 import renderer from 'react-test-renderer';
 
 describe('A <ScrollProvider>', () => {

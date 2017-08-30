@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollController } from '../index.js';
+import { ScrollController } from 'react-scroll-parallax';
 
 export default function withScrollPosition(WrappedComponent) {
-    return class WithScroll extends PureComponent {
+    return class ScrollPosition extends PureComponent {
         static contextTypes = {
             scrollController: PropTypes.object, // not required because this could be rendered on the server.
         };

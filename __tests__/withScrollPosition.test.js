@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { ScrollProvider, withScrollPosition } from 'index';
+import { ScrollProvider, withScrollPosition } from 'react-scroll-parallax';
 
 describe('withScrollPosition() higher order component', () => {
     it('provides a `scrollY` prop to a wrapped component', () => {
