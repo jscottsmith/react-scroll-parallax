@@ -7,5 +7,5 @@ export ScrollController from './models/ScrollController.js';
 
 // HOC
 export withScrollPosition from './hoc/withScrollPosition.js';
-export withViewportPosition from './hoc/withViewportPosition.js';
+export withViewportProgress from './hoc/withViewportProgress.js';
 export withObserver from './hoc/withObserver.js';
