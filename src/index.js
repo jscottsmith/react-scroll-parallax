@@ -1,6 +1,6 @@
 // Components
 export ScrollProvider from './components/ScrollProvider.js';
-export Translate from './components/Translate.js';
+export Parallax from './components/Parallax.js';
 
 // Models
 export ScrollController from './models/ScrollController.js';
