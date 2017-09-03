@@ -37,7 +37,7 @@ function withScrollPosition(WrappedComponent) {
             // if this has the window and no controller throw an error
             if (hasWindow && !hasController) {
                 throw new Error(
-                    "No scrollController exist in context. Must wrap your application's [[ parallax ]] components in a <ScrollProvider />."
+                    "No scrollController exist in context. Must wrap your application's <Parallax> components in a <ScrollProvider />."
                 );
             }
 
