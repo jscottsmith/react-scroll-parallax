@@ -4,18 +4,20 @@ import clamp from '../utils/clamp';
 
 // With Viewport Progress passes the progress prop
 // to wrapped components with a value ranging from
-// 0–1. 0 if the element has not entered the beggining
-// of the scroll area, 1 if the element has left.
+// 0–1. 0 if the elements bounds has not entered
+// the beginning of the scroll area, 1 if the
+// element has left.
 
-export default function withViewportProgress(WrappedComponent, range = [0, 1]) {
+function withViewportProgress(WrappedComponent, range = [0, 1]) {
     return class ViewportProgress extends PureComponent {
         static propTypes = {
+            getRef: PropTypes.func.isRequired,
             scrollY: PropTypes.number.isRequired,
         };
 
         state = {
             progress: range[0],
-            window: false,
+            resizeKey: null, // a key to trigger a state change when the window resizes
         };
 
         componentDidMount() {
@@ -23,7 +25,9 @@ export default function withViewportProgress(WrappedComponent, range = [0, 1]) {
             this.addListeners();
         }
 
-        componentWillUnmount() {}
+        componentWillUnmount() {
+            this.removeListeners();
+        }
 
         componentWillReceiveProps(nextProps) {
             // if the scroll has changed, and the
@@ -38,19 +42,29 @@ export default function withViewportProgress(WrappedComponent, range = [0, 1]) {
         }
 
         addListeners() {
-            window.addEventListener('resize', this.setAttributeCache, false);
+            window.addEventListener('resize', this.handleResize, false);
         }
 
         removeListeners() {
-            window.removeEventListener('resize', this.setAttributeCache, false);
+            window.removeEventListener('resize', this.handleResize, false);
         }
 
-        setAttributeCache = () => {
-            // cache layout thrashers
-            // @TODO: update on resize
+        handleResize = () => {
+            const resizeKey = `resize-${window.innerWidth}`;
 
-            // Accesing the ref of the wrapped component
-            const el = this.wrapped.innerRef;
+            this.setState(
+                () => ({
+                    resizeKey,
+                }),
+                this.setAttributeCache // update cached attributes
+            );
+        };
+
+        setAttributeCache() {
+            // This caches properties that cause layout thrash
+
+            // Accessing the ref of the wrapped component
+            const el = this.props.getRef();
 
             const _rect = el.getBoundingClientRect();
             const elHeight = el.offsetHeight;
@@ -76,7 +90,7 @@ export default function withViewportProgress(WrappedComponent, range = [0, 1]) {
                 windowHeight,
                 totalDist,
             };
-        };
+        }
 
         setProgress() {
             const currentScroll = window.pageYOffset;
@@ -84,34 +98,25 @@ export default function withViewportProgress(WrappedComponent, range = [0, 1]) {
             const { totalDist, windowHeight } = this.cache;
 
             // Percent the element has moved based on current and total distance to move
-            const movedValue = 1 - (windowHeight - top) / totalDist;
+            let progress = 1 - (windowHeight - top) / totalDist;
 
-            // clamp
-            // Why? I think because the isInView prop is *slightly*
-            // off since the observer is from 0.1 - 1.0. Shouldn't
-            // expect the Intersection Observer to be pixel-perfect
+            // NOTE: Clamping
+            // Why? Because the isInView prop may be *slightly*
+            // off since Intersection Observer to be pixel-perfect
             // accurate regardless.
-            const progress = clamp(movedValue, 0, 1);
-            // console.log(progress);
+
+            progress = clamp(progress, 0, 1);
 
             this.setState(() => ({
                 progress,
             }));
         }
 
-        mapRef = ref => {
-            this.wrapped = ref;
-        };
-
         render() {
             const { progress } = this.state;
-            return (
-                <WrappedComponent
-                    progress={progress}
-                    ref={this.mapRef}
-                    {...this.props}
-                />
-            );
+            return <WrappedComponent progress={progress} {...this.props} />;
         }
     };
 }
+
+export default withViewportProgress;
