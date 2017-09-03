@@ -2,7 +2,16 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollController } from 'react-scroll-parallax';
 
-export default function withScrollPosition(WrappedComponent) {
+// This HOC serves to connect a component via context
+// to the ScrollController which provides the current
+// scroll state that is then passed as props to the
+// <WrappedComponent />.
+
+// NOTE: Since the scroll state should only be updated when
+// the element is in view, this HOC should be composed
+// within a withObserver() HOC.
+
+function withScrollPosition(WrappedComponent) {
     return class ScrollPosition extends PureComponent {
         static contextTypes = {
             scrollController: PropTypes.object, // not required because this could be rendered on the server.
@@ -12,23 +21,9 @@ export default function withScrollPosition(WrappedComponent) {
             isInView: PropTypes.bool,
         };
 
-        constructor(props, context) {
-            super(props, context);
-
-            // So that we can render on the server without prop errors
-            const hasWindow = typeof window !== 'undefined';
-
-            if (hasWindow) {
-                const { scrollY } = context.scrollController.state;
-                this.state = {
-                    scrollY,
-                };
-            } else {
-                this.state = {
-                    scrollY: 0, // value for server so no required props throw
-                };
-            }
-        }
+        state = {
+            scrollY: 0, // value for server so no required props throw
+        };
 
         componentWillMount() {
             const { scrollController } = this.context;
@@ -74,3 +69,5 @@ export default function withScrollPosition(WrappedComponent) {
         }
     };
 }
+
+export default withScrollPosition;
