@@ -1,6 +1,5 @@
 {
   "globals" : {
-    "ParallaxController": true,
     "test": true,
     "expect": true
   },
