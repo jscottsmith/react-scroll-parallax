@@ -9,3 +9,4 @@ export ScrollController from './models/ScrollController.js';
 export withScrollPosition from './hoc/withScrollPosition.js';
 export withViewportProgress from './hoc/withViewportProgress.js';
 export withObserver from './hoc/withObserver.js';
+export withBounds from './hoc/withBounds.js';
