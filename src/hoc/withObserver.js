@@ -1,3 +1,5 @@
+/* global IntersectionObserver */
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,7 +11,7 @@ function withObserver(
     WrappedComponent,
     options = {
         root: null, // document.querySelector('#scrollArea')
-        rootMargin: '0px', // this needs to be set based on the offsets
+        rootMargin: '0px',
         threshold: [0, 0.2, 0.4, 0.6, 0.8, 1.0], // 1.0 = 100% of the el is visible, can be an array of values. callback is invoke when each is true
     }
 ) {
