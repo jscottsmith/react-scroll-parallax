@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
+import Element from '../Element/Element.js';
 import { Parallax } from 'react-scroll-parallax';
 import style from './ParallaxTest.scss';
 
-const INC_AMOUNT = 10;
-const START_NUM_ELEMENTS = 10;
+const START_NUM_ELEMENTS = 50;
 
-export default class ParallaxTest extends Component {
+export default class ParallaxTest extends PureComponent {
     static contextTypes = {
-        parallaxController: PropTypes.object.isRequired,
+        scrollController: PropTypes.object,
     };
 
     state = {
         elements: new Array(START_NUM_ELEMENTS).fill(null).map((x, i) => i),
-        offsetY: INC_AMOUNT,
-        slowerScrollRate: false,
-        unitPercent: false,
         disabled: false,
     };
 
     triggerDestroy = () => {
-        this.context.parallaxController.destroy();
+        this.context.scrollController.destroy();
     };
 
     handleAdd = () => {
@@ -40,36 +37,6 @@ export default class ParallaxTest extends Component {
         });
     };
 
-    increaseOffsetY = () => {
-        const offsetY = this.state.offsetY + INC_AMOUNT;
-        this.setState({
-            offsetY,
-        });
-    };
-
-    decreaseOffsetY = () => {
-        const offsetY = this.state.offsetY - INC_AMOUNT < 0
-            ? 0
-            : this.state.offsetY - INC_AMOUNT;
-        this.setState({
-            offsetY,
-        });
-    };
-
-    toggleSpeed = () => {
-        const slowerScrollRate = !this.state.slowerScrollRate;
-        this.setState({
-            slowerScrollRate,
-        });
-    };
-
-    toggleValue = () => {
-        const unitPercent = !this.state.unitPercent;
-        this.setState({
-            unitPercent,
-        });
-    };
-
     toggleDisabled = () => {
         const disabled = !this.state.disabled;
         this.setState({
@@ -78,27 +45,25 @@ export default class ParallaxTest extends Component {
     };
 
     mapToParallax() {
-        const offsetY = this.state.offsetY;
-        const slowerScrollRate = this.state.slowerScrollRate;
-
+        let row = 0;
         return this.state.elements.map((number, i) => {
-            const unit = this.state.unitPercent ? '%' : 'px';
-            const offsetYMin = offsetY * -1 * i + unit;
-            const offsetYMax = offsetY * i + unit;
+            const odd = i % 2 ? -1 : 1;
+            const offset = 200;
+
+            row = i % 4 === 0 ? row + 1 : row;
+
+            const props = {};
+            if (row % 3) {
+                props.x = [-offset * odd, offset * odd];
+            } else if (row % 2) {
+                props.y = [-offset * odd, offset * odd];
+            } else {
+                props.z = [-offset * odd, offset * odd];
+            }
 
             return (
-                <Parallax
-                    key={i}
-                    tag="span"
-                    disabled={this.state.disabled}
-                    offsetYMax={offsetYMax}
-                    offsetYMin={offsetYMin}
-                    offsetXMax={0}
-                    offsetXMin={0}
-                    className={style.item}
-                    slowerScrollRate={slowerScrollRate}
-                >
-                    {number}
+                <Parallax key={i} className={style.item} {...props}>
+                    <Element index={i} />
                 </Parallax>
             );
         });
@@ -107,10 +72,10 @@ export default class ParallaxTest extends Component {
     render() {
         return (
             <div className={style.parallaxTest}>
-                <h1 className={style.h1}>
+                <main className={style.items}>
                     {this.mapToParallax()}
-                </h1>
-                <div className={style.buttons}>
+                </main>
+                <nav className={style.buttons}>
                     <div className={style.currentState}>
                         <h4>
                             Parallax Elements:
@@ -123,59 +88,13 @@ export default class ParallaxTest extends Component {
                     </div>
                     <div className={style.currentState}>
                         <h4>
-                            Y Offsets:
-                            <span className="value">
-                                {this.state.offsetY}
-                                {this.state.unitPercent ? '%' : 'px'}
-                            </span>
-                        </h4>
-                        <button onClick={this.increaseOffsetY}>Increase</button>
-                        <button onClick={this.decreaseOffsetY}>Decrease</button>
-                    </div>
-                    <div className={style.currentState}>
-                        <h4>
-                            Speed:
-                            <span className="value">
-                                {this.state.slowerScrollRate
-                                    ? 'Slower'
-                                    : 'Faster'}
-                            </span>
-                        </h4>
-                        <button onClick={this.toggleSpeed}>
-                            {this.state.slowerScrollRate ? 'Faster' : 'Slower'}
-                        </button>
-                    </div>
-                    <div className={style.currentState}>
-                        <h4>
-                            Unit:
-                            <span className="value">
-                                {this.state.unitPercent ? 'Percent' : 'Pixels'}
-                            </span>
-                        </h4>
-                        <button onClick={this.toggleValue}>
-                            {this.state.unitPercent ? 'Pixels' : 'Percent'}
-                        </button>
-                    </div>
-                    <div className={style.currentState}>
-                        <h4>
-                            Disabled:
-                            <span className="value">
-                                {this.state.disabled ? 'True' : 'False'}
-                            </span>
-                        </h4>
-                        <button onClick={this.toggleDisabled}>
-                            {this.state.disabled ? 'Enable' : 'Disable'}
-                        </button>
-                    </div>
-                    <div className={style.currentState}>
-                        <h4>
-                            Destroys the ParallaxController. :-(
+                            Destroys the scrollController. :-(
                         </h4>
                         <button onClick={this.triggerDestroy}>
                             Destroy
                         </button>
                     </div>
-                </div>
+                </nav>
             </div>
         );
     }

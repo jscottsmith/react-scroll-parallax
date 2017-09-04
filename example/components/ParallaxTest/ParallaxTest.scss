@@ -1,18 +1,8 @@
 :local(.parallaxTest) {
-    margin: 100vh 0;
+    margin: 200vh 0;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-}
-
-:local(.h1) {
-    width: 100%;
-    font-size: 9vw;
-    text-align: center;
-}
-
-:local(.item) {
-    display: inline-block;
 }
 
 :local(.buttons) {
@@ -21,6 +11,24 @@
     left: 0;
     width: 100%;
     padding: 1em;
+}
+
+:local(.items) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20%;
+}
+
+:local(.item) {
+    position: relative;
+    perspective: 400px;
+    width: 20%;
+    margin: 20% 2%;
+    // background-color: rgba(tomato, 0.2);
+    border: 1px solid lightgreen;
 }
 
 :local(.currentState) {
@@ -53,23 +61,23 @@
 :global {
     body {
         background-color: #222;
-        background-image: 
-            linear-gradient(0deg, 
-                    transparent 24%, 
-                    #333 25%, 
-                    #333 26%, 
-                    transparent 27%,
-                    transparent 74%, 
-                    #333 75%, 
-                    #333 76%,
-                    transparent 77%,
-                    transparent), 
-            linear-gradient(90deg, transparent 24%, 
-                    #333 25%, 
+        background-image:
+            linear-gradient(0deg,
+                    transparent 24%,
+                    #333 25%,
                     #333 26%,
                     transparent 27%,
-                    transparent 74%, 
-                    #333 75%, 
+                    transparent 74%,
+                    #333 75%,
+                    #333 76%,
+                    transparent 77%,
+                    transparent),
+            linear-gradient(90deg, transparent 24%,
+                    #333 25%,
+                    #333 26%,
+                    transparent 27%,
+                    transparent 74%,
+                    #333 75%,
                     #333 76%,
                     transparent 77%,
                     transparent);
