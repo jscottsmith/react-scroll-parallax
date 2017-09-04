@@ -41,14 +41,18 @@ function withScrollPosition(WrappedComponent) {
                 );
             }
 
-            // Subscribe to scroll updates by passing a handler to setState of current scroll
-            if (hasWindow) scrollController.subscribe(this.updateScroll);
+            // Subscribe to scroll updates by passing
+            // a handler to setState of current scroll
+            if (hasWindow) {
+                scrollController.subscribe(this.updateScroll);
+            }
         }
 
         componentWillUnmount() {
             const { scrollController } = this.context;
 
-            // Unsubscribe to scroll updates by passing the subscribed scroll handler
+            // Unsubscribe to scroll updates by passing
+            // the subscribed scroll handler
             scrollController.unsubscribe(this.updateScroll);
         }
 
