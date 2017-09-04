@@ -30,4 +30,18 @@ describe('withScrollPosition() higher order component', () => {
         // Expected initial value
         expect(testProps.scrollY).toBe(0);
     });
+
+    it('throws if not wrapped in a <ScrollProvider>', () => {
+        const node = document.createElement('div');
+
+        const ScrollPosition = withScrollPosition(() => {
+            return null;
+        });
+
+        expect(() => {
+            ReactDOM.render(<ScrollPosition />, node);
+        }).toThrowError(
+            "No scrollController exist in context. Must wrap your application's <Parallax> components in a <ScrollProvider />."
+        );
+    });
 });
