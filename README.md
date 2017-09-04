@@ -12,6 +12,12 @@ Provides a React component and single passive scroll listener to add **vertical*
 npm i react-scroll-parallax --save
 ```
 
+This package also requires [support](https://caniuse.com/#search=IntersectionObserver) for the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Since this isn't supported in older browsers you will need to add a [polyfill](https://github.com/w3c/IntersectionObserver/tree/gh-pages/polyfill).
+
+```
+npm i intersection-observer --save
+```
+
 ## Usage
 
 ### Overview
