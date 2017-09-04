@@ -18,7 +18,7 @@ function withScrollPosition(WrappedComponent) {
         };
 
         static propTypes = {
-            isInView: PropTypes.bool,
+            isInView: PropTypes.bool.isRequired,
         };
 
         state = {
