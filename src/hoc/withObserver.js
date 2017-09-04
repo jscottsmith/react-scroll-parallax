@@ -34,6 +34,13 @@ function withObserver(
         }
 
         createObserver() {
+            const hasObserver = 'IntersectionObserver' in window;
+            if (!hasObserver) {
+                throw new Error(
+                    'Must provide an IntersectionObserver polyfill for browsers that do not yet support the technology.'
+                );
+            }
+
             this.observer = new IntersectionObserver(
                 this.handleIntersection,
                 options
@@ -41,7 +48,9 @@ function withObserver(
         }
 
         disconnectObserver() {
-            this.observer.disconnect();
+            if (this.observer) {
+                this.observer.disconnect();
+            }
         }
 
         observe() {
