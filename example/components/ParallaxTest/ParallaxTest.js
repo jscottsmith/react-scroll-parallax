@@ -8,7 +8,7 @@ const START_NUM_ELEMENTS = 10;
 
 export default class ParallaxTest extends Component {
     static contextTypes = {
-        parallaxController: PropTypes.object.isRequired,
+        parallaxController: PropTypes.object,
     };
 
     state = {
@@ -48,9 +48,10 @@ export default class ParallaxTest extends Component {
     };
 
     decreaseOffsetY = () => {
-        const offsetY = this.state.offsetY - INC_AMOUNT < 0
-            ? 0
-            : this.state.offsetY - INC_AMOUNT;
+        const offsetY =
+            this.state.offsetY - INC_AMOUNT < 0
+                ? 0
+                : this.state.offsetY - INC_AMOUNT;
         this.setState({
             offsetY,
         });
@@ -107,9 +108,7 @@ export default class ParallaxTest extends Component {
     render() {
         return (
             <div className={style.parallaxTest}>
-                <h1 className={style.h1}>
-                    {this.mapToParallax()}
-                </h1>
+                <h1 className={style.h1}>{this.mapToParallax()}</h1>
                 <div className={style.buttons}>
                     <div className={style.currentState}>
                         <h4>
@@ -136,9 +135,11 @@ export default class ParallaxTest extends Component {
                         <h4>
                             Speed:
                             <span className="value">
-                                {this.state.slowerScrollRate
-                                    ? 'Slower'
-                                    : 'Faster'}
+                                {this.state.slowerScrollRate ? (
+                                    'Slower'
+                                ) : (
+                                    'Faster'
+                                )}
                             </span>
                         </h4>
                         <button onClick={this.toggleSpeed}>
@@ -168,12 +169,8 @@ export default class ParallaxTest extends Component {
                         </button>
                     </div>
                     <div className={style.currentState}>
-                        <h4>
-                            Destroys the ParallaxController. :-(
-                        </h4>
-                        <button onClick={this.triggerDestroy}>
-                            Destroy
-                        </button>
+                        <h4>Destroys the ParallaxController. :-(</h4>
+                        <button onClick={this.triggerDestroy}>Destroy</button>
                     </div>
                 </div>
             </div>
