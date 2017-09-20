@@ -41,7 +41,7 @@ export default class Parallax extends Component {
             );
         }
 
-        // Deprecation warning for >=1.0.0
+        // Deprecation warning for <=1.0.0
         // If no context is available but the window global is then warn
         if (!this.context.parallaxController && window.ParallaxController) {
             console.log(
