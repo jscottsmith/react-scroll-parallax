@@ -390,11 +390,25 @@ function ParallaxController() {
 
 /**
  * Static method to instantiate the ParallaxController.
- * Returns a new instance of the ParallaxController.
+ * Returns a new or existing instance of the ParallaxController.
  * @returns {Object} ParallaxController
  */
 ParallaxController.init = function() {
-    return new ParallaxController();
+    const hasWindow = typeof window !== 'undefined';
+
+    if (!hasWindow) {
+        throw new Error(
+            'Looks like ParallaxController.init() was called on the server. This method must be called on the client.'
+        );
+    }
+
+    // Keep global reference for legacy versions >= 1.0.0
+
+    if (hasWindow && !window.ParallaxController) {
+        window.ParallaxController = new ParallaxController();
+    }
+
+    return window.ParallaxController;
 };
 
 export default ParallaxController;
