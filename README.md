@@ -20,7 +20,7 @@ npm i react-scroll-parallax --save
 
 ## Usage
 
-Wrap your component tree that will contain `<Parallax />` components with the `<ParallaxProvider />`;
+Wrap your component tree that will contain `<Parallax />` components with the `<ParallaxProvider />`. For example:
 
 ```jsx
 ...
@@ -121,7 +121,7 @@ Optionally pass a tag name to be applied to the outer most parallax element. For
 
 ## Parallax Controller Context
 
-Access the Parallax Controller via context in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
+Access the Parallax Controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
 
 ```jsx
 class Foo extends Component {
