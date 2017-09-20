@@ -31,15 +31,26 @@ export default class Parallax extends Component {
     };
 
     componentDidMount() {
-        // Make sure the provided context is an instance of the controller
-        if (!(this.context.parallaxController instanceof ParallaxController)) {
+        // Make sure the provided controller is an instance of the Parallax Controller
+        const isInstance = this.controller instanceof ParallaxController;
+
+        // Throw if neither context or global is available
+        if (!this.controller && !isInstance) {
             throw new Error(
                 "Must wrap your application's <Parallax /> components in a <ParallaxProvider />."
             );
         }
 
+        // Deprecation warning for >=1.0.0
+        // If no context is available but the window global is then warn
+        if (!this.context.parallaxController && window.ParallaxController) {
+            console.log(
+                'Calling ParallaxController.init() has been deprecated in favor of using the <ParallaxProvider /> component. For usage details see: https://github.com/jscottsmith/react-scroll-parallax/tree/v1.1.0#usage'
+            );
+        }
+
         // create a new parallax element and save the reference
-        this.element = this.context.parallaxController.createElement({
+        this.element = this.controller.createElement({
             elInner: this._inner,
             elOuter: this._outer,
             props: {
@@ -56,7 +67,7 @@ export default class Parallax extends Component {
     componentWillReceiveProps(nextProps) {
         // updates the elements props when changed
         if (this.props !== nextProps) {
-            this.context.parallaxController.updateElement(this.element, {
+            this.controller.updateElement(this.element, {
                 props: {
                     disabled: nextProps.disabled,
                     offsetXMax: nextProps.offsetXMax,
@@ -69,12 +80,17 @@ export default class Parallax extends Component {
         }
         // resets element styles when disabled
         if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
-            this.context.parallaxController.resetElementStyles(this.element);
+            this.controller.resetElementStyles(this.element);
         }
     }
 
     componentWillUnmount() {
-        this.context.parallaxController.removeElement(this.element);
+        this.controller.removeElement(this.element);
+    }
+
+    get controller() {
+        // Legacy versions may use the global, not context
+        return this.context.parallaxController || window.ParallaxController;
     }
 
     // refs
