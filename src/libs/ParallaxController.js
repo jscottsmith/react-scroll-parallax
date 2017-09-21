@@ -340,7 +340,9 @@ function ParallaxController() {
      * @param {object} element
      */
     this.removeElement = function(element) {
-        const index = elements.indexOf(element);
+        // gets the index of the element to update based on id
+        const index = elements.findIndex(el => el.id === element.id);
+
         if (index !== -1) {
             elements.splice(index, 1);
         }
@@ -356,10 +358,12 @@ function ParallaxController() {
         const index = elements.findIndex(el => el.id === element.id);
 
         // create new element with options and replaces the old
-        elements[index] = Object.assign({}, elements[index], options);
+        if (index !== -1) {
+            elements[index] = Object.assign({}, elements[index], options);
 
-        // call update to set attributes and positions based on the new options
-        this.update();
+            // call update to set attributes and positions based on the new options
+            this.update();
+        }
     };
 
     /**
