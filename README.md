@@ -58,7 +58,7 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-**NOTE:** The Parallax Controller caches the scroll state and positions of elements on the page for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted it won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via context once every thing has loaded and is ready. More details on how here: [Parallax Controller Context](#parallax-controller-context)
+**NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
 
 ## Parallax Component Props
 
@@ -175,4 +175,4 @@ React Scroll Parallax uses a single [passive scroll listener](https://developer.
 
 **PSA**
 
-It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should help achieve silky smooth animations.
+It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should keep scrolling smooth.
