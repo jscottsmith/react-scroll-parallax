@@ -48,6 +48,10 @@ class ScrollController {
         this.subscriptions.forEach(f => f(this.state));
     };
 
+    _updateSingleSubscriber = f => {
+        f(this.state);
+    };
+
     _addListeners() {
         window.addEventListener(
             'scroll',
@@ -70,6 +74,7 @@ class ScrollController {
 
     subscribe(f) {
         this.subscriptions.push(f);
+        this._updateSingleSubscriber(f);
     }
 
     unsubscribe(f) {
