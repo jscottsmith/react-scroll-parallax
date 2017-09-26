@@ -11,7 +11,6 @@ import clamp from '../utils/clamp';
 function withViewportProgress(WrappedComponent, range = [0, 1]) {
     return class ViewportProgress extends PureComponent {
         static propTypes = {
-            getRef: PropTypes.func.isRequired,
             scrollY: PropTypes.number.isRequired,
         };
 
@@ -22,6 +21,7 @@ function withViewportProgress(WrappedComponent, range = [0, 1]) {
 
         componentDidMount() {
             this.setAttributeCache();
+            this.setProgress();
             this.addListeners();
         }
 
@@ -60,11 +60,25 @@ function withViewportProgress(WrappedComponent, range = [0, 1]) {
             );
         };
 
+        mapInnerRef = ref => {
+            this.el = ref;
+
+            // NOTE: Since this HOC is composed within
+            // another that is also accessing via an
+            // innerRef function, we need to call the
+            // on via this component props since it will
+            // the prop will be overwritten by this component
+
+            if (this.props.innerRef) {
+                this.props.innerRef(ref);
+            }
+        };
+
         setAttributeCache() {
             // This caches properties that cause layout thrash
 
-            // Accessing the ref of the wrapped component
-            const el = this.props.getRef();
+            // Accessing the el withBounds() HOC
+            const el = this.el;
 
             const _rect = el.getBoundingClientRect();
             const elHeight = el.offsetHeight;
@@ -114,7 +128,12 @@ function withViewportProgress(WrappedComponent, range = [0, 1]) {
 
         render() {
             const { progress } = this.state;
-            return <WrappedComponent progress={progress} {...this.props} />;
+            const props = Object.assign({}, this.props, {
+                innerRef: this.mapInnerRef,
+                progress,
+            });
+
+            return <WrappedComponent {...props} />;
         }
     };
 }
