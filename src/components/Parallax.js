@@ -6,23 +6,39 @@ import {
     withViewportProgress,
     withBounds,
 } from '../hoc';
-import { scaleBetween, compose } from '../utils';
+import { scaleBetween, compose, parseUnit } from '../utils';
 
 class Parallax extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         progress: PropTypes.number.isRequired,
+        isInView: PropTypes.bool.isRequired,
         x: PropTypes.array,
         y: PropTypes.array,
+
         // @TODO: these should also be available
         // scale
         // rotation
         // opacity
-        // tag
+        // tag/element name?
     };
 
+    componentDidMount() {
+        this.setup();
+    }
+
+    setup() {
+        const { x, y } = this.props;
+
+        this.offsets = {
+            x: x.map(f => parseUnit(f)),
+            y: y.map(f => parseUnit(f)),
+        };
+    }
+
     scaleValues() {
-        const { progress, x: _x, y: _y } = this.props;
+        const { progress } = this.props;
+        const { x: _x, y: _y } = this.offsets;
 
         // @TODO: allow numbers with units and parse to determine
 
@@ -34,29 +50,41 @@ class Parallax extends Component {
         let y = 0;
 
         if (hasX) {
-            x = scaleBetween(progress, _x[0], _x[1], 1, 0);
+            x = scaleBetween(progress, _x[0].value, _x[1].value, 1, 0);
         }
         if (hasY) {
-            y = scaleBetween(progress, _y[0], _y[1], 1, 0);
+            y = scaleBetween(progress, _y[0].value, _y[1].value, 1, 0);
         }
 
-        return { x, y };
+        return {
+            x: {
+                value: x,
+                unit: _x[0].unit,
+            },
+            y: {
+                value: y,
+                unit: _y[0].unit,
+            },
+        };
     }
 
-    getTransform() {
+    getStyles() {
         const { x, y } = this.scaleValues();
-        return `translate3d(${x}px, ${y}px, 0)`;
+
+        return {
+            transform: `translate3d(${x.value}${x.unit}, ${y.value}${y.unit}, 0)`,
+        };
     }
 
     render() {
         const { children } = this.props;
 
-        const style = {
-            transform: this.getTransform(),
-        };
+        const style = this.getStyles();
+
+        const baseClass = 'parallax-element';
 
         return (
-            <div style={style}>
+            <div style={style} className={baseClass}>
                 {children}
             </div>
         );
