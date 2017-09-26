@@ -64,14 +64,28 @@ class Parallax extends Component {
 }
 
 // Compose together all HOCs
-// The order of which is important since some
-// rely on props provided by the others.
+// The order of which is important since
+// some rely on props provided by the others.
+// Each decorator provides a necessary
+// prop -- or element -- required by the
+// <Parallax> component.
+//
+// |
+// withObserver () => {isInView}
+// |
+// withScrollPosition (isInView) => if (isInView) {scrollY}
+// |
+// withViewportProgress (isInView, scrollY) => return {progress}
+// |
+// withBounds (innerRef) => bounds (ref)
+// |
+// <Parallax>
 
-const enhancements = compose(
-    withBounds,
+const decorators = compose(
     withObserver,
     withScrollPosition,
-    withViewportProgress
+    withViewportProgress,
+    withBounds
 );
 
-export default enhancements(Parallax);
+export default decorators(Parallax);
