@@ -34,17 +34,24 @@ function withObserver(
         }
 
         createObserver() {
+            this.checkForObserver();
+
+            this.observer = new IntersectionObserver(
+                this.handleIntersection,
+                options
+            );
+        }
+
+        checkForObserver() {
+            // NOTE: Error handling if the observer is not available
+            // This should be provided by the user via a polyfill
+
             const hasObserver = 'IntersectionObserver' in window;
             if (!hasObserver) {
                 throw new Error(
                     'Must provide an IntersectionObserver polyfill for browsers that do not yet support the technology.'
                 );
             }
-
-            this.observer = new IntersectionObserver(
-                this.handleIntersection,
-                options
-            );
         }
 
         disconnectObserver() {
