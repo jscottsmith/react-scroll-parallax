@@ -16,10 +16,6 @@ function withObserver(
     }
 ) {
     return class Observed extends PureComponent {
-        static propTypes = {
-            getRef: PropTypes.func.isRequired,
-        };
-
         state = {
             isInView: true, // initial state should be visible so that the scrollY is updated.
         };
@@ -32,6 +28,12 @@ function withObserver(
         componentWillUnmount() {
             this.disconnectObserver();
         }
+
+        mapInnerRef = ref => {
+            // NOTE: This ref will be the bounds of the
+            // element and be provided by the withBounds HOC
+            this.el = ref;
+        };
 
         createObserver() {
             this.checkForObserver();
@@ -61,9 +63,7 @@ function withObserver(
         }
 
         observe() {
-            // NOTE: gets the ref of the element to observe
-            const el = this.props.getRef();
-
+            const el = this.el;
             this.observer.observe(el);
         }
 
@@ -78,7 +78,13 @@ function withObserver(
         render() {
             const { isInView } = this.state;
 
-            return <WrappedComponent isInView={isInView} {...this.props} />;
+            return (
+                <WrappedComponent
+                    isInView={isInView}
+                    innerRef={this.mapInnerRef}
+                    {...this.props}
+                />
+            );
         }
     };
 }
