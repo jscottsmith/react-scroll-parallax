@@ -1,5 +1,4 @@
 const ROOT = './example/';
-const createBabelConfig = require('./babelrc');
 const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const path = require('path');
@@ -28,7 +27,6 @@ const clientConfig = merge(baseConfig, {
                 test: /\.js$/,
                 include: [path.resolve(ROOT), path.resolve('./src')],
                 loader: 'babel-loader',
-                query: createBabelConfig(),
             },
             {
                 test: /\.scss$/,
@@ -79,7 +77,6 @@ const serverConfig = merge(baseConfig, {
                 test: /\.js$/,
                 include: [path.resolve(ROOT), path.resolve('./src')],
                 loader: 'babel-loader',
-                query: createBabelConfig({ server: true }),
             },
             {
                 test: /\.scss$/,

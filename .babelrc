@@ -1,7 +1,9 @@
 {
-	"env": {
-	    "test": {
-			"presets": [ "es2015", "react", "stage-0" ]
-		}
-	}
+    "presets": [["env", { "modules": false }], "react", "stage-0"],
+
+    "env": {
+        "test": {
+            "presets": [["env", { "modules": "commonjs" }], "react", "stage-0"]
+        }
+    }
 }
