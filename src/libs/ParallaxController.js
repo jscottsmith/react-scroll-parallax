@@ -19,7 +19,7 @@ import {
  */
 function ParallaxController() {
     // All parallax elements to be updated
-    const elements = [];
+    let elements = [];
 
     // Tracks current scroll y distance
     let scrollY = 0;
@@ -323,15 +323,16 @@ function ParallaxController() {
      */
     this.createElement = function(options) {
         const id = _createID();
-        const element = {
+        const newElement = {
             id,
             ...options,
         };
 
-        elements.push(element);
+        const updatedElements = [...elements, newElement];
+        elements = updatedElements;
         this.update();
 
-        return element;
+        return newElement;
     };
 
     /**
@@ -340,12 +341,8 @@ function ParallaxController() {
      * @param {object} element
      */
     this.removeElement = function(element) {
-        // gets the index of the element to update based on id
-        const index = elements.findIndex(el => el.id === element.id);
-
-        if (index !== -1) {
-            elements.splice(index, 1);
-        }
+        const updatedElements = elements.filter(el => el.id !== element.id);
+        elements = updatedElements;
     };
 
     /**
@@ -354,16 +351,19 @@ function ParallaxController() {
      * @param {object} options
      */
     this.updateElement = function(element, options) {
-        // gets the index of the element to update based on id
-        const index = elements.findIndex(el => el.id === element.id);
+        const updatedElements = elements.map(el => {
+            // create element with new options and replaces the old
+            if (el.id === element.id) {
+                // update props
+                el.props = options.props;
+            }
+            return el;
+        });
 
-        // create new element with options and replaces the old
-        if (index !== -1) {
-            elements[index] = Object.assign({}, elements[index], options);
+        elements = updatedElements;
 
-            // call update to set attributes and positions based on the new options
-            this.update();
-        }
+        // call update to set attributes and positions based on the new options
+        this.update();
     };
 
     /**
