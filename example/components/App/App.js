@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { ParallaxTest } from 'components';
 
 export default class App extends Component {
+    // this just serves to test unmount/re-mount ParallaxProvider
+    state = {
+        mount: true,
+    };
+
     render() {
         return (
-            <ParallaxProvider>
-                <ParallaxTest />
-            </ParallaxProvider>
+            <main>
+                {this.state.mount ? (
+                    <ParallaxProvider>
+                        <ParallaxTest />
+                    </ParallaxProvider>
+                ) : (
+                    <div />
+                )}
+            </main>
         );
     }
 }

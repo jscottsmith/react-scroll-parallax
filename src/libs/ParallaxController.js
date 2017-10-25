@@ -389,6 +389,7 @@ function ParallaxController() {
     this.destroy = function() {
         _removeListeners();
         _removeParallaxStyles();
+        window.ParallaxController = null;
     };
 }
 
