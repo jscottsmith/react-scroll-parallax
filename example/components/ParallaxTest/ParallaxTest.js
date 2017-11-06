@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Element from '../Element/Element.js';
 import { Parallax } from 'react-scroll-parallax';
 import style from './ParallaxTest.scss';
 
-const START_NUM_ELEMENTS = 50;
+const START_NUM_ELEMENTS = 1;
 
-export default class ParallaxTest extends PureComponent {
+export default class ParallaxTest extends Component {
     static contextTypes = {
         scrollController: PropTypes.object,
     };
@@ -45,21 +45,16 @@ export default class ParallaxTest extends PureComponent {
     };
 
     mapToParallax() {
-        let row = 0;
         return this.state.elements.map((number, i) => {
             const odd = i % 2 ? -1 : 1;
-            const offset = 200;
+            const offset = 40;
 
-            row = i % 4 === 0 ? row + 1 : row;
-
-            const props = {};
-            if (row % 3) {
-                props.x = [-offset * odd, offset * odd];
-            } else if (row % 2) {
-                props.y = [-offset * odd, offset * odd];
-            } else {
-                props.z = [-offset * odd, offset * odd];
-            }
+            const props = {
+                x: [-offset * odd + 'px', offset * odd + 'px'],
+                y: [-offset * odd + 'px', offset * odd + 'px'],
+                scale: [2, 1],
+                opacity: [1, 1],
+            };
 
             return (
                 <Parallax key={i} className={style.item} {...props}>
@@ -72,9 +67,7 @@ export default class ParallaxTest extends PureComponent {
     render() {
         return (
             <div className={style.parallaxTest}>
-                <main className={style.items}>
-                    {this.mapToParallax()}
-                </main>
+                <main className={style.items}>{this.mapToParallax()}</main>
                 <nav className={style.buttons}>
                     <div className={style.currentState}>
                         <h4>
@@ -86,14 +79,10 @@ export default class ParallaxTest extends PureComponent {
                         <button onClick={this.handleAdd}>Add</button>
                         <button onClick={this.handleRemove}>Remove</button>
                     </div>
-                    <div className={style.currentState}>
-                        <h4>
-                            Destroys the scrollController. :-(
-                        </h4>
-                        <button onClick={this.triggerDestroy}>
-                            Destroy
-                        </button>
-                    </div>
+                    {/*<div className={style.currentState}>
+                        <h4>Destroys the scrollController. :-(</h4>
+                        <button onClick={this.triggerDestroy}>Destroy</button>
+                    </div>*/}
                 </nav>
             </div>
         );

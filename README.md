@@ -2,7 +2,7 @@
 
 Provides a React component and single passive scroll listener to add **vertical** scrolling based effects to elements based on their position in the viewport. Works with universal (server-side rendered) React apps.
 
-**NOTE** The v2 branch is a re-write of v1 to add new scroll features such as opacity, scale, and rotation in addition to translation. It also uses the new [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), which will be a more efficient way to determining when elements are within the viewport as compared to v1's implementation. Much of the state of v1's ParallaxController has been moved to focused React higher order components with the hope that these components can also be used to create additional custom scroll effects. That also has the added benefit of being able to easily debug with React specific tooling to see the state of scroll effects.
+**NOTE** The v2 branch is a re-write of v1 to add new scroll features such as opacity, scale, and rotation in addition to translation. It also uses the new [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), which will be a more efficient way to determining when elements are within the viewport as compared to v1's implementation. Additionally, much of the state of v1's ParallaxController has been moved to focused React components with the hope that these components can also be used to create additional custom scroll effects. This also has the added benefit of being able to easily debug with React specific tooling to see the state of scroll effects in the browser.
 
 For a stable version of this library [use v1](https://github.com/jscottsmith/react-scroll-parallax).
 
@@ -33,6 +33,8 @@ There are two main components to be utilized in this library:
 
 2. `<Parallax>`
     - Handles updating the styles of a DOM element such as translations, scale, or opacity.
+
+@TODO: Document any higher order components that can be used.
 
 ### How to
 
