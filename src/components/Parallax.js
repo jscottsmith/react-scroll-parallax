@@ -15,11 +15,9 @@ class Parallax extends Component {
         x: PropTypes.array,
         y: PropTypes.array,
         scale: PropTypes.array,
-
-        // @TODO: these should also be available
-        // scale
+        opacity: PropTypes.array,
+        // @TODO: these should also be available:
         // rotation
-        // opacity
         // tag/element name?
     };
 
@@ -69,10 +67,10 @@ class Parallax extends Component {
     };
 
     setBoundsStyle() {
-        // NOTE: This sets the state of style for the bounds element
-        // that will be observed by the IntersectionObserver
-        // It takes the offsets and resizes the bounds to
-        // account for x and y offsets as well as scale.
+        // NOTE: This sets the state of style for the bounds
+        // element that will be observed by the IntersectionObserver
+        // It takes the parallax props and resizes the bounds
+        // to account for x and y offsets as well as scale.
 
         // @TODO: Consider revising this function.
         // Break into multiple focused methods.
@@ -86,35 +84,35 @@ class Parallax extends Component {
         // NOTE: Temporary border added to debug
         const border = '1px dotted lightgreen';
 
-        let paddingTop = 0;
-        let paddingBottom = 0;
-        let paddingLeft = 0;
-        let paddingRight = 0;
+        let top = 0;
+        let bottom = 0;
+        let left = 0;
+        let right = 0;
 
         const hasScale = scale;
         const hasYPercent = y[0].unit === '%';
         const hasXPercent = x[0].unit === '%';
 
         // NOTE: Only need the bounding rect if we are using percent
-        // as a unit, or scale as an effect. Also only want to get this
-        // on the initial mount when no styles have been applied.
+        // as a unit, or scale as an effect. Also only want to get
+        // this on the initial mount when no styles have been applied.
         if ((hasYPercent || hasXPercent || hasScale) && !boundingRect) {
             boundingRect = this.el.getBoundingClientRect();
-            console.log(boundingRect);
+            // console.log(boundingRect);
         }
 
         if (y) {
             const y0 = Math.abs(y[0].value);
             const y1 = Math.abs(y[1].value);
-            paddingTop = hasYPercent ? y0 / 100 * boundingRect.height : y0;
-            paddingBottom = hasYPercent ? y1 / 100 * boundingRect.height : y1;
+            top = hasYPercent ? y0 / 100 * boundingRect.height : y0;
+            bottom = hasYPercent ? y1 / 100 * boundingRect.height : y1;
         }
 
         if (x) {
             const x0 = Math.abs(x[0].value);
             const x1 = Math.abs(x[1].value);
-            paddingLeft = hasXPercent ? x0 / 100 * boundingRect.width : x0;
-            paddingRight = hasXPercent ? x1 / 100 * boundingRect.width : x1;
+            left = hasXPercent ? x0 / 100 * boundingRect.width : x0;
+            right = hasXPercent ? x1 / 100 * boundingRect.width : x1;
         }
 
         if (scale) {
@@ -123,27 +121,21 @@ class Parallax extends Component {
             const halfDeltaX = (width * scaleMax - width) / 2;
             const halfDeltaY = (height * scaleMax - height) / 2;
 
-            paddingTop = paddingTop + halfDeltaY;
-            paddingBottom = paddingBottom + halfDeltaY;
-            paddingLeft = paddingLeft + halfDeltaX;
-            paddingRight = paddingRight + halfDeltaX;
+            top = top + halfDeltaY;
+            bottom = bottom + halfDeltaY;
+            left = left + halfDeltaX;
+            right = right + halfDeltaX;
         }
 
-        // NOTE: set negative margins based on padding
-        const marginTop = paddingTop * -1;
-        const marginBottom = paddingBottom * -1;
-        const marginLeft = paddingLeft * -1;
-        const marginRight = paddingRight * -1;
-
         const boundsStyle = {
-            marginTop,
-            marginBottom,
-            marginLeft,
-            marginRight,
-            paddingTop,
-            paddingBottom,
-            paddingLeft,
-            paddingRight,
+            marginTop: top * -1,
+            marginBottom: bottom * -1,
+            marginLeft: left * -1,
+            marginRight: right * -1,
+            paddingTop: top,
+            paddingBottom: bottom,
+            paddingLeft: left,
+            paddingRight: right,
             border,
         };
 
@@ -152,9 +144,10 @@ class Parallax extends Component {
                 boundsStyle,
                 boundingRect,
             }),
-            // NOTE: Since ViewportProgress caches the initial bounds on mount
-            // it needs to be updated once the bounds style is updated
-            // with the correct size that accounts for offsets.
+            // NOTE: Since ViewportProgress caches the initial
+            // bounds on mount it needs to be updated once the
+            // bounds style is updated with the correct size
+            // that accounts for offsets.
             this.viewportProgress.updateAttributeCache
         );
     }
