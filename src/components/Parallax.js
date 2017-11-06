@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { parseUnit } from '../utils';
+import { parseOffsetUnits } from '../utils';
 import {
     Observed,
     ScrollPosition,
@@ -45,13 +45,7 @@ class Parallax extends Component {
     }
 
     parseOffsetUnits() {
-        // NOTE: same parseOffsetUnits function also occurs in <ScrollEffects>
-        // Consider DRYing this up somehow.
-        const { x, y } = this.props;
-        this.offsets = {
-            x: x && x.map(f => parseUnit(f)),
-            y: y && y.map(f => parseUnit(f)),
-        };
+        this.offsets = parseOffsetUnits(this.props);
     }
 
     handleResize = () => {

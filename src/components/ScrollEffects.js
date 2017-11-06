@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { scaleBetween, parseUnit } from '../utils';
+import { scaleBetween, parseOffsetUnits } from '../utils';
 
 const defaultVal = {
     value: 0,
@@ -27,11 +27,7 @@ class ScrollEffects extends Component {
     }
 
     parseOffsetUnits() {
-        const { x, y } = this.props;
-        this.offsets = {
-            x: x && x.map(f => parseUnit(f)),
-            y: y && y.map(f => parseUnit(f)),
-        };
+        this.offsets = parseOffsetUnits(this.props);
     }
 
     scaleValues() {
