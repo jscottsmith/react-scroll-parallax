@@ -4,6 +4,7 @@
 export ParallaxProvider from './components/ParallaxProvider.js';
 export Parallax from './components/Parallax.js';
 export ScrollEffects from './components/ScrollEffects.js';
+export ScrollPosition from './components/ScrollPosition.js';
 
 // Controllers
 export ScrollController from './controllers/ScrollController.js';
