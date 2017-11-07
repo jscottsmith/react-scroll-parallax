@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollController } from 'react-scroll-parallax';
+import { ScrollController, ResizeController } from 'react-scroll-parallax';
 
-export default class ScrollProvider extends Component {
+export default class ParallaxProvider extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
     };
 
     static childContextTypes = {
         scrollController: PropTypes.object,
+        resizeController: PropTypes.object,
     };
 
     getChildContext() {
         // Passes down the reference to the controller
-        const { scrollController } = this;
-        return { scrollController };
+        const { scrollController, resizeController } = this;
+        return { scrollController, resizeController };
     }
 
     componentWillMount() {
@@ -24,6 +25,7 @@ export default class ScrollProvider extends Component {
         if (hasWindow) {
             // Must not be the server so kick it off...
             this.scrollController = ScrollController.init();
+            this.resizeController = ResizeController.init();
         }
     }
 
@@ -31,6 +33,7 @@ export default class ScrollProvider extends Component {
         if (this.scrollController) {
             // Remove scroll and resize listener if the provider is unmounted
             this.scrollController.destroy();
+            this.resizeController.destroy();
         }
     }
 

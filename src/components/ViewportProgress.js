@@ -13,6 +13,10 @@ class ViewportProgress extends Component {
         range: [0, 1],
     };
 
+    static contextTypes = {
+        resizeController: PropTypes.object, // not required because this could be rendered on the server.
+    };
+
     static propTypes = {
         isInView: PropTypes.bool.isRequired,
         range: PropTypes.array.isRequired,
@@ -28,9 +32,11 @@ class ViewportProgress extends Component {
     }
 
     componentDidMount() {
-        this.setAttributeCache();
+        // subscribe to resize changes with handler to update cache
+        const { resizeController } = this.context;
+        resizeController.subscribe(this.updateAttributeCache);
+
         this.setProgress();
-        this.addListeners();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,30 +49,14 @@ class ViewportProgress extends Component {
     }
 
     componentWillUnmount() {
-        this.removeListeners();
-    }
+        const { resizeController } = this.context;
 
-    addListeners() {
-        window.addEventListener('resize', this.handleResize, false);
-    }
-
-    removeListeners() {
-        window.removeEventListener('resize', this.handleResize, false);
+        // Unsubscribe to resize updates by passing the subscribed handler
+        resizeController.unsubscribe(this.updateAttributeCache);
     }
 
     updateAttributeCache = () => {
         this.setAttributeCache();
-    };
-
-    handleResize = () => {
-        const resizeKey = `resize-${window.innerWidth}`;
-
-        this.setState(
-            () => ({
-                resizeKey,
-            }),
-            this.setAttributeCache // update cached attributes
-        );
     };
 
     mapRef = ref => {
@@ -76,7 +66,6 @@ class ViewportProgress extends Component {
     setAttributeCache() {
         // This caches properties that cause layout thrash
 
-        // Accessing the el withBounds() HOC
         const el = this.el;
 
         const _rect = el.getBoundingClientRect();

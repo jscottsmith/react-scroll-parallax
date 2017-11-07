@@ -15,6 +15,10 @@ class Parallax extends Component {
         observerOptions,
     };
 
+    static contextTypes = {
+        resizeController: PropTypes.object, // not required because this could be rendered on the server.
+    };
+
     static propTypes = {
         children: PropTypes.node.isRequired,
         className: PropTypes.string,
@@ -34,21 +38,18 @@ class Parallax extends Component {
     };
 
     componentDidMount() {
-        this.addListeners();
         this.parseOffsetUnits();
-        this.setBoundsStyle();
+
+        // subscribe to resize changes with handler to update bounds
+        const { resizeController } = this.context;
+        resizeController.subscribe(this.handleResize);
     }
 
     componentWillUnmount() {
-        this.removeListeners();
-    }
+        const { resizeController } = this.context;
 
-    addListeners() {
-        window.addEventListener('resize', this.handleResize, false);
-    }
-
-    removeListeners() {
-        window.removeEventListener('resize', this.handleResize, false);
+        // Unsubscribe to resize updates by passing the subscribed handler
+        resizeController.unsubscribe(this.handleResize);
     }
 
     parseOffsetUnits() {

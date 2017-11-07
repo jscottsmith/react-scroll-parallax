@@ -1,6 +1,9 @@
+// @TODO: update exports to include all public files for package
+
 // Components
-export ScrollProvider from './components/ScrollProvider.js';
+export ParallaxProvider from './components/ParallaxProvider.js';
 export Parallax from './components/Parallax.js';
 
 // Controllers
 export ScrollController from './controllers/ScrollController.js';
+export ResizeController from './controllers/ResizeController.js';
