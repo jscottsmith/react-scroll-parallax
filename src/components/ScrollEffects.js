@@ -49,25 +49,25 @@ class ScrollEffects extends Component {
 
         if (hasX) {
             values.x = {
-                value: scaleBetween(progress, x[0].value, x[1].value, 1, 0),
+                value: scaleBetween(progress, x[0].value, x[1].value, 0, 1),
                 unit: x[0].unit,
             };
         }
         if (hasY) {
             values.y = {
-                value: scaleBetween(progress, y[0].value, y[1].value, 1, 0),
+                value: scaleBetween(progress, y[0].value, y[1].value, 0, 1),
                 unit: y[0].unit,
             };
         }
         if (hasScale) {
             values.scale = {
-                value: scaleBetween(progress, scale[0], scale[1], 1, 0),
+                value: scaleBetween(progress, scale[0], scale[1], 0, 1),
                 unit: null,
             };
         }
         if (hasOpacity) {
             values.opacity = {
-                value: scaleBetween(progress, opacity[0], opacity[1], 1, 0),
+                value: scaleBetween(progress, opacity[0], opacity[1], 0, 1),
                 unit: null,
             };
         }
