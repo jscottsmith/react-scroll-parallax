@@ -1,4 +1,5 @@
 import { testForPassiveScroll } from '../utils/index';
+import Subscribers from './Subscribers';
 
 /**
  * -------------------------------------------------------
@@ -10,8 +11,9 @@ import { testForPassiveScroll } from '../utils/index';
  *
  */
 
-class ScrollController {
+class ScrollController extends Subscribers {
     constructor() {
+        super();
         this._addListeners();
     }
 
@@ -24,9 +26,6 @@ class ScrollController {
         scrollY: 0,
     };
 
-    // Subscriptions to the controller
-    subscriptions = [];
-
     // Passive support test
     supportsPassive = testForPassiveScroll();
 
@@ -35,21 +34,9 @@ class ScrollController {
         // Save current scroll
         const scrollY = window.pageYOffset; // Supports IE 9 and up.
 
-        this.state = {
+        this.setState({
             scrollY,
-        };
-
-        // update subscribers
-        // window.requestAnimationFrame(this._updateSubscribers);
-        this._updateSubscribers();
-    };
-
-    _updateSubscribers = () => {
-        this.subscriptions.forEach(f => f(this.state));
-    };
-
-    _updateSingleSubscriber = f => {
-        f(this.state);
+        });
     };
 
     _addListeners() {
@@ -70,15 +57,6 @@ class ScrollController {
 
     destroy() {
         this._removeListeners();
-    }
-
-    subscribe(f) {
-        this.subscriptions.push(f);
-        this._updateSingleSubscriber(f);
-    }
-
-    unsubscribe(f) {
-        this.subscriptions = this.subscriptions.filter(x => f !== x);
     }
 }
 
