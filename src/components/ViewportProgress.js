@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clamp from '../utils/clamp';
 
-// With Viewport Progress passes the progress prop
-// to wrapped components with a value ranging from
-// 0–1. 0 if the elements bounds has not entered
+// Viewport Progress passes the progress prop
+// to wrapped components with a default value ranging
+// from 0–1. 0 if the elements bounds has not entered
 // the beginning of the scroll area, 1 if the
 // element has left.
 
@@ -27,11 +27,12 @@ class ViewportProgress extends Component {
         super();
         this.state = {
             progress: props.range[0],
-            resizeKey: null, // a key to trigger a state change when the window resizes
         };
     }
 
     componentDidMount() {
+        this.checkForRef();
+
         // subscribe to resize changes with handler to update cache
         const { resizeController } = this.context;
         resizeController.subscribe(this.updateAttributeCache);
@@ -53,6 +54,15 @@ class ViewportProgress extends Component {
 
         // Unsubscribe to resize updates by passing the subscribed handler
         resizeController.unsubscribe(this.updateAttributeCache);
+    }
+
+    checkForRef() {
+        if (!this.el) {
+            // @TODO: probably should clarify the error or provide a link to docs.
+            throw new Error(
+                "Must provide a ref of the element to track progress. Use the ({ mapRef }) from the render callback as the handler for the element's ref prop."
+            );
+        }
     }
 
     updateAttributeCache = () => {
@@ -100,16 +110,18 @@ class ViewportProgress extends Component {
         const currentScroll = window.pageYOffset;
         const top = this.cache.rect.top - currentScroll; // this was the cached value so subtract the current scroll
         const { totalDist, windowHeight } = this.cache;
+        const { range } = this.props;
 
         // Percent the element has moved based on current and total distance to move
         let progress = 1 - (windowHeight - top) / totalDist;
 
         // NOTE: Clamping
         // Why? Because the isInView prop may be *slightly*
-        // off since Intersection Observer to be pixel-perfect
-        // accurate regardless.
+        // off since Intersection Observer is not expected
+        // to be pixel-perfect accurate. Regardless, we should
+        // exceed the given range.
 
-        progress = clamp(progress, 0, 1);
+        progress = clamp(progress, range[0], range[1]);
 
         this.setState(() => ({
             progress,
