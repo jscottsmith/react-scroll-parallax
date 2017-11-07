@@ -2,16 +2,16 @@
 
 Install node modules and start webpack:
 
-`npm i`
+`yarn install`
 
 Run webpack watch:
 
-`npm run dev`
+`yarn run dev`
 
 Run dev server:
 
-`npm run dev-server`
+`yarn run dev-server`
 
 Run Jest tests:
 
-`npm run test`
+`yarn run test`
