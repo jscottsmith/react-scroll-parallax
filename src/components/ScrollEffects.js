@@ -78,11 +78,8 @@ class ScrollEffects extends Component {
     getStyles() {
         const { x, y, opacity, scale } = this.scaleValues();
 
-        const translateTransform =
-            x.value || y.value
-                ? `translate3d(${x.value}${x.unit}, ${y.value}${y.unit}, 0)`
-                : '';
-        const scaleTransform = scale.value ? `scale(${scale.value})` : '';
+        const translateTransform = `translate3d(${x.value}${x.unit}, ${y.value}${y.unit}, 0)`;
+        const scaleTransform = `scale(${scale.value})`;
 
         return {
             opacity: opacity.value,
