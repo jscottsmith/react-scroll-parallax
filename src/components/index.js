@@ -1,5 +1,4 @@
 // Components
-export Observed from './Observed.js';
 export Parallax from './Parallax.js';
 export ScrollEffects from './ScrollEffects.js';
 export ScrollPosition from './ScrollPosition.js';

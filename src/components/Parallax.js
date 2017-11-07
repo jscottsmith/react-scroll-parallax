@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { parseOffsetUnits } from '../utils';
-import {
-    Observed,
-    ScrollPosition,
-    ScrollEffects,
-    ViewportProgress,
-} from './index.js';
+import Observed from 'react-observed';
+import { ScrollPosition, ScrollEffects, ViewportProgress } from './index.js';
+
+const observerOptions = {
+    root: null,
+    rootMargin: '10px',
+    threshold: [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+};
 
 class Parallax extends Component {
+    static defaultProps = {
+        observerOptions,
+    };
+
     static propTypes = {
         children: PropTypes.node.isRequired,
         className: PropTypes.string,
@@ -16,6 +22,7 @@ class Parallax extends Component {
         y: PropTypes.array,
         scale: PropTypes.array,
         opacity: PropTypes.array,
+        observerOptions: PropTypes.object.isRequired,
         // @TODO: these should also be available:
         // rotation
         // tag/element name?
@@ -188,7 +195,10 @@ class Parallax extends Component {
         // renderMarkup(isInView, style, refCallbacks)
 
         return (
-            <Observed>
+            <Observed
+                intersectionRatio={0.01}
+                options={this.props.observerOptions}
+            >
                 {({ isInView, mapRef: mapRefObserved }) => (
                     <ScrollPosition isInView={isInView}>
                         {({ scrollY }) => (

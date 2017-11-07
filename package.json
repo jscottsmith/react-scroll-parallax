@@ -8,11 +8,11 @@
     },
     "main": "lib/index.js",
     "scripts": {
-        "dev": "jest && webpack --progress --colors --watch",
+        "dev": "yarn test && webpack --progress --colors --watch",
         "dev-server": "node ./example/dist/server",
         "gh-pages": "NODE_ENV=production webpack --progress --colors",
-        "test": "jest",
-        "test:watch": "jest --watch",
+        "test": "BABEL_ENV=test jest",
+        "test:watch": "BABEL_ENV=test jest --watch",
         "prettier":
             "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
         "prepublish":
@@ -27,7 +27,8 @@
     "dependencies": {
         "prop-types": "^15.5.10",
         "react": "^15.0.0",
-        "react-dom": "^15.0.0"
+        "react-dom": "^15.0.0",
+        "react-observed": "^1.0.0-beta.1"
     },
     "devDependencies": {
         "babel-cli": "^6.24.1",
