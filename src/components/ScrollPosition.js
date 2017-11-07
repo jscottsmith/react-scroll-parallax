@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollController } from 'react-scroll-parallax';
 
-// This HOC serves to connect a component via context
+// This component serves to connect via context
 // to the ScrollController which provides the current
-// scroll state that is then passed as props to the
-// <WrappedComponent />.
+// scroll state that is then passed as a param
+// of the child render callback.
 
 // NOTE: Since the scroll state should only be updated when
-// the element is in view, this HOC should be composed
-// within a withObserver() HOC.
+// the element is in view, this component must be provided
+// an isInView prop
 
-class ScrollPosition extends PureComponent {
+class ScrollPosition extends Component {
     static contextTypes = {
         scrollController: PropTypes.object, // not required because this could be rendered on the server.
     };
