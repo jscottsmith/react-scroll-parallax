@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`A <ScrollProvider> to render children 1`] = `
+exports[`A <ParallaxProvider> to render children 1`] = `
 <img
   alt="bar"
   src="foo"
