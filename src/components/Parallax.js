@@ -13,6 +13,10 @@ const observerOptions = {
 class Parallax extends Component {
     static defaultProps = {
         observerOptions,
+        x: [0, 0],
+        y: [0, 0],
+        scale: [1, 1],
+        opacity: [1, 1],
     };
 
     static contextTypes = {
@@ -22,10 +26,10 @@ class Parallax extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         className: PropTypes.string,
-        x: PropTypes.array,
-        y: PropTypes.array,
-        scale: PropTypes.array,
-        opacity: PropTypes.array,
+        x: PropTypes.array.isRequired,
+        y: PropTypes.array.isRequired,
+        scale: PropTypes.array.isRequired,
+        opacity: PropTypes.array.isRequired,
         observerOptions: PropTypes.object.isRequired,
         // @TODO: these should also be available:
         // rotation
