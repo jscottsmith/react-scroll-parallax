@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { parseOffsetUnits } from '../utils';
 import Observed from 'react-observed';
+import { validateOffsets } from '../utils/propValidation';
 import { ScrollPosition, ScrollEffects, ViewportProgress } from './index.js';
 
 const observerOptions = {
@@ -26,8 +27,8 @@ class Parallax extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         className: PropTypes.string,
-        x: PropTypes.array.isRequired,
-        y: PropTypes.array.isRequired,
+        x: validateOffsets,
+        y: validateOffsets,
         scale: PropTypes.array.isRequired,
         opacity: PropTypes.array.isRequired,
         observerOptions: PropTypes.object.isRequired,
