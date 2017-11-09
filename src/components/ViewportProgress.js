@@ -36,8 +36,6 @@ class ViewportProgress extends Component {
         // subscribe to resize changes with handler to update cache
         const { resizeController } = this.context;
         resizeController.subscribe(this.updateAttributeCache);
-
-        this.setProgress();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -104,6 +102,9 @@ class ViewportProgress extends Component {
         };
 
         // console.log('<ViewportProgress> cache updated');
+
+        // always update progress when cache updates.
+        this.setProgress();
     }
 
     setProgress() {
