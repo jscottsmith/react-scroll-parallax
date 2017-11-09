@@ -28,7 +28,7 @@
         "prop-types": "^15.5.10",
         "react": "^15.0.0",
         "react-dom": "^15.0.0",
-        "react-observed": "^1.0.0-beta.1"
+        "react-observed": "^1.0.0-beta.2"
     },
     "devDependencies": {
         "babel-cli": "^6.24.1",

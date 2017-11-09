@@ -201,6 +201,7 @@ class Parallax extends Component {
 
         return (
             <Observed
+                initialViewState
                 intersectionRatio={0.01}
                 options={this.props.observerOptions}
             >

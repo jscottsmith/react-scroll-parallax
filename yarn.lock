@@ -4044,9 +4044,9 @@ react-dom@^15.0.0:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-observed@^1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/react-observed/-/react-observed-1.0.0-beta.1.tgz#6529ea2dcafb6412cf3b6b7e0393d5d6a460ac1f"
+react-observed@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-observed/-/react-observed-1.0.0-beta.2.tgz#b41a4d58d817c00620dd1f80bce8618dbf5be68a"
 
 react-test-renderer@^15.6.1:
   version "15.6.2"
