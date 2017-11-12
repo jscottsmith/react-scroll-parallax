@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Observed from 'react-observed';
-import { validateOffsets } from '../utils/propValidation';
+import {
+    validateOffsets,
+    validateScale,
+    validateOpacity,
+} from '../utils/propValidation';
 import {
     Bounds,
     ScrollEffects,
@@ -30,8 +34,8 @@ class Parallax extends Component {
         className: PropTypes.string,
         x: validateOffsets,
         y: validateOffsets,
-        scale: PropTypes.array.isRequired,
-        opacity: PropTypes.array.isRequired,
+        scale: validateScale,
+        opacity: validateOpacity,
         observerOptions: PropTypes.object.isRequired,
         // @TODO: these should also be available:
         // rotation
@@ -62,7 +66,7 @@ class Parallax extends Component {
         // ↓
         // renderMarkup(isInView, style, refCallbacks)
 
-        const { children, x, y, scale, observerOptions } = this.props;
+        const { children, x, y, scale, opacity, observerOptions } = this.props;
 
         // prettier-ignore
         return (
@@ -72,7 +76,7 @@ class Parallax extends Component {
                         {({ scrollY }) => (
                             <ViewportProgress isInView={isInView} scrollY={scrollY}>
                                 {({ progress, updateAttributeCache, mapRef: viewportRef }) => (
-                                    <ScrollEffects progress={progress} x={x} y={y} scale={scale}>
+                                    <ScrollEffects progress={progress} x={x} y={y} scale={scale} opacity={opacity}>
                                         {({ style }) => (
                                             <div className={this.getWrapperClass(isInView)}>
                                                 <Bounds

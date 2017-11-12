@@ -82,20 +82,139 @@ export function validateOffsets(props, propName, componentName) {
         }
     }
 
-    // Make sure a valid numbers are provided e.g. a negative and positive value
+    // Make sure valid numbers are provided e.g. a negative and positive value
     if (isArray && correctLength) {
         const v1 = parseUnit(value[0]).value;
         const v2 = parseUnit(value[1]).value;
 
-        const yMin = Math.min(v1, v2);
-        const yMax = Math.max(v1, v2);
+        const vMin = Math.min(v1, v2);
+        const vMax = Math.max(v1, v2);
 
-        const hasPositive = yMin <= 0;
-        const hasNegative = yMax >= 0;
+        const hasPositive = vMin <= 0;
+        const hasNegative = vMax >= 0;
 
         if (!hasPositive || !hasNegative) {
             return new Error(
                 `${warning} One value must be >= 0 and the other value <= 0. ${valueProvided}`
+            );
+        }
+    }
+
+    return null;
+}
+
+export function validateScale(props, propName, componentName) {
+    componentName = componentName || 'ANONYMOUS';
+
+    let value = props[propName];
+
+    const isArray = Array.isArray(value);
+    const correctLength = value.length === 2;
+    const warning = `[${propName}] in <${componentName}>.`;
+    const valueProvided = `Instead the value provided was [${value}].`;
+
+    // Make sure it's an array
+    if (!isArray) {
+        return new Error(
+            `${warning} Must be an array of Numbers or Strings with '%' or 'px' as units. ${valueProvided}`
+        );
+    }
+
+    // Make sure it has the correct length of 2
+    if (isArray && !correctLength) {
+        return new Error(
+            `${warning} Must be an Array with a length of 2. ${valueProvided}`
+        );
+    }
+
+    // Make sure the values are numbers
+    if (isArray && correctLength) {
+        let isValid = true;
+
+        value.forEach(val => {
+            isValid = isValid && typeof val === 'number';
+        });
+
+        if (!isValid) {
+            return new Error(
+                `${warning} Each item in the Array must be a Number. ${valueProvided}`
+            );
+        }
+    }
+
+    // Make sure valid numbers are provided e.g. both positive value
+    if (isArray && correctLength) {
+        const v1 = parseUnit(value[0]).value;
+        const v2 = parseUnit(value[1]).value;
+
+        const vMin = Math.min(v1, v2);
+        const vMax = Math.max(v1, v2);
+
+        const hasPositive = vMin >= 0 && vMax >= 0;
+
+        if (!hasPositive) {
+            return new Error(
+                `${warning} Both values must be >= 0. ${valueProvided}`
+            );
+        }
+    }
+
+    return null;
+}
+
+export function validateOpacity(props, propName, componentName) {
+    componentName = componentName || 'ANONYMOUS';
+
+    let value = props[propName];
+
+    const isArray = Array.isArray(value);
+    const correctLength = value.length === 2;
+    const warning = `[${propName}] in <${componentName}>.`;
+    const valueProvided = `Instead the value provided was [${value}].`;
+
+    // Make sure it's an array
+    if (!isArray) {
+        return new Error(
+            `${warning} Must be an array of Numbers or Strings with '%' or 'px' as units. ${valueProvided}`
+        );
+    }
+
+    // Make sure it has the correct length of 2
+    if (isArray && !correctLength) {
+        return new Error(
+            `${warning} Must be an Array with a length of 2. ${valueProvided}`
+        );
+    }
+
+    // Make sure the values are numbers
+    if (isArray && correctLength) {
+        let isValid = true;
+
+        value.forEach(val => {
+            isValid = isValid && typeof val === 'number';
+        });
+
+        if (!isValid) {
+            return new Error(
+                `${warning} Each item in the Array must be a Number. ${valueProvided}`
+            );
+        }
+    }
+
+    // Make sure valid numbers are provided e.g. both positive value
+    if (isArray && correctLength) {
+        const v1 = parseUnit(value[0]).value;
+        const v2 = parseUnit(value[1]).value;
+
+        const vMin = Math.min(v1, v2);
+        const vMax = Math.max(v1, v2);
+
+        const hasPositive = vMin >= 0 && vMax >= 0;
+        const lessThanOne = vMin <= 1 && vMax <= 1;
+
+        if (!hasPositive || !lessThanOne) {
+            return new Error(
+                `${warning} Both values must be >= 0 and <= 1. ${valueProvided}`
             );
         }
     }
