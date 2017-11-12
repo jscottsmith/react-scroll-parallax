@@ -82,5 +82,23 @@ export function validateOffsets(props, propName, componentName) {
         }
     }
 
+    // Make sure a valid numbers are provided e.g. a negative and positive value
+    if (isArray && correctLength) {
+        const v1 = parseUnit(value[0]).value;
+        const v2 = parseUnit(value[1]).value;
+
+        const yMin = Math.min(v1, v2);
+        const yMax = Math.max(v1, v2);
+
+        const hasPositive = yMin <= 0;
+        const hasNegative = yMax >= 0;
+
+        if (!hasPositive || !hasNegative) {
+            return new Error(
+                `${warning} One value must be >= 0 and the other value <= 0. ${valueProvided}`
+            );
+        }
+    }
+
     return null;
 }
