@@ -131,9 +131,9 @@ class ViewportProgress extends Component {
 
     render() {
         const { progress } = this.state;
-        const { mapRef } = this;
+        const { mapRef, updateAttributeCache } = this;
 
-        return this.props.children({ progress, mapRef });
+        return this.props.children({ progress, mapRef, updateAttributeCache });
     }
 }
 
