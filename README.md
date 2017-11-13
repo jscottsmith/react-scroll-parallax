@@ -48,13 +48,13 @@ npm i intersection-observer --save
 
 There are two main components to be utilized in this library:
 
-1. `<ScrollProvider>`
-    - Responsible for providing the current scroll position to all `<Parallax>` components via context.
+1. `<ParallaxProvider>`
+    - Responsible for providing access to the scroll and resize controllers to all `<Parallax>` components via context.
 
 2. `<Parallax>`
-    - Handles updating the styles of a DOM element such as translations, scale, or opacity.
+    - Handles updating the styles of a DOM element such as x and y translations, scale, or opacity.
 
-@TODO: Document any higher order components that can be used.
+@TODO: Document other internal components that can be used.
 
 ### How to
 
