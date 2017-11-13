@@ -1,6 +1,26 @@
 # React Scroll Parallax v2
 
-Provides a React component and single passive scroll listener to add **vertical** scrolling based effects to elements based on their position in the viewport. Works with universal (server-side rendered) React apps.
+A small library of components for creating **vertical** scroll based effects like parallax based on an element's position in the viewport. Works with universal (server-side rendered) React apps.
+
+### Optimizations
+
+Scroll effects can cause lots of [jank](http://jankfree.org/). The following optimizations _attempt to limit_ this jank:
+
+- Using a single passive scroll listener and single resize listener for all elements
+- Only updates elements when they are within the viewport
+- Determines visibility of elements with the browsers asynchronous [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+- Caches expensive calls like `getBoundingClient` that cause paints, reflow and layout
+- Apply effects as 3D transforms to utilize the GPU and prevent re-paints
+
+### Supported Effects
+
+The following are supported effects
+
+- **Translate X** 
+- **Translate Y**
+- **Scale**
+- **Opacity** 
+
 
 **NOTE** The v2 branch is a re-write of v1 to add new scroll features such as opacity, scale, and rotation in addition to translation. It also uses the new [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), which will be a more efficient way to determining when elements are within the viewport as compared to v1's implementation. Additionally, much of the state of v1's ParallaxController has been moved to focused React components with the hope that these components can also be used to create additional custom scroll effects. This also has the added benefit of being able to easily debug with React specific tooling to see the state of scroll effects in the browser.
 
