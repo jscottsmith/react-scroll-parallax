@@ -5,8 +5,9 @@ cache:
   directories:
     - "node_modules"
 deploy:
+  skip_cleanup: true
   provider: surge
-  before_deploy: npm run deploy
-  # project: ./build/
+  script: npm run deploy
+  project: build
   domain: react-scroll-parallax.surge.sh
   on: v2
