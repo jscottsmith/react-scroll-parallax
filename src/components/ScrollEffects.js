@@ -26,6 +26,16 @@ class ScrollEffects extends Component {
         this.parseOffsetUnits();
     }
 
+    componentDidUpdate(prevProps) {
+        if (
+            this.props.y !== prevProps.y ||
+            this.props.x !== prevProps.x ||
+            this.props.scale !== prevProps.scale
+        ) {
+            this.parseOffsetUnits();
+        }
+    }
+
     parseOffsetUnits() {
         this.offsets = parseOffsetUnits(this.props);
     }

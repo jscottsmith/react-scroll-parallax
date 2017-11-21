@@ -28,6 +28,17 @@ class Bounds extends Component {
         resizeController.subscribe(this.handleResize);
     }
 
+    componentDidUpdate(prevProps) {
+        if (
+            this.props.y !== prevProps.y ||
+            this.props.x !== prevProps.x ||
+            this.props.scale !== prevProps.scale
+        ) {
+            this.parseOffsetUnits();
+            this.setBoundsStyle();
+        }
+    }
+
     componentWillUnmount() {
         const { resizeController } = this.context;
 
