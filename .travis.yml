@@ -1,0 +1,7 @@
+language: node_js
+deploy:
+  script: ./deploy.sh
+  provider: surge
+  project: ./out/
+  domain: react-scroll-parallax.surge.sh
+  on: v2
