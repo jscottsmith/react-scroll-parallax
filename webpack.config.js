@@ -32,7 +32,7 @@ const clientConfig = merge(baseConfig, {
             },
             {
                 test: /\.scss$/,
-                include: [path.resolve(ROOT)],
+                include: [path.resolve(ROOT), path.resolve('./stories')],
                 loaders: [
                     'style-loader',
                     {
@@ -83,7 +83,7 @@ const serverConfig = merge(baseConfig, {
             },
             {
                 test: /\.scss$/,
-                include: [path.resolve(ROOT)],
+                include: [path.resolve(ROOT), path.resolve('./stories')],
                 loaders: [
                     {
                         loader: 'css-loader/locals',

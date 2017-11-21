@@ -16,7 +16,9 @@
         "prettier":
             "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
         "prepublish":
-            "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports"
+            "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
+        "storybook": "BABEL_ENV=test start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "jest": {
         "modulePaths": ["<rootDir>/src/"]
@@ -31,6 +33,11 @@
         "react-observed": "^1.0.0-beta.2"
     },
     "devDependencies": {
+        "@storybook/cli": "^3.2.15",
+        "@storybook/addon-actions": "^3.2.15",
+        "@storybook/addon-knobs": "^3.2.15",
+        "@storybook/addon-links": "^3.2.15",
+        "@storybook/react": "^3.2.15",
         "babel-cli": "^6.24.1",
         "babel-core": "^6.23.1",
         "babel-jest": "^20.0.3",

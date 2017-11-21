@@ -4,13 +4,14 @@
             "presets": ["es2015", "react", "stage-0"],
             "plugins": [
                 [
-                    "module-resolver", {
+                    "module-resolver",
+                    {
                         "alias": {
-                            "react-scroll-parallax": "./src",
-                        },
-                    },
-                ],
-            ],
+                            "react-scroll-parallax": "./src"
+                        }
+                    }
+                ]
+            ]
         }
-    },
+    }
 }
