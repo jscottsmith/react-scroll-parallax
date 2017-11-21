@@ -1,4 +1,4 @@
 #!/bin/sh
 
-yarn run test
-yarn run storybook:export
+npm run test
+npm run storybook:export
