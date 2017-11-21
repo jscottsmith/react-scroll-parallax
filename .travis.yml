@@ -7,7 +7,7 @@ cache:
 deploy:
   skip_cleanup: true
   provider: surge
-  script: npm run deploy
+  script: yarn run storybook:export
   project: build
   domain: react-scroll-parallax.surge.sh
   on: v2
