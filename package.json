@@ -19,7 +19,7 @@
             "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
         "storybook": "BABEL_ENV=dev start-storybook -p 6006",
         "storybook:export":
-            "BABEL_ENV=dev build-storybook -c .storybook -o .out",
+            "BABEL_ENV=dev build-storybook -c .storybook -o build",
         "build-storybook": "build-storybook",
         "deploy": "./deploy.sh"
     },
