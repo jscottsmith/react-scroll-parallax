@@ -2,6 +2,8 @@
 
 A small library of components for creating **vertical** scroll based effects like parallax based on an element's position in the viewport. Works with universal (server-side rendered) React apps.
 
+[Storybook Demos](http://react-scroll-parallax.surge.sh/)
+
 ### Optimizations
 
 Scroll effects can cause lots of [jank](http://jankfree.org/). The following optimizations _attempt to limit_ this jank:
