@@ -11,7 +11,7 @@
         "dev": "yarn test && webpack --progress --colors --watch",
         "dev-server": "node ./example/dist/server",
         "gh-pages": "NODE_ENV=production webpack --progress --colors",
-        "test": "BABEL_ENV=test jest",
+        "test": "BABEL_ENV=test jest && yarn run storybook:export",
         "test:watch": "BABEL_ENV=test jest --watch",
         "prettier":
             "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
@@ -21,7 +21,7 @@
         "storybook:export":
             "BABEL_ENV=dev build-storybook -c .storybook -o build",
         "build-storybook": "build-storybook",
-        "deploy": "./deploy.sh"
+        "deploy": "yarn run storybook:export"
     },
     "jest": {
         "modulePaths": ["<rootDir>/src/"]
