@@ -1,6 +1,5 @@
 node_modules
 *dist
-*.out
 *.env
 npm-debug.log
 /lib
