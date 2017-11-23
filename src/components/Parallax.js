@@ -58,15 +58,15 @@ class Parallax extends Component {
         //
         // It's not as bad as it looks. ;)
         //
-        // Observed => isInView, mapRef
+        // <Observed> => ({ isInView, mapRef })
         // ↓
-        // ScrollPosition => scrollY
+        // <ScrollPosition> => ({ scrollY })
         // ↓
-        // ViewportProgress => progress, mapRef, updateAttributeCache
+        // <ViewportProgress> => ({ progress, mapRef, updateAttributeCache })
         // ↓
-        // ScrollEffects => style
+        // <ScrollEffects> => ({ style })
         // ↓
-        // renderMarkup(isInView, style, refCallbacks)
+        // markup
 
         const { children, x, y, scale, opacity, observerOptions } = this.props;
 
