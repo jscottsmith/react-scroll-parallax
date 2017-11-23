@@ -44,9 +44,11 @@ class Parallax extends Component {
 
     getWrapperClass(isInView) {
         const { className } = this.props;
-        return isInView
-            ? `${className} parallax-wrapper is-in-view`
-            : `${className} parallax-wrapper`;
+        let cx = 'parallax-wrapper';
+        cx = isInView ? `${cx} is-in-view` : cx;
+        cx = className ? `${cx} ${className}` : cx;
+
+        return cx;
     }
 
     render() {
