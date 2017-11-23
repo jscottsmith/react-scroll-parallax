@@ -30,7 +30,10 @@ class Parallax extends Component {
     };
 
     static propTypes = {
-        children: PropTypes.node.isRequired,
+        children: PropTypes.oneOfType([
+            PropTypes.element.isRequired,
+            PropTypes.func.isRequired,
+        ]),
         className: PropTypes.string,
         x: validateOffsets,
         y: validateOffsets,
@@ -70,6 +73,9 @@ class Parallax extends Component {
 
         const { children, x, y, scale, opacity, observerOptions } = this.props;
 
+        // if child is a function, call it with updateAttributeCache
+        const isFunc = children instanceof Function;
+
         // prettier-ignore
         return (
             <Observed initialViewState intersectionRatio={0.01} options={observerOptions}>
@@ -89,7 +95,7 @@ class Parallax extends Component {
                                                     y={y}
                                                 >
                                                     <div style={style} className="parallax-element">
-                                                        {children}
+                                                        {isFunc ? children({ updateAttributeCache }) : children}
                                                     </div>
                                                 </Bounds>                                                
                                             </div>
