@@ -31,18 +31,21 @@ export default function createBoundsStyle(x, y, scale, el) {
     // this on the initial mount when no styles have been applied.
     // let boundingRect;
     if (hasYPercent || hasXPercent || hasScale) {
-        const computedStyle = getComputedStyle(el);
-
+        const computedStyle = window.getComputedStyle(el);
         height = el.clientHeight; // height with padding
         width = el.clientWidth; // width with padding
 
-        // subtract padding;
-        height -=
-            parseFloat(computedStyle.paddingTop) +
-            parseFloat(computedStyle.paddingBottom);
-        width -=
-            parseFloat(computedStyle.paddingLeft) +
-            parseFloat(computedStyle.paddingRight);
+        const {
+            paddingTop,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+        } = computedStyle;
+
+        // subtract padding; Guard is for Jest/Jsdom test which fails
+        // to properly getComputedStyles
+        height -= parseFloat(paddingTop || 0) + parseFloat(paddingBottom || 0);
+        width -= parseFloat(paddingLeft || 0) + parseFloat(paddingRight || 0);
     }
 
     if (y) {
