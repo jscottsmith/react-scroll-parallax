@@ -73,10 +73,13 @@ Import `<Parallax>` then add some props and give it some children to render.
 import { Parallax } from 'react-scroll-parallax';
 
 <Parallax
-    x={[-100, 100]}
-    y={[-100, 100]}
+    x={['-50%', '75%']}
+    y={['-100px', '100px']}
+    scale={[0.5, 1.5]}
+    opacity={[1, 0]}
+    className="foo"
 >
-    <div class="your-thing" />
+    <div className="bar" />
 </Parallax>
 ```
 
@@ -86,7 +89,7 @@ The following are all props that can be passed to the React `<Parallax />` compo
 
 For effect props such as `x`, `y`, `scale`, and `opacity` an `Array` with two elements must be provided. This represents the start and end values of the effect.
 
-|Prop                  |Type    |Description
+|Name                  |Type    |Description
 |----------------------|:-------|:----------------------------------------
 |**x**                 |`Array` |`translateX` offsets, first value is the starting position, second is the ending position. Accepts units of `px` or `%`. Integers without units default to `px`.
 |**y**                 |`Array` |`translateY` offsets, first value is the starting position, second is the ending position. Accepts units of `px` or `%`. Integers without units default to `px`.
