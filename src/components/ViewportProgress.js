@@ -101,8 +101,6 @@ class ViewportProgress extends Component {
             totalDist,
         };
 
-        // console.log('<ViewportProgress> cache updated');
-
         // always update progress when cache updates.
         this.setProgress();
     }
@@ -116,10 +114,9 @@ class ViewportProgress extends Component {
         // Percent the element has moved based on current and total distance to move
         let progress = 1 - (windowHeight - top) / totalDist;
 
-        // NOTE: Clamping
-        // Why? Because the isInView prop may be *slightly*
-        // off since Intersection Observer is not expected
-        // to be pixel-perfect accurate. Regardless, we should
+        // NOTE: Clamping because the isInView prop may be *slightly*
+        // off since Intersection Observer is not expected to be
+        // pixel-perfect accurate. Regardless, we should never
         // exceed the given range.
 
         progress = clamp(progress, range[0], range[1]);
