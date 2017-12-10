@@ -98,10 +98,17 @@ For effect props such as `x`, `y`, `scale`, and `opacity` an `Array` with two el
 |**className**         |`String`|`class` to be applied to the outermost `<div>`.
 |**observerOptions**   |`Object`|[options](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) given to the Intersection Observer contructor.
 
+### <Parallax> Render Callback
 
+You can access the `progress` and `isInView` properties from a render callback. Here's an example:
 
-
-
-
-
-
+```jsx
+<Parallax>
+    {({ isInView, progress }) => (
+        <div>
+            <div>Progress: {progress}</div>
+            <div>{isInView ? "I'm visibile" : "Can't see me" }</div>
+        </div>
+    )}
+</Parallax>
+```
