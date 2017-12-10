@@ -112,7 +112,7 @@ class ViewportProgress extends Component {
         const { range } = this.props;
 
         // Percent the element has moved based on current and total distance to move
-        let progress = 1 - (windowHeight - top) / totalDist;
+        let progress = (windowHeight - top) / totalDist;
 
         // NOTE: Clamping because the isInView prop may be *slightly*
         // off since Intersection Observer is not expected to be
