@@ -83,7 +83,7 @@ import { Parallax } from 'react-scroll-parallax';
 </Parallax>
 ```
 
-### <Parallax> Props
+### \<Parallax> Props
 
 The following are all props that can be passed to the React `<Parallax />` component. 
 
@@ -98,7 +98,7 @@ For effect props such as `x`, `y`, `scale`, and `opacity` an `Array` with two el
 |**className**         |`String`|`class` to be applied to the outermost `<div>`.
 |**observerOptions**   |`Object`|[options](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) given to the Intersection Observer contructor.
 
-### <Parallax> Render Callback
+### \<Parallax> Render Callback
 
 You can access the `progress` and `isInView` properties from a render callback. Here's an example:
 
