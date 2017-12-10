@@ -4,6 +4,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ScrollPosition, ParallaxProvider } from 'react-scroll-parallax';
 
+beforeEach(() => {
+    // see:
+    // https://github.com/facebook/react/issues/11098
+    // https://github.com/facebook/react/pull/11636
+    // spyOn(console, 'error');
+    Error.prototype.suppressReactErrorLogging = true;
+    DOMException.prototype.suppressReactErrorLogging = true;
+});
+
 describe('Expect a <ScrollPosition> component', () => {
     it('to throw if no scrollController is found in context', () => {
         const node = document.createElement('div');
