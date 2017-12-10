@@ -68,7 +68,7 @@ describe('Expect a <ViewportProgress> component', () => {
             node
         );
         expect(testObject).toMatchObject({
-            progress: 0,
+            progress: expect.any(Number),
             mapRef: expect.any(Function),
         });
     });
