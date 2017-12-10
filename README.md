@@ -27,7 +27,7 @@ The following are supported effects
 
 ## Install
 
-Currently a prerelease. For a stable version of this library [use v1](https://github.com/jscottsmith/react-scroll-parallax).
+**Warning:** This is currently a prerelease. For a stable version of this library [use v1](https://github.com/jscottsmith/react-scroll-parallax).
 
 ```
 npm i react-scroll-parallax@next --save
