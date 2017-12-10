@@ -61,11 +61,26 @@ body {
 }
 
 :local(.parallax) {
-    margin: 10% 10%;
+    margin: 6rem;
     width: 200px;
 }
 
 :local(.small) {
-    margin: 10% 10%;
+    margin: 6rem;
     width: 10%;
+}
+
+:local(.portal) {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    color: black;
+    z-index: 100;
+    border-radius: 3px;
+    background-color: rgba(#eee, 0.8);
+
+    > * {
+        margin: 0.5rem;
+    }
 }

@@ -58,7 +58,7 @@ export default class ParallaxTest extends Component {
 
             return (
                 <Parallax key={i} className={style.item} {...props}>
-                    <Element index={i} />
+                    <Element name={i} />
                 </Parallax>
             );
         });

@@ -11,7 +11,7 @@ import {
 
 import React from 'react';
 import { ParallaxProvider, Parallax } from '../src/components';
-import { Element } from '../example/components';
+import { Element, Portal } from '../example/components';
 import styles from './styles.scss';
 import 'intersection-observer';
 
@@ -19,8 +19,11 @@ const stories = storiesOf('<Parallax>', module);
 
 // Decorate all stories with ParallaxProvider and center styles
 const CenterDecorator = storyFn => (
-    <div className="center elements">
-        <ParallaxProvider>{storyFn()}</ParallaxProvider>
+    <div>
+        <div id="portal" className={styles.portal} />
+        <div className="center elements">
+            <ParallaxProvider>{storyFn()}</ParallaxProvider>
+        </div>
     </div>
 );
 addDecorator(CenterDecorator);
@@ -38,7 +41,7 @@ stories
             // scale={[0, 1]}
             // opacity={[0.5, 1]}
         >
-            <Element index="A" />
+            <Element name="A" />
         </Parallax>
     ))
     .add('with y offset props', () => {
@@ -51,10 +54,10 @@ stories
         return (
             <div className="elements">
                 <Parallax className={styles.parallax} y={y1}>
-                    <Element index="A" />
+                    <Element name="A" />
                 </Parallax>
                 <Parallax className={styles.parallax} y={y2}>
-                    <Element index="B" />
+                    <Element name="B" />
                 </Parallax>
             </div>
         );
@@ -69,10 +72,10 @@ stories
         return (
             <div className="elements">
                 <Parallax className={styles.parallax} x={x1}>
-                    <Element index="A" />
+                    <Element name="A" />
                 </Parallax>
                 <Parallax className={styles.parallax} x={x2}>
-                    <Element index="B" />
+                    <Element name="B" />
                 </Parallax>
             </div>
         );
@@ -87,10 +90,10 @@ stories
         return (
             <div className="elements">
                 <Parallax className={styles.parallax} scale={scale1}>
-                    <Element index="A" />
+                    <Element name="A" />
                 </Parallax>
                 <Parallax className={styles.parallax} scale={scale2}>
-                    <Element index="B" />
+                    <Element name="B" />
                 </Parallax>
             </div>
         );
@@ -105,10 +108,10 @@ stories
         return (
             <div className="elements">
                 <Parallax className={styles.parallax} opacity={opacity1}>
-                    <Element index="A" />
+                    <Element name="A" />
                 </Parallax>
                 <Parallax className={styles.parallax} opacity={opacity2}>
-                    <Element index="B" />
+                    <Element name="B" />
                 </Parallax>
             </div>
         );
@@ -132,10 +135,72 @@ stories
 
                     return (
                         <Parallax key={i} className={styles.small} {...props}>
-                            <Element index={i} />
+                            <Element name={i} />
                         </Parallax>
                     );
                 })}
+            </div>
+        );
+    })
+    .add('with viewport progress', () => {
+        const offset = number('Offset %', 100);
+        const domNode = document.getElementById('portal');
+
+        // wait for the portal container to be rendered by the decorator...
+        if (!domNode) return null;
+
+        const elements = [
+            { name: 'A', props: { y: [-offset + '%', offset + '%'] } },
+            { name: 'B', props: { x: [offset + '%', -offset + '%'] } },
+        ];
+
+        return (
+            <div className="elements">
+                {elements.map(({ name, props }, i) => (
+                    <Parallax key={name} className={styles.parallax} {...props}>
+                        {({ progress }) => (
+                            <Element name={name}>
+                                <Portal domNode={domNode}>
+                                    <div className={styles.progress}>
+                                        <strong>Progress {name}:</strong>{' '}
+                                        {progress}
+                                    </div>
+                                </Portal>
+                            </Element>
+                        )}
+                    </Parallax>
+                ))}
+            </div>
+        );
+    })
+    .add('with viewport visibility', () => {
+        const offset = number('Offset %', 100);
+        const domNode = document.getElementById('portal');
+
+        // wait for the portal container to be rendered by the decorator...
+        if (!domNode) return null;
+
+        const elements = [
+            { name: 'A', props: { y: [-offset + '%', offset + '%'] } },
+            { name: 'B', props: { x: [offset + '%', -offset + '%'] } },
+        ];
+
+        return (
+            <div className="elements">
+                {elements.map(({ name, props }, i) => (
+                    <Parallax key={name} className={styles.parallax} {...props}>
+                        {({ isInView }) => (
+                            <Element name={name}>
+                                <Portal domNode={domNode}>
+                                    <div className={styles.progress}>
+                                        <strong>Visibility {name}:</strong>{' '}
+                                        {isInView ? 'true' : 'false'}
+                                    </div>
+                                </Portal>
+                            </Element>
+                        )}
+                    </Parallax>
+                ))}
             </div>
         );
     });
