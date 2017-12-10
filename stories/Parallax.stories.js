@@ -15,7 +15,7 @@ import { Element } from '../example/components';
 import styles from './styles.scss';
 import 'intersection-observer';
 
-const stories = storiesOf('Parallax', module);
+const stories = storiesOf('<Parallax>', module);
 
 // Decorate all stories with ParallaxProvider and center styles
 const CenterDecorator = storyFn => (
