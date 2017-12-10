@@ -95,7 +95,7 @@ class Parallax extends Component {
                                                     y={y}
                                                 >
                                                     <div style={style} className="parallax-element">
-                                                        {isFunc ? children({ updateAttributeCache }) : children}
+                                                        {isFunc ? children({ updateAttributeCache, progress, isInView }) : children}
                                                     </div>
                                                 </Bounds>                                                
                                             </div>

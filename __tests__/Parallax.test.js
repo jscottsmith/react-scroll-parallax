@@ -49,4 +49,48 @@ describe('Expect a <Parallax> component', () => {
             updateAttributeCache: expect.any(Function),
         });
     });
+
+    it('to pass the isInView boolean', () => {
+        const node = document.createElement('div');
+
+        let testParams = {};
+
+        ReactDOM.render(
+            <ParallaxProvider>
+                <Parallax>
+                    {params => {
+                        testParams = params;
+                        return <div />;
+                    }}
+                </Parallax>
+            </ParallaxProvider>,
+            node
+        );
+
+        expect(testParams).toMatchObject({
+            isInView: expect.any(Boolean),
+        });
+    });
+
+    it('to pass the progress value', () => {
+        const node = document.createElement('div');
+
+        let testParams = {};
+
+        ReactDOM.render(
+            <ParallaxProvider>
+                <Parallax>
+                    {params => {
+                        testParams = params;
+                        return <div />;
+                    }}
+                </Parallax>
+            </ParallaxProvider>,
+            node
+        );
+
+        expect(testParams).toMatchObject({
+            progress: expect.any(Number),
+        });
+    });
 });
