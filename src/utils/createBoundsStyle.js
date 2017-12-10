@@ -4,9 +4,6 @@ export default function createBoundsStyle(x, y, scale, el) {
     // It takes the x, y, and scale props then resizes
     // provides the styles to create the bounds.
 
-    // NOTE: Temporary border added to debug
-    const border = '1px dotted tomato';
-
     // for percents and scale
     let height = 0;
     let width = 0;
@@ -69,7 +66,6 @@ export default function createBoundsStyle(x, y, scale, el) {
         paddingBottom: bounds.mb * -1,
         paddingLeft: bounds.ml * -1,
         paddingRight: bounds.mr * -1,
-        border,
     };
 }
 
