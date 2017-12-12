@@ -17,11 +17,11 @@ class Subscribers {
     state = {};
 
     _updateSubscribers = () => {
-        this.subscriptions.forEach(f => f(this.state));
+        this.subscriptions.forEach(cb => cb(this.state));
     };
 
-    _updateSingleSubscriber = f => {
-        f(this.state);
+    _updateSingleSubscriber = cb => {
+        cb(this.state);
     };
 
     setState(nextState) {
@@ -29,13 +29,13 @@ class Subscribers {
         this._updateSubscribers();
     }
 
-    subscribe(f) {
-        this.subscriptions.push(f);
-        this._updateSingleSubscriber(f);
+    subscribe(cb) {
+        this.subscriptions.push(cb);
+        this._updateSingleSubscriber(cb);
     }
 
-    unsubscribe(f) {
-        this.subscriptions = this.subscriptions.filter(x => f !== x);
+    unsubscribe(cb) {
+        this.subscriptions = this.subscriptions.filter(x => cb !== x);
     }
 }
 
