@@ -4,10 +4,10 @@ node_js:
 cache:
   directories:
     - "node_modules"
+script: codecov && yarn storybook:export
 deploy:
   skip_cleanup: true
   provider: surge
-  script: yarn run storybook:export
   project: build
   domain: react-scroll-parallax.surge.sh
   on: v2
