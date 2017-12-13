@@ -26,8 +26,12 @@ class ScrollController extends Subscribers {
         scrollY: 0,
     };
 
-    // Passive support test
     supportsPassive = testForPassiveScroll();
+
+    // Passive support test
+    get listenerOptions() {
+        return this.supportsPassive ? { passive: true } : false;
+    }
 
     // Window scroll handler. Sets the 'scrollY'
     _handleScroll = () => {
@@ -43,7 +47,7 @@ class ScrollController extends Subscribers {
         window.addEventListener(
             'scroll',
             this._handleScroll,
-            this.supportsPassive ? { passive: true } : false
+            this.listenerOptions
         );
     }
 
@@ -51,7 +55,7 @@ class ScrollController extends Subscribers {
         window.removeEventListener(
             'scroll',
             this._handleScroll,
-            this.supportsPassive ? { passive: true } : false
+            this.listenerOptions
         );
     }
 
