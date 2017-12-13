@@ -35,7 +35,7 @@ The following are supported effects
 npm i react-scroll-parallax@next --save
 ```
 
-This package also requires [support](https://caniuse.com/#search=IntersectionObserver) for the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Since this isn't supported in older browsers you will need to add a [polyfill](https://github.com/w3c/IntersectionObserver/tree/gh-pages/polyfill).
+This package also requires [support](https://caniuse.com/#search=IntersectionObserver) for the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Since this isn't supported in older browsers (or the latest [Safari](https://media.giphy.com/media/3og0INyCmHlNylks9O/giphy.gif) and [no update](https://bugs.webkit.org/show_bug.cgi?id=159475) as to when it will land) you will need to add a [polyfill](https://github.com/w3c/IntersectionObserver/tree/gh-pages/polyfill).
 
 ```
 npm i intersection-observer --save
