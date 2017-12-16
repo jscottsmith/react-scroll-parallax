@@ -4,7 +4,7 @@ node_js:
 cache:
   directories:
     - "node_modules"
-script: codecov && yarn storybook:export
+script: yarn test && codecov && yarn storybook:export
 deploy:
   skip_cleanup: true
   provider: surge
