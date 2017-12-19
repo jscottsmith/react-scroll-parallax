@@ -53,7 +53,7 @@ describe('Expect a <ViewportProgress> component', () => {
         );
     });
 
-    it('to pass a an object containing the { progress, mapRef }w keys', () => {
+    it('to pass a an object containing the { progress, mapRef, and updateAttributeCache } keys', () => {
         const node = document.createElement('div');
         let testObject = {};
         ReactDOM.render(
@@ -70,6 +70,7 @@ describe('Expect a <ViewportProgress> component', () => {
         expect(testObject).toMatchObject({
             progress: expect.any(Number),
             mapRef: expect.any(Function),
+            updateAttributeCache: expect.any(Function),
         });
     });
 });
