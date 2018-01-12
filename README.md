@@ -111,7 +111,7 @@ Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Pe
 - type: `Boolean`
 - default `false`
 
-Determines whether the scroll rate of the parallax component will move faster or slower than the default rate of scroll.
+Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.
 
 **`tag`**
 
