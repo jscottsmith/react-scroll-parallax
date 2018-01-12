@@ -24,7 +24,6 @@ npm i react-scroll-parallax --save
 The `<ParallaxProvider />` should wrap the component tree that contains all `<Parallax />` components. This should be a top level component like `<AppContainer />`. The `<ParallaxProvider />` will then provide necessary context to the [`parallaxController`](#parallax-controller-context) for all `<Parallax />` elements. For example:
 
 ```jsx
-...
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 class AppContainer extends Component {
@@ -39,24 +38,22 @@ class AppContainer extends Component {
 
 ```
 
-Import the `Parallax` component...
-
-```javascript
-import { Parallax } from 'react-scroll-parallax';
-```
-
-... then use it like so:
+Import the `Parallax` component and use it anywhere within the provider like so:
 
 ```jsx
-<Parallax
-    className="custom-class"
-    offsetYMax={20}
-    offsetYMin={-20}
-    slowerScrollRate
-    tag="figure"
->
-    <img src="/image" />
-</Parallax>
+import { Parallax } from 'react-scroll-parallax';
+
+const Image = () => (
+    <Parallax
+        className="custom-class"
+        offsetYMax={20}
+        offsetYMin={-20}
+        slowerScrollRate
+        tag="figure"
+    >
+        <img src="/image.jpg" />
+    </Parallax>
+);
 ```
 
 **NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
