@@ -1,4 +1,4 @@
-import { ParallaxController } from 'react-scroll-parallax';
+import ParallaxController from 'libs/ParallaxController';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;

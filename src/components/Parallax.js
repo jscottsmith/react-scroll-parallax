@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { offsetMin, offsetMax } from '../utils/propValidation';
-import { ParallaxController } from 'react-scroll-parallax';
+import ParallaxController from '../libs/ParallaxController';
 
 export default class Parallax extends Component {
     static defaultProps = {

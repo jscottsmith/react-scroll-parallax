@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ParallaxController } from 'react-scroll-parallax';
+import ParallaxController from '../libs/ParallaxController';
 
 export default class ParallaxProvider extends Component {
     static propTypes = {
