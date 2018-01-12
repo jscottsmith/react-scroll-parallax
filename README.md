@@ -21,17 +21,17 @@ npm i react-scroll-parallax --save
 
 ## Usage
 
-Wrap your component tree that will contain `<Parallax />` components with the `<ParallaxProvider />`. For example:
+The `<ParallaxProvider />` should wrap the component tree that contains all `<Parallax />` components. This should be a top level component like `<AppContainer />`. The `<ParallaxProvider />` will then provide necessary context to the [`parallaxController`](#parallax-controller-context) for all `<Parallax />` elements. For example:
 
 ```jsx
 ...
 import { ParallaxProvider } from 'react-scroll-parallax';
 
-class App extends Component {
+class AppContainer extends Component {
     render() {
         return (
             <ParallaxProvider>
-                <StuffWithParallax />
+                <App />
             </ParallaxProvider>
         );
     }
