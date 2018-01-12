@@ -62,60 +62,16 @@ const Image = () => (
 
 The following are all props that can be passed to the React `<Parallax />` component:
 
-**`className`**
-
-- type: `String`
-
-Optionally pass additional class names to be added to the outer parallax element.
-
-**`disabled`**
-
-- type: `Boolean`
-- default: `false`
-
-Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated.
-
-**`offsetXMax`**
-
-- type: `Number` or `String`
-- default: `0`
-
-Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
-
-**`offsetXMin`**
-
-- type: `Number` or `String`
-- default: `0`
-
-Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
-
-**`offsetYMax`**
-
-- type: `Number` or `String`
-- default: `0`
-
-Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
-
-**`offsetYMin`**
-
-- type: `Number` or `String`
-- default: `0`
-
-Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
-
-**`slowerScrollRate`**
-
-- type: `Boolean`
-- default `false`
-
-Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.
-
-**`tag`**
-
-- type: `String`
-- default `div`
-
-Optionally pass a tag name to be applied to the outer most parallax element. For example: `<Parallax tag="figure" />`.
+|Name                  |Type                  |Default   |Description
+|----------------------|:--------------------:|:---------|----------------------------------------
+|**className**         |`String`              |          |Optionally pass additional class names to be added to the outer most parallax element.
+|**disabled**          |`Boolean`             |`false`   |Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated.
+|**offsetXMax**        |`Number` or `String`  |`0`       |Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
+|**offsetXMin**        |`Number` or `String`  |`0`       |Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
+|**offsetYMax**        |`Number` or `String`  |`0`       |Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
+|**offsetYMin**        |`Number` or `String`  |`0`       |Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
+|**slowerScrollRate**  |`Boolean`             |`false`   |Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.
+|**tag**               |`String`              |`div`     |Optionally pass an element tag name to be applied to the outer most parallax element.
 
 ## Parallax Controller Context
 
