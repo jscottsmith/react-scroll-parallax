@@ -6,11 +6,12 @@ Provides a React component and single passive scroll listener to add **vertical*
 
 ## Examples
 
-🔗 [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
+Some links demonstrating possible effects created with this lib:
 
-🔗 [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
-
-🔗 [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
+- [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
+- [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
+- [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
+- [CodePen Parallax Banner](https://codepen.io/jscottsmith/pen/aVBvGj)
 
 ## Install
 
