@@ -15,8 +15,16 @@ Some links demonstrating possible effects created with this lib:
 
 ## Install
 
+With npm
+
 ```
 npm i react-scroll-parallax --save
+```
+
+or yarn
+
+```
+yarn add react-scroll-parallax
 ```
 
 ## Usage
