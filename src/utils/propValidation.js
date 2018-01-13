@@ -1,14 +1,14 @@
-export function offsetMin(props, propName, componentName) {
-    componentName = componentName || 'ANONYMOUS';
+export function offsetMin(props, propName, componentName = 'ANONYMOUS') {
+    let value = props[propName];
+    const isValid = typeof value === 'string' || typeof value === 'number';
 
-    if (!typeof value === 'string' || !typeof value === 'number') {
+    if (!isValid) {
         return new Error(
-            `[${propName}] in ${componentName} must be a string with with "%"" or "px" units or number`
+            `[${propName}] in ${componentName} must be a string with with "%"" or "px" units or number.`
         );
     }
 
     if (props[propName]) {
-        let value = props[propName];
         if (typeof value === 'string') {
             value = parseInt(value, 10);
         }
@@ -21,17 +21,17 @@ export function offsetMin(props, propName, componentName) {
     return null;
 }
 
-export function offsetMax(props, propName, componentName) {
-    componentName = componentName || 'ANONYMOUS';
+export function offsetMax(props, propName, componentName = 'ANONYMOUS') {
+    let value = props[propName];
+    const isValid = typeof value === 'string' || typeof value === 'number';
 
-    if (!typeof value === 'string' || !typeof value === 'number') {
+    if (!isValid) {
         return new Error(
-            `[${propName}] in ${componentName} must be a string with with "%"" or "px" units or number`
+            `[${propName}] in ${componentName} must be a string with with "%"" or "px" units or number.`
         );
     }
 
     if (props[propName]) {
-        let value = props[propName];
         if (typeof value === 'string') {
             value = parseInt(value, 10);
         }
