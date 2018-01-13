@@ -7,7 +7,6 @@ import ParallaxController from 'libs/ParallaxController';
 const log = global.console.log;
 
 describe('Expect the <Parallax> component', () => {
-
     afterEach(() => {
         global.console.log = log;
         global.ParallaxController = undefined;
@@ -26,7 +25,7 @@ describe('Expect the <Parallax> component', () => {
         };
 
         expect(render).toThrow(
-            'Must wrap your application\'s <Parallax /> components in a <ParallaxProvider />.'
+            "Must wrap your application's <Parallax /> components in a <ParallaxProvider />."
         );
     });
 
@@ -62,7 +61,7 @@ describe('Expect the <Parallax> component', () => {
         const render = () => {
             ReactDOM.render(
                 <ParallaxProvider>
-                    <Parallax offsetYMin={-100} offsetYMax={100}> 
+                    <Parallax offsetYMin={-100} offsetYMax={100}>
                         <div />
                     </Parallax>
                 </ParallaxProvider>,
@@ -97,7 +96,7 @@ describe('Expect the <Parallax> component', () => {
         const render = () => {
             ReactDOM.render(
                 <ParallaxProvider>
-                    <Parallax ref={ref => instance = ref}> 
+                    <Parallax ref={ref => (instance = ref)}>
                         <div />
                     </Parallax>
                 </ParallaxProvider>,
@@ -117,7 +116,7 @@ describe('Expect the <Parallax> component', () => {
         global.ParallaxController = ParallaxController.init();
         global.ParallaxController.updateElement = jest.fn();
         global.ParallaxController.resetElementStyles = jest.fn();
-        
+
         let instance;
 
         class StateChanger extends React.Component {
@@ -129,7 +128,10 @@ describe('Expect the <Parallax> component', () => {
 
             render() {
                 return (
-                    <Parallax disabled={this.state.disabled} ref={ref => instance = ref} />
+                    <Parallax
+                        disabled={this.state.disabled}
+                        ref={ref => (instance = ref)}
+                    />
                 );
             }
         }
@@ -145,17 +147,22 @@ describe('Expect the <Parallax> component', () => {
 
         render();
 
-        expect(global.ParallaxController.updateElement).toBeCalledWith(instance.element, {
-            props: {
-                disabled: instance.props.disabled,
-                offsetXMax: instance.props.offsetXMax,
-                offsetXMin: instance.props.offsetXMin,
-                offsetYMax: instance.props.offsetYMax,
-                offsetYMin: instance.props.offsetYMin,
-                slowerScrollRate: instance.props.slowerScrollRate,
-            },
-        });
+        expect(global.ParallaxController.updateElement).toBeCalledWith(
+            instance.element,
+            {
+                props: {
+                    disabled: instance.props.disabled,
+                    offsetXMax: instance.props.offsetXMax,
+                    offsetXMin: instance.props.offsetXMin,
+                    offsetYMax: instance.props.offsetYMax,
+                    offsetYMin: instance.props.offsetYMin,
+                    slowerScrollRate: instance.props.slowerScrollRate,
+                },
+            }
+        );
 
-        expect(global.ParallaxController.resetElementStyles).toBeCalledWith(instance.element);
+        expect(global.ParallaxController.resetElementStyles).toBeCalledWith(
+            instance.element
+        );
     });
 });

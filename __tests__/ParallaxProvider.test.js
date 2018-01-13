@@ -8,14 +8,13 @@ import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'libs/ParallaxController';
 
 describe('A <ParallaxProvider>', () => {
-
     // afterEach(() => )
     it('to render children', () => {
         const node = document.createElement('div');
         let child = jest.fn();
         const Child = () => {
             child();
-            return <div />
+            return <div />;
         };
 
         const render = () => {

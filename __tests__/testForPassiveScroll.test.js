@@ -4,7 +4,6 @@ const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;
 
 describe('Expect the testForPassiveScroll function', () => {
-
     afterEach(() => {
         window.addEventListener = addEventListener;
         window.removeEventListener = removeEventListener;
@@ -12,7 +11,7 @@ describe('Expect the testForPassiveScroll function', () => {
 
     it('to return a boolean', () => {
         const bool = testForPassiveScroll();
-        expect(bool).toBe(false)
+        expect(bool).toBe(false);
     });
 
     it('to add and remove a test listener', () => {
