@@ -51,7 +51,7 @@ Import the `Parallax` component and use it anywhere within the provider like so:
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
-const Image = () => (
+const ParallaxImage = () => (
     <Parallax
         className="custom-class"
         offsetYMax={20}
