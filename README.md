@@ -29,7 +29,7 @@ yarn add react-scroll-parallax
 
 ## Usage
 
-The `<ParallaxProvider />` should wrap the component tree that contains all `<Parallax />` components. This should be a top level component like `<AppContainer />`. The `<ParallaxProvider />` will then provide necessary context to the [`parallaxController`](#parallax-controller-context) for all `<Parallax />` elements. For example:
+The [`<ParallaxProvider />`](#parallaxprovider) should wrap the component tree that contains all `<Parallax />` components. This should be a top level component like `<AppContainer />`. For example:
 
 ```jsx
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -59,14 +59,14 @@ const Image = () => (
         slowerScrollRate
         tag="figure"
     >
-        <img src="/image.jpg" />
+        <Image src="/image.jpg" />
     </Parallax>
 );
 ```
 
-**NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (perhaps from images loading) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
+**NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
 
-## Parallax Component Props
+## \<Parallax> Props
 
 The following are all props that can be passed to the React `<Parallax />` component:
 
@@ -81,38 +81,46 @@ The following are all props that can be passed to the React `<Parallax />` compo
 |**slowerScrollRate**  |`Boolean`             |`false`   |Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.
 |**tag**               |`String`              |`div`     |Optionally pass an element tag name to be applied to the outer most parallax element.
 
-## Parallax Controller Context
+## \<ParallaxProvider>
+    
+The `<ParallaxProvider />` component is meant to wrap a top level component in your application and is necessary to provide access though React's context API to the parallax controller. This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
+
+```jsx
+const AppContainer = () => (
+    <ParallaxProvider>
+        <Router>
+            <App />
+        </Router>
+    </ParallaxProvider>    
+);
+```
+
+### Parallax Controller Context
 
 Access the Parallax Controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
 
 ```jsx
 class Foo extends Component {
-
     static contextTypes = {
         parallaxController: PropTypes.object.isRequired,
     };
 
     doSomething() {
         // do stuff with this.context.parallaxController
-    }
-
-    ...
+    }  
+}
 ```
 
 or for stateless functional components like:
 
 ```jsx
 const Bar = (props, context) => (
-
     // do stuff with context.parallaxController
-
-    ...
 );
 
 Bar.contextTypes = {
     parallaxController: PropTypes.object.isRequired,
 };
-
 ```
 
 ### Available Methods
@@ -126,6 +134,27 @@ Updates all cached attributes for parallax elements then updates their positions
 **`destroy()`**
 
 Removes window scroll and resize listeners then resets all styles applied to parallax elements.
+
+### Example usage of context
+
+The most common use case that would require access to the controller is dealing with images. Since the controller caches attributes for performance they will need to be updated with the correct values once the image loads. Here's an example of how you could do that with an `<Image />` component:
+
+```jsx
+class Image extends Component {
+    static contextTypes = {
+        parallaxController: PropTypes.object.isRequired,
+    };
+
+    handleLoad = () => {
+        // updates cached values after image dimensions have loaded
+        this.context.parallaxController.update();
+    };
+
+    render() {
+        return <img src={this.props.src} onLoad={this.handleLoad} />;
+    }
+}
+```
 
 ## Browser Support
 
