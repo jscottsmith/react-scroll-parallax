@@ -295,8 +295,9 @@ function ParallaxController() {
 
         // Apply styles
         const el = element.elInner;
-        el.style.cssText = `position:relative;
-            transform:translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
+
+        // prettier-ignore
+        el.style.transform = `translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
     }
 
     /**
@@ -305,8 +306,7 @@ function ParallaxController() {
      */
     function _resetStyles(element) {
         const el = element.elInner;
-        el.style.cssText = `position:relative;
-            transform:translate3d(0, 0, 0)`;
+        el.style.transform = '';
     }
 
     /**
@@ -407,7 +407,7 @@ ParallaxController.init = function() {
         );
     }
 
-    // Keep global reference for legacy versions >= 1.0.0
+    // Keep global reference for legacy versions <= 1.1.0
 
     if (hasWindow && !window.ParallaxController) {
         window.ParallaxController = new ParallaxController();

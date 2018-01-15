@@ -50,8 +50,6 @@ describe('Expect the ParallaxController', () => {
             },
         };
         const element = instance.createElement(options);
-        const expectedElInner = document.createElement('div');
-        expectedElInner.style.position = 'relative';
 
         const expectedElement = {
             attributes: {
@@ -65,7 +63,7 @@ describe('Expect the ParallaxController', () => {
                 yMaxPx: 0,
                 yMinPx: 0,
             },
-            elInner: expectedElInner,
+            elInner: document.createElement('div'),
             elOuter: document.createElement('div'),
             id: 1,
             offsets: {
