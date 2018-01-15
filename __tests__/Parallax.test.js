@@ -14,6 +14,11 @@ describe('Expect the <Parallax> component', () => {
 
     it('to throw if the ParallaxController is not available', () => {
         const node = document.createElement('div');
+        // NOTE: hide error and react warning
+        // see issue: https://github.com/facebook/jest/issues/4597
+        const preventError = e => e.preventDefault();
+        window.addEventListener('error', preventError, true);
+        Error.prototype.suppressReactErrorLogging = true;
 
         const render = () => {
             ReactDOM.render(
@@ -27,6 +32,9 @@ describe('Expect the <Parallax> component', () => {
         expect(render).toThrow(
             "Must wrap your application's <Parallax /> components in a <ParallaxProvider />."
         );
+
+        window.removeEventListener('error', preventError, true);
+        Error.prototype.suppressReactErrorLogging = false;
     });
 
     it('to warn if the ParallaxController is found but not provided by <ParallaxProvider>', () => {
