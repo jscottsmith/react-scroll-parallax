@@ -1,41 +1,31 @@
 /**
  * Determines the unit of a string and parses the value
  *
- * @param {string} value
+ * @param {string} str
+ * @param {object} out
  * @return {object} The parsed value and the unit if any
  */
-export default function parseValueAndUnit(value) {
-    const isBool = typeof value === 'boolean';
-    const isObject = typeof value === 'object';
-    const isString = typeof value === 'string';
-    const isNumb = typeof value === 'number';
+export default function parseValueAndUnit(str, out = { value: 0, unit: 'px' }) {
+    const isValid = typeof str === 'number' || typeof str === 'string';
 
-    if (isBool || isObject) {
+    if (!isValid) {
         throw new Error(
-            'Ivalid value provided. Must provide a value as a string with % or px units.'
+            'Invalid value provided. Must provide a value as a string or number'
         );
     }
 
-    if (isNumb) {
-        return {
-            value,
-            unit: '%', // defaults to percent if not unit is passed
-        };
-    } else if (isString && value.slice(-1) === '%') {
-        // remove % then parse
-        value = parseInt(value.slice(0, -1), 10);
+    str = String(str);
+    out.value = parseFloat(str, 10);
+    out.unit = str.match(/[\d.\-\+]*\s*(.*)/)[1] || '%'; // default to percent
 
-        return {
-            value,
-            unit: '%',
-        };
-    } else if (isString && value.slice(-2) === 'px') {
-        // remove px then parse
-        value = parseInt(value.slice(0, -2), 10);
+    const validUnits = ['px', '%'];
+    const isValidUnit = validUnits.find(unit => unit === out.unit);
 
-        return {
-            value,
-            unit: 'px',
-        };
+    if (!isValidUnit) {
+        throw new Error(
+            'Invalid unit provided. Must provide a unit of px in or %'
+        );
     }
+
+    return out;
 }
