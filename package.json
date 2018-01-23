@@ -27,6 +27,7 @@
     "react",
     "parallax",
     "scroll",
+    "animation",
     "component"
   ],
   "author": "J Scott Smith",
