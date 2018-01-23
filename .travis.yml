@@ -5,17 +5,22 @@ cache:
   directories:
     - "node_modules"
 script: yarn test && codecov && yarn storybook:export
-before_deploy:
-  # Set up git user name and email
-  - git config --local user.name "jscottsmith"
-  - git config --local user.email "jscsmith@gmail.com"
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: GITHUB_TOKEN
+  provider: surge
+  project: build
+  domain: react-scroll-parallax-v1.surge.sh  
+  on: dev
+# TODO: Fix this gh-pages deploy.
+# https://docs.travis-ci.com/user/deployment/pages/
+# https://github.com/travis-ci/dpl/pull/501/files
+  # provider: pages
+  # skip-cleanup: true
+  # name: "jscottsmith"
+  # email: "jscsmith@gmail.com"
+  # github-token: GITHUB_TOKEN
   # committer-from-gh: true
-  verbose: true
+  # verbose: true
   # keep-history: true
-  local-dir: build
-  on:
-    branch: dev
+  # local-dir: build
+  # on:
+  #   branch: dev
