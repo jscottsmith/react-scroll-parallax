@@ -70,16 +70,18 @@ const ParallaxImage = () => (
 
 The following are all props that can be passed to the React `<Parallax />` component:
 
-|Name                  |Type                  |Default   |Description
-|----------------------|:--------------------:|:---------|----------------------------------------
-|**className**         |`String`              |          |Optionally pass additional class names to be added to the outer most parallax element.
-|**disabled**          |`Boolean`             |`false`   |Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated.
-|**offsetXMax**        |`Number` or `String`  |`0`       |Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
-|**offsetXMin**        |`Number` or `String`  |`0`       |Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.
-|**offsetYMax**        |`Number` or `String`  |`0`       |Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
-|**offsetYMin**        |`Number` or `String`  |`0`       |Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.
-|**slowerScrollRate**  |`Boolean`             |`false`   |Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.
-|**tag**               |`String`              |`div`     |Optionally pass an element tag name to be applied to the outer most parallax element.
+| Name                 |         Type         | Default | Description                                                                                                                                                    |
+| -------------------- | :------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **className**        |       `String`       |         | Optionally pass additional class names to be added to the outer most parallax element.                                                                         |
+| **disabled**         |      `Boolean`       | `false` | Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated. |
+| **offsetXMax**       | `Number` or `String` | `0`     | Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.                                          |
+| **offsetXMin**       | `Number` or `String` | `0`     | Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.                                          |
+| **offsetYMax**       | `Number` or `String` | `0`     | Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.                                         |
+| **offsetYMin**       | `Number` or `String` | `0`     | Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.                                         |
+| **slowerScrollRate** |      `Boolean`       | `false` | Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.      |
+| **styleInner**       |       `Object`       |         | Optionally pass a style object to be added to the innermost parallax element                                                                                   |
+| **styleOuter**       |       `Object`       |         | Optionally pass a style object to be added to the outermost parallax element                                                                                   |
+| **tag**              |       `String`       | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                           |
 
 ## \<ParallaxProvider>
     
