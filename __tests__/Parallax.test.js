@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 import Parallax from 'components/Parallax';
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'libs/ParallaxController';
@@ -10,6 +11,46 @@ describe('Expect the <Parallax> component', () => {
     afterEach(() => {
         global.console.log = log;
         global.ParallaxController = undefined;
+    });
+
+    it('to render correctly', () => {
+        // Workaround for refs
+        // See https://github.com/facebook/react/issues/7740
+        const div = document.createElement('div');
+        function createNodeMock() {
+            return {
+                getBoundingClientRect: () => div.getBoundingClientRect(),
+            };
+        }
+
+        const tree = renderer
+            .create(
+                <ParallaxProvider>
+                    <Parallax
+                        className="class-foo"
+                        disabled={false}
+                        offsetXMax={100}
+                        offsetXMin={-100}
+                        offsetYMax="75%"
+                        offsetYMin="-75%"
+                        slowerScrollRate={false}
+                        styleOuter={{
+                            border: 'solid red 2px',
+                        }}
+                        styleInner={{
+                            border: 'solid blue 2px',
+                        }}
+                        tag="figure"
+                    >
+                        <div className="foo" />
+                    </Parallax>
+                </ParallaxProvider>,
+                {
+                    createNodeMock,
+                }
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
     it('to throw if the ParallaxController is not available', () => {
