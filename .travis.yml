@@ -10,7 +10,7 @@ deploy:
   skip-cleanup: true
   name: jscottsmith
   email: jscsmith@gmail.com
-  github-token: $GITHUB_TOKEN
+  github-token: GITHUB_TOKEN
   # committer-from-gh: true
   verbose: true
   # keep-history: true
