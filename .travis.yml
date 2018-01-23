@@ -11,7 +11,7 @@ deploy:
   name: jscottsmith
   email: jscsmith@gmail.com
   github-token: $GITHUB_TOKEN
-  committer-from-gh: true
+  # committer-from-gh: true
   verbose: true
   # keep-history: true
   local-dir: build
