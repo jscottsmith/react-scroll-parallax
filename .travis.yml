@@ -8,6 +8,7 @@ script: yarn test && codecov && yarn storybook:export
 deploy:
   provider: pages
   skip-cleanup: true
+  email: jscsmith@gmail.com
   github-token: GITHUB_TOKEN
   # keep-history: true
   local-dir: build
