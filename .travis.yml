@@ -4,4 +4,11 @@ node_js:
 cache:
   directories:
     - "node_modules"
-script: yarn test && codecov
+script: yarn test && codecov && yarn storybook:export
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: dev

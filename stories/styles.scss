@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700');
+
+$bg1: #ececec;
+$bg2: #d6d6d6;
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: $bg1;
+    background-image: linear-gradient(
+            0deg,
+            transparent 24%,
+            $bg2 25%,
+            $bg2 26%,
+            transparent 27%,
+            transparent 74%,
+            $bg2 75%,
+            $bg2 76%,
+            transparent 77%,
+            transparent
+        ),
+        linear-gradient(
+            90deg,
+            transparent 24%,
+            $bg2 25%,
+            $bg2 26%,
+            transparent 27%,
+            transparent 74%,
+            $bg2 75%,
+            $bg2 76%,
+            transparent 77%,
+            transparent
+        );
+
+    background-size: 50px 50px;
+    font-size: 16px;
+    font-family: 'Roboto Mono', monsopace;
+    font-style: normal;
+
+    &:before {
+        content: '↑ Scroll ↓';
+        position: fixed;
+        top: 10px;
+        width: 100%;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: tomato;
+        z-index: 1000;
+    }
+}
+
+:global(.center) {
+    min-height: 300vh;
+}
+
+:global(.elements) {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+:local(.parallax) {
+    margin: 6rem;
+    width: 200px;
+}
+
+:local(.small) {
+    margin: 6rem;
+    width: 10%;
+}
+
+:local(.portal) {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    color: black;
+    z-index: 100;
+    border-radius: 3px;
+    background-color: rgba(#eee, 0.8);
+
+    > * {
+        margin: 0.5rem;
+    }
+}

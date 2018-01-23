@@ -8,13 +8,15 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "dev": "yarn test && webpack --progress --colors --watch",
-    "dev-server": "node ./example/dist/server",
-    "gh-pages": "NODE_ENV=production webpack --progress --colors",
+    "start": "yarn storybook",
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
     "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
-    "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports"
+    "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
+    "storybook": "start-storybook -p 3000",
+    "storybook:build": "build-storybook",
+    "storybook:export": "build-storybook -c .storybook -o build",
+    "deploy": "yarn run storybook:export"
   },
   "jest": {
     "modulePaths": [
@@ -39,6 +41,11 @@
     "react": "^15.0.0-0 || ^16.0.0-0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.3.9",
+    "@storybook/addon-knobs": "^3.3.9",
+    "@storybook/addon-links": "^3.3.9",
+    "@storybook/addons": "^3.3.9",
+    "@storybook/react": "^3.3.9",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.23.1",
     "babel-jest": "^20.0.3",
@@ -61,8 +68,6 @@
     "regenerator-runtime": "^0.10.5",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "webpack": "^2.2.1",
-    "webpack-merge": "^4.1.0",
-    "webpack-node-externals": "^1.5.4"
+    "webpack": "^2.2.1"
   }
 }
