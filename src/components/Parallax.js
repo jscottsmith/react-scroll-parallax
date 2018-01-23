@@ -23,6 +23,8 @@ export default class Parallax extends Component {
         offsetYMax: offsetMax,
         offsetYMin: offsetMin,
         slowerScrollRate: PropTypes.bool.isRequired,
+        styleOuter: PropTypes.object,
+        styleInner: PropTypes.object,
         tag: PropTypes.string.isRequired,
     };
 
@@ -103,13 +105,27 @@ export default class Parallax extends Component {
     };
 
     render() {
-        const { children, className, tag: Tag } = this.props;
+        const {
+            children,
+            className,
+            tag: Tag,
+            styleOuter,
+            styleInner,
+        } = this.props;
 
         const rootClass = 'parallax-outer' + (className ? ` ${className}` : '');
 
         return (
-            <Tag className={rootClass} ref={this.mapRefOuter}>
-                <div className="parallax-inner" ref={this.mapRefInner}>
+            <Tag
+                className={rootClass}
+                ref={this.mapRefOuter}
+                style={styleOuter}
+            >
+                <div
+                    className="parallax-inner"
+                    ref={this.mapRefInner}
+                    style={styleInner}
+                >
                     {children}
                 </div>
             </Tag>
