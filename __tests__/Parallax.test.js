@@ -168,49 +168,83 @@ describe('Expect the <Parallax> component', () => {
         expect(controller.removeElement).toBeCalledWith(element);
     });
 
-    it('to update an element in the controller when receiving new props and disable an element if the disable prop is true', () => {
+    it('to update an element in the controller when receiving relevant new props', () => {
         const node = document.createElement('div');
 
         const controller = ParallaxController.init();
         controller.updateElement = jest.fn();
-        controller.resetElementStyles = jest.fn();
 
         let instance;
-
         class StateChanger extends React.Component {
             state = { disabled: false };
-
-            componentDidMount() {
-                this.setState({ disabled: true });
-            }
-
             render() {
                 return (
-                    <Parallax
-                        disabled={this.state.disabled}
-                        ref={ref => (instance = ref)}
-                    />
+                    <Parallax {...this.state} ref={ref => (instance = ref)} />
                 );
             }
         }
 
+        let stateInstance;
         ReactDOM.render(
             <MockProvider controllerMock={controller}>
-                <StateChanger />
+                <StateChanger ref={ref => (stateInstance = ref)} />
             </MockProvider>,
             node
         );
 
+        const testProps = {
+            disabled: true,
+            offsetXMax: 100,
+            offsetXMin: -100,
+            offsetYMax: 100,
+            offsetYMin: -100,
+            slowerScrollRate: false,
+        };
+
+        // trigger an update
+        stateInstance.setState(testProps);
+
         expect(controller.updateElement).toBeCalledWith(instance.element, {
             props: {
-                disabled: instance.props.disabled,
-                offsetXMax: instance.props.offsetXMax,
-                offsetXMin: instance.props.offsetXMin,
-                offsetYMax: instance.props.offsetYMax,
-                offsetYMin: instance.props.offsetYMin,
-                slowerScrollRate: instance.props.slowerScrollRate,
+                ...testProps,
             },
         });
+
+        // should not be called again
+        stateInstance.setState({
+            ...testProps,
+            foo: false,
+            bar: true,
+        });
+
+        expect(controller.updateElement).toHaveBeenCalledTimes(1);
+    });
+
+    it('to reset styles on an elment if the disabled prop is true', () => {
+        const node = document.createElement('div');
+
+        const controller = ParallaxController.init();
+        controller.resetElementStyles = jest.fn();
+
+        let instance;
+        class StateChanger extends React.Component {
+            state = { disabled: false };
+            render() {
+                return (
+                    <Parallax {...this.state} ref={ref => (instance = ref)} />
+                );
+            }
+        }
+
+        let stateInstance;
+        ReactDOM.render(
+            <MockProvider controllerMock={controller}>
+                <StateChanger ref={ref => (stateInstance = ref)} />
+            </MockProvider>,
+            node
+        );
+
+        stateInstance.setState({ disabled: true });
 
         expect(controller.resetElementStyles).toBeCalledWith(instance.element);
     });

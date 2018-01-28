@@ -67,8 +67,15 @@ export default class Parallax extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // updates the elements props when changed
-        if (this.props !== nextProps) {
+        // updates the elements props when relevant parallax props change
+        if (
+            this.props.disabled !== nextProps.disabled ||
+            this.props.offsetXMax !== nextProps.offsetXMax ||
+            this.props.offsetXMin !== nextProps.offsetXMin ||
+            this.props.offsetYMax !== nextProps.offsetYMax ||
+            this.props.offsetYMin !== nextProps.offsetYMin ||
+            this.props.slowerScrollRate !== nextProps.slowerScrollRate
+        ) {
             this.controller.updateElement(this.element, {
                 props: {
                     disabled: nextProps.disabled,
