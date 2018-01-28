@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import Parallax from 'components/Parallax';
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'libs/ParallaxController';
+
+// provides a controller to the provider for mocking tests
+class MockProvider extends Component {
+    static childContextTypes = {
+        parallaxController: PropTypes.object,
+    };
+
+    getChildContext() {
+        const { controllerMock } = this.props;
+        return { parallaxController: controllerMock };
+    }
+
+    componentWillUnmount() {
+        this.props.controllerMock.destroy();
+    }
+
+    render() {
+        const { children } = this.props;
+        return children;
+    }
+}
 
 const log = global.console.log;
 
@@ -84,16 +106,12 @@ describe('Expect the <Parallax> component', () => {
         global.console.log = jest.fn();
         global.ParallaxController = ParallaxController.init();
 
-        const render = () => {
-            ReactDOM.render(
-                <Parallax>
-                    <div />
-                </Parallax>,
-                node
-            );
-        };
-
-        render();
+        ReactDOM.render(
+            <Parallax>
+                <div />
+            </Parallax>,
+            node
+        );
 
         expect(global.console.log).toBeCalledWith(
             'Calling ParallaxController.init() has been deprecated in favor of using the <ParallaxProvider /> component. For usage details see: https://github.com/jscottsmith/react-scroll-parallax/tree/v1.1.0#usage'
@@ -103,24 +121,19 @@ describe('Expect the <Parallax> component', () => {
     it('to create an element in the controller on mount', () => {
         const node = document.createElement('div');
 
-        global.ParallaxController = ParallaxController.init();
-        global.ParallaxController.createElement = jest.fn();
-        const spy = global.ParallaxController.createElement;
+        const controller = ParallaxController.init();
+        controller.createElement = jest.fn();
 
-        const render = () => {
-            ReactDOM.render(
-                <ParallaxProvider>
-                    <Parallax offsetYMin={-100} offsetYMax={100}>
-                        <div />
-                    </Parallax>
-                </ParallaxProvider>,
-                node
-            );
-        };
+        ReactDOM.render(
+            <MockProvider controllerMock={controller}>
+                <Parallax offsetYMin={-100} offsetYMax={100}>
+                    <div />
+                </Parallax>
+            </MockProvider>,
+            node
+        );
 
-        render();
-
-        expect(spy).toBeCalledWith({
+        expect(controller.createElement).toBeCalledWith({
             elInner: expect.any(Object),
             elOuter: expect.any(Object),
             props: {
@@ -137,34 +150,30 @@ describe('Expect the <Parallax> component', () => {
     it('to remove an element in the controller when unmounting', () => {
         const node = document.createElement('div');
 
-        global.ParallaxController = ParallaxController.init();
-        global.ParallaxController.removeElement = jest.fn();
-        const spy = global.ParallaxController.removeElement;
+        const controller = ParallaxController.init();
+        controller.removeElement = jest.fn();
 
         let instance;
-        const render = () => {
-            ReactDOM.render(
-                <ParallaxProvider>
-                    <Parallax ref={ref => (instance = ref)}>
-                        <div />
-                    </Parallax>
-                </ParallaxProvider>,
-                node
-            );
-        };
+        ReactDOM.render(
+            <MockProvider controllerMock={controller}>
+                <Parallax ref={ref => (instance = ref)}>
+                    <div />
+                </Parallax>
+            </MockProvider>,
+            node
+        );
 
-        render();
         const element = instance.element;
         ReactDOM.unmountComponentAtNode(node);
-        expect(spy).toBeCalledWith(element);
+        expect(controller.removeElement).toBeCalledWith(element);
     });
 
     it('to update an element in the controller when receiving new props and disable an element if the disable prop is true', () => {
         const node = document.createElement('div');
 
-        global.ParallaxController = ParallaxController.init();
-        global.ParallaxController.updateElement = jest.fn();
-        global.ParallaxController.resetElementStyles = jest.fn();
+        const controller = ParallaxController.init();
+        controller.updateElement = jest.fn();
+        controller.resetElementStyles = jest.fn();
 
         let instance;
 
@@ -185,33 +194,24 @@ describe('Expect the <Parallax> component', () => {
             }
         }
 
-        const render = () => {
-            ReactDOM.render(
-                <ParallaxProvider>
-                    <StateChanger />
-                </ParallaxProvider>,
-                node
-            );
-        };
-
-        render();
-
-        expect(global.ParallaxController.updateElement).toBeCalledWith(
-            instance.element,
-            {
-                props: {
-                    disabled: instance.props.disabled,
-                    offsetXMax: instance.props.offsetXMax,
-                    offsetXMin: instance.props.offsetXMin,
-                    offsetYMax: instance.props.offsetYMax,
-                    offsetYMin: instance.props.offsetYMin,
-                    slowerScrollRate: instance.props.slowerScrollRate,
-                },
-            }
+        ReactDOM.render(
+            <MockProvider controllerMock={controller}>
+                <StateChanger />
+            </MockProvider>,
+            node
         );
 
-        expect(global.ParallaxController.resetElementStyles).toBeCalledWith(
-            instance.element
-        );
+        expect(controller.updateElement).toBeCalledWith(instance.element, {
+            props: {
+                disabled: instance.props.disabled,
+                offsetXMax: instance.props.offsetXMax,
+                offsetXMin: instance.props.offsetXMin,
+                offsetYMax: instance.props.offsetYMax,
+                offsetYMin: instance.props.offsetYMin,
+                slowerScrollRate: instance.props.slowerScrollRate,
+            },
+        });
+
+        expect(controller.resetElementStyles).toBeCalledWith(instance.element);
     });
 });

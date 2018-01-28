@@ -407,13 +407,14 @@ ParallaxController.init = function() {
         );
     }
 
-    // Keep global reference for legacy versions <= 1.1.0
+    const controller = new ParallaxController();
 
+    // Keep global reference for legacy versions <= 1.1.0
     if (hasWindow && !window.ParallaxController) {
-        window.ParallaxController = new ParallaxController();
+        window.ParallaxController = controller;
     }
 
-    return window.ParallaxController;
+    return controller;
 };
 
 export default ParallaxController;

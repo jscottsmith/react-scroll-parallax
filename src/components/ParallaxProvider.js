@@ -28,10 +28,7 @@ export default class ParallaxProvider extends Component {
     }
 
     componentWillUnmount() {
-        if (this.parallaxController) {
-            // Remove scroll and resize listener if the provider is unmounted
-            this.parallaxController.destroy();
-        }
+        this.parallaxController = this.parallaxController.destroy();
     }
 
     render() {
