@@ -316,6 +316,14 @@ function ParallaxController() {
      */
 
     /**
+     * Gets the parallax elements in the controller
+     * @return {array} parallax elements
+     */
+    this.getElements = function() {
+        return elements;
+    };
+
+    /**
      * Creates a new parallax element object with new id
      * and options to store in the 'elements' array.
      * @param {object} options
