@@ -3,6 +3,19 @@ import ParallaxController from 'libs/ParallaxController';
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;
 
+const options = {
+    elInner: document.createElement('div'),
+    elOuter: document.createElement('div'),
+    props: {
+        disabled: false,
+        offsetXMax: 0,
+        offsetXMin: 0,
+        offsetYMax: 0,
+        offsetYMin: 0,
+        slowerScrollRate: false,
+    },
+};
+
 describe('Expect the ParallaxController', () => {
     afterEach(() => {
         window.addEventListener = addEventListener;
@@ -37,18 +50,6 @@ describe('Expect the ParallaxController', () => {
 
     it('to create an element and return it', () => {
         const controller = ParallaxController.init();
-        const options = {
-            elInner: document.createElement('div'),
-            elOuter: document.createElement('div'),
-            props: {
-                disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 0,
-                offsetYMin: 0,
-                slowerScrollRate: false,
-            },
-        };
         const element = controller.createElement(options);
 
         const expectedElement = {
@@ -86,23 +87,51 @@ describe('Expect the ParallaxController', () => {
         expect(element).toEqual(expectedElement);
     });
 
-    it('to update the controller when creating an element', () => {
+    it('to add created elements into the controller', () => {
+        const controller = ParallaxController.init();
+        const element = controller.createElement(options);
+        const elements = controller.getElements();
+
+        expect(elements[0]).toEqual(element);
+    });
+
+    it('to remove elements from the controller', () => {
+        const controller = ParallaxController.init();
+        const element = controller.createElement(options);
+        expect(controller.getElements()[0]).toEqual(element);
+
+        controller.removeElement(element);
+        expect(controller.getElements()).toEqual([]);
+    });
+
+    it("to throw if matching units aren't provided", () => {
         window.removeEventListener = jest.fn();
         const controller = ParallaxController.init();
-        controller.update = jest.fn();
 
-        const options = {
+        const incorrectOffsets = {
             elInner: document.createElement('div'),
             elOuter: document.createElement('div'),
             props: {
                 disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 0,
-                offsetYMin: 0,
+                offsetXMax: '100px',
+                offsetXMin: '-10%',
+                offsetYMax: '50px',
+                offsetYMin: 100, // defaults to %
                 slowerScrollRate: false,
             },
         };
+
+        expect(() => controller.createElement(incorrectOffsets)).toThrowError(
+            'Must provide matching units for the min and max offset values of each axis.'
+        );
+
+        controller.destroy();
+    });
+
+    it('to update the controller when creating an element', () => {
+        window.removeEventListener = jest.fn();
+        const controller = ParallaxController.init();
+        controller.update = jest.fn();
 
         controller.createElement(options);
         expect(controller.update).toBeCalled();
@@ -113,19 +142,6 @@ describe('Expect the ParallaxController', () => {
         window.removeEventListener = jest.fn();
         const controller = ParallaxController.init();
         controller.update = jest.fn();
-
-        const options = {
-            elInner: document.createElement('div'),
-            elOuter: document.createElement('div'),
-            props: {
-                disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 0,
-                offsetYMin: 0,
-                slowerScrollRate: false,
-            },
-        };
 
         const element = controller.createElement(options);
         controller.updateElement(element, {
@@ -139,19 +155,6 @@ describe('Expect the ParallaxController', () => {
         window.removeEventListener = jest.fn();
         const controller = ParallaxController.init();
         controller.update = jest.fn();
-
-        const options = {
-            elInner: document.createElement('div'),
-            elOuter: document.createElement('div'),
-            props: {
-                disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 0,
-                offsetYMin: 0,
-                slowerScrollRate: false,
-            },
-        };
 
         controller.createElement(options);
 
