@@ -12,8 +12,15 @@ const CenterDecorator = storyFn => (
     </div>
 );
 
-addDecorator(CenterDecorator);
+// reset the window on each story
+const withWindowReset = storyFn => {
+    window.scrollTo(0, 0);
+    return storyFn();
+};
+
 addDecorator(withKnobs);
+addDecorator(withWindowReset);
+addDecorator(CenterDecorator);
 
 const req = require.context('../stories', true, /\.stories\.js$/);
 
