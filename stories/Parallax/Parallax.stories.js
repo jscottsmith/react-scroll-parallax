@@ -52,7 +52,7 @@ storiesOf('<Parallax>', module)
             </Parallax>
         </div>
     ))
-    .add('on a 100 elements', () => {
+    .add('with a 100 elements', () => {
         const amount = number('Number of Elements', 100);
         const offset = number('Offset %', 50);
         const elements = new Array(amount).fill(null).map((x, i) => i);
