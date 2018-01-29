@@ -8,10 +8,10 @@ Provides a React component and single passive scroll listener to add **vertical*
 
 Some links demonstrating possible effects created with this lib:
 
-- [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
-- [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
-- [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
-- [CodePen Parallax Banner](https://codepen.io/jscottsmith/pen/aVBvGj)
+* [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
+* [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
+* [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
+* [CodePen Parallax Banner](https://codepen.io/jscottsmith/pen/aVBvGj)
 
 ## Install
 
@@ -29,7 +29,7 @@ yarn add react-scroll-parallax
 
 ## Usage
 
-The [`<ParallaxProvider />`](#parallaxprovider) should wrap the component tree that contains all `<Parallax />` components. This should be a top level component like `<AppContainer />`. For example:
+The [`<ParallaxProvider>`](#parallaxprovider) should wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<AppContainer>`. For example:
 
 ```jsx
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -43,7 +43,6 @@ class AppContainer extends Component {
         );
     }
 }
-
 ```
 
 Import the `Parallax` component and use it anywhere within the provider like so:
@@ -66,25 +65,81 @@ const ParallaxImage = () => (
 
 **NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
 
-## \<Parallax> Props
+## \<Parallax>
 
-The following are all props that can be passed to the React `<Parallax />` component:
+The main component for manipulating an element's position based on scroll position within the viewport.
+
+### Props
+
+The following are all props that can be passed to the `<Parallax>` component:
 
 | Name                 |         Type         | Default | Description                                                                                                                                                    |
 | -------------------- | :------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **className**        |       `String`       |         | Optionally pass additional class names to be added to the outer most parallax element.                                                                         |
+| **className**        |       `String`       |         | Optionally pass additional class names to be added to the outermost parallax element.                                                                          |
 | **disabled**         |      `Boolean`       | `false` | Determines if the component will have parallax offsets applied. If `true` parallax styles are completely removed from the element and it is no longer updated. |
 | **offsetXMax**       | `Number` or `String` | `0`     | Maximum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.                                          |
 | **offsetXMin**       | `Number` or `String` | `0`     | Minimum **x** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.                                          |
 | **offsetYMax**       | `Number` or `String` | `0`     | Maximum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.                                         |
 | **offsetYMin**       | `Number` or `String` | `0`     | Minimum **y** offset in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.                                         |
 | **slowerScrollRate** |      `Boolean`       | `false` | Internally swaps the min/max offset y values of the parallax component to give the appearance of moving faster or slower than the default rate of scroll.      |
-| **styleInner**       |       `Object`       |         | Optionally pass a style object to be added to the innermost parallax element                                                                                   |
-| **styleOuter**       |       `Object`       |         | Optionally pass a style object to be added to the outermost parallax element                                                                                   |
+| **styleInner**       |       `Object`       |         | Optionally pass a style object to be added to the innermost parallax element.                                                                                  |
+| **styleOuter**       |       `Object`       |         | Optionally pass a style object to be added to the outermost parallax element.                                                                                  |
 | **tag**              |       `String`       | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                           |
 
+## \<ParallaxBanner>
+
+Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect.
+
+### Example Usage
+
+Use the `layers` prop to indicate all images, offset amounts and scroll rates. Optionally pass additional children to be rendered. Styles of the outermost banner element can also be changed. Here's an example:
+
+```jsx
+<ParallaxBanner
+    className="your-class"
+    layers={[
+        {
+            image: 'https://foo.com/foo.jpg',
+            amount: 0.1,
+            slowerScrollRate: false,
+        },
+        {
+            image: 'https://foo.com/bar.jpg',
+            amount: 0.2,
+            slowerScrollRate: false,
+        },
+    ]}
+    style={{
+        height: '500px',
+    }}
+>
+    <h1>Banner Children</h1>
+</ParallaxBanner>
+```
+
+### Props
+
+The following are all props that can be passed to the `<ParallaxBanner>` component:
+
+| Name          |   Type    | Default | Description                                                                                                                    |
+| ------------- | :-------: | :------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| **className** | `String`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                   |
+| **disabled**  | `Boolean` | `false` | Determines if the components internal parallax layers will have parallax offsets applied.                                      |
+| **layers**    |  `Array`  |         | A required `Array` of `Objects` with correct layer properties: `[{ amount: 0.1, image: 'foo.jpg', slowerScrollRate: false }]`. |
+| **style**     | `Object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                           |
+
+### Layers Prop
+
+The `layers` props takes an array of objects that will represent each image of the parallax banner. The following properties describe a layer:
+
+| Name                 |   Type   | Description                                                                                                                                          |
+| -------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **amount**           | `Number` | A value from `0 – 1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
+| **image**            | `String` | Image source that will be applied as a CSS background image on the layer.                                                                            |
+| **slowerScrollRate** | `Number` | Indicates whether the layer should move faster or slower than the default rate of scroll.                                                            |
+
 ## \<ParallaxProvider>
-    
+
 The `<ParallaxProvider />` component is meant to wrap a top level component in your application and is necessary to provide access though React's context API to the parallax controller. This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
 
 ```jsx
@@ -93,13 +148,13 @@ const AppContainer = () => (
         <Router>
             <App />
         </Router>
-    </ParallaxProvider>    
+    </ParallaxProvider>
 );
 ```
 
 ### Parallax Controller Context
 
-Access the Parallax Controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider />` by defining the `contextTypes` like so:
+Access the Parallax Controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider>` by defining the `contextTypes` like so:
 
 ```jsx
 class Foo extends Component {
@@ -109,7 +164,7 @@ class Foo extends Component {
 
     doSomething() {
         // do stuff with this.context.parallaxController
-    }  
+    }
 }
 ```
 
