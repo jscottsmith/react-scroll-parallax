@@ -5819,9 +5819,11 @@ react-modal@^3.1.4:
     prop-types "^15.5.10"
     warning "^3.0.0"
 
-react-observed@^1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/react-observed/-/react-observed-1.0.0-beta.2.tgz#b41a4d58d817c00620dd1f80bce8618dbf5be68a"
+react-observed@^1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-observed/-/react-observed-1.0.0-beta.4.tgz#5078a961f1e54da0b739c30180d1ce2c9c61658a"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-onclickoutside@^6.5.0:
   version "6.7.0"

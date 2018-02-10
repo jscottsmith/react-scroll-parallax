@@ -41,7 +41,7 @@
     },
     "dependencies": {
         "prop-types": "^15.5.7",
-        "react-observed": "^1.0.0-beta.2"
+        "react-observed": "^1.0.0-beta.4"
     },
     "devDependencies": {
         "@storybook/addon-actions": "^3.2.17",

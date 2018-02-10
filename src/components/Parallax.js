@@ -13,15 +13,8 @@ import {
     ViewportProgress,
 } from './index.js';
 
-const observerOptions = {
-    root: null,
-    rootMargin: '10px',
-    threshold: [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-};
-
 class Parallax extends Component {
     static defaultProps = {
-        observerOptions,
         x: [0, 0],
         y: [0, 0],
         scale: [1, 1],
@@ -38,7 +31,7 @@ class Parallax extends Component {
         y: validateOffsets,
         scale: validateScale,
         opacity: validateOpacity,
-        observerOptions: PropTypes.object.isRequired,
+        observerOptions: PropTypes.object,
         // @TODO: these should also be available:
         // rotation
         // tag/element name?
@@ -77,7 +70,7 @@ class Parallax extends Component {
 
         // prettier-ignore
         return (
-            <Observed initialViewState intersectionRatio={0.01} options={observerOptions}>
+            <Observed initialViewState options={observerOptions}>
                 {({ isInView, mapRef: observedRef }) => (
                     <ScrollPosition isInView={isInView}>
                         {({ scrollY }) => (
