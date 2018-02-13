@@ -6,36 +6,11 @@ $bg2: #d6d6d6;
 body {
     padding: 0;
     margin: 0;
-    background-color: $bg1;
-    background-image: linear-gradient(
-            0deg,
-            transparent 24%,
-            $bg2 25%,
-            $bg2 26%,
-            transparent 27%,
-            transparent 74%,
-            $bg2 75%,
-            $bg2 76%,
-            transparent 77%,
-            transparent
-        ),
-        linear-gradient(
-            90deg,
-            transparent 24%,
-            $bg2 25%,
-            $bg2 26%,
-            transparent 27%,
-            transparent 74%,
-            $bg2 75%,
-            $bg2 76%,
-            transparent 77%,
-            transparent
-        );
-
-    background-size: 50px 50px;
     font-size: 16px;
     font-family: 'Roboto Mono', monsopace;
     font-style: normal;
+    background-color: #f3f3f3;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgLz4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjEwIiB5PSIxMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiAvPjwvc3ZnPg==);
 
     &:before {
         content: '↑ Scroll ↓';
