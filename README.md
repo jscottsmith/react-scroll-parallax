@@ -125,8 +125,8 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 | Name          |   Type    | Default | Description                                                                                                                                                          |
 | ------------- | :-------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **className** | `String`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                                                         |
-| **disabled**  | `Boolean` | `false` | Determines if the components internal parallax layers will have parallax offsets applied.                                                                            |
-| **layers**    |  `Array`  |         | A required `Array` of `Objects` with correct layer properties: `[{ amount: 0.1, image: 'foo.jpg', slowerScrollRate: false }]`. [See layers prop below](#layers-prop) |
+| **disabled**  | `Boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                                       |
+| **layers**    |  `Array`  |         | A required `Array` of `Objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg', slowerScrollRate: false }]`. [See layers prop below](#layers-prop) |
 | **style**     | `Object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                                                 |
 
 ### Layers Prop
