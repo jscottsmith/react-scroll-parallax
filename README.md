@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-Provides React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
+React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
 
 ## Examples
 
