@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-Provides a React component and single passive scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. Works with universal (server-side rendered) React apps.
+Provides React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
 
 ## Examples
 
@@ -27,6 +27,22 @@ or yarn
 ```
 yarn add react-scroll-parallax
 ```
+
+## Overview
+
+* [Usage](#usage)
+* [`<Parallax>`](#parallax)
+    * [Parallax Props](#parallax-props)
+* [`<ParallaxBanner>`](#parallax)
+    * [Banner Usage](#banner-usage)
+    * [Banner Props](#banner-props)
+    * [Banner Layers Prop](#banner-layers-prop)
+* [`<ParallaxProvider>`](#parallaxprovider)
+    * [Parallax Controller Context](#parallax-controller-context)
+    * [Available Methods](#available-methods)
+* [Browser Support](#browser-support)
+* [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
+    * [PSA](#psa)
 
 ## Usage
 
@@ -68,9 +84,9 @@ const ParallaxImage = () => (
 
 ## \<Parallax>
 
-The main component for manipulating an element's position based on scroll position within the viewport.
+The main component for manipulating a DOM element's position based on it's position within the viewport.
 
-### Props
+### Parallax Props
 
 The following are all props that can be passed to the `<Parallax>` component:
 
@@ -89,11 +105,11 @@ The following are all props that can be passed to the `<Parallax>` component:
 
 ## \<ParallaxBanner>
 
-Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect.
+Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect. Allows a single or multiple images to be parallaxed at different rates within the banner area.
 
-### Example Usage
+### Banner Usage
 
-Use the `layers` prop to indicate all images, offset amounts and scroll rates. Optionally pass additional children to be rendered. Styles of the outermost banner element can also be changed. Here's an example:
+Use the `layers` prop to indicate all images, offset amounts, and scroll rates. Optionally pass additional children to be rendered. Styles of the outermost banner element can also be changed. Here's an example:
 
 ```jsx
 <ParallaxBanner
@@ -118,20 +134,20 @@ Use the `layers` prop to indicate all images, offset amounts and scroll rates. O
 </ParallaxBanner>
 ```
 
-### Props
+### Banner Props
 
 The following are all props that can be passed to the `<ParallaxBanner>` component:
 
-| Name          |   Type    | Default | Description                                                                                                                                                          |
-| ------------- | :-------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **className** | `String`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                                                         |
-| **disabled**  | `Boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                                       |
-| **layers**    |  `Array`  |         | A required `Array` of `Objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg', slowerScrollRate: false }]`. [See layers prop below](#layers-prop) |
-| **style**     | `Object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                                                 |
+| Name          |   Type    | Default | Description                                                                                                                                                         |
+| ------------- | :-------: | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **className** | `String`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                                                        |
+| **disabled**  | `Boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                                               |
+| **layers**    |  `Array`  |         | A required `Array` of `Objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg', slowerScrollRate: false }]`. [See layers prop below](#banner-layers-prop) |
+| **style**     | `Object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                                                |
 
-### Layers Prop
+### Banner Layers Prop
 
-The `layers` props takes an array of objects that will represent each image of the parallax banner. The following properties describe a layer:
+The `layers` prop takes an array of objects that will represent each image of the parallax banner. The following properties describe a layer object:
 
 | Name                 |   Type   | Description                                                                                                                                          |
 | -------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -222,6 +238,6 @@ React scroll parallax should support the last two versions of all major browsers
 
 React Scroll Parallax uses a single [passive scroll listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners) (dependent on browser support) with the minimal amount of work done on the scroll event to prevent [jank](http://jankfree.org/) (calculations that cause layout, reflow and paint are cached initially and only updated when layout changes). Request animation frame is then used to decouple the scroll handler and further reduce jank. All offsets are applied with 3D transforms to utilize the GPU and prevent paints. If you have ideas to further optimize scrolling please PR or post an issue.
 
-**PSA**
+### **PSA**
 
-It's 2017 and you probably shouldn't be building parallax sites—but if you do (like I did) and you use this package try and use it responsibly. Keeping images small and optimized, reducing the number of moving elements in view and on the page, and disabling scroll effects on mobile devices should keep scrolling smooth.
+Even with these optimizations scroll effects can cause jank. If you use this lib make sure to keep images small and optimized, reduce the number of moving elements in view and on the page in total, and disable scroll effects on mobile devices. That should keep scrolling smooth and users happy.
