@@ -33,7 +33,7 @@ yarn add react-scroll-parallax
 * [Usage](#usage)
 * [`<Parallax>`](#parallax)
     * [Parallax Props](#parallax-props)
-* [`<ParallaxBanner>`](#parallax)
+* [`<ParallaxBanner>`](#parallaxbanner)
     * [Banner Usage](#banner-usage)
     * [Banner Props](#banner-props)
     * [Banner Layers Prop](#banner-layers-prop)
