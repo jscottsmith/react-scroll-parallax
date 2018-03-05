@@ -10,7 +10,7 @@ const constainerStyle = {
     height: '50vh',
 };
 
-const absolute = {
+const absoluteStyle = {
     position: 'absolute',
     top: 0,
     right: 0,
@@ -24,29 +24,61 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
             style={{ ...constainerStyle, ...style }}
             className={'parallax-banner' + (className ? ` ${className}` : '')}
         >
-            {layers.map((layer, i) => (
-                <Parallax
-                    key={`layer-${i}`}
-                    offsetYMax={layer.amount * 100 + '%'}
-                    offsetYMin={layer.amount * -1 * 100 + '%'}
-                    slowerScrollRate={layer.slowerScrollRate}
-                    styleInner={absolute}
-                    styleOuter={absolute}
-                    disabled={disabled}
-                >
-                    <div
-                        className={`parallax-banner-layer-${i}`}
-                        style={{
-                            backgroundImage: `url(${layer.image})`,
-                            backgroundPosition: 'center',
-                            backgroundSize: 'cover',
-                            ...absolute,
-                            top: layer.amount * 100 * -1 + '%',
-                            bottom: layer.amount * 100 * -1 + '%',
-                        }}
-                    />
-                </Parallax>
-            ))}
+            {layers.map(
+                (
+                    {
+                        image,
+                        amount,
+                        slowerScrollRate,
+                        children,
+                        expanded = true,
+                    },
+                    i
+                ) => {
+                    // if this is an expanded layer overwrite the top/bottom styles with negative margins
+                    const expandedStyle = expanded
+                        ? {
+                              top: amount * 100 * -1 + '%',
+                              bottom: amount * 100 * -1 + '%',
+                          }
+                        : {};
+
+                    return (
+                        <Parallax
+                            key={`layer-${i}`}
+                            offsetYMax={amount * 100 + '%'}
+                            offsetYMin={amount * -1 * 100 + '%'}
+                            slowerScrollRate={slowerScrollRate}
+                            styleInner={absoluteStyle}
+                            styleOuter={absoluteStyle}
+                            disabled={disabled}
+                        >
+                            {image ? (
+                                <div
+                                    className={`parallax-banner-layer-${i}`}
+                                    style={{
+                                        backgroundImage: `url(${image})`,
+                                        backgroundPosition: 'center',
+                                        backgroundSize: 'cover',
+                                        ...absoluteStyle,
+                                        ...expandedStyle,
+                                    }}
+                                />
+                            ) : (
+                                <div
+                                    className={`parallax-banner-layer-${i}`}
+                                    style={{
+                                        ...absoluteStyle,
+                                        ...expandedStyle,
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            )}
+                        </Parallax>
+                    );
+                }
+            )}
             {children}
         </div>
     );
@@ -63,7 +95,9 @@ ParallaxBanner.propTypes = {
     layers: PropTypes.arrayOf(
         PropTypes.shape({
             amount: PropTypes.number.isRequired,
-            image: PropTypes.string.isRequired,
+            children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+            expanded: PropTypes.bool,
+            image: PropTypes.string,
             slowerScrollRate: PropTypes.bool,
         })
     ),
