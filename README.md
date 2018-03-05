@@ -32,17 +32,17 @@ yarn add react-scroll-parallax
 
 * [Usage](#usage)
 * [`<Parallax>`](#parallax)
-    * [Parallax Props](#parallax-props)
+  * [Parallax Props](#parallax-props)
 * [`<ParallaxBanner>`](#parallaxbanner)
-    * [Banner Usage](#banner-usage)
-    * [Banner Props](#banner-props)
-    * [Banner Layers Prop](#banner-layers-prop)
+  * [Banner Usage](#banner-usage)
+  * [Banner Props](#banner-props)
+  * [Banner Layers Prop](#banner-layers-prop)
 * [`<ParallaxProvider>`](#parallaxprovider)
-    * [Parallax Controller Context](#parallax-controller-context)
-    * [Available Methods](#available-methods)
+  * [Parallax Controller Context](#parallax-controller-context)
+  * [Available Methods](#available-methods)
 * [Browser Support](#browser-support)
 * [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
-    * [PSA](#psa)
+  * [PSA](#psa)
 
 ## Usage
 
@@ -147,13 +147,15 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 
 ### Banner Layers Prop
 
-The `layers` prop takes an array of objects that will represent each image of the parallax banner. The following properties describe a layer object:
+The `layers` prop takes an array of objects that will represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
-| Name                 |   Type   | Description                                                                                                                                          |
-| -------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **amount**           | `Number` | A value from `0 – 1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
-| **image**            | `String` | Image source that will be applied as a CSS background image on the layer.                                                                            |
-| **slowerScrollRate** | `Number` | Indicates whether the layer should move faster or slower than the default rate of scroll.                                                            |
+| Name                 |   Type    | Default | Description                                                                                                                                          |
+| -------------------- | :-------: | :------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **amount**           | `Number`  |         | A value from `0 – 1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
+| **children**         | `Element` |         | Custom layer children provided as a React element, for example `<Video />`                                                                           |
+| **expanded**         | `Boolean` | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                        |
+| **image**            | `String`  |         | Image source that will be applied as a CSS background image on the layer.                                                                            |
+| **slowerScrollRate** | `Number`  |         | Indicates whether the layer should move faster or slower than the default rate of scroll.                                                            |
 
 ## \<ParallaxProvider>
 
