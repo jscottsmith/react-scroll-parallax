@@ -6,19 +6,20 @@ import ParallaxBanner from 'components/ParallaxBanner';
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'libs/ParallaxController';
 
+// Workaround for refs
+// See https://github.com/facebook/react/issues/7740
+function createNodeMock() {
+    const div = document.createElement('div');
+
+    return {
+        getBoundingClientRect: () => div.getBoundingClientRect(),
+    };
+}
+
 describe('Expect the <ParallaxBanner> component', () => {
     afterEach(() => {});
 
-    it('to render correctly', () => {
-        // Workaround for refs
-        // See https://github.com/facebook/react/issues/7740
-        const div = document.createElement('div');
-        function createNodeMock() {
-            return {
-                getBoundingClientRect: () => div.getBoundingClientRect(),
-            };
-        }
-
+    it('to render image banners correctly', () => {
         const tree = renderer
             .create(
                 <ParallaxProvider>
@@ -50,6 +51,56 @@ describe('Expect the <ParallaxBanner> component', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('to render custom child banners correctly', () => {
+        const tree = renderer
+            .create(
+                <ParallaxProvider>
+                    <ParallaxBanner
+                        className="test-class"
+                        disabled={false}
+                        layers={[
+                            {
+                                children: <div>test</div>,
+                                amount: 0.2,
+                                slowerScrollRate: false,
+                            },
+                        ]}
+                        style={{
+                            backgroundColor: 'blue',
+                            border: '1px solid red',
+                        }}
+                    />
+                </ParallaxProvider>,
+                {
+                    createNodeMock,
+                }
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('to render without expanded margins', () => {
+        const tree = renderer
+            .create(
+                <ParallaxProvider>
+                    <ParallaxBanner
+                        layers={[
+                            {
+                                children: <div>test</div>,
+                                amount: 0.2,
+                                expanded: false,
+                            },
+                        ]}
+                    />
+                </ParallaxProvider>,
+                {
+                    createNodeMock,
+                }
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('to render children', () => {
         const node = document.createElement('div');
 
@@ -64,6 +115,60 @@ describe('Expect the <ParallaxBanner> component', () => {
                 <ParallaxBanner layers={[]}>
                     <Child />
                 </ParallaxBanner>
+            </ParallaxProvider>,
+            node
+        );
+
+        expect(child).toBeCalled();
+    });
+
+    it('to render layer children', () => {
+        const node = document.createElement('div');
+
+        let child = jest.fn();
+        const Child = () => {
+            child();
+            return <div />;
+        };
+
+        ReactDOM.render(
+            <ParallaxProvider>
+                <ParallaxBanner
+                    layers={[
+                        {
+                            children: <Child />,
+                            amount: 0.2,
+                            slowerScrollRate: false,
+                        },
+                    ]}
+                />
+            </ParallaxProvider>,
+            node
+        );
+
+        expect(child).toBeCalled();
+    });
+
+    it('to render layer children', () => {
+        const node = document.createElement('div');
+
+        let child = jest.fn();
+        const Child = () => {
+            child();
+            return <div />;
+        };
+
+        ReactDOM.render(
+            <ParallaxProvider>
+                <ParallaxBanner
+                    layers={[
+                        {
+                            children: <Child />,
+                            amount: 0.2,
+                            slowerScrollRate: false,
+                        },
+                    ]}
+                />
             </ParallaxProvider>,
             node
         );
