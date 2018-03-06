@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Observed from 'react-observed';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Observed from "react-observed";
 import {
     validateOffsets,
     validateScale,
-    validateOpacity,
-} from '../utils/propValidation';
+    validateOpacity
+} from "../utils/propValidation";
 import {
     Bounds,
     ScrollEffects,
     ScrollPosition,
-    ViewportProgress,
-} from './index.js';
+    ViewportProgress
+} from "./index.js";
 
 class Parallax extends Component {
     static defaultProps = {
         x: [0, 0],
         y: [0, 0],
         scale: [1, 1],
-        opacity: [1, 1],
+        opacity: [1, 1]
     };
 
     static propTypes = {
         children: PropTypes.oneOfType([
             PropTypes.element.isRequired,
-            PropTypes.func.isRequired,
+            PropTypes.func.isRequired
         ]),
         className: PropTypes.string,
         x: validateOffsets,
@@ -32,6 +32,7 @@ class Parallax extends Component {
         scale: validateScale,
         opacity: validateOpacity,
         observerOptions: PropTypes.object,
+        elementStyle: PropTypes.object
         // @TODO: these should also be available:
         // rotation
         // tag/element name?
@@ -39,7 +40,7 @@ class Parallax extends Component {
 
     getWrapperClass(isInView) {
         const { className } = this.props;
-        let cx = 'parallax-wrapper';
+        let cx = "parallax-wrapper";
         cx = isInView ? `${cx} is-in-view` : cx;
         cx = className ? `${cx} ${className}` : cx;
 
@@ -63,7 +64,15 @@ class Parallax extends Component {
         // ↓
         // markup
 
-        const { children, x, y, scale, opacity, observerOptions } = this.props;
+        const {
+            children,
+            x,
+            y,
+            scale,
+            opacity,
+            observerOptions,
+            elementStyle
+        } = this.props;
 
         // if child is a function, call it with updateAttributeCache
         const isFunc = children instanceof Function;
@@ -86,7 +95,7 @@ class Parallax extends Component {
                                                     x={x}
                                                     y={y}
                                                 >
-                                                    <div style={style} className="parallax-element">
+                                                    <div style={style} className="parallax-element" style={elementStyle}>
                                                         {isFunc ? children({ updateAttributeCache, progress, isInView }) : children}
                                                     </div>
                                                 </Bounds>                                                
