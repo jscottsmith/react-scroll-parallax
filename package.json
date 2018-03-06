@@ -8,32 +8,29 @@
     },
     "main": "lib/index.js",
     "scripts": {
-        "dev": "yarn test && BABEL_ENV=dev webpack --progress --colors --watch",
+        "dev":
+            "yarn test && cross-env BABEL_ENV=dev webpack --progress --colors --watch",
         "dev-server": "node ./example/dist/server",
-        "gh-pages": "NODE_ENV=production webpack --progress --colors",
-        "test": "BABEL_ENV=test jest",
-        "test:watch": "BABEL_ENV=test jest --watch",
-        "test:coverage": "BABEL_ENV=test jest && codecov",
-        "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
-        "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
-        "storybook": "BABEL_ENV=dev start-storybook -p 6006",
-        "storybook:export": "BABEL_ENV=dev build-storybook -c .storybook -o build",
+        "gh-pages": "cross-env NODE_ENV=production webpack --progress --colors",
+        "test": "cross-env BABEL_ENV=test jest",
+        "test:watch": "cross-env BABEL_ENV=test jest --watch",
+        "test:coverage": "cross-env BABEL_ENV=test jest && codecov",
+        "prettier":
+            "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
+        "prepublish":
+            "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
+        "storybook": "cross-env BABEL_ENV=dev start-storybook -p 6006",
+        "storybook:export":
+            "cross-env BABEL_ENV=dev build-storybook -c .storybook -o build",
         "build-storybook": "build-storybook",
         "deploy": "yarn run storybook:export"
     },
     "jest": {
-        "modulePaths": [
-            "<rootDir>/src/"
-        ],
+        "modulePaths": ["<rootDir>/src/"],
         "coverageDirectory": "./coverage/",
         "collectCoverage": true
     },
-    "keywords": [
-        "react",
-        "parallax",
-        "scroll",
-        "component"
-    ],
+    "keywords": ["react", "parallax", "scroll", "component"],
     "author": "J Scott Smith",
     "license": "ISC",
     "peerDependencies": {
@@ -60,7 +57,7 @@
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-0": "^6.24.1",
         "codecov": "^3.0.0",
-        "cross-env": "^3.1.4",
+        "cross-env": "^3.2.4",
         "css-loader": "^0.28.0",
         "express": "^4.14.1",
         "intersection-observer": "^0.4.2",
