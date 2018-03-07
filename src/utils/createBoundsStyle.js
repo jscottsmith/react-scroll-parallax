@@ -1,6 +1,6 @@
 import BoundsStyle from './BoundsStyle';
 
-export default function createBoundsStyle(x, y, scale, el) {
+export default function createBoundsStyle(x, y, scale, el, minHeight) {
     // NOTE: This creates the style for the bounds element
     // that will be observed by the IntersectionObserver
     // It takes the x, y, and scale props then resizes
@@ -40,7 +40,7 @@ export default function createBoundsStyle(x, y, scale, el) {
         .transformBoundsY(y, height)
         .transformBoundsX(x, width)
         .transformBoundsScale(scale, width, height).boundsStyle;
-
+    bounds.minHeight = minHeight;
     return bounds;
 }
 

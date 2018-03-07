@@ -3,7 +3,7 @@ export default class BoundsStyle {
         mt: 0,
         mb: 0,
         ml: 0,
-        mr: 0,
+        mr: 0
     };
 
     get boundsStyle() {
@@ -15,7 +15,7 @@ export default class BoundsStyle {
             paddingTop: this.bounds.mt * -1,
             paddingBottom: this.bounds.mb * -1,
             paddingLeft: this.bounds.ml * -1,
-            paddingRight: this.bounds.mr * -1,
+            paddingRight: this.bounds.mr * -1
         };
     }
 

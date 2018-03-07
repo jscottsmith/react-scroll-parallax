@@ -18,7 +18,8 @@ class Parallax extends Component {
         x: [0, 0],
         y: [0, 0],
         scale: [1, 1],
-        opacity: [1, 1]
+        opacity: [1, 1],
+        minHeight: 0
     };
 
     static propTypes = {
@@ -32,7 +33,7 @@ class Parallax extends Component {
         scale: validateScale,
         opacity: validateOpacity,
         observerOptions: PropTypes.object,
-        elementStyle: PropTypes.object
+        minHeight: PropTypes.number
         // @TODO: these should also be available:
         // rotation
         // tag/element name?
@@ -71,7 +72,7 @@ class Parallax extends Component {
             scale,
             opacity,
             observerOptions,
-            elementStyle
+            minHeight
         } = this.props;
 
         // if child is a function, call it with updateAttributeCache
@@ -94,8 +95,9 @@ class Parallax extends Component {
                                                     scale={scale}
                                                     x={x}
                                                     y={y}
+                                                    minHeight={minHeight}
                                                 >
-                                                    <div style={style} className="parallax-element" style={elementStyle}>
+                                                    <div style={style} className="parallax-element">
                                                         {isFunc ? children({ updateAttributeCache, progress, isInView }) : children}
                                                     </div>
                                                 </Bounds>                                                

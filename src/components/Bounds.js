@@ -9,7 +9,7 @@ class Bounds extends Component {
         scale: PropTypes.array.isRequired,
         children: PropTypes.node.isRequired,
         refCallbacks: PropTypes.array.isRequired,
-        updateAttributeCache: PropTypes.func.isRequired,
+        updateAttributeCache: PropTypes.func.isRequired
     };
 
     static contextTypes = {
@@ -30,6 +30,7 @@ class Bounds extends Component {
 
     componentDidUpdate(prevProps) {
         if (
+            this.props.minHeight !== this.props.minHeight ||
             this.props.y !== prevProps.y ||
             this.props.x !== prevProps.x ||
             this.props.scale !== prevProps.scale
@@ -68,10 +69,10 @@ class Bounds extends Component {
 
     setBoundsStyle() {
         const { x, y } = this.offsets;
-        const { scale } = this.props;
+        const { scale, minHeight } = this.props;
         const { el } = this;
 
-        const boundsStyle = createBoundsStyle(x, y, scale, el);
+        const boundsStyle = createBoundsStyle(x, y, scale, el, minHeight);
 
         this.setState(
             () => ({
