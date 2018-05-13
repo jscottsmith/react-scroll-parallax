@@ -14,6 +14,8 @@ Some links demonstrating possible effects created with this lib:
 * [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
 * [CodePen Parallax Banner](https://codepen.io/jscottsmith/pen/aVBvGj)
 
+You can also view [the source code for these examples](https://github.com/jscottsmith/react-scroll-parallax-examples) on Github.
+
 ## Install
 
 With npm
