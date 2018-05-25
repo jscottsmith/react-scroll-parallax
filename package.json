@@ -34,7 +34,7 @@
     "component"
   ],
   "author": "J Scott Smith",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "prop-types": "^15.5.10"
   },
