@@ -81,8 +81,9 @@ const ParallaxImage = () => (
     </Parallax>
 );
 ```
-
-**NOTE:** Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
+**Warnings:**
+1. This lib was designed to be used on `relative` or `absolute` positioned elements that scroll naturally with the page. If you use `fixed` positioning on either the element itself or the parent you will encounter issues. More on that in [troubleshooting](#troubleshooting).
+2. Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
 
 ## \<Parallax>
 
@@ -234,9 +235,13 @@ class Image extends Component {
 }
 ```
 
+## Troubleshooting
+
+If you're encountering issues like the parallax element jumping around or becoming stuck, there's a few likely culprits. Since this lib caches important positioning states it's posible for these to be outdated and incorrect. The most likely cause for this type of problem is the result of images loading and increasing the height of an element and/or the page. This can be fixed easily by [updating the cache](#example-usage-of-context). Another likely issue is the CSS positioning applied to the parent or parallax element itself is `fixed`. Fixed positioning parallax elements is currently not supported and may appear to work in some cases but break in others. Avoid using `position: fixed` and instead use `static`, `relative` or `absolute`, which this lib was designed to support. If none of these are relevant and you still have trouble please post an issue with your code or a demo that reproduces the problem.
+
 ## Browser Support
 
-React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari and Edge, as well as the following: iOS 9, iOS 10, Android 4 and IE11. If you encounter any errors for browsers that should be supported please post an issue.
+React scroll parallax should support the last two versions of all major browsers and has been tested on desktop Chrome, Firefox, Safari, Edge and IE11, as well as the following for mobile: iOS 9, iOS 10, Android 4. While this lib may work on mobile browsers I do not recommend it in most cases for UX reasons. If you encounter any errors for browsers that should be supported please post an issue.
 
 ## Optimizations to Reduce Jank
 
