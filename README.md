@@ -83,7 +83,7 @@ const ParallaxImage = () => (
 ```
 **Warnings:**
 1. This lib was designed to be used on `relative` or `absolute` positioned elements that scroll naturally with the page. If you use `fixed` positioning on either the element itself or the parent you will encounter issues. More on that in [troubleshooting](#troubleshooting).
-2. Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via `context`. More details on how here: [Parallax Controller Context](#parallax-controller-context).
+2. Scroll state and positions of elements on the page are cached for performance reasons. This means that if the page height changes (most likely from [images loading](#example-usage-of-context)) after `<Parallax />` components are mounted the controller won't properly determine when the elements are in view. To correct this you can call the `parallaxController.update()` method from any child component of the `<ParallaxProvider />` via context and the `withController()` HOC. More details on how here: [Parallax Controller Context](#parallax-controller-context).
 
 ## \<Parallax>
 
@@ -176,30 +176,26 @@ const AppContainer = () => (
 
 ### Parallax Controller Context
 
-Access the Parallax Controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider>` by defining the `contextTypes` like so:
+Access the controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider>` by using the `withController()` HOC:
 
 ```jsx
-class Foo extends Component {
-    static contextTypes = {
-        parallaxController: PropTypes.object.isRequired,
+
+import { withController } from 'react-scroll-parallax';
+
+class MyComponent extends Component {
+    static propTypes = {
+        parallaxController: PropTypes.object,
     };
 
     doSomething() {
-        // do stuff with this.context.parallaxController
+        const { parallaxController } = this.props;
+        // do stuff with `parallaxController`
     }
 }
-```
 
-or for stateless functional components like:
+// Compose your component with the Higher Order Component
+export withController(MyComponent);
 
-```jsx
-const Bar = (props, context) => (
-    // do stuff with context.parallaxController
-);
-
-Bar.contextTypes = {
-    parallaxController: PropTypes.object.isRequired,
-};
 ```
 
 ### Available Methods
@@ -219,20 +215,20 @@ Removes window scroll and resize listeners then resets all styles applied to par
 The most common use case that would require access to the controller is dealing with images. Since the controller caches attributes for performance they will need to be updated with the correct values once the image loads. Here's an example of how you could do that with an `<Image />` component:
 
 ```jsx
-class Image extends Component {
-    static contextTypes = {
-        parallaxController: PropTypes.object.isRequired,
-    };
+import { withController } from 'react-scroll-parallax';
 
+class Image extends Component {
     handleLoad = () => {
         // updates cached values after image dimensions have loaded
-        this.context.parallaxController.update();
+        this.props.parallaxController.update();
     };
 
     render() {
         return <img src={this.props.src} onLoad={this.handleLoad} />;
     }
 }
+
+export withController(Image);
 ```
 
 ## Troubleshooting
