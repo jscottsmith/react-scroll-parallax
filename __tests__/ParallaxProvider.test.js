@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'libs/ParallaxController';
+import ParallaxController from 'modules/ParallaxController';
+import withController from 'components/withController';
 
 describe('A <ParallaxProvider>', () => {
     // afterEach(() => )
@@ -35,20 +36,11 @@ describe('A <ParallaxProvider>', () => {
     it('to pass the controller context', () => {
         const node = document.createElement('div');
 
-        let rootCtx;
-        const ContextChecker = (props, context) => {
-            rootCtx = context;
+        let parallaxController;
+        const ContextChecker = withController(props => {
+            parallaxController = props.parallaxController;
             return null;
-        };
-
-        const testController = ParallaxController.init();
-
-        ContextChecker.contextTypes = {
-            parallaxController: PropTypes.shape({
-                destroy: PropTypes.func.isRequired,
-                update: PropTypes.func.isRequired,
-            }),
-        };
+        });
 
         ReactDOM.render(
             <ParallaxProvider>
@@ -58,7 +50,7 @@ describe('A <ParallaxProvider>', () => {
         );
 
         // Expected methods and state
-        expect(rootCtx.parallaxController).toBeInstanceOf(ParallaxController);
+        expect(parallaxController).toBeInstanceOf(ParallaxController);
     });
 
     it('to destroy the controller when unmounting', () => {
@@ -72,8 +64,8 @@ describe('A <ParallaxProvider>', () => {
             node
         );
 
-        instance.parallaxController.destroy = jest.fn();
-        const spy = instance.parallaxController.destroy;
+        instance.controller.destroy = jest.fn();
+        const spy = instance.controller.destroy;
 
         ReactDOM.unmountComponentAtNode(node);
 
@@ -126,12 +118,12 @@ describe('A <ParallaxProvider>', () => {
         // first instance mounted
         const instance1 = render(node1);
         expect(window.ParallaxController).toBeInstanceOf(ParallaxController);
-        expect(instance1.parallaxController).toBeInstanceOf(ParallaxController);
+        expect(instance1.controller).toBeInstanceOf(ParallaxController);
 
         // second instance mounted
         const instance2 = render(node2);
         expect(window.ParallaxController).toBeInstanceOf(ParallaxController);
-        expect(instance2.parallaxController).toBeInstanceOf(ParallaxController);
+        expect(instance2.controller).toBeInstanceOf(ParallaxController);
 
         // unmount first instance
         ReactDOM.unmountComponentAtNode(node1);
@@ -139,7 +131,7 @@ describe('A <ParallaxProvider>', () => {
         expect(window.ParallaxController).toBeNull();
 
         // this must still be defined
-        expect(instance2.parallaxController).toBeInstanceOf(ParallaxController);
+        expect(instance2.controller).toBeInstanceOf(ParallaxController);
     });
 
     it('to not init the controller on the server');

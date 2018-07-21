@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParallaxController from '../libs/ParallaxController';
+import ParallaxContext from '../modules/ParallaxContext';
+import ParallaxController from '../modules/ParallaxController';
+
+const createController = () => {
+    // Don't initialize on the server
+    const isServer = typeof window === 'undefined';
+
+    if (!isServer) {
+        // Must not be the server so kick it off...
+        return ParallaxController.init();
+    }
+    return null;
+};
 
 export default class ParallaxProvider extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
     };
 
-    static childContextTypes = {
-        parallaxController: PropTypes.object,
-    };
-
-    getChildContext() {
-        // Passes down the reference to the controller
-        const { parallaxController } = this;
-        return { parallaxController };
-    }
-
     componentWillMount() {
-        // Don't initialize on the server
-        const isServer = typeof window === 'undefined';
-
-        if (!isServer) {
-            // Must not be the server so kick it off...
-            this.parallaxController = ParallaxController.init();
-        }
+        this.controller = createController();
     }
 
     componentWillUnmount() {
-        this.parallaxController = this.parallaxController.destroy();
+        this.controller = this.controller.destroy();
     }
 
     render() {
         const { children } = this.props;
 
-        return children;
+        return (
+            <ParallaxContext.Provider value={this.controller}>
+                {children}
+            </ParallaxContext.Provider>
+        );
     }
 }

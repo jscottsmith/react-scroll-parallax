@@ -1,4 +1,4 @@
-import ParallaxController from 'libs/ParallaxController';
+import ParallaxController from 'modules/ParallaxController';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;

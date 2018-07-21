@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import Parallax from 'components/Parallax';
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'libs/ParallaxController';
+import ParallaxController from 'modules/ParallaxController';
+import ParallaxContext from 'modules/ParallaxContext';
 
-// provides a controller to the provider for mocking tests
 class MockProvider extends Component {
-    static childContextTypes = {
-        parallaxController: PropTypes.object,
-    };
-
-    getChildContext() {
-        const { controllerMock } = this.props;
-        return { parallaxController: controllerMock };
+    componentWillMount() {
+        this.controller = this.props.controllerMock;
     }
 
     componentWillUnmount() {
-        this.props.controllerMock.destroy();
+        this.controller = this.controller.destroy();
     }
 
     render() {
         const { children } = this.props;
-        return children;
+
+        return (
+            <ParallaxContext.Provider value={this.controller}>
+                {children}
+            </ParallaxContext.Provider>
+        );
     }
 }
 
@@ -153,19 +153,17 @@ describe('Expect the <Parallax> component', () => {
         const controller = ParallaxController.init();
         controller.removeElement = jest.fn();
 
-        let instance;
         ReactDOM.render(
             <MockProvider controllerMock={controller}>
-                <Parallax ref={ref => (instance = ref)}>
+                <Parallax>
                     <div />
                 </Parallax>
             </MockProvider>,
             node
         );
 
-        const element = instance.element;
         ReactDOM.unmountComponentAtNode(node);
-        expect(controller.removeElement).toBeCalledWith(element);
+        expect(controller.removeElement).toBeCalled();
     });
 
     it('to update an element in the controller when receiving relevant new props', () => {
@@ -174,13 +172,10 @@ describe('Expect the <Parallax> component', () => {
         const controller = ParallaxController.init();
         controller.updateElement = jest.fn();
 
-        let instance;
         class StateChanger extends React.Component {
             state = { disabled: false };
             render() {
-                return (
-                    <Parallax {...this.state} ref={ref => (instance = ref)} />
-                );
+                return <Parallax {...this.state} />;
             }
         }
 
@@ -204,7 +199,7 @@ describe('Expect the <Parallax> component', () => {
         // trigger an update
         stateInstance.setState(testProps);
 
-        expect(controller.updateElement).toBeCalledWith(instance.element, {
+        expect(controller.updateElement).toBeCalledWith(expect.any(Object), {
             props: {
                 ...testProps,
             },
@@ -220,19 +215,16 @@ describe('Expect the <Parallax> component', () => {
         expect(controller.updateElement).toHaveBeenCalledTimes(1);
     });
 
-    it('to reset styles on an elment if the disabled prop is true', () => {
+    it('to reset styles on an element if the disabled prop is true', () => {
         const node = document.createElement('div');
 
         const controller = ParallaxController.init();
         controller.resetElementStyles = jest.fn();
 
-        let instance;
         class StateChanger extends React.Component {
             state = { disabled: false };
             render() {
-                return (
-                    <Parallax {...this.state} ref={ref => (instance = ref)} />
-                );
+                return <Parallax {...this.state} />;
             }
         }
 
@@ -246,6 +238,6 @@ describe('Expect the <Parallax> component', () => {
 
         stateInstance.setState({ disabled: true });
 
-        expect(controller.resetElementStyles).toBeCalledWith(instance.element);
+        expect(controller.resetElementStyles).toBeCalled();
     });
 });
