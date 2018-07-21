@@ -3,3 +3,4 @@ coverage
 dist
 build
 npm-debug.log
+lib

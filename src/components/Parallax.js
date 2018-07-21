@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { offsetMin, offsetMax } from '../utils/propValidation';
-import ParallaxController from '../libs/ParallaxController';
+import ParallaxController from '../modules/ParallaxController';
+import withController from './withController';
 
-export default class Parallax extends Component {
+class Parallax extends Component {
     static defaultProps = {
         disabled: false,
         offsetYMax: 0,
         offsetYMin: 0,
         offsetXMax: 0,
         offsetXMin: 0,
-        slowerScrollRate: false, // determines whether scroll rate is faster or slower than standard scroll
+        slowerScrollRate: false,
         tag: 'div',
     };
 
@@ -26,10 +27,7 @@ export default class Parallax extends Component {
         styleOuter: PropTypes.object,
         styleInner: PropTypes.object,
         tag: PropTypes.string.isRequired,
-    };
-
-    static contextTypes = {
-        parallaxController: PropTypes.object, // not required because this could be rendered on the server.
+        parallaxController: PropTypes.object,
     };
 
     componentDidMount() {
@@ -45,7 +43,7 @@ export default class Parallax extends Component {
 
         // Deprecation warning for <=1.0.0
         // If no context is available but the window global is then warn
-        if (!this.context.parallaxController && window.ParallaxController) {
+        if (!this.props.parallaxController && window.ParallaxController) {
             console.log(
                 'Calling ParallaxController.init() has been deprecated in favor of using the <ParallaxProvider /> component. For usage details see: https://github.com/jscottsmith/react-scroll-parallax/tree/v1.1.0#usage'
             );
@@ -99,7 +97,7 @@ export default class Parallax extends Component {
 
     get controller() {
         // Legacy versions may use the global, not context
-        return this.context.parallaxController || window.ParallaxController;
+        return this.props.parallaxController || window.ParallaxController;
     }
 
     // refs
@@ -139,3 +137,5 @@ export default class Parallax extends Component {
         );
     }
 }
+
+export default withController(Parallax);

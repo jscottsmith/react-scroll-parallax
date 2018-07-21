@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import ParallaxBanner from 'components/ParallaxBanner';
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'libs/ParallaxController';
 
 // Workaround for refs
 // See https://github.com/facebook/react/issues/7740
