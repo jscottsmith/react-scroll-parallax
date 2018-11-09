@@ -212,8 +212,8 @@ function ParallaxController() {
             top = rect.top + scrollY + yMinPx;
             bottom = rect.bottom + scrollY + yMaxPx;
         } else {
-            top = rect.top + scrollY + yMaxPx * -1;
-            bottom = rect.bottom + scrollY + yMinPx * -1;
+            top = rect.top + scrollY + yMinPx * -1;
+            bottom = rect.bottom + scrollY + yMaxPx * -1;
         }
 
         // NOTE: Total distance the element will move from when
