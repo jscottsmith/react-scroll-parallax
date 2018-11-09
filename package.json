@@ -12,10 +12,9 @@
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
     "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
-    "prepare": "npm run prepublish",
+    "prepare": "npm install && npm run prepublish",
     "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
     "storybook": "start-storybook -p 3000",
-    "postinstall": "npm run prepublish",
     "storybook:build": "build-storybook",
     "storybook:export": "build-storybook -c .storybook -o build",
     "deploy": "yarn run storybook:export"
