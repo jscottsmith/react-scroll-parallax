@@ -15,6 +15,7 @@
     "prepare": "npm run prepublish",
     "prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
     "storybook": "start-storybook -p 3000",
+    "postinstall": "npm run prepublish",
     "storybook:build": "build-storybook",
     "storybook:export": "build-storybook -c .storybook -o build",
     "deploy": "yarn run storybook:export"
