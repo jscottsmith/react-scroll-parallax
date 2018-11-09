@@ -4,7 +4,7 @@
   "description": "React components to create parallax scroll effects for banners, images or any other DOM elements.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jscottsmith/react-scroll-parallax"
+    "url": "https://github.com/Bajtas/react-scroll-parallax"
   },
   "main": "lib/index.js",
   "scripts": {
