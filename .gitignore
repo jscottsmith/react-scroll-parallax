@@ -4,3 +4,4 @@ dist
 build
 npm-debug.log
 lib
+.cache
