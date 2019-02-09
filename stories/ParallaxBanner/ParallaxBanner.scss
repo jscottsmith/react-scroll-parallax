@@ -1,4 +1,4 @@
-:local(.parallaxChildren) {
+.parallaxChildren {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,11 +16,11 @@
     }
 }
 
-:local(.bannerBg) {
+.bannerBg {
     background: #fff;
 }
 
-:local(.customChild) {
+.customChild {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,19 +29,19 @@
     text-align: center;
 }
 
-:local(.red) {
+.red {
     background-color: rgba(#f74c36, 0.8);
 }
 
-:local(.green) {
+.green {
     background-color: rgba(#35f783, 0.8);
 }
 
-:local(.blue) {
+.blue {
     background-color: rgba(#42a7f4, 0.8);
 }
 
-:local(.video) {
+.video {
     width: 100%;
     height: 100%;
     object-fit: cover;

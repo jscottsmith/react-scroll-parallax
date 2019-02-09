@@ -1,4 +1,4 @@
-:local(.ratio) {
+.ratio {
     display: flex;
     position: relative;
     width: 100%;
@@ -7,7 +7,7 @@
     background: slateblue;
 }
 
-:local(.inner) {
+.inner {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
     justify-content: center;
 }
 
-:local(.box) {
+.box {
     width: 3rem;
     height: 3rem;
     border-radius: 1.5rem;

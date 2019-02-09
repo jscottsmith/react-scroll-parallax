@@ -46,17 +46,17 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-:local(.parallax) {
+.parallax {
     margin: 6rem;
     width: 200px;
 }
 
-:local(.small) {
+.small {
     margin: 6rem;
     width: 10%;
 }
 
-:local(.portal) {
+.portal {
     position: fixed;
     bottom: 2rem;
     left: 2rem;

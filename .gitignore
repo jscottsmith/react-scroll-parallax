@@ -5,3 +5,4 @@ build
 npm-debug.log
 lib
 .cache
+/yarn-error.log
