@@ -124,8 +124,6 @@ function ParallaxController() {
 
         // set styles if it is
         if (isInView) setParallaxStyles(element, windowHeight);
-
-        if (!isInView) _setOutOfViewStyles(element);
     }
 
     /**
@@ -155,11 +153,6 @@ function ParallaxController() {
     function _setWindowHeight() {
         const html = document.documentElement;
         windowHeight = window.innerHeight || html.clientHeight;
-    }
-
-    function _setOutOfViewStyles(element) {
-        element.elOuter.style.outline = 'solid 1px blue';
-        element.elInner.style.outline = 'solid 1px red';
     }
 
     /**

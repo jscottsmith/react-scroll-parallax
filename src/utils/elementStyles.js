@@ -24,8 +24,6 @@ export function setParallaxStyles(element, windowHeight) {
     el.style.transform = `translate3d(${offsets.x.value}${offsets.x.unit}, ${
         offsets.y.value
     }${offsets.y.unit}, 0)`;
-    // TODO: REMOVE
-    element.elInner.style.outline = 'none';
 }
 
 /**

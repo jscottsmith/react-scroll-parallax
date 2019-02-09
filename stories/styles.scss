@@ -42,6 +42,10 @@ body {
     justify-content: space-around;
 }
 
+:global(.parallax-outer) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 :local(.parallax) {
     margin: 6rem;
     width: 200px;
