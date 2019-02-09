@@ -1,19 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import ParallaxBanner from 'components/ParallaxBanner';
 import ParallaxProvider from 'components/ParallaxProvider';
-
-// Workaround for refs
-// See https://github.com/facebook/react/issues/7740
-function createNodeMock() {
-    const div = document.createElement('div');
-
-    return {
-        getBoundingClientRect: () => div.getBoundingClientRect(),
-    };
-}
+import createNodeMock from './testUtils/createNodeMock';
 
 describe('Expect the <ParallaxBanner> component', () => {
     afterEach(() => {});
@@ -103,7 +93,7 @@ describe('Expect the <ParallaxBanner> component', () => {
     it('to render children', () => {
         const node = document.createElement('div');
 
-        let child = jest.fn();
+        const child = jest.fn();
         const Child = () => {
             child();
             return <div />;
@@ -124,9 +114,9 @@ describe('Expect the <ParallaxBanner> component', () => {
     it('to render layer children', () => {
         const node = document.createElement('div');
 
-        let child = jest.fn();
+        const childFn = jest.fn();
         const Child = () => {
-            child();
+            childFn();
             return <div />;
         };
 
@@ -145,33 +135,6 @@ describe('Expect the <ParallaxBanner> component', () => {
             node
         );
 
-        expect(child).toBeCalled();
-    });
-
-    it('to render layer children', () => {
-        const node = document.createElement('div');
-
-        let child = jest.fn();
-        const Child = () => {
-            child();
-            return <div />;
-        };
-
-        ReactDOM.render(
-            <ParallaxProvider>
-                <ParallaxBanner
-                    layers={[
-                        {
-                            children: <Child />,
-                            amount: 0.2,
-                            slowerScrollRate: false,
-                        },
-                    ]}
-                />
-            </ParallaxProvider>,
-            node
-        );
-
-        expect(child).toBeCalled();
+        expect(childFn).toBeCalled();
     });
 });

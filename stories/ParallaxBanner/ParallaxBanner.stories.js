@@ -20,7 +20,6 @@ storiesOf('<ParallaxBanner>', module)
                     image:
                         'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
                     amount: 0.2,
-                    slowerScrollRate: false,
                 },
             ]}
         />
@@ -36,7 +35,6 @@ storiesOf('<ParallaxBanner>', module)
                     image:
                         'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
                     amount: 0.2,
-                    slowerScrollRate: false,
                 },
             ]}
         />
@@ -49,7 +47,6 @@ storiesOf('<ParallaxBanner>', module)
                     image:
                         'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
                     amount: 0.2,
-                    slowerScrollRate: false,
                 },
             ]}
         >
@@ -63,14 +60,12 @@ storiesOf('<ParallaxBanner>', module)
             {
                 image:
                     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
-                amount: 0.2,
-                slowerScrollRate: false,
+                amount: 0.5,
             },
             {
                 image:
                     'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png',
-                amount: 0.4,
-                slowerScrollRate: false,
+                amount: 0.25,
             },
         ];
         return (
@@ -86,7 +81,7 @@ storiesOf('<ParallaxBanner>', module)
             className={styles.bannerBg}
             layers={[
                 {
-                    amount: 0.3,
+                    amount: -0.3,
                     children: (
                         <video
                             className={styles.video}
@@ -99,7 +94,6 @@ storiesOf('<ParallaxBanner>', module)
                             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/boats-at-sea-720.mp4"
                         />
                     ),
-                    slowerScrollRate: true,
                 },
             ]}
         >
@@ -120,7 +114,6 @@ storiesOf('<ParallaxBanner>', module)
                     ),
                     amount: 0.2,
                     expanded: false,
-                    slowerScrollRate: false,
                 },
                 {
                     children: (
@@ -132,7 +125,6 @@ storiesOf('<ParallaxBanner>', module)
                     ),
                     amount: 0.4,
                     expanded: false,
-                    slowerScrollRate: false,
                 },
                 {
                     children: (
@@ -142,7 +134,6 @@ storiesOf('<ParallaxBanner>', module)
                     ),
                     amount: 0.6,
                     expanded: false,
-                    slowerScrollRate: false,
                 },
             ]}
         />
@@ -156,7 +147,6 @@ storiesOf('<ParallaxBanner>', module)
                     image:
                         'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
                     amount: 0.2,
-                    slowerScrollRate: false,
                 },
             ]}
         >

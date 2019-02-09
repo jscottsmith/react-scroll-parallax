@@ -1,120 +1,64 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
+import TestRenderer from 'react-test-renderer';
 import Parallax from 'components/Parallax';
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'modules/ParallaxController';
-import ParallaxContext from 'modules/ParallaxContext';
+import MockProvider from './testUtils/MockProvider';
+import expectRenderError from './testUtils/expectRenderError';
+import createNodeMock from './testUtils/createNodeMock';
 
-class MockProvider extends Component {
-    componentWillMount() {
-        this.controller = this.props.controllerMock;
-    }
-
-    componentWillUnmount() {
-        this.controller = this.controller.destroy();
-    }
-
-    render() {
-        const { children } = this.props;
-
-        return (
-            <ParallaxContext.Provider value={this.controller}>
-                {children}
-            </ParallaxContext.Provider>
-        );
-    }
-}
-
-const log = global.console.log;
+const consoleLog = global.console.log;
 
 describe('Expect the <Parallax> component', () => {
+    const preventError = e => e.preventDefault();
+
+    beforeEach(() => {
+        window.addEventListener('error', preventError);
+    });
+
     afterEach(() => {
-        global.console.log = log;
+        global.console.log = consoleLog;
         global.ParallaxController = undefined;
+
+        window.removeEventListener('error', preventError);
     });
 
     it('to render correctly', () => {
-        // Workaround for refs
-        // See https://github.com/facebook/react/issues/7740
-        const div = document.createElement('div');
-        function createNodeMock() {
-            return {
-                getBoundingClientRect: () => div.getBoundingClientRect(),
-            };
-        }
-
-        const tree = renderer
-            .create(
-                <ParallaxProvider>
-                    <Parallax
-                        className="class-foo"
-                        disabled={false}
-                        offsetXMax={100}
-                        offsetXMin={-100}
-                        offsetYMax="75%"
-                        offsetYMin="-75%"
-                        slowerScrollRate={false}
-                        styleOuter={{
-                            border: 'solid red 2px',
-                        }}
-                        styleInner={{
-                            border: 'solid blue 2px',
-                        }}
-                        tag="figure"
-                    >
-                        <div className="foo" />
-                    </Parallax>
-                </ParallaxProvider>,
-                {
-                    createNodeMock,
-                }
-            )
-            .toJSON();
+        const tree = TestRenderer.create(
+            <ParallaxProvider>
+                <Parallax
+                    className="class-foo"
+                    disabled={false}
+                    x={[-100, 100]}
+                    y={['-100%', '100%']}
+                    styleOuter={{
+                        border: 'solid red 2px',
+                    }}
+                    styleInner={{
+                        border: 'solid blue 2px',
+                    }}
+                    tagOuter="figure"
+                    tagInner="div"
+                >
+                    <div className="foo" />
+                </Parallax>
+            </ParallaxProvider>,
+            {
+                createNodeMock,
+            }
+        ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     it('to throw if the ParallaxController is not available', () => {
-        const node = document.createElement('div');
-        // NOTE: hide error and react warning
-        // see issue: https://github.com/facebook/jest/issues/4597
-        const preventError = e => e.preventDefault();
-        window.addEventListener('error', preventError, true);
-        Error.prototype.suppressReactErrorLogging = true;
-
-        const render = () => {
-            ReactDOM.render(
-                <Parallax>
-                    <div />
-                </Parallax>,
-                node
-            );
-        };
-
-        expect(render).toThrow(
-            "Must wrap your application's <Parallax /> components in a <ParallaxProvider />."
-        );
-
-        window.removeEventListener('error', preventError, true);
-        Error.prototype.suppressReactErrorLogging = false;
-    });
-
-    it('to warn if the ParallaxController is found but not provided by <ParallaxProvider>', () => {
-        const node = document.createElement('div');
-
-        global.console.log = jest.fn();
-        global.ParallaxController = ParallaxController.init();
-
-        ReactDOM.render(
+        expectRenderError(
             <Parallax>
                 <div />
             </Parallax>,
-            node
-        );
-
-        expect(global.console.log).toBeCalledWith(
-            'Calling ParallaxController.init() has been deprecated in favor of using the <ParallaxProvider /> component. For usage details see: https://github.com/jscottsmith/react-scroll-parallax/tree/v1.1.0#usage'
+            "Must wrap your application's <Parallax /> components in a <ParallaxProvider />.",
+            2 // 2 errors because of error removing element on unmount
         );
     });
 
@@ -136,14 +80,7 @@ describe('Expect the <Parallax> component', () => {
         expect(controller.createElement).toBeCalledWith({
             elInner: expect.any(Object),
             elOuter: expect.any(Object),
-            props: {
-                disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 100,
-                offsetYMin: -100,
-                slowerScrollRate: false,
-            },
+            props: { disabled: false, x0: 0, x1: 0, y0: 0, y1: 0 },
         });
     });
 
@@ -189,11 +126,8 @@ describe('Expect the <Parallax> component', () => {
 
         const testProps = {
             disabled: true,
-            offsetXMax: 100,
-            offsetXMin: -100,
-            offsetYMax: 100,
-            offsetYMin: -100,
-            slowerScrollRate: false,
+            x: [100, -100],
+            y: [-100, 100],
         };
 
         // trigger an update
@@ -201,7 +135,11 @@ describe('Expect the <Parallax> component', () => {
 
         expect(controller.updateElement).toBeCalledWith(expect.any(Object), {
             props: {
-                ...testProps,
+                disabled: true,
+                x0: 100,
+                x1: -100,
+                y0: -100,
+                y1: 100,
             },
         });
 

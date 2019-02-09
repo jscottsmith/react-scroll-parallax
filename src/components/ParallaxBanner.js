@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Parallax from './Parallax';
-import { offsetMin, offsetMax } from '../utils/propValidation';
 
-const constainerStyle = {
+const containerStyle = {
     position: 'relative',
     overflow: 'hidden',
     width: '100%',
@@ -21,34 +20,26 @@ const absoluteStyle = {
 const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
     return (
         <div
-            style={{ ...constainerStyle, ...style }}
+            style={{ ...containerStyle, ...style }}
             className={'parallax-banner' + (className ? ` ${className}` : '')}
         >
             {layers.map(
                 (
-                    {
-                        image,
-                        amount,
-                        slowerScrollRate,
-                        children,
-                        expanded = true,
-                    },
+                    { image, amount, children: layerChildren, expanded = true },
                     i
                 ) => {
                     // if this is an expanded layer overwrite the top/bottom styles with negative margins
                     const expandedStyle = expanded
                         ? {
-                              top: amount * 100 * -1 + '%',
-                              bottom: amount * 100 * -1 + '%',
+                              top: Math.abs(amount) * 100 * -1 + '%',
+                              bottom: Math.abs(amount) * 100 * -1 + '%',
                           }
                         : {};
 
                     return (
                         <Parallax
                             key={`layer-${i}`}
-                            offsetYMax={amount * 100 + '%'}
-                            offsetYMin={amount * -1 * 100 + '%'}
-                            slowerScrollRate={slowerScrollRate}
+                            y={[amount * -1 * 100 + '%', amount * 100 + '%']}
                             styleInner={absoluteStyle}
                             styleOuter={absoluteStyle}
                             disabled={disabled}
@@ -72,7 +63,7 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
                                         ...expandedStyle,
                                     }}
                                 >
-                                    {children}
+                                    {layerChildren}
                                 </div>
                             )}
                         </Parallax>
@@ -89,8 +80,8 @@ ParallaxBanner.defaultProps = {
 };
 
 ParallaxBanner.propTypes = {
-    className: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     disabled: PropTypes.bool.isRequired,
     layers: PropTypes.arrayOf(
         PropTypes.shape({
@@ -98,7 +89,6 @@ ParallaxBanner.propTypes = {
             children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
             expanded: PropTypes.bool,
             image: PropTypes.string,
-            slowerScrollRate: PropTypes.bool,
         })
     ),
     style: PropTypes.object,

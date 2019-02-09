@@ -37,6 +37,11 @@ body {
     justify-content: center;
 }
 
+:global(.linear) {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
 :local(.parallax) {
     margin: 6rem;
     width: 200px;

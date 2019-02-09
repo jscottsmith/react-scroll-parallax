@@ -2,58 +2,35 @@ import getParallaxOffsets from 'utils/getParallaxOffsets.js';
 import { parseValueAndUnit, scaleBetween } from 'utils';
 
 const offset = {
-    xMin: parseValueAndUnit('-100px'),
-    xMax: parseValueAndUnit('40px'),
-    yMin: parseValueAndUnit('-80%'),
-    yMax: parseValueAndUnit('50%'),
+    x0: parseValueAndUnit('-100px'),
+    x1: parseValueAndUnit('40px'),
+    y0: parseValueAndUnit('-80%'),
+    y1: parseValueAndUnit('50%'),
 };
 
 const percentMoved = 44;
 
 test('Gets offsets based on percent in view', () => {
-    expect(getParallaxOffsets(offset, percentMoved, false)).toEqual({
+    expect(getParallaxOffsets(offset, percentMoved)).toEqual({
         x: {
             value: scaleBetween(
                 percentMoved,
-                offset.xMax.value,
-                offset.xMin.value,
+                offset.x0.value,
+                offset.x1.value,
                 0,
                 100
             ),
-            unit: offset.xMax.unit,
+            unit: offset.x1.unit,
         },
         y: {
             value: scaleBetween(
                 percentMoved,
-                offset.yMax.value,
-                offset.yMin.value,
+                offset.y0.value,
+                offset.y1.value,
                 0,
                 100
             ),
-            unit: offset.yMax.unit,
-        },
-    });
-
-    expect(getParallaxOffsets(offset, percentMoved, true)).toEqual({
-        x: {
-            value: scaleBetween(
-                percentMoved,
-                offset.xMin.value,
-                offset.xMax.value,
-                0,
-                100
-            ),
-            unit: offset.xMax.unit,
-        },
-        y: {
-            value: scaleBetween(
-                percentMoved,
-                offset.yMin.value,
-                offset.yMax.value,
-                0,
-                100
-            ),
-            unit: offset.yMax.unit,
+            unit: offset.y1.unit,
         },
     });
 });

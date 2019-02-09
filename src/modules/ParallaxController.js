@@ -1,8 +1,10 @@
 import {
-    getParallaxOffsets,
+    addAttributes,
     isElementInView,
-    parseValueAndUnit,
     testForPassiveScroll,
+    setParallaxStyles,
+    resetStyles,
+    addOffsets,
 } from '../utils/index';
 
 /**
@@ -33,9 +35,6 @@ function ParallaxController() {
     // Ticking
     let ticking = false;
 
-    // Scroll direction
-    // let scrollDown = null;
-
     // Passive support
     const supportsPassive = testForPassiveScroll();
 
@@ -58,10 +57,11 @@ function ParallaxController() {
     }
 
     _addListeners();
+    _setWindowHeight();
 
     /**
      * Window scroll handler. Sets the 'scrollY'
-     * and then calls '_updateElementPositions()'.
+     * and then calls '_updateAllElements()'.
      */
     function _handleScroll() {
         // reference to prev scroll y
@@ -70,14 +70,11 @@ function ParallaxController() {
         // Save current scroll
         scrollY = window.pageYOffset; // Supports IE 9 and up.
 
-        // direction
-        // scrollDown = scrollY > prevScrollY;
-
         // Only called if the last animation request has been
         // completed and there are parallax elements to update
         if (!ticking && elements.length > 0) {
             ticking = true;
-            window.requestAnimationFrame(_updateElementPositions);
+            window.requestAnimationFrame(_updateAllElements);
         }
     }
 
@@ -88,7 +85,7 @@ function ParallaxController() {
     function _handleResize() {
         _setWindowHeight();
         _updateElementAttributes();
-        _updateElementPositions();
+        _updateAllElements();
     }
 
     /**
@@ -105,19 +102,30 @@ function ParallaxController() {
      * Determines if the element is in view based on the cached
      * attributes, if so set the elements parallax styles.
      */
-    function _updateElementPositions() {
+    function _updateAllElements() {
         elements.forEach(element => {
-            if (element.props.disabled) return;
-
-            // check if the element is in view then
-            const isInView = isElementInView(element, windowHeight, scrollY);
-
-            // set styles if it is
-            if (isInView) _setParallaxStyles(element);
+            _updateElementPosition(element);
 
             // reset ticking so more animations can be called
             ticking = false;
         });
+    }
+
+    /**
+     * Update element positions.
+     * Determines if the element is in view based on the cached
+     * attributes, if so set the elements parallax styles.
+     */
+    function _updateElementPosition(element) {
+        if (element.props.disabled) return;
+
+        // check if the element is in view then
+        const isInView = isElementInView(element, windowHeight, scrollY);
+
+        // set styles if it is
+        if (isInView) setParallaxStyles(element, windowHeight);
+
+        if (!isInView) _setOutOfViewStyles(element);
     }
 
     /**
@@ -127,22 +135,18 @@ function ParallaxController() {
      * other important attributes.
      */
     function _updateElementAttributes() {
-        elements.forEach(element => {
-            if (element.props.disabled) return;
-
-            _setupOffsets(element);
-
-            _cacheAttributes(element);
-        });
+        elements = elements.map(element =>
+            element.props.disabled
+                ? element
+                : addAttributes(addOffsets(element), windowHeight)
+        );
     }
 
     /**
      * Remove parallax styles from all elements.
      */
     function _removeParallaxStyles() {
-        elements.forEach(element => {
-            _resetStyles(element);
-        });
+        elements.forEach(element => resetStyles(element));
     }
 
     /**
@@ -153,160 +157,9 @@ function ParallaxController() {
         windowHeight = window.innerHeight || html.clientHeight;
     }
 
-    /**
-     * Takes a parallax element and caches important values that
-     * cause layout reflow and paints. Stores the values as an
-     * attribute object accesible on the parallax element.
-     * @param {object} element
-     */
-    function _cacheAttributes(element) {
-        const { yMin, yMax, xMax, xMin } = element.offsets;
-
-        const { slowerScrollRate } = element.props;
-
-        // NOTE: Many of these cause layout and reflow so we're not
-        // calculating them on every frame -- instead these values
-        // are cached on the element to access later when determining
-        // the element's position and offset.
-        const el = element.elOuter;
-        const rect = el.getBoundingClientRect();
-        const elHeight = el.offsetHeight;
-        const elWidth = el.offsetWidth;
-        const scrollY = window.pageYOffset;
-
-        // NOTE: offsetYMax and offsetYMin are percents
-        // based of the height of the element. They must be
-        // calculated as px to correctly determine whether
-        // the element is in the viewport.
-        const yPercent = yMax.unit === '%' || yMin.unit === '%';
-        const xPercent = xMax.unit === '%' || xMin.unit === '%';
-
-        // X offsets
-        let yMinPx = yMin.value;
-        let yMaxPx = yMax.value;
-
-        if (yPercent) {
-            const h100 = elHeight / 100;
-            yMaxPx = yMax.value * h100;
-            yMinPx = yMin.value * h100; // negative value
-        }
-
-        // Y offsets
-        let xMinPx = xMax.value;
-        let xMaxPx = xMin.value;
-
-        if (xPercent) {
-            const w100 = elWidth / 100;
-            xMaxPx = xMax.value * w100;
-            xMinPx = xMin.value * w100; // negative value
-        }
-
-        // NOTE: must add the current scroll position when the
-        // element is checked so that we get its absolute position
-        // relative to the document and not the viewport then
-        // add the min/max offsets calculated above.
-        let top = 0;
-        let bottom = 0;
-
-        if (slowerScrollRate) {
-            top = rect.top + scrollY + yMinPx;
-            bottom = rect.bottom + scrollY + yMaxPx;
-        } else {
-            top = rect.top + scrollY + yMaxPx * -1;
-            bottom = rect.bottom + scrollY + yMinPx * -1;
-        }
-
-        // NOTE: Total distance the element will move from when
-        // the top enters the view to the bottom leaving
-        // accounting for elements height and max/min offsets.
-        const totalDist = windowHeight + (elHeight + Math.abs(yMinPx) + yMaxPx);
-
-        element.attributes = {
-            top,
-            bottom,
-            elHeight,
-            elWidth,
-            yMaxPx,
-            yMinPx,
-            xMaxPx,
-            xMinPx,
-            totalDist,
-        };
-    }
-
-    /**
-     * Takes a parallax element and parses the offset props to get the value
-     * and unit. Sets these values as offset object accessible on the element.
-     * @param {object} element
-     */
-    function _setupOffsets(element) {
-        const {
-            offsetYMin,
-            offsetYMax,
-            offsetXMax,
-            offsetXMin,
-        } = element.props;
-
-        const yMin = parseValueAndUnit(offsetYMin);
-        const yMax = parseValueAndUnit(offsetYMax);
-        const xMin = parseValueAndUnit(offsetXMax);
-        const xMax = parseValueAndUnit(offsetXMin);
-
-        if (xMin.unit !== xMax.unit || yMin.unit !== yMax.unit) {
-            throw new Error(
-                'Must provide matching units for the min and max offset values of each axis.'
-            );
-        }
-
-        const xUnit = xMin.unit || '%';
-        const yUnit = yMin.unit || '%';
-
-        element.offsets = {
-            xUnit,
-            yUnit,
-            yMin,
-            yMax,
-            xMin,
-            xMax,
-        };
-    }
-
-    /**
-     * Takes a parallax element and set the styles based on the
-     * offsets and percent the element has moved though the viewport.
-     * @param {object} element
-     */
-    function _setParallaxStyles(element) {
-        const top = element.attributes.top - scrollY;
-        const { totalDist } = element.attributes;
-
-        // Percent the element has moved based on current and total distance to move
-        const percentMoved = (top * -1 + windowHeight) / totalDist * 100;
-
-        // Scale percentMoved to min/max percent determined by offset props
-        const { slowerScrollRate } = element.props;
-
-        // Get the parallax X and Y offsets
-        const offsets = getParallaxOffsets(
-            element.offsets,
-            percentMoved,
-            slowerScrollRate
-        );
-
-        // Apply styles
-        const el = element.elInner;
-
-        // prettier-ignore
-        el.style.transform = `translate3d(${offsets.x.value}${offsets.x.unit}, ${offsets.y.value}${offsets.y.unit}, 0)`;
-    }
-
-    /**
-     * Takes a parallax element and removes parallax offset styles.
-     * @param {object} element
-     */
-    function _resetStyles(element) {
-        const el = element.elInner;
-        el.style.transform = '';
+    function _setOutOfViewStyles(element) {
+        element.elOuter.style.outline = 'solid 1px blue';
+        element.elInner.style.outline = 'solid 1px red';
     }
 
     /**
@@ -330,15 +183,16 @@ function ParallaxController() {
      * @return {object} element
      */
     this.createElement = function(options) {
-        const id = _createID();
-        const newElement = {
-            id,
-            ...options,
-        };
+        const newElement = addAttributes(
+            addOffsets({
+                id: _createID(),
+                ...options,
+            }),
+            windowHeight
+        );
+        elements = [...elements, newElement];
 
-        const updatedElements = [...elements, newElement];
-        elements = updatedElements;
-        this.update();
+        _updateElementPosition(newElement);
 
         return newElement;
     };
@@ -349,8 +203,7 @@ function ParallaxController() {
      * @param {object} element
      */
     this.removeElement = function(element) {
-        const updatedElements = elements.filter(el => el.id !== element.id);
-        elements = updatedElements;
+        elements = elements.filter(el => el.id !== element.id);
     };
 
     /**
@@ -359,16 +212,20 @@ function ParallaxController() {
      * @param {object} options
      */
     this.updateElement = function(element, options) {
-        const updatedElements = elements.map(el => {
+        elements = elements.map(el => {
             // create element with new options and replaces the old
             if (el.id === element.id) {
                 // update props
-                el.props = options.props;
+                return addAttributes(
+                    addOffsets({
+                        ...el,
+                        props: options.props,
+                    }),
+                    windowHeight
+                );
             }
             return el;
         });
-
-        elements = updatedElements;
 
         // call update to set attributes and positions based on the new options
         this.update();
@@ -379,7 +236,7 @@ function ParallaxController() {
      * @param {object} element
      */
     this.resetElementStyles = function(element) {
-        _resetStyles(element);
+        resetStyles(element);
     };
 
     /**
@@ -387,8 +244,7 @@ function ParallaxController() {
      */
     this.update = function() {
         _setWindowHeight();
-        _updateElementAttributes();
-        _updateElementPositions();
+        _updateAllElements();
     };
 
     /**
@@ -397,7 +253,6 @@ function ParallaxController() {
     this.destroy = function() {
         _removeListeners();
         _removeParallaxStyles();
-        window.ParallaxController = null;
     };
 }
 
@@ -416,11 +271,6 @@ ParallaxController.init = function() {
     }
 
     const controller = new ParallaxController();
-
-    // Keep global reference for legacy versions <= 1.1.0
-    if (hasWindow && !window.ParallaxController) {
-        window.ParallaxController = controller;
-    }
 
     return controller;
 };

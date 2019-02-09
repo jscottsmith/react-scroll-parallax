@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { offsetMin, offsetMax } from '../utils/propValidation';
 import ParallaxController from '../modules/ParallaxController';
 import withController from './withController';
 
 class Parallax extends Component {
     static defaultProps = {
         disabled: false,
-        offsetYMax: 0,
-        offsetYMin: 0,
-        offsetXMax: 0,
-        offsetXMin: 0,
-        slowerScrollRate: false,
-        tag: 'div',
+        tagInner: 'div',
+        tagOuter: 'div',
+        x: [0, 0],
+        y: [0, 0],
     };
 
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
         disabled: PropTypes.bool.isRequired,
-        offsetXMax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        offsetXMin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        offsetYMax: offsetMax,
-        offsetYMin: offsetMin,
-        slowerScrollRate: PropTypes.bool.isRequired,
-        styleOuter: PropTypes.object,
-        styleInner: PropTypes.object,
-        tag: PropTypes.string.isRequired,
         parallaxController: PropTypes.object,
+        styleInner: PropTypes.object,
+        styleOuter: PropTypes.object,
+        tagInner: PropTypes.string.isRequired,
+        tagOuter: PropTypes.string.isRequired,
+        x: PropTypes.arrayOf(
+            PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        ),
+        y: PropTypes.arrayOf(
+            PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        ),
     };
 
     componentDidMount() {
@@ -41,52 +40,40 @@ class Parallax extends Component {
             );
         }
 
-        // Deprecation warning for <=1.0.0
-        // If no context is available but the window global is then warn
-        if (!this.props.parallaxController && window.ParallaxController) {
-            console.log(
-                'Calling ParallaxController.init() has been deprecated in favor of using the <ParallaxProvider /> component. For usage details see: https://github.com/jscottsmith/react-scroll-parallax/tree/v1.1.0#usage'
-            );
-        }
-
         // create a new parallax element and save the reference
         this.element = this.controller.createElement({
             elInner: this._inner,
             elOuter: this._outer,
             props: {
                 disabled: this.props.disabled,
-                offsetXMax: this.props.offsetXMax,
-                offsetXMin: this.props.offsetXMin,
-                offsetYMax: this.props.offsetYMax,
-                offsetYMin: this.props.offsetYMin,
-                slowerScrollRate: this.props.slowerScrollRate,
+                x1: this.props.x[1],
+                x0: this.props.x[0],
+                y1: this.props.y[1],
+                y0: this.props.y[0],
             },
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        // updates the elements props when relevant parallax props change
+    componentDidUpdate(prevProps) {
         if (
-            this.props.disabled !== nextProps.disabled ||
-            this.props.offsetXMax !== nextProps.offsetXMax ||
-            this.props.offsetXMin !== nextProps.offsetXMin ||
-            this.props.offsetYMax !== nextProps.offsetYMax ||
-            this.props.offsetYMin !== nextProps.offsetYMin ||
-            this.props.slowerScrollRate !== nextProps.slowerScrollRate
+            this.props.disabled !== prevProps.disabled ||
+            this.props.x[0] !== prevProps.x[0] ||
+            this.props.x[1] !== prevProps.x[1] ||
+            this.props.y[0] !== prevProps.y[0] ||
+            this.props.y[1] !== prevProps.y[1]
         ) {
             this.controller.updateElement(this.element, {
                 props: {
-                    disabled: nextProps.disabled,
-                    offsetXMax: nextProps.offsetXMax,
-                    offsetXMin: nextProps.offsetXMin,
-                    offsetYMax: nextProps.offsetYMax,
-                    offsetYMin: nextProps.offsetYMin,
-                    slowerScrollRate: nextProps.slowerScrollRate,
+                    disabled: this.props.disabled,
+                    x1: this.props.x[1],
+                    x0: this.props.x[0],
+                    y1: this.props.y[1],
+                    y0: this.props.y[0],
                 },
             });
         }
         // resets element styles when disabled
-        if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+        if (this.props.disabled !== prevProps.disabled && this.props.disabled) {
             this.controller.resetElementStyles(this.element);
         }
     }
@@ -96,11 +83,9 @@ class Parallax extends Component {
     }
 
     get controller() {
-        // Legacy versions may use the global, not context
-        return this.props.parallaxController || window.ParallaxController;
+        return this.props.parallaxController;
     }
 
-    // refs
     mapRefOuter = ref => {
         this._outer = ref;
     };
@@ -113,7 +98,8 @@ class Parallax extends Component {
         const {
             children,
             className,
-            tag: Tag,
+            tagOuter: Outer,
+            tagInner: Inner,
             styleOuter,
             styleInner,
         } = this.props;
@@ -121,19 +107,19 @@ class Parallax extends Component {
         const rootClass = 'parallax-outer' + (className ? ` ${className}` : '');
 
         return (
-            <Tag
+            <Outer
                 className={rootClass}
                 ref={this.mapRefOuter}
                 style={styleOuter}
             >
-                <div
+                <Inner
                     className="parallax-inner"
                     ref={this.mapRefInner}
                     style={styleInner}
                 >
                     {children}
-                </div>
-            </Tag>
+                </Inner>
+            </Outer>
         );
     }
 }
