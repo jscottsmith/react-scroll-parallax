@@ -1,9 +1,26 @@
 {
-    "presets": [["env", { "modules": false }], "react", "stage-0"],
-
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false,
+                "browserslist": "> 0.25%, not dead"
+            }
+        ],
+        "@babel/preset-react"
+    ],
     "env": {
         "test": {
-            "presets": [["env", { "modules": "commonjs" }], "react", "stage-0"]
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": "commonjs"
+                    }
+                ],
+                "@babel/preset-react"
+            ]
         }
-    }
+    },
+    "plugins": ["@babel/plugin-proposal-export-default-from"]
 }

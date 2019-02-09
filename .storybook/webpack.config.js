@@ -11,10 +11,6 @@ const SRC = path.resolve('./src');
 const STORIES = path.resolve('./stories');
 
 module.exports = {
-    plugins: [
-        // your custom plugins
-    ],
-
     resolve: {
         alias: {
             'react-scroll-parallax': SRC,
@@ -25,30 +21,16 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                include: SRC,
-                loader: 'babel-loader',
-            },
-            {
-                test: /\.scss$/,
-                include: STORIES,
-                loaders: [
+                test: /\.scss|.css$/,
+                use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
-                        query: {
-                            localIdentName: '[name]_[local]_[hash:base64:3]',
-                            importLoaders: 1,
-                        },
+                        options: { importLoaders: 1, modules: true },
                     },
-                    'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                        query: {
-                            outputStyle: 'expanded',
-                        },
-                    },
+                    'sass-loader',
                 ],
+                include: STORIES,
             },
         ],
     },
