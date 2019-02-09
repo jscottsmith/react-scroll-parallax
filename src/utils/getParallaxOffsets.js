@@ -7,28 +7,14 @@ import { scaleBetween } from './index';
  * @returns {Object}
  */
 
-export default function getParallaxOffsets(
-    offsets,
-    percentMoved,
-    slowerScrollRate
-) {
-    const { yMin, yMax, xMin, xMax } = offsets;
+export default function getParallaxOffsets(offsets, percentMoved) {
+    const { y0, y1, x0, x1 } = offsets;
 
-    const yUnit = yMax.unit;
-    const xUnit = xMax.unit;
+    const yUnit = y1.unit;
+    const xUnit = x1.unit;
 
-    // sets parallax to faster or slower than the rate of scroll
-    let x = 0;
-    let y = 0;
-
-    if (slowerScrollRate) {
-        x = scaleBetween(percentMoved, xMin.value, xMax.value, 0, 100);
-        y = scaleBetween(percentMoved, yMin.value, yMax.value, 0, 100);
-    } else {
-        // flipped max/min
-        x = scaleBetween(percentMoved, xMax.value, xMin.value, 0, 100);
-        y = scaleBetween(percentMoved, yMax.value, yMin.value, 0, 100);
-    }
+    const x = scaleBetween(percentMoved, x0.value, x1.value, 0, 100);
+    const y = scaleBetween(percentMoved, y0.value, y1.value, 0, 100);
 
     return {
         x: {

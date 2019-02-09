@@ -17,7 +17,7 @@ describe('Expect the testForPassiveScroll function', () => {
     it('to add and remove a test listener', () => {
         window.addEventListener = jest.fn();
         window.removeEventListener = jest.fn();
-        const bool = testForPassiveScroll();
+        testForPassiveScroll();
         expect(window.addEventListener.mock.calls[0]).toEqual(
             expect.arrayContaining(['test', null, expect.any(Object)])
         );

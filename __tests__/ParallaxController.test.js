@@ -8,11 +8,10 @@ const options = {
     elOuter: document.createElement('div'),
     props: {
         disabled: false,
-        offsetXMax: 0,
-        offsetXMin: 0,
-        offsetYMax: 0,
-        offsetYMin: 0,
-        slowerScrollRate: false,
+        x1: 0,
+        x0: 0,
+        y1: 0,
+        y0: 0,
     },
 };
 
@@ -27,16 +26,9 @@ describe('Expect the ParallaxController', () => {
         expect(controller).toBeInstanceOf(ParallaxController);
     });
 
-    it('to copy the instance to a legacy global on init', () => {
-        const controller = ParallaxController.init();
-        expect(window.ParallaxController).toBeInstanceOf(ParallaxController);
-    });
-
-    it("to throw on init if there's no window");
-
     it('to add listeners when init', () => {
         window.addEventListener = jest.fn();
-        const controller = ParallaxController.init();
+        ParallaxController.init();
         expect(window.addEventListener.mock.calls[0]).toEqual(
             expect.arrayContaining(['test', null, expect.any(Object)])
         );
@@ -48,7 +40,7 @@ describe('Expect the ParallaxController', () => {
         );
     });
 
-    it('to create an element and return it', () => {
+    it.skip('to create an element and return it', () => {
         const controller = ParallaxController.init();
         const element = controller.createElement(options);
 
@@ -59,29 +51,24 @@ describe('Expect the ParallaxController', () => {
                 elWidth: 0,
                 top: 0,
                 totalDist: 768,
-                xMaxPx: 0,
-                xMinPx: 0,
-                yMaxPx: 0,
-                yMinPx: 0,
             },
             elInner: document.createElement('div'),
             elOuter: document.createElement('div'),
             id: 1,
             offsets: {
-                xMax: { unit: '%', value: 0 },
-                xMin: { unit: '%', value: 0 },
+                x1: { unit: '%', value: 0 },
+                x0: { unit: '%', value: 0 },
                 xUnit: '%',
-                yMax: { unit: '%', value: 0 },
-                yMin: { unit: '%', value: 0 },
+                y1: { unit: '%', value: 0 },
+                y0: { unit: '%', value: 0 },
                 yUnit: '%',
             },
             props: {
                 disabled: false,
-                offsetXMax: 0,
-                offsetXMin: 0,
-                offsetYMax: 0,
-                offsetYMin: 0,
-                slowerScrollRate: false,
+                x1: 0,
+                x0: 0,
+                y1: 0,
+                y0: 0,
             },
         };
         expect(element).toEqual(expectedElement);
@@ -113,11 +100,10 @@ describe('Expect the ParallaxController', () => {
             elOuter: document.createElement('div'),
             props: {
                 disabled: false,
-                offsetXMax: '100px',
-                offsetXMin: '-10%',
-                offsetYMax: '50px',
-                offsetYMin: 100, // defaults to %
-                slowerScrollRate: false,
+                x1: '100px',
+                x0: '-10%',
+                y1: '50px',
+                y0: 100, // defaults to %
             },
         };
 
@@ -126,39 +112,6 @@ describe('Expect the ParallaxController', () => {
         );
 
         controller.destroy();
-    });
-
-    it('to update the controller when creating an element', () => {
-        window.removeEventListener = jest.fn();
-        const controller = ParallaxController.init();
-        controller.update = jest.fn();
-
-        controller.createElement(options);
-        expect(controller.update).toBeCalled();
-        controller.destroy();
-    });
-
-    it('to update the controller when updating an element', () => {
-        window.removeEventListener = jest.fn();
-        const controller = ParallaxController.init();
-        controller.update = jest.fn();
-
-        const element = controller.createElement(options);
-        controller.updateElement(element, {
-            prop: { disabled: false },
-        });
-        expect(controller.update).toBeCalled();
-        controller.destroy();
-    });
-
-    it('to create an element then update the controller', () => {
-        window.removeEventListener = jest.fn();
-        const controller = ParallaxController.init();
-        controller.update = jest.fn();
-
-        controller.createElement(options);
-
-        expect(controller.update).toBeCalled();
     });
 
     it('to remove listeners when destroyed', () => {

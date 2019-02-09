@@ -1,27 +1,13 @@
 language: node_js
 node_js:
-  - "7"
+    - '7'
 cache:
-  directories:
-    - "node_modules"
+    directories:
+        - 'node_modules'
 script: yarn test && codecov && yarn storybook:export
 deploy:
-  skip-cleanup: true
-  provider: surge
-  project: build
-  domain: react-scroll-parallax-v1.surge.sh  
-  on: dev
-# TODO: Fix this gh-pages deploy.
-# https://docs.travis-ci.com/user/deployment/pages/
-# https://github.com/travis-ci/dpl/pull/501/files
-  # provider: pages
-  # skip-cleanup: true
-  # name: "jscottsmith"
-  # email: "jscsmith@gmail.com"
-  # github-token: GITHUB_TOKEN
-  # committer-from-gh: true
-  # verbose: true
-  # keep-history: true
-  # local-dir: build
-  # on:
-  #   branch: dev
+    skip-cleanup: true
+    provider: surge
+    project: build
+    domain: react-scroll-parallax-next.surge.sh
+    on: next
