@@ -6,7 +6,6 @@ import ParallaxController from '../modules/ParallaxController';
 const createController = () => {
     // Don't initialize on the server
     const isServer = typeof window === 'undefined';
-
     if (!isServer) {
         // Must not be the server so kick it off...
         return ParallaxController.init();
@@ -19,7 +18,8 @@ export default class ParallaxProvider extends Component {
         children: PropTypes.node.isRequired,
     };
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         this.controller = createController();
     }
 

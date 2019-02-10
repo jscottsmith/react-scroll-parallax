@@ -3,9 +3,13 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
+
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'modules/ParallaxController';
 import withController from 'components/withController';
+
+import expectRenderError from './testUtils/expectRenderError';
 
 describe('A <ParallaxProvider>', () => {
     it('to render children', () => {
@@ -103,17 +107,4 @@ describe('A <ParallaxProvider>', () => {
         // this must still be defined
         expect(instance2.controller).toBeInstanceOf(ParallaxController);
     });
-
-    it.todo('to not init the controller on the server');
-
-    // it('to not init the controller on the server', () => {
-    //     // window = undefined;
-
-    //     const serverRender = () =>
-    //         ReactDOMServer.renderToString(
-    //             <ParallaxProvider>
-    //                 <div />
-    //             </ParallaxProvider>
-    //         );
-    // });
 });
