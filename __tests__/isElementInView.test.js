@@ -14,11 +14,24 @@ const element2 = {
     },
 };
 
-const windowHeight = 1000;
-
-test('Returns whether an element is in view', () => {
-    expect(isElementInView(element1, windowHeight, 1500)).toBe(false);
-    expect(isElementInView(element1, windowHeight, 0)).toBe(true);
-    expect(isElementInView(element2, 4000, 0)).toBe(true);
-    expect(isElementInView(element2, windowHeight, 6500)).toBe(false);
-});
+describe.each([
+    // element // win height // scroll // view
+    [element1, 1000, 1500, false],
+    [element1, 1000, 0, true],
+    [element2, 4000, 0, true],
+    [element2, 2499, 0, false],
+    [element2, 2500, 4001, false],
+    [element2, 500, 2500, true],
+    [element2, 500, 2000, true],
+    [element2, 500, 1999, false],
+    [element2, 1000, 6500, false],
+])(
+    '.isElementInView(%o, %i, %i)',
+    (element, windowHeight, scrollY, expected) => {
+        test(`returns ${expected}%`, () => {
+            expect(isElementInView(element, windowHeight, scrollY)).toBe(
+                expected
+            );
+        });
+    }
+);

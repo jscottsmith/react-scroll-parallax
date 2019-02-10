@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    withKnobs,
-    text,
-    boolean,
-    number,
-    array,
-} from '@storybook/addon-knobs';
+import { text, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { Parallax } from 'react-scroll-parallax';
 import Element from '../Element/Element';
@@ -31,10 +25,10 @@ storiesOf('<Parallax>', module)
         );
     })
     .add('with horizontal offsets', () => {
-        const a0 = text('A: y[0]', '-50%');
-        const a1 = text('A: y[1]', '50%');
-        const b0 = text('B: y[0]', '50%');
-        const b1 = text('B: y[1]', '-50%');
+        const a0 = text('A: x[0]', '-50%');
+        const a1 = text('A: x[1]', '50%');
+        const b0 = text('B: x[0]', '50%');
+        const b1 = text('B: x[1]', '-50%');
         return (
             <div className="elements">
                 <Parallax x={[a0, a1]} className={styles.parallax}>
@@ -48,8 +42,8 @@ storiesOf('<Parallax>', module)
     })
     .add('with linear offsets', () => {
         const amount = number('Number of Elements', 5);
-        const offA = number('Offset A', -50);
-        const offB = number('Offset B', 50);
+        const offA = number('Offset A', -25);
+        const offB = number('Offset B', 25);
         const unit = text('Offset Unit', '%');
         const elements = new Array(amount).fill(null).map((x, i) => i);
 
@@ -97,6 +91,7 @@ storiesOf('<Parallax>', module)
             </div>
         );
     })
+
     .add('with a 100 elements', () => {
         const amount = number('Number of Elements', 100);
         const offset = number('Offset %', 50);

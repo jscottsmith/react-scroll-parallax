@@ -10,8 +10,8 @@ export default function addOffsets(element) {
 
     const y0 = parseValueAndUnit(y0Prop);
     const y1 = parseValueAndUnit(y1Prop);
-    const x0 = parseValueAndUnit(x1Prop);
-    const x1 = parseValueAndUnit(x0Prop);
+    const x0 = parseValueAndUnit(x0Prop);
+    const x1 = parseValueAndUnit(x1Prop);
 
     if (x0.unit !== x1.unit || y0.unit !== y1.unit) {
         throw new Error(

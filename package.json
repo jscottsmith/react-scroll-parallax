@@ -27,6 +27,11 @@
       "**/?(*.)+(spec|test).[jt]s?(x)"
     ],
     "coverageDirectory": "./coverage/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "package.json",
+      "/stories/"
+    ],
     "collectCoverage": true,
     "testURL": "http://localhost"
   },
@@ -70,7 +75,7 @@
     "eslint-plugin-jest": "^22.2.2",
     "eslint-plugin-react": "^7.12.4",
     "express": "^4.14.1",
-    "jest": "22.0.6",
+    "jest": "^24.0.1",
     "node-sass": "^4.5.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
