@@ -46,10 +46,10 @@ class Parallax extends Component {
             elOuter: this._outer,
             props: {
                 disabled: this.props.disabled,
-                x1: this.props.x[1],
                 x0: this.props.x[0],
-                y1: this.props.y[1],
+                x1: this.props.x[1],
                 y0: this.props.y[0],
+                y1: this.props.y[1],
             },
         });
     }
@@ -65,10 +65,10 @@ class Parallax extends Component {
             this.controller.updateElement(this.element, {
                 props: {
                     disabled: this.props.disabled,
-                    x1: this.props.x[1],
                     x0: this.props.x[0],
-                    y1: this.props.y[1],
+                    x1: this.props.x[1],
                     y0: this.props.y[0],
+                    y1: this.props.y[1],
                 },
             });
         }

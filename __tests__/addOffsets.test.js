@@ -11,8 +11,8 @@ describe('addOffsets', () => {
                 yUnit: '%',
                 y0: parseValueAndUnit(element.props.y0),
                 y1: parseValueAndUnit(element.props.y1),
-                x0: parseValueAndUnit(element.props.x1),
-                x1: parseValueAndUnit(element.props.x0),
+                x0: parseValueAndUnit(element.props.x0),
+                x1: parseValueAndUnit(element.props.x1),
             },
         });
     });
@@ -28,8 +28,8 @@ describe('addOffsets', () => {
                 yUnit: 'px',
                 y0: parseValueAndUnit(element.props.y0),
                 y1: parseValueAndUnit(element.props.y1),
-                x0: parseValueAndUnit(element.props.x1),
-                x1: parseValueAndUnit(element.props.x0),
+                x0: parseValueAndUnit(element.props.x0),
+                x1: parseValueAndUnit(element.props.x1),
             },
         });
     });

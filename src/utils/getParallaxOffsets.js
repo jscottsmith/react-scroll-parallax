@@ -7,7 +7,7 @@ import { scaleBetween } from './index';
  * @returns {Object}
  */
 
-export default function getParallaxOffsets(offsets, percentMoved) {
+export function getParallaxOffsets(offsets, percentMoved) {
     const { y0, y1, x0, x1 } = offsets;
 
     const yUnit = y1.unit;

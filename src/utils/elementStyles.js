@@ -1,29 +1,20 @@
-import { getParallaxOffsets } from '../utils/index';
+import { getParallaxOffsets } from './index';
 
 /**
  * Takes a parallax element and set the styles based on the
  * offsets and percent the element has moved though the viewport.
  * @param {object} element
+ * @param {number} percentMoved
  */
-export function setParallaxStyles(element, windowHeight) {
-    const { originTotalDist, originTop } = element.attributes;
-
-    const currentTop = originTop - scrollY;
-
-    // Percent the element has moved based on current and total distance to move
-    const percentMoved =
-        ((currentTop * -1 + windowHeight) / originTotalDist) * 100;
-
+export function setParallaxStyles(element, percentMoved) {
     // Get the parallax X and Y offsets
-    const offsets = getParallaxOffsets(element.offsets, percentMoved);
+    const {
+        x: { value: xv, unit: xu },
+        y: { value: yv, unit: yu },
+    } = getParallaxOffsets(element.offsets, percentMoved);
 
     // Apply styles
-    const el = element.elInner;
-
-    // prettier-ignore
-    el.style.transform = `translate3d(${offsets.x.value}${offsets.x.unit}, ${
-        offsets.y.value
-    }${offsets.y.unit}, 0)`;
+    element.elInner.style.transform = `translate3d(${xv}${xu}, ${yv}${yu}, 0)`;
 }
 
 /**

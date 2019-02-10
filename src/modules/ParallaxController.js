@@ -3,6 +3,7 @@ import {
     isElementInView,
     testForPassiveScroll,
     setParallaxStyles,
+    percentMoved,
     resetStyles,
     addOffsets,
 } from '../utils/index';
@@ -123,7 +124,10 @@ function ParallaxController() {
         const isInView = isElementInView(element, windowHeight, scrollY);
 
         // set styles if it is
-        if (isInView) setParallaxStyles(element, windowHeight);
+        if (isInView) {
+            const percent = percentMoved(element, windowHeight, scrollY);
+            setParallaxStyles(element, percent);
+        }
     }
 
     /**

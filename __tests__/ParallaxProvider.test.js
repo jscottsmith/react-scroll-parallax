@@ -104,7 +104,7 @@ describe('A <ParallaxProvider>', () => {
         expect(instance2.controller).toBeInstanceOf(ParallaxController);
     });
 
-    it('to not init the controller on the server');
+    it.todo('to not init the controller on the server');
 
     // it('to not init the controller on the server', () => {
     //     // window = undefined;
