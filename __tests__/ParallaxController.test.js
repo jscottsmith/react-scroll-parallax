@@ -1,4 +1,5 @@
 import ParallaxController from 'modules/ParallaxController';
+import { VERTICAL } from '../src/constants';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;
@@ -22,13 +23,13 @@ describe('Expect the ParallaxController', () => {
     });
 
     it('to return an instance on init', () => {
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         expect(controller).toBeInstanceOf(ParallaxController);
     });
 
     it('to add listeners when init', () => {
         window.addEventListener = jest.fn();
-        ParallaxController.init();
+        ParallaxController.init({ scrollAxis: VERTICAL });
         expect(window.addEventListener.mock.calls[0]).toEqual(
             expect.arrayContaining(['test', null, expect.any(Object)])
         );
@@ -41,7 +42,7 @@ describe('Expect the ParallaxController', () => {
     });
 
     it.skip('to create an element and return it', () => {
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         const element = controller.createElement(options);
 
         const expectedElement = {
@@ -75,7 +76,7 @@ describe('Expect the ParallaxController', () => {
     });
 
     it('to add created elements into the controller', () => {
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         const element = controller.createElement(options);
         const elements = controller.getElements();
 
@@ -83,7 +84,7 @@ describe('Expect the ParallaxController', () => {
     });
 
     it('to remove elements from the controller', () => {
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         const element = controller.createElement(options);
         expect(controller.getElements()[0]).toEqual(element);
 
@@ -93,7 +94,7 @@ describe('Expect the ParallaxController', () => {
 
     it("to throw if matching units aren't provided", () => {
         window.removeEventListener = jest.fn();
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
 
         const incorrectOffsets = {
             elInner: document.createElement('div'),
@@ -116,7 +117,7 @@ describe('Expect the ParallaxController', () => {
 
     it('to remove listeners when destroyed', () => {
         window.removeEventListener = jest.fn();
-        const instance = ParallaxController.init();
+        const instance = ParallaxController.init({ scrollAxis: VERTICAL });
         expect(window.removeEventListener.mock.calls[0]).toEqual(
             expect.arrayContaining(['test', null, expect.any(Object)])
         );

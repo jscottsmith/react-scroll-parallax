@@ -1,19 +1,23 @@
 /**
- * Takes a parallax element and returns whether the element
- * is in view based on the cached position of the element,
- * current scroll position and the window height.
- * @param {object} element
+ * Takes two values (start, end) and returns whether it is within
+ * the view size based on the cached position adjusted for current scroll.
+ * Only along a single dimension <--- [ --- a --- b --- ] -->
+ * @param {number} a - top/left
+ * @param {number} b - bottom/right
+ * @param {number} size - width/height
+ * @param {number} scroll - x/y
  * @return {boolean} isInView
  */
-export default function isElementInView(element, windowHeight, scrollY) {
-    const top = element.attributes.top - scrollY;
-    const bottom = element.attributes.bottom - scrollY;
 
-    const topInView = top >= 0 && top <= windowHeight;
-    const bottomInView = bottom >= 0 && bottom <= windowHeight;
-    const covering = top <= 0 && bottom >= windowHeight;
+export function isElementInView(a, b, size, scroll) {
+    const ax = a - scroll;
+    const bx = b - scroll;
 
-    const isInView = topInView || bottomInView || covering;
+    const aView = ax >= 0 && ax <= size;
+    const bInView = bx >= 0 && bx <= size;
+    const abCovering = ax <= 0 && bx >= size;
+
+    const isInView = aView || bInView || abCovering;
 
     return isInView;
 }
