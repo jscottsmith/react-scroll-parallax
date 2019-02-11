@@ -1,15 +1,11 @@
 /* global describe, it */
 
 import React from 'react';
-
 import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server';
 
 import ParallaxProvider from 'components/ParallaxProvider';
 import ParallaxController from 'modules/ParallaxController';
 import withController from 'components/withController';
-
-import expectRenderError from './testUtils/expectRenderError';
 
 describe('A <ParallaxProvider>', () => {
     it('to render children', () => {

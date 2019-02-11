@@ -8,6 +8,7 @@ import ParallaxController from 'modules/ParallaxController';
 import MockProvider from './testUtils/MockProvider';
 import expectRenderError from './testUtils/expectRenderError';
 import createNodeMock from './testUtils/createNodeMock';
+import { VERTICAL } from '../src/constants';
 
 const consoleLog = global.console.log;
 
@@ -65,7 +66,7 @@ describe('Expect the <Parallax> component', () => {
     it('to create an element in the controller on mount', () => {
         const node = document.createElement('div');
 
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         controller.createElement = jest.fn();
 
         ReactDOM.render(
@@ -87,7 +88,7 @@ describe('Expect the <Parallax> component', () => {
     it('to remove an element in the controller when unmounting', () => {
         const node = document.createElement('div');
 
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         controller.removeElement = jest.fn();
 
         ReactDOM.render(
@@ -106,7 +107,7 @@ describe('Expect the <Parallax> component', () => {
     it('to update an element in the controller when receiving relevant new props', () => {
         const node = document.createElement('div');
 
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         controller.updateElement = jest.fn();
 
         class StateChanger extends React.Component {
@@ -156,7 +157,7 @@ describe('Expect the <Parallax> component', () => {
     it('to reset styles on an element if the disabled prop is true', () => {
         const node = document.createElement('div');
 
-        const controller = ParallaxController.init();
+        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
         controller.resetElementStyles = jest.fn();
 
         class StateChanger extends React.Component {

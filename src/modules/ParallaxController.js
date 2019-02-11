@@ -1,5 +1,6 @@
 import {
-    addAttributes,
+    addAttributesVertical,
+    addAttributesHorizontal,
     isElementInView,
     testForPassiveScroll,
     setParallaxStyles,
@@ -7,6 +8,10 @@ import {
     resetStyles,
     addOffsets,
 } from '../utils/index';
+
+import { View } from './View';
+import { Scroll } from './Scroll';
+import { VERTICAL, HORIZONTAL } from '../constants';
 
 /**
  * -------------------------------------------------------
@@ -17,18 +22,18 @@ import {
  * listeners, managing and caching parallax element positions,
  * determining which elements are inside the viewport based on
  * scroll position, and then updating parallax element styles
- * based on min/max offsets and current scroll position.
+ * based on x/y offsets and current scroll position.
  *
  */
-function ParallaxController() {
+function ParallaxController({ scrollAxis = VERTICAL }) {
+    const isVertical = scrollAxis === VERTICAL;
+
     // All parallax elements to be updated
     let elements = [];
 
-    // Tracks current scroll y distance
-    let scrollY = 0;
-
-    // Window inner height
-    let windowHeight = 0;
+    // Scroll and View
+    const scroll = new Scroll(0, 0);
+    const view = new View(0, 0);
 
     // ID to increment for elements
     let id = 0;
@@ -58,18 +63,19 @@ function ParallaxController() {
     }
 
     _addListeners();
-    _setWindowHeight();
+    _setViewSize();
 
     /**
-     * Window scroll handler. Sets the 'scrollY'
+     * Window scroll handler sets scroll position
      * and then calls '_updateAllElements()'.
      */
     function _handleScroll() {
-        // reference to prev scroll y
-        // const prevScrollY = scrollY;
-
         // Save current scroll
-        scrollY = window.pageYOffset; // Supports IE 9 and up.
+        // Supports IE 9 and up.
+        const x = window.pageXOffset;
+        const y = window.pageYOffset;
+
+        scroll.setScroll(x, y);
 
         // Only called if the last animation request has been
         // completed and there are parallax elements to update
@@ -84,7 +90,7 @@ function ParallaxController() {
      * then updates parallax element attributes and positions.
      */
     function _handleResize() {
-        _setWindowHeight();
+        _setViewSize();
         _updateElementAttributes();
         _updateAllElements();
     }
@@ -121,11 +127,35 @@ function ParallaxController() {
         if (element.props.disabled) return;
 
         // check if the element is in view then
-        const isInView = isElementInView(element, windowHeight, scrollY);
-
-        // set styles if it is
-        if (isInView) {
-            const percent = percentMoved(element, windowHeight, scrollY);
+        if (isVertical) {
+            const isInView = isElementInView(
+                element.attributes.top,
+                element.attributes.bottom,
+                view.height,
+                scroll.y
+            );
+            if (!isInView) return;
+            const percent = percentMoved(
+                element.attributes.originTop,
+                element.attributes.originTotalDist,
+                view.height,
+                scroll.y
+            );
+            setParallaxStyles(element, percent);
+        } else {
+            const isInView = isElementInView(
+                element.attributes.left,
+                element.attributes.right,
+                view.width,
+                scroll.x
+            );
+            if (!isInView) return;
+            const percent = percentMoved(
+                element.attributes.originLeft,
+                element.attributes.originTotalDist,
+                view.width,
+                scroll.x
+            );
             setParallaxStyles(element, percent);
         }
     }
@@ -140,23 +170,22 @@ function ParallaxController() {
         elements = elements.map(element =>
             element.props.disabled
                 ? element
-                : addAttributes(addOffsets(element), windowHeight)
+                : isVertical
+                ? addAttributesVertical(element, view.height, scroll.y)
+                : addAttributesHorizontal(element, view.width, scroll.x)
         );
-    }
-
-    /**
-     * Remove parallax styles from all elements.
-     */
-    function _removeParallaxStyles() {
-        elements.forEach(element => resetStyles(element));
     }
 
     /**
      * Cache the window height.
      */
-    function _setWindowHeight() {
+    function _setViewSize() {
         const html = document.documentElement;
-        windowHeight = window.innerHeight || html.clientHeight;
+
+        const width = window.innerWidth || html.clientWidth;
+        const height = window.innerHeight || html.clientHeight;
+
+        view.setSize(width, height);
     }
 
     /**
@@ -180,13 +209,24 @@ function ParallaxController() {
      * @return {object} element
      */
     this.createElement = function(options) {
-        const newElement = addAttributes(
-            addOffsets({
-                id: _createID(),
-                ...options,
-            }),
-            windowHeight
-        );
+        const newElement = isVertical
+            ? addAttributesVertical(
+                  addOffsets({
+                      id: _createID(),
+                      ...options,
+                  }),
+                  view.height,
+                  scroll.y
+              )
+            : addAttributesHorizontal(
+                  addOffsets({
+                      id: _createID(),
+                      ...options,
+                  }),
+                  view.width,
+                  scroll.x
+              );
+
         elements = [...elements, newElement];
 
         _updateElementPosition(newElement);
@@ -213,13 +253,23 @@ function ParallaxController() {
             // create element with new options and replaces the old
             if (el.id === element.id) {
                 // update props
-                return addAttributes(
-                    addOffsets({
-                        ...el,
-                        props: options.props,
-                    }),
-                    windowHeight
-                );
+                return isVertical
+                    ? addAttributesVertical(
+                          addOffsets({
+                              ...el,
+                              props: options.props,
+                          }),
+                          view.height,
+                          scroll.y
+                      )
+                    : addAttributesHorizontal(
+                          addOffsets({
+                              ...el,
+                              props: options.props,
+                          }),
+                          view.width,
+                          scroll.x
+                      );
             }
             return el;
         });
@@ -237,10 +287,10 @@ function ParallaxController() {
     };
 
     /**
-     * Updates all parallax element attributes and postitions.
+     * Updates all parallax element attributes and positions.
      */
     this.update = function() {
-        _setWindowHeight();
+        _setViewSize();
         _updateAllElements();
     };
 
@@ -249,7 +299,7 @@ function ParallaxController() {
      */
     this.destroy = function() {
         _removeListeners();
-        _removeParallaxStyles();
+        elements.forEach(element => resetStyles(element));
     };
 }
 
@@ -258,7 +308,7 @@ function ParallaxController() {
  * Returns a new or existing instance of the ParallaxController.
  * @returns {Object} ParallaxController
  */
-ParallaxController.init = function() {
+ParallaxController.init = function(options) {
     const hasWindow = typeof window !== 'undefined';
 
     if (!hasWindow) {
@@ -267,9 +317,7 @@ ParallaxController.init = function() {
         );
     }
 
-    const controller = new ParallaxController();
-
-    return controller;
+    return new ParallaxController(options);
 };
 
 export default ParallaxController;
