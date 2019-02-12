@@ -88,7 +88,7 @@ describe('Expect the ParallaxController', () => {
         const element = controller.createElement(options);
         expect(controller.getElements()[0]).toEqual(element);
 
-        controller.removeElement(element);
+        controller.removeElementById(element.id);
         expect(controller.getElements()).toEqual([]);
     });
 

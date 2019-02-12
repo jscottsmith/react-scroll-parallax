@@ -1,16 +1,8 @@
-import {
-    addAttributesVertical,
-    addAttributesHorizontal,
-    isElementInView,
-    testForPassiveScroll,
-    setParallaxStyles,
-    percentMoved,
-    resetStyles,
-    addOffsets,
-} from '../utils/index';
+import { testForPassiveScroll, resetStyles } from '../utils/index';
 
 import { View } from './View';
 import { Scroll } from './Scroll';
+import { Element } from './Element';
 import { VERTICAL, HORIZONTAL } from '../constants';
 
 /**
@@ -26,17 +18,12 @@ import { VERTICAL, HORIZONTAL } from '../constants';
  *
  */
 function ParallaxController({ scrollAxis = VERTICAL }) {
-    const isVertical = scrollAxis === VERTICAL;
-
     // All parallax elements to be updated
     let elements = [];
 
     // Scroll and View
     const scroll = new Scroll(0, 0);
     const view = new View(0, 0);
-
-    // ID to increment for elements
-    let id = 0;
 
     // Ticking
     let ticking = false;
@@ -96,15 +83,6 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     }
 
     /**
-     * Creates a unique id to distinguish parallax elements.
-     * @return {Number}
-     */
-    function _createID() {
-        ++id;
-        return id;
-    }
-
-    /**
      * Update element positions.
      * Determines if the element is in view based on the cached
      * attributes, if so set the elements parallax styles.
@@ -125,39 +103,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      */
     function _updateElementPosition(element) {
         if (element.props.disabled) return;
-
-        // check if the element is in view then
-        if (isVertical) {
-            const isInView = isElementInView(
-                element.attributes.top,
-                element.attributes.bottom,
-                view.height,
-                scroll.y
-            );
-            if (!isInView) return;
-            const percent = percentMoved(
-                element.attributes.originTop,
-                element.attributes.originTotalDist,
-                view.height,
-                scroll.y
-            );
-            setParallaxStyles(element, percent);
-        } else {
-            const isInView = isElementInView(
-                element.attributes.left,
-                element.attributes.right,
-                view.width,
-                scroll.x
-            );
-            if (!isInView) return;
-            const percent = percentMoved(
-                element.attributes.originLeft,
-                element.attributes.originTotalDist,
-                view.width,
-                scroll.x
-            );
-            setParallaxStyles(element, percent);
-        }
+        element.updatePosition(view, scroll);
     }
 
     /**
@@ -168,11 +114,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      */
     function _updateElementAttributes() {
         elements = elements.map(element =>
-            element.props.disabled
-                ? element
-                : isVertical
-                ? addAttributesVertical(element, view.height, scroll.y)
-                : addAttributesHorizontal(element, view.width, scroll.x)
+            element.setCachedAttributes(view, scroll)
         );
     }
 
@@ -209,28 +151,10 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      * @return {object} element
      */
     this.createElement = function(options) {
-        const newElement = isVertical
-            ? addAttributesVertical(
-                  addOffsets({
-                      id: _createID(),
-                      ...options,
-                  }),
-                  view.height,
-                  scroll.y
-              )
-            : addAttributesHorizontal(
-                  addOffsets({
-                      id: _createID(),
-                      ...options,
-                  }),
-                  view.width,
-                  scroll.x
-              );
-
+        const newElement = new Element({ ...options, scrollAxis });
+        newElement.setCachedAttributes(view, scroll);
         elements = [...elements, newElement];
-
         _updateElementPosition(newElement);
-
         return newElement;
     };
 
@@ -239,8 +163,8 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      * and options to store in the 'elements' array.
      * @param {object} element
      */
-    this.removeElement = function(element) {
-        elements = elements.filter(el => el.id !== element.id);
+    this.removeElementById = function(id) {
+        elements = elements.filter(el => el.id !== id);
     };
 
     /**
@@ -248,33 +172,14 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      * @param {object} element
      * @param {object} options
      */
-    this.updateElement = function(element, options) {
+    this.updateElementPropsById = function(id, props) {
         elements = elements.map(el => {
-            // create element with new options and replaces the old
-            if (el.id === element.id) {
-                // update props
-                return isVertical
-                    ? addAttributesVertical(
-                          addOffsets({
-                              ...el,
-                              props: options.props,
-                          }),
-                          view.height,
-                          scroll.y
-                      )
-                    : addAttributesHorizontal(
-                          addOffsets({
-                              ...el,
-                              props: options.props,
-                          }),
-                          view.width,
-                          scroll.x
-                      );
+            if (el.id === id) {
+                return el.updateProps(props);
             }
             return el;
         });
 
-        // call update to set attributes and positions based on the new options
         this.update();
     };
 

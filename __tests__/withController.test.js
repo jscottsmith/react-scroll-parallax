@@ -33,8 +33,8 @@ describe('Expect the withController HoC', () => {
             expect.objectContaining({
                 getElements: expect.any(Function),
                 createElement: expect.any(Function),
-                removeElement: expect.any(Function),
-                updateElement: expect.any(Function),
+                removeElementById: expect.any(Function),
+                updateElementPropsById: expect.any(Function),
                 resetElementStyles: expect.any(Function),
                 update: expect.any(Function),
                 destroy: expect.any(Function),

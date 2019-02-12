@@ -4,14 +4,13 @@
  * attribute object accessible on the parallax element.
  * @param {object} element
  */
-export function addAttributesVertical(element, windowHeight, scrollY) {
-    const { y0, y1 } = element.offsets;
-
+export function addAttributesVertical(elOuter, offsets, windowHeight, scrollY) {
+    const { y0, y1 } = offsets;
     // NOTE: Many of these cause layout and reflow so we're not
     // calculating them on every frame -- instead these values
     // are cached on the element to access later when determining
     // the element's position and offset.
-    const el = element.elOuter;
+    const el = elOuter;
     const rect = el.getBoundingClientRect();
     const elHeight = el.offsetHeight;
     const elWidth = el.offsetWidth;
@@ -55,18 +54,15 @@ export function addAttributesVertical(element, windowHeight, scrollY) {
     }
 
     return {
-        ...element,
-        attributes: {
-            top,
-            bottom,
-            elHeight,
-            elWidth,
-            totalDist,
-            // origins
-            originTop,
-            originBottom,
-            originTotalDist,
-        },
+        top,
+        bottom,
+        elHeight,
+        elWidth,
+        totalDist,
+        // origins
+        originTop,
+        originBottom,
+        originTotalDist,
     };
 }
 
@@ -74,14 +70,14 @@ export function addAttributesVertical(element, windowHeight, scrollY) {
  * Horizontal
  * @param {object} element
  */
-export function addAttributesHorizontal(element, viewWidth, scrollX) {
-    const { x0, x1 } = element.offsets;
+export function addAttributesHorizontal(elOuter, offsets, viewWidth, scrollX) {
+    const { x0, x1 } = offsets;
 
     // NOTE: Many of these cause layout and reflow so we're not
     // calculating them on every frame -- instead these values
     // are cached on the element to access later when determining
     // the element's position and offset.
-    const el = element.elOuter;
+    const el = elOuter;
     const rect = el.getBoundingClientRect();
     const elHeight = el.offsetHeight;
     const elWidth = el.offsetWidth;
@@ -122,18 +118,15 @@ export function addAttributesHorizontal(element, viewWidth, scrollX) {
     }
 
     return {
-        ...element,
-        attributes: {
-            left,
-            right,
+        left,
+        right,
 
-            elHeight,
-            elWidth,
-            totalDist,
-            // origins
-            originLeft,
-            originRight,
-            originTotalDist,
-        },
+        elHeight,
+        elWidth,
+        totalDist,
+        // origins
+        originLeft,
+        originRight,
+        originTotalDist,
     };
 }

@@ -89,7 +89,7 @@ describe('Expect the <Parallax> component', () => {
         const node = document.createElement('div');
 
         const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-        controller.removeElement = jest.fn();
+        controller.removeElementById = jest.fn();
 
         ReactDOM.render(
             <MockProvider controllerMock={controller}>
@@ -99,16 +99,16 @@ describe('Expect the <Parallax> component', () => {
             </MockProvider>,
             node
         );
-
+        const element = controller.getElements()[0];
         ReactDOM.unmountComponentAtNode(node);
-        expect(controller.removeElement).toBeCalled();
+        expect(controller.removeElementById).toBeCalledWith(element.id);
     });
 
     it('to update an element in the controller when receiving relevant new props', () => {
         const node = document.createElement('div');
 
         const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-        controller.updateElement = jest.fn();
+        controller.updateElementPropsById = jest.fn();
 
         class StateChanger extends React.Component {
             state = { disabled: false };
@@ -133,15 +133,14 @@ describe('Expect the <Parallax> component', () => {
 
         // trigger an update
         stateInstance.setState(testProps);
+        const element = controller.getElements()[0];
 
-        expect(controller.updateElement).toBeCalledWith(expect.any(Object), {
-            props: {
-                disabled: true,
-                x0: 100,
-                x1: -100,
-                y0: -100,
-                y1: 100,
-            },
+        expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
+            disabled: true,
+            x0: 100,
+            x1: -100,
+            y0: -100,
+            y1: 100,
         });
 
         // should not be called again
@@ -151,7 +150,7 @@ describe('Expect the <Parallax> component', () => {
             bar: true,
         });
 
-        expect(controller.updateElement).toHaveBeenCalledTimes(1);
+        expect(controller.updateElementPropsById).toHaveBeenCalledTimes(1);
     });
 
     it('to reset styles on an element if the disabled prop is true', () => {
