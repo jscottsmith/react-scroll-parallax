@@ -41,17 +41,7 @@ class Parallax extends Component {
         }
 
         // create a new parallax element and save the reference
-        this.element = this.controller.createElement({
-            elInner: this._inner,
-            elOuter: this._outer,
-            props: {
-                disabled: this.props.disabled,
-                x0: this.props.x[0],
-                x1: this.props.x[1],
-                y0: this.props.y[0],
-                y1: this.props.y[1],
-            },
-        });
+        this.element = this.controller.createElement(this._getElementOptions());
     }
 
     componentDidUpdate(prevProps) {
@@ -62,15 +52,10 @@ class Parallax extends Component {
             this.props.y[0] !== prevProps.y[0] ||
             this.props.y[1] !== prevProps.y[1]
         ) {
-            this.controller.updateElement(this.element, {
-                props: {
-                    disabled: this.props.disabled,
-                    x0: this.props.x[0],
-                    x1: this.props.x[1],
-                    y0: this.props.y[0],
-                    y1: this.props.y[1],
-                },
-            });
+            this.controller.updateElementPropsById(
+                this.element.id,
+                this._getElementOptions().props
+            );
         }
         // resets element styles when disabled
         if (this.props.disabled !== prevProps.disabled && this.props.disabled) {
@@ -79,7 +64,21 @@ class Parallax extends Component {
     }
 
     componentWillUnmount() {
-        this.controller.removeElement(this.element);
+        this.controller.removeElementById(this.element.id);
+    }
+
+    _getElementOptions() {
+        return {
+            elInner: this._inner,
+            elOuter: this._outer,
+            props: {
+                disabled: this.props.disabled,
+                x0: this.props.x[0],
+                x1: this.props.x[1],
+                y0: this.props.y[0],
+                y1: this.props.y[1],
+            },
+        };
     }
 
     get controller() {

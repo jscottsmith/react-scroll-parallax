@@ -8,7 +8,8 @@ export {
     addAttributesHorizontal,
 } from './addAttributes';
 export addOffsets from './addOffsets';
-export clamp from './clamp';
+
 export parseValueAndUnit from './parseValueAndUnit';
 export scaleBetween from './scaleBetween';
 export testForPassiveScroll from './testForPassiveScroll';
+export { createId } from './createId';
