@@ -90,10 +90,9 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     function _updateAllElements() {
         elements.forEach(element => {
             _updateElementPosition(element);
-
-            // reset ticking so more animations can be called
-            ticking = false;
         });
+        // reset ticking so more animations can be called
+        ticking = false;
     }
 
     /**
@@ -159,11 +158,11 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     };
 
     /**
-     * Creates a new parallax element object with new id
-     * and options to store in the 'elements' array.
+     * Remove an element by id
      * @param {object} element
      */
     this.removeElementById = function(id) {
+        if (!elements) return;
         elements = elements.filter(el => el.id !== id);
     };
 
@@ -205,12 +204,12 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     this.destroy = function() {
         _removeListeners();
         elements.forEach(element => resetStyles(element));
+        elements = undefined;
     };
 }
 
 /**
  * Static method to instantiate the ParallaxController.
- * Returns a new or existing instance of the ParallaxController.
  * @returns {Object} ParallaxController
  */
 ParallaxController.init = function(options) {
