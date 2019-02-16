@@ -21,13 +21,13 @@ export class Element {
         this.isInView = null;
     }
 
-    updateProps(props) {
-        this.props = props;
-        this.offsets = addOffsets(props);
+    updateProps(nextProps) {
+        this.props = { ...this.props, ...nextProps };
+        this.offsets = addOffsets(nextProps);
         return this;
     }
 
-    setCachedAttributes = (view, scroll) => {
+    setCachedAttributes(view, scroll) {
         if (this.scrollAxis === VERTICAL) {
             this.attributes = addAttributesVertical(
                 this.elOuter,
@@ -43,7 +43,8 @@ export class Element {
                 scroll.x
             );
         }
-    };
+        return this;
+    }
 
     updatePosition(view, scroll) {
         if (this.scrollAxis === VERTICAL) {
@@ -78,5 +79,7 @@ export class Element {
             );
             setParallaxStyles(this.elInner, this.offsets, percent);
         }
+
+        return this;
     }
 }
