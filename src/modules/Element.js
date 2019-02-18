@@ -55,7 +55,8 @@ export class Element {
                 scroll.y
             );
 
-            if (!this.isInView) return;
+            if (!this.isInView) return this;
+
             const percent = percentMoved(
                 this.attributes.originTop,
                 this.attributes.originTotalDist,
@@ -70,7 +71,9 @@ export class Element {
                 view.width,
                 scroll.x
             );
-            if (!this.isInView) return;
+
+            if (!this.isInView) return this;
+
             const percent = percentMoved(
                 this.attributes.originLeft,
                 this.attributes.originTotalDist,
