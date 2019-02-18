@@ -3,11 +3,8 @@ export { setParallaxStyles, resetStyles } from './elementStyles';
 export { getParallaxOffsets } from './getParallaxOffsets';
 export { isElementInView } from './isElementInView';
 
-export {
-    addAttributesVertical,
-    addAttributesHorizontal,
-} from './addAttributes';
-export addOffsets from './addOffsets';
+export getOffsets from './getOffsets';
+export getCache from './getCache';
 
 export parseValueAndUnit from './parseValueAndUnit';
 export scaleBetween from './scaleBetween';

@@ -1,11 +1,10 @@
 import {
     createId,
-    addOffsets,
-    addAttributesHorizontal,
-    addAttributesVertical,
+    getOffsets,
     isElementInView,
     percentMoved,
     setParallaxStyles,
+    getCache,
 } from '../utils/index';
 import { VERTICAL } from '../constants';
 
@@ -16,41 +15,32 @@ export class Element {
         this.props = options.props;
         this.scrollAxis = options.scrollAxis;
         this.id = createId();
-        this.offsets = addOffsets(this.props);
-        this.attributes = null;
+        this.offsets = getOffsets(this.props);
+        this.cache = null;
         this.isInView = null;
     }
 
     updateProps(nextProps) {
         this.props = { ...this.props, ...nextProps };
-        this.offsets = addOffsets(nextProps);
+        this.offsets = getOffsets(nextProps);
         return this;
     }
 
     setCachedAttributes(view, scroll) {
-        if (this.scrollAxis === VERTICAL) {
-            this.attributes = addAttributesVertical(
-                this.elOuter,
-                this.offsets,
-                view.height,
-                scroll.y
-            );
-        } else {
-            this.attributes = addAttributesHorizontal(
-                this.elOuter,
-                this.offsets,
-                view.width,
-                scroll.x
-            );
-        }
+        this.cache = getCache({
+            element: this.elOuter,
+            offsets: this.offsets,
+            view,
+            scroll,
+        });
         return this;
     }
 
     updatePosition(view, scroll) {
         if (this.scrollAxis === VERTICAL) {
             this.isInView = isElementInView(
-                this.attributes.top,
-                this.attributes.bottom,
+                this.cache.top,
+                this.cache.bottom,
                 view.height,
                 scroll.y
             );
@@ -58,16 +48,16 @@ export class Element {
             if (!this.isInView) return this;
 
             const percent = percentMoved(
-                this.attributes.originTop,
-                this.attributes.originTotalDist,
+                this.cache.originTop,
+                this.cache.originTotalDistY,
                 view.height,
                 scroll.y
             );
             setParallaxStyles(this.elInner, this.offsets, percent);
         } else {
             this.isInView = isElementInView(
-                this.attributes.left,
-                this.attributes.right,
+                this.cache.left,
+                this.cache.right,
                 view.width,
                 scroll.x
             );
@@ -75,8 +65,8 @@ export class Element {
             if (!this.isInView) return this;
 
             const percent = percentMoved(
-                this.attributes.originLeft,
-                this.attributes.originTotalDist,
+                this.cache.originLeft,
+                this.cache.originTotalDistX,
                 view.width,
                 scroll.x
             );

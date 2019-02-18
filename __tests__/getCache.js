@@ -1,5 +1,5 @@
-import addAttributes from 'utils/addAttributes.js';
-import addOffsets from 'utils/addOffsets.js';
+import getCache from 'utils/getCache.js';
+import getOffsets from 'utils/getOffsets.js';
 
 const getBoundingClientRect = Element.prototype.getBoundingClientRect;
 
@@ -42,7 +42,7 @@ describe('addAttributes', () => {
             elOuter: createElement(),
         };
 
-        expect(addAttributes(addOffsets(element), 768)).toEqual(
+        expect(getCache(getOffsets(element), 768)).toEqual(
             expect.objectContaining({
                 attributes: {
                     bottom: 2164.4444444444443,
