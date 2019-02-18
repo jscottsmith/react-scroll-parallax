@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/jscottsmith/react-scroll-parallax"
   },
+  "files": [
+    "./cjs", "./README.md", "LICENSE"
+  ],
   "main": "./cjs/index.js",
   "browserslist": [
     "last 2 version",
