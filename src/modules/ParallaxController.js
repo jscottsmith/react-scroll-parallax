@@ -22,7 +22,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     let elements = [];
 
     // Scroll and View
-    const scroll = new Scroll(0, 0);
+    const scroll = new Scroll(window.pageXOffset, window.pageYOffset);
     const view = new View(0, 0);
 
     // Ticking
