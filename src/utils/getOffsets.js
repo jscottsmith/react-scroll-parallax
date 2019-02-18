@@ -5,7 +5,7 @@ import { parseValueAndUnit } from './index';
  * and unit. Sets these values as offset object accessible on the element.
  * @param {object} element
  */
-export default function addOffsets(props) {
+export default function getOffsets(props) {
     const { y0: y0Prop, y1: y1Prop, x1: x1Prop, x0: x0Prop } = props;
 
     const y0 = parseValueAndUnit(y0Prop);

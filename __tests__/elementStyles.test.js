@@ -1,9 +1,9 @@
 import { setParallaxStyles } from 'utils/elementStyles.js';
 import createNodeMock from './testUtils/createNodeMock';
-import addOffsets from 'utils/addOffsets';
+import getOffsets from 'utils/getOffsets';
 
 function createOffsets(x0, x1, y0, y1) {
-    return addOffsets({
+    return getOffsets({
         x0,
         x1,
         y0,
