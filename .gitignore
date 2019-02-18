@@ -1,8 +1,10 @@
-node_modules
-coverage
-dist
-build
-npm-debug.log
-lib
-.cache
+/.cache
+/build
+/cjs
+/coverage
+/dist
+/esm
+/node_modules
 /yarn-error.log
+
+npm-debug.log
