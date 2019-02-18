@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add **vertical** scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
+React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add vertical or horizontal scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
 
 ## Examples
 
@@ -42,6 +42,7 @@ yarn add react-scroll-parallax
     -   [Banner Props](#banner-props)
     -   [Banner Layers Prop](#banner-layers-prop)
 -   [`<ParallaxProvider>`](#parallaxprovider)
+    -   [ParallaxProvider Props](#parallaxprovider-props)
     -   [Parallax Controller Context](#parallax-controller-context)
     -   [Available Methods](#available-methods)
 -   [Browser Support](#browser-support)
@@ -169,6 +170,14 @@ const AppContainer = () => (
     </ParallaxProvider>
 );
 ```
+
+### ParallaxProvider Props
+
+The following props configure the `<ParallaxProvider>` component:
+
+| Name           |   Type   | Default    | Description                                                                                                  |
+| -------------- | :------: | :--------- | ------------------------------------------------------------------------------------------------------------ |
+| **scrollAxis** | `String` | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal` |
 
 ### Parallax Controller Context
 
