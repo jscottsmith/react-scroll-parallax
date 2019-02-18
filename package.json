@@ -6,14 +6,19 @@
     "type": "git",
     "url": "https://github.com/jscottsmith/react-scroll-parallax"
   },
-  "main": "lib/index.js",
+  "main": "./cjs/index.js",
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not dead"
+  ],
   "scripts": {
     "start": "yarn storybook",
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
     "lint": "eslint ./src ./__tests__",
     "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
-    "todo:prepublish": "babel ./src --out-dir ./lib --presets es2015,react,stage-0 --plugins babel-plugin-add-module-exports",
+    "prepublishOnly": "BABEL_ENV=production babel ./src --out-dir ./cjs",
     "storybook": "start-storybook -p 3000",
     "storybook:build": "build-storybook",
     "storybook:export": "build-storybook -c .storybook -o build",

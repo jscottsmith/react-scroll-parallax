@@ -1,14 +1,4 @@
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "modules": false,
-                "browserslist": "> 0.25%, not dead"
-            }
-        ],
-        "@babel/preset-react"
-    ],
     "env": {
         "test": {
             "presets": [
@@ -17,11 +7,23 @@
                     {
                         "modules": "commonjs"
                     }
-                ],
-                "@babel/preset-react"
-            ],
-            "plugins": ["@babel/plugin-proposal-class-properties"]
+                ]
+            ]
+        },
+        "production": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": "commonjs"
+                    }
+                ]
+            ]
         }
     },
-    "plugins": ["@babel/plugin-proposal-export-default-from"]
+    "presets": ["@babel/preset-react"],
+    "plugins": [
+        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-proposal-class-properties"
+    ]
 }
