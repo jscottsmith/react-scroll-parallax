@@ -3,7 +3,7 @@ import { testForPassiveScroll, resetStyles } from '../utils/index';
 import { View } from './View';
 import { Scroll } from './Scroll';
 import { Element } from './Element';
-import { VERTICAL, HORIZONTAL } from '../constants';
+import { VERTICAL } from '../constants';
 
 /**
  * -------------------------------------------------------
