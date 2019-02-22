@@ -17,13 +17,18 @@ import { VERTICAL } from '../constants';
  * based on x/y offsets and current scroll position.
  *
  */
-function ParallaxController({ scrollAxis = VERTICAL }) {
+function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     // All parallax elements to be updated
     let elements = [];
 
+    const hasScrollContainer = !!scrollContainer;
+    const viewEl = scrollContainer || window;
+
     // Scroll and View
-    const scroll = new Scroll(window.pageXOffset, window.pageYOffset);
-    const view = new View(0, 0);
+    const x = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+    const y = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
+    const scroll = new Scroll(x, y);
+    const view = new View({ width: 0, height: 0, scrollContainer });
 
     // Ticking
     let ticking = false;
@@ -32,7 +37,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     const supportsPassive = testForPassiveScroll();
 
     function _addListeners() {
-        window.addEventListener(
+        viewEl.addEventListener(
             'scroll',
             _handleScroll,
             supportsPassive ? { passive: true } : false
@@ -41,7 +46,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     }
 
     function _removeListeners() {
-        window.removeEventListener(
+        viewEl.removeEventListener(
             'scroll',
             _handleScroll,
             supportsPassive ? { passive: true } : false
@@ -59,9 +64,8 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     function _handleScroll() {
         // Save current scroll
         // Supports IE 9 and up.
-        const x = window.pageXOffset;
-        const y = window.pageYOffset;
-
+        const x = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+        const y = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
         scroll.setScroll(x, y);
 
         // Only called if the last animation request has been
@@ -78,8 +82,7 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      */
     function _handleResize() {
         _setViewSize();
-        _updateElementAttributes();
-        _updateAllElements();
+        _updateAllElements({ updateCache: true });
     }
 
     /**
@@ -87,9 +90,12 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
      * Determines if the element is in view based on the cached
      * attributes, if so set the elements parallax styles.
      */
-    function _updateAllElements() {
+    function _updateAllElements({ updateCache } = {}) {
         elements.forEach(element => {
             _updateElementPosition(element);
+            if (updateCache) {
+                element.setCachedAttributes(view, scroll);
+            }
         });
         // reset ticking so more animations can be called
         ticking = false;
@@ -106,27 +112,20 @@ function ParallaxController({ scrollAxis = VERTICAL }) {
     }
 
     /**
-     * Update element attributes.
-     * Sets up the elements offsets based on the props passed from
-     * the component then caches the elements current position and
-     * other important attributes.
-     */
-    function _updateElementAttributes() {
-        elements = elements.map(element =>
-            element.setCachedAttributes(view, scroll)
-        );
-    }
-
-    /**
      * Cache the window height.
      */
     function _setViewSize() {
-        const html = document.documentElement;
+        if (hasScrollContainer) {
+            const width = viewEl.offsetWidth;
+            const height = viewEl.offsetHeight;
+            return view.setSize(width, height);
+        }
 
+        const html = document.documentElement;
         const width = window.innerWidth || html.clientWidth;
         const height = window.innerHeight || html.clientHeight;
 
-        view.setSize(width, height);
+        return view.setSize(width, height);
     }
 
     /**
