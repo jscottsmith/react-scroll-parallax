@@ -1,7 +1,19 @@
 export default function getCache({ element, offsets, view, scroll }) {
     const { y0, y1, x1, x0 } = offsets;
 
-    const rect = element.getBoundingClientRect();
+    let rect = element.getBoundingClientRect();
+
+    // rect is based on viewport -- must adjust for relative scroll container
+    if (view.scrollContainer) {
+        const scrollRect = view.scrollContainer.getBoundingClientRect();
+
+        rect = {
+            top: rect.top - scrollRect.top,
+            right: rect.right - scrollRect.left,
+            bottom: rect.bottom - scrollRect.top,
+            left: rect.left - scrollRect.left,
+        };
+    }
 
     const height = element.offsetHeight;
     const width = element.offsetWidth;

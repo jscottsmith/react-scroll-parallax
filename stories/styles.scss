@@ -29,6 +29,25 @@ $bg2: #d6d6d6;
         min-height: 100%;
     }
 
+    .scroll-container {
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        bottom: 50px;
+        left: 50px;
+        background-color: rgba(30, 30, 30, 0.2);
+        border: 1px solid rgba(30, 30, 30, 0.2);
+
+        overflow: scroll;
+        display: flex;
+
+        &:before {
+            content: 'in this <div>';
+            @include scroll;
+            top: 60px;
+        }
+    }
+
     body {
         padding: 0;
         margin: 0;

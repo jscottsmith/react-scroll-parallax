@@ -30,6 +30,7 @@ export default class ParallaxProvider extends Component {
 
         this.controller = createController({
             scrollAxis: props.scrollAxis,
+            scrollContainer: props.scrollContainer,
         });
     }
 
