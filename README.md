@@ -92,16 +92,16 @@ The main component for manipulating a DOM element's position based on it's posit
 
 The following are all props that can be passed to the `<Parallax>` component:
 
-| Name           |                 Type                  | Default  | Description                                                                                                        |
-| -------------- | :-----------------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------ |
-| **x**          | `Array` of types `String` or `Number` | `[0, 0]` | Offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **y**          | `Array` of types `String` or `Number` | `[0, 0]` | Offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **className**  |               `String`                |          | Optionally pass additional class names to be added to the outermost parallax element.                              |
-| **disabled**   |               `Boolean`               | `false`  | Disables parallax effects on individual elements when `true`.                                                      |
-| **styleInner** |               `Object`                |          | Optionally pass a style object to be added to the innermost parallax element.                                      |
-| **styleOuter** |               `Object`                |          | Optionally pass a style object to be added to the outermost parallax element.                                      |
-| **tagInner**   |               `String`                | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                               |
-| **tagOuter**   |               `String`                | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                               |
+| Name           |              Type               | Default  | Description                                                                                                        |
+| -------------- | :-----------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------ |
+| **x**          | `Array` of `String` or `Number` | `[0, 0]` | Offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
+| **y**          | `Array` of `String` or `Number` | `[0, 0]` | Offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
+| **className**  |            `String`             |          | Optionally pass additional class names to be added to the outermost parallax element.                              |
+| **disabled**   |            `Boolean`            | `false`  | Disables parallax effects on individual elements when `true`.                                                      |
+| **styleInner** |            `Object`             |          | Optionally pass a style object to be added to the innermost parallax element.                                      |
+| **styleOuter** |            `Object`             |          | Optionally pass a style object to be added to the outermost parallax element.                                      |
+| **tagInner**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                               |
+| **tagOuter**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                               |
 
 ## \<ParallaxBanner>
 
@@ -175,9 +175,10 @@ const AppContainer = () => (
 
 The following props configure the `<ParallaxProvider>` component:
 
-| Name           |   Type   | Default    | Description                                                                                                  |
-| -------------- | :------: | :--------- | ------------------------------------------------------------------------------------------------------------ |
-| **scrollAxis** | `String` | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal` |
+| Name                |   Type    | Default    | Description                                                                                                  |
+| ------------------- | :-------: | :--------- | ------------------------------------------------------------------------------------------------------------ |
+| **scrollAxis**      | `String`  | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal` |
+| **scrollContainer** | `Element` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the HTML body |
 
 ### Parallax Controller Context
 
