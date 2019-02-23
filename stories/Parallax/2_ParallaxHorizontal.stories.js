@@ -42,7 +42,7 @@ storiesOf('<Parallax> Horizontal', module)
         );
     })
     .add('linear x offsets', () => {
-        const amount = number('Number of Elements', 5);
+        const amount = number('Number of Elements', 3);
         const offA = number('x[0] * i', -50);
         const offB = number('x[1] * i', 50);
         const unit = text('Offset Unit', '%');
@@ -73,7 +73,7 @@ storiesOf('<Parallax> Horizontal', module)
         );
     })
     .add('linear y offsets', () => {
-        const amount = number('Number of Elements', 5);
+        const amount = number('Number of Elements', 3);
         const offA = number('y[0] * i', -50);
         const offB = number('y[1] * i', 50);
         const unit = text('Offset Unit', '%');

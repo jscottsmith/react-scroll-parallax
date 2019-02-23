@@ -18,6 +18,7 @@ $bg2: #d6d6d6;
     z-index: 1000;
     transform: translate3d(-50%, 0, 0);
 }
+
 :global {
     html {
         height: 100%;
@@ -27,25 +28,6 @@ $bg2: #d6d6d6;
         display: flex;
         min-width: 100%;
         min-height: 100%;
-    }
-
-    .scroll-container {
-        position: fixed;
-        top: 50px;
-        right: 50px;
-        bottom: 50px;
-        left: 50px;
-        background-color: rgba(30, 30, 30, 0.2);
-        border: 1px solid rgba(30, 30, 30, 0.2);
-
-        overflow: scroll;
-        display: flex;
-
-        &:before {
-            content: 'in this <div>';
-            @include scroll;
-            top: 60px;
-        }
     }
 
     body {
@@ -58,9 +40,29 @@ $bg2: #d6d6d6;
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgLz4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjEwIiB5PSIxMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiAvPjwvc3ZnPg==);
     }
 
+    .scroll-container {
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        bottom: 50px;
+        left: 50px;
+        background-color: rgba(30, 30, 30, 0.2);
+        border: 1px solid rgba(30, 30, 30, 0.15);
+        display: flex;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        &:before {
+            content: 'in this <div>';
+            @include scroll;
+            top: 60px;
+        }
+    }
+
     .vertical {
         width: 100%;
         min-height: 300vh;
+        overflow-x: hidden;
 
         &:before {
             content: '↑ Scroll ↓';
@@ -71,6 +73,7 @@ $bg2: #d6d6d6;
     .horizontal {
         height: 100%;
         min-width: 300vw;
+        overflow-y: hidden;
 
         &:before {
             content: '← Scroll →';
@@ -105,5 +108,9 @@ $bg2: #d6d6d6;
 
     .parallax-outer {
         background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .parallax-inner {
+        will-change: transform;
     }
 }
