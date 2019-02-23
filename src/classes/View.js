@@ -4,16 +4,9 @@ export class View {
         this.setSize(width, height);
     }
 
-    setSize = (width, height) => {
+    setSize(width, height) {
         this.width = width;
         this.height = height;
         return this;
-    };
-
-    size() {
-        return {
-            width: this.width,
-            height: this.height,
-        };
     }
 }

@@ -1,17 +1,11 @@
-export function Scroll(...args) {
-    const scroll = {
-        setScroll(x, y) {
-            this.x = x;
-            this.y = y;
-            return this;
-        },
-        position() {
-            return {
-                x: this.x,
-                y: this.y,
-            };
-        },
-    };
+export class Scroll {
+    constructor(...args) {
+        this.setScroll(...args);
+    }
 
-    return scroll.setScroll(...args);
+    setScroll(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+    }
 }
