@@ -1,4 +1,4 @@
-import { getParallaxOffsets } from 'utils/getParallaxOffsets.js';
+import { getParallaxOffsets } from 'helpers/getParallaxOffsets';
 import { parseValueAndUnit, scaleBetween } from 'utils';
 
 const offset = {

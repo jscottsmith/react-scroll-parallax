@@ -1,5 +1,5 @@
-import getCache from 'utils/getCache.js';
-import getOffsets from 'utils/getOffsets.js';
+import getCache from 'helpers/getCache.js';
+import getOffsets from 'helpers/getOffsets.js';
 
 const getBoundingClientRect = Element.prototype.getBoundingClientRect;
 

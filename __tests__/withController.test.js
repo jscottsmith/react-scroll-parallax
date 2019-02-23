@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import withController from 'components/withController';
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'modules/ParallaxController';
+import ParallaxController from 'classes/ParallaxController';
 
 describe('Expect the withController HoC', () => {
     it('to provide the controller to a component as a prop', () => {

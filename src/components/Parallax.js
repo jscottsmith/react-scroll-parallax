@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParallaxController from '../modules/ParallaxController';
+import ParallaxController from '../classes/ParallaxController';
 import withController from './withController';
 
 class Parallax extends Component {

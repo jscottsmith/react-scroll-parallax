@@ -1,4 +1,4 @@
-import { getParallaxOffsets } from './index';
+import { getParallaxOffsets } from './getParallaxOffsets';
 
 /**
  * Takes a parallax element and set the styles based on the

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParallaxContext from '../modules/ParallaxContext';
+import ParallaxContext from '../helpers/ParallaxContext';
 
 export default WrappedComponent => {
     class WithController extends Component {

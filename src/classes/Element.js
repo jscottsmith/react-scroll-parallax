@@ -1,11 +1,11 @@
+import { createId } from '../utils/index';
 import {
-    createId,
     getOffsets,
     isElementInView,
     percentMoved,
     setParallaxStyles,
     getCache,
-} from '../utils/index';
+} from '../helpers/index';
 import { VERTICAL } from '../constants';
 
 export class Element {

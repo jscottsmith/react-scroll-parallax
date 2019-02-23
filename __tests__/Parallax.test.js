@@ -1,14 +1,13 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import TestRenderer from 'react-test-renderer';
 import Parallax from 'components/Parallax';
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'modules/ParallaxController';
+import ParallaxController from 'classes/ParallaxController';
 import MockProvider from './testUtils/MockProvider';
 import expectRenderError from './testUtils/expectRenderError';
 import createNodeMock from './testUtils/createNodeMock';
-import { VERTICAL } from '../src/constants';
+import { VERTICAL } from 'constants';
 
 const consoleLog = global.console.log;
 
