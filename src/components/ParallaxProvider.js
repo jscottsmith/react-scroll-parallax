@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParallaxContext from '../modules/ParallaxContext';
-import ParallaxController from '../modules/ParallaxController';
+import ParallaxContext from '../helpers/ParallaxContext';
+import ParallaxController from '../classes/ParallaxController';
 import { VERTICAL, HORIZONTAL } from '../constants';
 
 const createController = options => {

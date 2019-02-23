@@ -1,4 +1,4 @@
-import { parseValueAndUnit } from './index';
+import { parseValueAndUnit } from '../utils/index';
 
 /**
  * Takes a parallax element and parses the offset props to get the value

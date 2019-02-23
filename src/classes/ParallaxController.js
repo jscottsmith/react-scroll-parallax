@@ -1,5 +1,5 @@
-import { testForPassiveScroll, resetStyles } from '../utils/index';
-
+import { testForPassiveScroll } from '../utils';
+import { resetStyles } from '../helpers';
 import { View } from './View';
 import { Scroll } from './Scroll';
 import { Element } from './Element';

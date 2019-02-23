@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'modules/ParallaxController';
+import ParallaxController from 'classes/ParallaxController';
 import withController from 'components/withController';
 
 describe('A <ParallaxProvider>', () => {

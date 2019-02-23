@@ -1,4 +1,4 @@
-import { scaleBetween } from './index';
+import { scaleBetween } from '../utils/index';
 
 /**
  * Gets the parallax X and Y offsets to be applied to an element

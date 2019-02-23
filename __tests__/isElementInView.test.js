@@ -1,4 +1,4 @@
-import { isElementInView } from 'utils/isElementInView.js';
+import { isElementInView } from 'helpers/isElementInView';
 
 describe.each([
     // a // b // size // scroll // in view ?

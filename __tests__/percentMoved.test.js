@@ -1,4 +1,4 @@
-import { percentMoved } from 'utils/percentMoved.js';
+import { percentMoved } from 'helpers/percentMoved';
 
 describe.each([
     // element // win height // scroll // percent

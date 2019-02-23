@@ -1,4 +1,4 @@
-import getOffsets from 'utils/getOffsets.js';
+import getOffsets from 'helpers/getOffsets';
 import { parseValueAndUnit } from 'utils/index';
 
 describe('getOffsets', () => {

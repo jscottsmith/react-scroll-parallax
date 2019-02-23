@@ -1,5 +1,5 @@
-import ParallaxController from 'modules/ParallaxController';
-import { Element } from 'modules/Element';
+import ParallaxController from 'classes/ParallaxController';
+import { Element } from 'classes/Element';
 import { VERTICAL } from '../src/constants';
 
 const addEventListener = window.addEventListener;

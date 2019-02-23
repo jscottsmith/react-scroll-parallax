@@ -1,4 +1,4 @@
-import { Element } from 'modules/Element';
+import { Element } from 'classes/Element';
 
 const DEFAULT_OPTIONS = {
     elInner: document.createElement('div'),
