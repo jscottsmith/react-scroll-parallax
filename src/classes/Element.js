@@ -18,6 +18,12 @@ export class Element {
         this.offsets = getOffsets(this.props);
         this.cache = null;
         this.isInView = null;
+        this.percent = 0;
+
+        this.updatePosition =
+            options.scrollAxis === VERTICAL
+                ? this._updatePositionVertical
+                : this._updatePositionHorizontal;
     }
 
     updateProps(nextProps) {
@@ -36,42 +42,46 @@ export class Element {
         return this;
     }
 
-    updatePosition(view, scroll) {
-        if (this.scrollAxis === VERTICAL) {
-            this.isInView = isElementInView(
-                this.cache.top,
-                this.cache.bottom,
-                view.height,
-                scroll.y
-            );
+    _updatePositionHorizontal(view, scroll) {
+        this.isInView = isElementInView(
+            this.cache.left,
+            this.cache.right,
+            view.width,
+            scroll.x
+        );
 
-            if (!this.isInView) return this;
+        if (!this.isInView) return this;
 
-            const percent = percentMoved(
-                this.cache.originTop,
-                this.cache.originTotalDistY,
-                view.height,
-                scroll.y
-            );
-            setParallaxStyles(this.elInner, this.offsets, percent);
-        } else {
-            this.isInView = isElementInView(
-                this.cache.left,
-                this.cache.right,
-                view.width,
-                scroll.x
-            );
+        this.percent = percentMoved(
+            this.cache.originLeft,
+            this.cache.originTotalDistX,
+            view.width,
+            scroll.x
+        );
 
-            if (!this.isInView) return this;
+        setParallaxStyles(this.elInner, this.offsets, this.percent);
 
-            const percent = percentMoved(
-                this.cache.originLeft,
-                this.cache.originTotalDistX,
-                view.width,
-                scroll.x
-            );
-            setParallaxStyles(this.elInner, this.offsets, percent);
-        }
+        return this;
+    }
+
+    _updatePositionVertical(view, scroll) {
+        this.isInView = isElementInView(
+            this.cache.top,
+            this.cache.bottom,
+            view.height,
+            scroll.y
+        );
+
+        if (!this.isInView) return this;
+
+        this.percent = percentMoved(
+            this.cache.originTop,
+            this.cache.originTotalDistY,
+            view.height,
+            scroll.y
+        );
+
+        setParallaxStyles(this.elInner, this.offsets, this.percent);
 
         return this;
     }

@@ -1,20 +1,8 @@
 import getCache from 'helpers/getCache.js';
 import getOffsets from 'helpers/getOffsets.js';
+import createElementMock from './testUtils/createElementMock';
 
 const getBoundingClientRect = Element.prototype.getBoundingClientRect;
-
-function createElement() {
-    const elOuter = document.createElement('div');
-    Object.defineProperty(elOuter, 'offsetHeight', {
-        value: 120,
-        writable: false,
-    });
-    Object.defineProperty(elOuter, 'offsetWidth', {
-        value: 120,
-        writable: false,
-    });
-    return elOuter;
-}
 
 describe('addAttributes', () => {
     beforeAll(() => {
@@ -39,7 +27,7 @@ describe('addAttributes', () => {
     it.skip('adds the attribute cache properties to an element with defaults', () => {
         const element = {
             props: { y0: -100, y1: 100, x1: 0, x0: 0 },
-            elOuter: createElement(),
+            elOuter: createElementMock(),
         };
 
         expect(getCache(getOffsets(element), 768)).toEqual(

@@ -58,6 +58,8 @@ describe('Expect the ParallaxController', () => {
             scrollAxis: 'vertical',
             elInner: elInner,
             elOuter: document.createElement('div'),
+            percent: 100,
+            updatePosition: expect.any(Function),
             cache: {
                 height: 0,
                 width: 0,
@@ -88,61 +90,6 @@ describe('Expect the ParallaxController', () => {
                 x0: 0,
                 y1: 0,
                 y0: 0,
-            },
-        };
-        expect(element).toEqual(expectedElement);
-        controller.destroy();
-    });
-
-    it('to create an element and return it', () => {
-        const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-        const element = controller.createElement(options);
-        expect(element.id).toEqual(2);
-        controller.updateElementPropsById(element.id, {
-            y0: 0,
-            y1: 0,
-            x1: 10,
-            x0: -10,
-        });
-        const elInner = document.createElement('div');
-        elInner.style.transform = 'translate3d(10%, 0%, 0)';
-
-        const expectedElement = {
-            id: 2,
-            isInView: true,
-            scrollAxis: 'vertical',
-            elInner: elInner,
-            elOuter: document.createElement('div'),
-            cache: {
-                height: 0,
-                width: 0,
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                totalDistY: 768,
-                totalDistX: 1024,
-                originTop: 0,
-                originBottom: 0,
-                originLeft: 0,
-                originRight: 0,
-                originTotalDistY: 768,
-                originTotalDistX: 1024,
-            },
-            offsets: {
-                x1: { unit: '%', value: 10 },
-                x0: { unit: '%', value: -10 },
-                xUnit: '%',
-                y1: { unit: '%', value: 0 },
-                y0: { unit: '%', value: 0 },
-                yUnit: '%',
-            },
-            props: {
-                disabled: false,
-                y0: 0,
-                y1: 0,
-                x1: 10,
-                x0: -10,
             },
         };
         expect(element).toEqual(expectedElement);
