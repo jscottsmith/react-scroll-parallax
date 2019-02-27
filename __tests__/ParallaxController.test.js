@@ -1,5 +1,7 @@
 import ParallaxController from 'classes/ParallaxController';
 import { Element } from 'classes/Element';
+import Rect from 'classes/Rect';
+import Bounds from 'classes/Bounds';
 import { VERTICAL } from '../src/constants';
 
 const addEventListener = window.addEventListener;
@@ -60,22 +62,6 @@ describe('Expect the ParallaxController', () => {
             elOuter: document.createElement('div'),
             percent: 100,
             updatePosition: expect.any(Function),
-            cache: {
-                height: 0,
-                width: 0,
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                totalDistY: 768,
-                totalDistX: 1024,
-                originTop: 0,
-                originBottom: 0,
-                originLeft: 0,
-                originRight: 0,
-                originTotalDistY: 768,
-                originTotalDistX: 1024,
-            },
             offsets: {
                 x1: { unit: '%', value: 0 },
                 x0: { unit: '%', value: 0 },
@@ -92,7 +78,10 @@ describe('Expect the ParallaxController', () => {
                 y0: 0,
             },
         };
-        expect(element).toEqual(expectedElement);
+        expect(element).toMatchObject(expectedElement);
+        expect(element.bounds).toBeInstanceOf(Bounds);
+        expect(element.rect).toBeInstanceOf(Rect);
+
         controller.destroy();
     });
 

@@ -48,22 +48,6 @@ describe('Expect the Element class', () => {
         const scroll = new Scroll(0, 40);
         const instance = element.setCachedAttributes(view, scroll);
         expect(instance).toBeInstanceOf(Element);
-        expect(instance.cache).toMatchObject({
-            bottom: 40,
-            height: 0,
-            left: 0,
-            originBottom: 40,
-            originLeft: 0,
-            originRight: 0,
-            originTop: 40,
-            originTotalDistX: 100,
-            originTotalDistY: 50,
-            right: 0,
-            top: 40,
-            totalDistX: 100,
-            totalDistY: 50,
-            width: 0,
-        });
     });
 
     it('to update position and return the instance', () => {

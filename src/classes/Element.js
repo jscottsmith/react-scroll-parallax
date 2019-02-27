@@ -4,9 +4,10 @@ import {
     isElementInView,
     percentMoved,
     setParallaxStyles,
-    getCache,
 } from '../helpers/index';
 import { VERTICAL } from '../constants';
+import Bounds from './Bounds';
+import Rect from './Rect';
 
 export class Element {
     constructor(options) {
@@ -16,7 +17,6 @@ export class Element {
         this.scrollAxis = options.scrollAxis;
         this.id = createId();
         this.offsets = getOffsets(this.props);
-        this.cache = null;
         this.isInView = null;
         this.percent = 0;
 
@@ -33,19 +33,15 @@ export class Element {
     }
 
     setCachedAttributes(view, scroll) {
-        this.cache = getCache({
-            element: this.elOuter,
-            offsets: this.offsets,
-            view,
-            scroll,
-        });
+        this.rect = new Rect(this.elOuter, view, scroll);
+        this.bounds = new Bounds(this.rect, this.offsets, view);
         return this;
     }
 
     _updatePositionHorizontal(view, scroll) {
         this.isInView = isElementInView(
-            this.cache.left,
-            this.cache.right,
+            this.bounds.left,
+            this.bounds.right,
             view.width,
             scroll.x
         );
@@ -53,8 +49,8 @@ export class Element {
         if (!this.isInView) return this;
 
         this.percent = percentMoved(
-            this.cache.originLeft,
-            this.cache.originTotalDistX,
+            this.rect.left,
+            this.rect.originTotalDistX,
             view.width,
             scroll.x
         );
@@ -66,8 +62,8 @@ export class Element {
 
     _updatePositionVertical(view, scroll) {
         this.isInView = isElementInView(
-            this.cache.top,
-            this.cache.bottom,
+            this.bounds.top,
+            this.bounds.bottom,
             view.height,
             scroll.y
         );
@@ -75,8 +71,8 @@ export class Element {
         if (!this.isInView) return this;
 
         this.percent = percentMoved(
-            this.cache.originTop,
-            this.cache.originTotalDistY,
+            this.rect.top,
+            this.rect.originTotalDistY,
             view.height,
             scroll.y
         );
