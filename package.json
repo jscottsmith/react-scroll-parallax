@@ -22,7 +22,7 @@
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
     "lint": "eslint ./src ./__tests__",
-    "prettier": "prettier --tab-width 4 --single-quote --trailing-comma es5 --print-width 80 --write \"{src,examples,__tests__}/**/**/**/*.js\"",
+    "prettier": "prettier --config ./.prettierrc --write \"{src,stories,__tests__}/**/*.js\"",
     "prepublishOnly": "BABEL_ENV=production babel ./src --out-dir ./cjs",
     "storybook": "start-storybook -p 3000",
     "storybook:build": "build-storybook",
