@@ -58,7 +58,7 @@ describe('Expect the ParallaxController', () => {
             id: 1,
             isInView: true,
             scrollAxis: 'vertical',
-            elInner: elInner,
+            elInner,
             elOuter: document.createElement('div'),
             percent: 100,
             updatePosition: expect.any(Function),

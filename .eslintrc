@@ -8,6 +8,11 @@
         "node": true,
         "jest/globals": true
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "parser": "babel-eslint",
     "plugins": ["babel", "react", "jest"],
     "rules": {
@@ -169,10 +174,10 @@
 
         /* ECMAScript 6 */
         "constructor-super": 1,
-        "generator-star-spacing": 0, // see Babel section
+        "generator-star-spacing": 1,
         "no-this-before-super": 1,
         "no-var": 1,
-        "object-shorthand": 0, // see Babel section
+        "object-shorthand": 1,
         "prefer-const": 1,
 
         /* Legacy */
@@ -184,8 +189,6 @@
         "no-plusplus": 0,
 
         /* Babel */
-        "babel/object-shorthand": [1, "always"],
-        "babel/generator-star-spacing": [1, "after"],
         "babel/new-cap": 1,
         "babel/object-curly-spacing": [1, "always"],
 

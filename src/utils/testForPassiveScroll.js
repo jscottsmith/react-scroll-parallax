@@ -2,7 +2,7 @@ export default function testForPassiveScroll() {
     let supportsPassiveOption = false;
     try {
         const opts = Object.defineProperty({}, 'passive', {
-            get: function() {
+            get() {
                 supportsPassiveOption = true;
             },
         });

@@ -23,6 +23,7 @@ export default class ParallaxProvider extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         scrollAxis: PropTypes.oneOf([VERTICAL, HORIZONTAL]),
+        scrollContainer: PropTypes.instanceOf(Element),
     };
 
     constructor(props) {
