@@ -64,9 +64,9 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     function _handleScroll() {
         // Save current scroll
         // Supports IE 9 and up.
-        const x = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
-        const y = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
-        scroll.setScroll(x, y);
+        const nx = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+        const ny = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
+        scroll.setScroll(nx, ny);
 
         // Only called if the last animation request has been
         // completed and there are parallax elements to update
