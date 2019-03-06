@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ParallaxContext from '../helpers/ParallaxContext';
 import ParallaxController from '../classes/ParallaxController';
 import { VERTICAL, HORIZONTAL } from '../constants';
+import validHTMLElement from '../utils/validHTMLElement';
 
 const createController = options => {
     // Don't initialize on the server
@@ -23,7 +24,7 @@ export default class ParallaxProvider extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         scrollAxis: PropTypes.oneOf([VERTICAL, HORIZONTAL]),
-        scrollContainer: PropTypes.instanceOf(Element),
+        scrollContainer: validHTMLElement,
     };
 
     constructor(props) {
