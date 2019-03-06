@@ -151,13 +151,12 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 
 The `layers` prop takes an array of objects that will represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
-| Name                 |   Type    | Default | Description                                                                                                                                              |
-| -------------------- | :-------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **amount**           | `Number`  |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
-| **children**         | `Element` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
-| **expanded**         | `Boolean` | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
-| **image**            | `String`  |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
-| **slowerScrollRate** | `Number`  |         | Indicates whether the layer should move faster or slower than the default rate of scroll.                                                                |
+| Name         |   Type    | Default | Description                                                                                                                                              |
+| ------------ | :-------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **amount**   | `Number`  |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
+| **children** | `Element` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
+| **expanded** | `Boolean` | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
+| **image**    | `String`  |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
 
 ## \<ParallaxProvider>
 
