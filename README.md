@@ -1,5 +1,7 @@
 # React Scroll Parallax v2
 
+**Warning** This was an early alpha that is not supported. Use the [latest v2](https://github.com/jscottsmith/react-scroll-parallax)
+
 [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=v2)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/v2/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/v2)
 
 A small library of components for creating **vertical** scroll based effects like parallax based on an element's position in the viewport. Works with universal (server-side rendered) React apps.
