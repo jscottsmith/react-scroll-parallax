@@ -19,7 +19,6 @@ describe('Expect the <ParallaxBanner> component', () => {
                             {
                                 image: 'https://foo.com/bar.jpg',
                                 amount: 0.2,
-                                slowerScrollRate: false,
                             },
                         ]}
                         style={{
@@ -51,7 +50,6 @@ describe('Expect the <ParallaxBanner> component', () => {
                             {
                                 children: <div>test</div>,
                                 amount: 0.2,
-                                slowerScrollRate: false,
                             },
                         ]}
                         style={{
@@ -127,7 +125,6 @@ describe('Expect the <ParallaxBanner> component', () => {
                         {
                             children: <Child />,
                             amount: 0.2,
-                            slowerScrollRate: false,
                         },
                     ]}
                 />
