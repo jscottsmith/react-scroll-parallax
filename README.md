@@ -6,17 +6,9 @@ React components to create parallax scroll effects for banners, images or any ot
 
 ## Examples
 
-Next Storybook: http://react-scroll-parallax-next.surge.sh
-
-Demo: https://react-scroll-parallax.netlify.com/
-
-Some (old) links demonstrating possible effects created with this lib (v1):
-
--   [Example Site](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
--   [Storybook](http://react-scroll-parallax-v1.surge.sh/)
--   [Parallax Testing](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-test/)
--   [CodePen Parallax](https://codepen.io/jscottsmith/pen/eREbwz)
--   [CodePen Parallax Banner](https://codepen.io/jscottsmith/pen/aVBvGj)
+-   [Storybook](http://react-scroll-parallax-next.surge.sh)
+-   [Demo 1](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/)
+-   [Demo 2](https://react-scroll-parallax.netlify.com/)
 
 You can also view [the source code for these examples](https://github.com/jscottsmith/react-scroll-parallax-examples) on Github.
 
