@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-parallax",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "React components to create parallax scroll effects for banners, images or any other DOM elements.",
   "repository": {
     "type": "git",
