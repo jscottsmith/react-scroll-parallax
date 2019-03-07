@@ -4,7 +4,7 @@
 
 React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add vertical or horizontal scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
 
-If you're coming from [v1](https://github.com/jscottsmith/react-scroll-parallax/tree/v1), here's a [migration guide](https://github.com/jscottsmith/react-scroll-parallax/blob/next/docs/migration-guide.md).
+If you're coming from [v1](https://github.com/jscottsmith/react-scroll-parallax/tree/v1), here's a [migration guide](https://github.com/jscottsmith/react-scroll-parallax/blob/master/docs/migration-guide.md).
 
 ## Examples
 
