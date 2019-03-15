@@ -10,4 +10,4 @@ deploy:
     provider: surge
     project: build
     domain: react-scroll-parallax-next.surge.sh
-    on: next
+    on: master
