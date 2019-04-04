@@ -23,7 +23,7 @@
     "test:watch": "BABEL_ENV=test jest --watch",
     "lint": "eslint ./src ./__tests__",
     "prettier": "prettier --config ./.prettierrc --write \"{src,stories,__tests__}/**/*.js\"",
-    "prepublishOnly": "BABEL_ENV=production babel ./src --out-dir ./cjs",
+    "prepublishOnly": "yarn test && ./publish.sh",
     "storybook": "start-storybook -p 3000",
     "storybook:build": "build-storybook",
     "storybook:export": "build-storybook -c .storybook -o build",
