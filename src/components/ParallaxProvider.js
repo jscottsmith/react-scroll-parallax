@@ -36,6 +36,12 @@ export default class ParallaxProvider extends Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.scrollContainer !== this.props.scrollContainer) {
+            this.controller.updateScrollContainer(this.props.scrollContainer);
+        }
+    }
+
     componentWillUnmount() {
         this.controller = this.controller.destroy();
     }
