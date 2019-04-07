@@ -1,23 +1,32 @@
 import React from 'react';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 export default class ScrollContainer extends React.Component {
-    constructor() {
-        super();
-        this.scrollContainer = React.createRef();
-        this.state = {
-            mounted: false,
-        };
-    }
-
-    componentDidMount = () => {
-        this.setState({ mounted: true });
+    static defaultProps = {
+        scrollAxis: 'vertical',
     };
 
+    constructor() {
+        super();
+        this.state = {
+            scrollContainer: null,
+        };
+        this.scrollContainer = React.createRef();
+    }
+
+    componentDidMount() {
+        this.setState({ scrollContainer: this.scrollContainer.current });
+    }
+
     render() {
-        const ref = this.scrollContainer.current;
         return (
             <div className="scroll-container" ref={this.scrollContainer}>
-                {this.state.mounted ? this.props.children(ref) : null}
+                <ParallaxProvider
+                    scrollContainer={this.state.scrollContainer}
+                    scrollAxis={this.props.scrollAxis}
+                >
+                    {this.props.children}
+                </ParallaxProvider>
             </div>
         );
     }
