@@ -194,7 +194,7 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      */
     this.update = function() {
         _setViewSize();
-        _updateAllElements();
+        _updateAllElements({ updateCache: true });
     };
 
     this.updateScrollContainer = function(el) {
