@@ -1,7 +1,7 @@
 import React from 'react';
 import { text, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import { Parallax } from 'react-scroll-parallax';
 import Element from '../Element/Element';
 import ScrollContainer from '../ScrollContainer';
 import styles from './Parallax.scss';
@@ -16,29 +16,25 @@ storiesOf('<Parallax> in a <div>', module)
         const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
         return (
             <ScrollContainer>
-                {scrollContainer => (
-                    <ParallaxProvider scrollContainer={scrollContainer}>
-                        <div className="vertical">
-                            <div className="elements linear">
-                                {elements.map((_, i) => {
-                                    const n = i - amount;
-                                    return (
-                                        <Parallax
-                                            key={n}
-                                            className={styles.smallLinear}
-                                            x={[
-                                                `${offA * n}${unit}`,
-                                                `${offB * n}${unit}`,
-                                            ]}
-                                        >
-                                            <Element name={n * -1} />
-                                        </Parallax>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </ParallaxProvider>
-                )}
+                <div className="vertical">
+                    <div className="elements linear">
+                        {elements.map((_, i) => {
+                            const n = i - amount;
+                            return (
+                                <Parallax
+                                    key={n}
+                                    className={styles.smallLinear}
+                                    x={[
+                                        `${offA * n}${unit}`,
+                                        `${offB * n}${unit}`,
+                                    ]}
+                                >
+                                    <Element name={n * -1} />
+                                </Parallax>
+                            );
+                        })}
+                    </div>
+                </div>
             </ScrollContainer>
         );
     })
@@ -50,29 +46,25 @@ storiesOf('<Parallax> in a <div>', module)
         const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
         return (
             <ScrollContainer>
-                {scrollContainer => (
-                    <ParallaxProvider scrollContainer={scrollContainer}>
-                        <div className="vertical">
-                            <div className="elements linear">
-                                {elements.map((_, i) => {
-                                    const n = i - amount;
-                                    return (
-                                        <Parallax
-                                            key={n}
-                                            className={styles.smallLinear}
-                                            y={[
-                                                `${offA * n}${unit}`,
-                                                `${offB * n}${unit}`,
-                                            ]}
-                                        >
-                                            <Element name={n * -1} />
-                                        </Parallax>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </ParallaxProvider>
-                )}
+                <div className="vertical">
+                    <div className="elements linear">
+                        {elements.map((_, i) => {
+                            const n = i - amount;
+                            return (
+                                <Parallax
+                                    key={n}
+                                    className={styles.smallLinear}
+                                    y={[
+                                        `${offA * n}${unit}`,
+                                        `${offB * n}${unit}`,
+                                    ]}
+                                >
+                                    <Element name={n * -1} />
+                                </Parallax>
+                            );
+                        })}
+                    </div>
+                </div>
             </ScrollContainer>
         );
     })
@@ -83,33 +75,26 @@ storiesOf('<Parallax> in a <div>', module)
         const unit = text('Offset Unit', '%');
         const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
         return (
-            <ScrollContainer>
-                {scrollContainer => (
-                    <ParallaxProvider
-                        scrollContainer={scrollContainer}
-                        scrollAxis="horizontal"
-                    >
-                        <div className="horizontal">
-                            <div className="elements linear">
-                                {elements.map((_, i) => {
-                                    const n = i - amount;
-                                    return (
-                                        <Parallax
-                                            key={n}
-                                            className={styles.smallLinear}
-                                            x={[
-                                                `${offA * n}${unit}`,
-                                                `${offB * n}${unit}`,
-                                            ]}
-                                        >
-                                            <Element name={n * -1} />
-                                        </Parallax>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </ParallaxProvider>
-                )}
+            <ScrollContainer scrollAxis="horizontal">
+                <div className="horizontal">
+                    <div className="elements linear">
+                        {elements.map((_, i) => {
+                            const n = i - amount;
+                            return (
+                                <Parallax
+                                    key={n}
+                                    className={styles.smallLinear}
+                                    x={[
+                                        `${offA * n}${unit}`,
+                                        `${offB * n}${unit}`,
+                                    ]}
+                                >
+                                    <Element name={n * -1} />
+                                </Parallax>
+                            );
+                        })}
+                    </div>
+                </div>
             </ScrollContainer>
         );
     })
@@ -120,33 +105,26 @@ storiesOf('<Parallax> in a <div>', module)
         const unit = text('Offset Unit', '%');
         const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
         return (
-            <ScrollContainer>
-                {scrollContainer => (
-                    <ParallaxProvider
-                        scrollContainer={scrollContainer}
-                        scrollAxis="horizontal"
-                    >
-                        <div className="horizontal">
-                            <div className="elements linear">
-                                {elements.map((_, i) => {
-                                    const n = i - amount;
-                                    return (
-                                        <Parallax
-                                            key={n}
-                                            className={styles.smallLinear}
-                                            y={[
-                                                `${offA * n}${unit}`,
-                                                `${offB * n}${unit}`,
-                                            ]}
-                                        >
-                                            <Element name={n * -1} />
-                                        </Parallax>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </ParallaxProvider>
-                )}
+            <ScrollContainer scrollAxis="horizontal">
+                <div className="horizontal">
+                    <div className="elements linear">
+                        {elements.map((_, i) => {
+                            const n = i - amount;
+                            return (
+                                <Parallax
+                                    key={n}
+                                    className={styles.smallLinear}
+                                    y={[
+                                        `${offA * n}${unit}`,
+                                        `${offB * n}${unit}`,
+                                    ]}
+                                >
+                                    <Element name={n * -1} />
+                                </Parallax>
+                            );
+                        })}
+                    </div>
+                </div>
             </ScrollContainer>
         );
     });

@@ -21,14 +21,14 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     // All parallax elements to be updated
     let elements = [];
 
-    const hasScrollContainer = !!scrollContainer;
-    const viewEl = scrollContainer || window;
+    let hasScrollContainer = !!scrollContainer;
+    let viewEl = scrollContainer || window;
 
     // Scroll and View
     const x = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
     const y = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
     const scroll = new Scroll(x, y);
-    const view = new View({ width: 0, height: 0, scrollContainer });
+    let view = new View({ width: 0, height: 0, scrollContainer });
 
     // Ticking
     let ticking = false;
@@ -36,8 +36,8 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     // Passive support
     const supportsPassive = testForPassiveScroll();
 
-    function _addListeners() {
-        viewEl.addEventListener(
+    function _addListeners(el) {
+        el.addEventListener(
             'scroll',
             _handleScroll,
             supportsPassive ? { passive: true } : false
@@ -45,8 +45,8 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
         window.addEventListener('resize', _handleResize, false);
     }
 
-    function _removeListeners() {
-        viewEl.removeEventListener(
+    function _removeListeners(el) {
+        el.removeEventListener(
             'scroll',
             _handleScroll,
             supportsPassive ? { passive: true } : false
@@ -54,7 +54,7 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
         window.removeEventListener('resize', _handleResize, false);
     }
 
-    _addListeners();
+    _addListeners(viewEl);
     _setViewSize();
 
     /**
@@ -194,14 +194,26 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      */
     this.update = function() {
         _setViewSize();
-        _updateAllElements();
+        _updateAllElements({ updateCache: true });
+    };
+
+    this.updateScrollContainer = function(el) {
+        // remove existing listeners with current el first
+        _removeListeners(viewEl);
+
+        viewEl = el;
+        hasScrollContainer = !!el;
+        view = new View({ width: 0, height: 0, scrollContainer: el });
+        _setViewSize();
+        _addListeners(viewEl);
+        _updateAllElements({ updateCache: true });
     };
 
     /**
      * Removes listeners, reset all styles then nullifies the global ParallaxController.
      */
     this.destroy = function() {
-        _removeListeners();
+        _removeListeners(viewEl);
         elements.forEach(element => resetStyles(element));
         elements = undefined;
     };

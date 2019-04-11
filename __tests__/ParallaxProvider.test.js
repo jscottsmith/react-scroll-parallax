@@ -69,6 +69,39 @@ describe('A <ParallaxProvider>', () => {
         expect(spy).toBeCalled();
     });
 
+    it('to update the scroll container when receiving a new container el', () => {
+        const node = document.createElement('div');
+        let instance;
+        let providerInstance;
+
+        class StateChanger extends React.Component {
+            state = { el: null };
+            render() {
+                return (
+                    <ParallaxProvider
+                        scrollContainer={this.state.el}
+                        ref={ref => (providerInstance = ref)}
+                    >
+                        <div />
+                    </ParallaxProvider>
+                );
+            }
+        }
+
+        ReactDOM.render(<StateChanger ref={ref => (instance = ref)} />, node);
+
+        const el = document.createElement('div');
+
+        providerInstance.controller.updateScrollContainer = jest.fn();
+        const spy = providerInstance.controller.updateScrollContainer;
+
+        instance.setState({ el });
+
+        ReactDOM.unmountComponentAtNode(node);
+
+        expect(spy).toBeCalledWith(el);
+    });
+
     it('to always create a new instance when re-mounting', () => {
         // the provider isn't gauranteed to be destroyed before re-instantiated
         // in a route change.
