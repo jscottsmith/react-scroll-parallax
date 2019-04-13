@@ -12,7 +12,7 @@ $bg2: #d6d6d6;
     text-align: center;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    background-color: rgba(30, 30, 30, 0.6);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     color: white;
     z-index: 1000;
@@ -36,8 +36,8 @@ $bg2: #d6d6d6;
         font-size: 16px;
         font-family: 'Roboto Mono', monsopace;
         font-style: normal;
-        background-color: #f3f3f3;
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgLz4gIDxyZWN0IGZpbGw9InJnYmEoMCwgMCwgMCwgMC4wNSkiIHg9IjEwIiB5PSIxMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiAvPjwvc3ZnPg==);
+        background-image: url('static/bg-grid.svg');
+        background-color: #222;
     }
 
     .scroll-container {
@@ -46,8 +46,8 @@ $bg2: #d6d6d6;
         right: 50px;
         bottom: 50px;
         left: 50px;
-        background-color: rgba(30, 30, 30, 0.2);
-        border: 1px solid rgba(30, 30, 30, 0.15);
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
@@ -81,33 +81,8 @@ $bg2: #d6d6d6;
         }
     }
 
-    .elements {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        justify-content: space-around;
-
-        > div .parallax-inner {
-            background: slateblue;
-        }
-        > div:nth-of-type(2n) .parallax-inner {
-            background: darkslateblue;
-        }
-    }
-
-    .horizontal .elements {
-        flex-flow: column nowrap;
-    }
-
-    .linear {
-        flex-flow: row nowrap;
-        justify-content: space-around;
-    }
-
     .parallax-outer {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.05);
     }
 
     .parallax-inner {

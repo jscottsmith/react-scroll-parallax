@@ -1,5 +1,6 @@
 .parallax {
-    width: 200px;
+    width: 10rem;
+    height: 10rem;
 }
 
 .small {
@@ -10,4 +11,32 @@
 .smallLinear {
     margin: 0.2rem;
     width: 5rem;
+}
+
+.elements {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.elementsHorizontal {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+}
+
+.linear {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.linearHorizontal {
+    flex-flow: row nowrap;
+    flex-flow: column nowrap;
 }
