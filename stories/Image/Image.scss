@@ -1,0 +1,27 @@
+.images {
+    padding: 20% 10%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.parallaxImage {
+    margin: 10% 0;
+    width: 45%;
+    background: none;
+}
+
+.parallaxImage2 {
+    margin: 10% auto 10%;
+    width: 65%;
+    background: none;
+}
+
+.image {
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}

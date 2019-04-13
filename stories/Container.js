@@ -1,10 +1,10 @@
 import React from 'react';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
-const Container = ({ children, scrollAxis }) => (
+const Container = ({ children, scrollAxis, className }) => (
     <ParallaxProvider scrollAxis={scrollAxis}>
         <div className={scrollAxis}>
-            <div className="elements">{children}</div>
+            <div className={className}>{children}</div>
         </div>
     </ParallaxProvider>
 );

@@ -10,28 +10,31 @@ const path = require('path');
 const SRC = path.resolve('./src');
 const STORIES = path.resolve('./stories');
 
-module.exports = {
-    resolve: {
-        alias: {
-            'react-scroll-parallax': SRC,
-            components: path.resolve(SRC + 'components'),
-        },
-    },
+// Export a function. Accept the base config as the only param.
+module.exports = async ({ config, mode }) => {
+    // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+    // You can change the configuration based on that.
+    // 'PRODUCTION' is used when building the static version of storybook.
 
-    module: {
-        rules: [
+    // Make whatever fine-grained changes you need
+    config.module.rules.push({
+        test: /\.scss|.css$/,
+        use: [
+            'style-loader',
             {
-                test: /\.scss|.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: { importLoaders: 1, modules: true },
-                    },
-                    'sass-loader',
-                ],
-                include: STORIES,
+                loader: 'css-loader',
+                options: { importLoaders: 1, modules: true },
             },
+            'sass-loader',
         ],
-    },
+        include: STORIES,
+    });
+
+    config.resolve.alias = {
+        'react-scroll-parallax': SRC,
+        components: path.resolve(SRC + 'components'),
+    };
+
+    // Return the altered config
+    return config;
 };
