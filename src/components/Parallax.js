@@ -114,7 +114,7 @@ class Parallax extends Component {
                 <Inner
                     className="parallax-inner"
                     ref={this.mapRefInner}
-                    style={styleInner}
+                    style={{ willChange: 'transform', ...styleInner }}
                 >
                     {children}
                 </Inner>
