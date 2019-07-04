@@ -37,21 +37,25 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     const supportsPassive = testForPassiveScroll();
 
     function _addListeners(el) {
-        el.addEventListener(
-            'scroll',
-            _handleScroll,
-            supportsPassive ? { passive: true } : false
-        );
-        window.addEventListener('resize', _handleResize, false);
+        if(el && el.addEventListener)
+            el.addEventListener(
+                'scroll',
+                _handleScroll,
+                supportsPassive ? { passive: true } : false
+            );
+        if(window & window.addEventListener)
+            window.addEventListener('resize', _handleResize, false);
     }
 
     function _removeListeners(el) {
-        el.removeEventListener(
-            'scroll',
-            _handleScroll,
-            supportsPassive ? { passive: true } : false
-        );
-        window.removeEventListener('resize', _handleResize, false);
+        if(el && el.addEventListener)
+            el.removeEventListener(
+                'scroll',
+                _handleScroll,
+                supportsPassive ? { passive: true } : false
+            );
+        if(window & window.addEventListener)
+            window.removeEventListener('resize', _handleResize, false);
     }
 
     _addListeners(viewEl);
