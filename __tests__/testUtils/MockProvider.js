@@ -8,8 +8,9 @@ export default class MockProvider extends Component {
         controllerMock: PropTypes.object.isRequired,
     };
 
-    componentWillMount() {
-        this.controller = this.props.controllerMock;
+    constructor(props) {
+        super(props);
+        this.controller = props.controllerMock;
     }
 
     componentWillUnmount() {
