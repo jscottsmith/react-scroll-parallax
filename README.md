@@ -150,7 +150,7 @@ The `layers` prop takes an array of objects that will represent each image (or c
 
 ## \<ParallaxProvider>
 
-The `<ParallaxProvider />` component is meant to wrap a top level component in your application and is necessary to provide access though React's context API to the parallax controller. This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
+The `<ParallaxProvider />` component is meant to wrap a top level component in your application and is necessary to provide access though React context API to the parallax controller. This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
 
 ```jsx
 const AppContainer = () => (
@@ -195,6 +195,19 @@ export withController(MyComponent);
 
 ```
 
+Also `parallaxController` is accessible using `useController()` [React hook](https://reactjs.org/docs/hooks-intro.html) in components without writing a class or wrapping them in HOC.
+
+```jsx
+import { useController } from 'react-scroll-parallax';
+
+const MyComponent = () => {
+    const { parallaxController } = useController();
+    // do stuff with `parallaxController`
+
+    return <div />;
+};
+```
+
 ### Available Methods
 
 Access the following methods on `parallaxController` via context:
@@ -228,9 +241,27 @@ class Image extends Component {
 export withController(Image);
 ```
 
+If your parallax components are stuck and acting weird, this is most likely due to the fact that your page initial scroll was not at the top on load. Here's a possible solution to this problem using `useController()` hook. It can be used in your application top level component or specifically in the part of your application where you are experiencing problems.
+
+```jsx
+const ParallaxCache = () => {
+    const { parallaxController } = useController();
+
+    useLayoutEffect(() => {
+        const handler = () => parallaxController.update();
+        window.addEventListener('load', handler);
+        return () => window.removeEventListener('load', handler);
+    }, [parallaxController]);
+
+    return null;
+};
+
+// <ParallaxCache /> now can be used anywhere you have problems with cached attributes
+```
+
 ## Troubleshooting
 
-If you're encountering issues like the parallax element jumping around or becoming stuck, there's a few likely culprits. Since this lib caches important positioning states it's posible for these to be outdated and incorrect. The most likely cause for this type of problem is the result of images loading and increasing the height of an element and/or the page. This can be fixed easily by [updating the cache](#example-usage-of-context). Another likely issue is the CSS positioning applied to the parent or parallax element itself is `fixed`. Fixed positioning parallax elements is currently not supported and may appear to work in some cases but break in others. Avoid using `position: fixed` and instead use `static`, `relative` or `absolute`, which this lib was designed to support. If none of these are relevant and you still have trouble please post an issue with your code or a demo that reproduces the problem.
+If you're encountering issues like the parallax element jumping around or becoming stuck, there's a few likely culprits. Since this lib caches important positioning states it's possible for these to be outdated and incorrect. The most likely cause for this type of problem is the result of images loading and increasing the height of an element and/or the page. This can be fixed easily by [updating the cache](#example-usage-of-context). Another likely issue is the CSS positioning applied to the parent or parallax element itself is `fixed`. Fixed positioning parallax elements is currently not supported and may appear to work in some cases but break in others. Avoid using `position: fixed` and instead use `static`, `relative` or `absolute`, which this lib was designed to support. If none of these are relevant and you still have trouble please post an issue with your code or a demo that reproduces the problem.
 
 ## Browser Support
 
