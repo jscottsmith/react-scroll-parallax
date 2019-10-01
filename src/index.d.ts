@@ -116,3 +116,11 @@ type RemoveProps<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>>;
 export function withController<P extends WithControllerInjectedProps>(
     Component: React.ComponentType<P>
 ): React.ComponentType<RemoveProps<P, 'parallaxController'>>;
+
+export interface ParallaxContextValue {
+    parallaxController: ParallaxController;
+}
+
+export const ParallaxContext: React.Context<ParallaxContextValue>;
+
+export function useController(): WithControllerInjectedProps;
