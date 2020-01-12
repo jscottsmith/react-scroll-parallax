@@ -25,14 +25,40 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
         >
             {layers.map(
                 (
-                    { image, amount, children: layerChildren, expanded = true },
+                    {
+                        amount,
+                        children: layerChildren,
+                        expanded = true,
+                        image,
+                        props = {},
+                    },
                     i
                 ) => {
+                    // save props to be merged
+                    const layerStyle = props.style || {};
+                    const layerClass = props.className || '';
+
+                    // remove from pass through props
+                    delete props.style;
+                    delete props.className;
+
+                    const layerClassMerged = `parallax-banner-layer-${i}${
+                        layerClass ? ` ${layerClass}` : ''
+                    }`;
+
                     // if this is an expanded layer overwrite the top/bottom styles with negative margins
                     const expandedStyle = expanded
                         ? {
                               top: Math.abs(amount) * 100 * -1 + '%',
                               bottom: Math.abs(amount) * 100 * -1 + '%',
+                          }
+                        : {};
+                    // optional image styles
+                    const imageStyle = image
+                        ? {
+                              backgroundImage: `url(${image})`,
+                              backgroundPosition: 'center',
+                              backgroundSize: 'cover',
                           }
                         : {};
 
@@ -44,28 +70,18 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
                             styleOuter={absoluteStyle}
                             disabled={disabled}
                         >
-                            {image ? (
-                                <div
-                                    className={`parallax-banner-layer-${i}`}
-                                    style={{
-                                        backgroundImage: `url(${image})`,
-                                        backgroundPosition: 'center',
-                                        backgroundSize: 'cover',
-                                        ...absoluteStyle,
-                                        ...expandedStyle,
-                                    }}
-                                />
-                            ) : (
-                                <div
-                                    className={`parallax-banner-layer-${i}`}
-                                    style={{
-                                        ...absoluteStyle,
-                                        ...expandedStyle,
-                                    }}
-                                >
-                                    {layerChildren}
-                                </div>
-                            )}
+                            <div
+                                className={layerClassMerged}
+                                style={{
+                                    ...imageStyle,
+                                    ...absoluteStyle,
+                                    ...expandedStyle,
+                                    ...layerStyle,
+                                }}
+                                {...props}
+                            >
+                                {layerChildren}
+                            </div>
                         </Parallax>
                     );
                 }
@@ -89,6 +105,7 @@ ParallaxBanner.propTypes = {
             children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
             expanded: PropTypes.bool,
             image: PropTypes.string,
+            props: PropTypes.object,
         })
     ),
     style: PropTypes.object,

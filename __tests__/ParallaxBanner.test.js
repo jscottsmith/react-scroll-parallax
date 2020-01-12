@@ -134,4 +134,31 @@ describe('Expect the <ParallaxBanner> component', () => {
 
         expect(childFn).toBeCalled();
     });
+
+    it('to render layers with custom props', () => {
+        const tree = renderer
+            .create(
+                <ParallaxProvider>
+                    <ParallaxBanner
+                        layers={[
+                            {
+                                amount: 0.2,
+                                props: {
+                                    style: {
+                                        backgroundColor: 'red',
+                                    },
+                                    className: 'my-custom-class',
+                                    id: 'my-id',
+                                },
+                            },
+                        ]}
+                    />
+                </ParallaxProvider>,
+                {
+                    createNodeMock,
+                }
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 });
