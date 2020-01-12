@@ -147,6 +147,7 @@ The `layers` prop takes an array of objects that will represent each image (or c
 | **children** | `Element` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
 | **expanded** | `Boolean` | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
 | **image**    | `String`  |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
+| **props**    | `Object`  |         | Props to apply to the layer element. Example: `{ props: style: { background: 'red' }}`                                                                   |
 
 ## \<ParallaxProvider>
 
