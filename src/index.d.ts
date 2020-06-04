@@ -70,7 +70,7 @@ export interface BannerLayer {
     /**
      * Custom layer children provided as a React element, for example `<Video />`
      */
-    children: any;
+    children?: any;
     /**
      * Indicate if the layer should be expanded with negative top/bottom margins so the edges will
      * never be visible.
