@@ -80,6 +80,10 @@ export interface BannerLayer {
      * Image source that will be applied as a CSS background image on the layer.
      */
     image?: string;
+    /*
+     * 	Props to apply to the layer element.
+     */
+    props?: any;
 }
 
 export interface ParallaxBannerProps {
