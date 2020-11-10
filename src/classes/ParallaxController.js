@@ -91,12 +91,14 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      * attributes, if so set the elements parallax styles.
      */
     function _updateAllElements({ updateCache } = {}) {
-        elements.forEach(element => {
-            _updateElementPosition(element);
-            if (updateCache) {
-                element.setCachedAttributes(view, scroll);
-            }
-        });
+        if (elements) {
+            elements.forEach(element => {
+                _updateElementPosition(element);
+                if (updateCache) {
+                    element.setCachedAttributes(view, scroll);
+                }
+            });
+        }
         // reset ticking so more animations can be called
         ticking = false;
     }
@@ -151,7 +153,7 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     this.createElement = function(options) {
         const newElement = new Element({ ...options, scrollAxis });
         newElement.setCachedAttributes(view, scroll);
-        elements = [...elements, newElement];
+        elements = elements ? [...elements, newElement] : [newElement];
         _updateElementPosition(newElement);
         return newElement;
     };
@@ -171,12 +173,14 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      * @param {object} options
      */
     this.updateElementPropsById = function(id, props) {
-        elements = elements.map(el => {
-            if (el.id === id) {
-                return el.updateProps(props);
-            }
-            return el;
-        });
+        if (elements) {
+            elements = elements.map(el => {
+                if (el.id === id) {
+                    return el.updateProps(props);
+                }
+                return el;
+            });
+        }
 
         this.update();
     };
@@ -214,7 +218,9 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      */
     this.destroy = function() {
         _removeListeners(viewEl);
-        elements.forEach(element => resetStyles(element));
+        if (elements) {
+            elements.forEach(element => resetStyles(element));
+        }
         elements = undefined;
     };
 }
