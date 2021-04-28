@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "react": ">=17.0.1",
-     "react-dom": ">=17.0.1"
+    "react-dom": ">=17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -69,11 +69,11 @@
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/addon-actions": "^5.0.6",
-    "@storybook/addon-knobs": "^5.0.6",
-    "@storybook/addon-links": "^5.0.6",
-    "@storybook/addons": "^5.0.6",
-    "@storybook/react": "^5.0.6",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/addons": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "@types/jest": "^24.0.11",
     "@types/react": "^17.0.1",
     "babel-core": "^7.0.0-bridge.0",
