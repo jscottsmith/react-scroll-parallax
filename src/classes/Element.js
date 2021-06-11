@@ -55,7 +55,7 @@ export class Element {
             scroll.x
         );
 
-        setParallaxStyles(this.elInner, this.offsets, this.percent);
+        setParallaxStyles(this.elInner, this.offsets, this.percent, this.props.transformFunc);
 
         return this;
     }
@@ -77,7 +77,7 @@ export class Element {
             scroll.y
         );
 
-        setParallaxStyles(this.elInner, this.offsets, this.percent);
+        setParallaxStyles(this.elInner, this.offsets, this.percent, this.props.transformFunc);
 
         return this;
     }

@@ -21,6 +21,7 @@ class Parallax extends Component {
         styleOuter: PropTypes.object,
         tagInner: PropTypes.string.isRequired,
         tagOuter: PropTypes.string.isRequired,
+        transformFunc: PropTypes.func,
         x: PropTypes.arrayOf(
             PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         ),
@@ -77,6 +78,7 @@ class Parallax extends Component {
                 x1: this.props.x[1],
                 y0: this.props.y[0],
                 y1: this.props.y[1],
+                transformFunc: this.props.transformFunc,
             },
         };
     }

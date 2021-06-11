@@ -3,18 +3,26 @@ import { getParallaxOffsets } from './getParallaxOffsets';
 /**
  * Takes a parallax element and set the styles based on the
  * offsets and percent the element has moved though the viewport.
- * @param {object} element
+ * @param {object} elInner
+ * @param {object} offsets
  * @param {number} percentMoved
+ * @param {function} transformFunc
  */
-export function setParallaxStyles(elInner, offsets, percentMoved) {
+export function setParallaxStyles(elInner, offsets, percentMoved, transformFunc) {
+    const parallaxOffset = getParallaxOffsets(offsets, percentMoved);
     // Get the parallax X and Y offsets
     const {
         x: { value: xv, unit: xu },
         y: { value: yv, unit: yu },
-    } = getParallaxOffsets(offsets, percentMoved);
+    } = parallaxOffset;
 
-    // Apply styles
-    elInner.style.transform = `translate3d(${xv}${xu}, ${yv}${yu}, 0)`;
+    if(transformFunc && typeof transformFunc === 'function') {
+        // Apply custom transform styles
+        elInner.style.transform = transformFunc(parallaxOffset, percentMoved);
+    } else {
+        // Apply styles
+        elInner.style.transform = `translate3d(${xv}${xu}, ${yv}${yu}, 0)`;
+    }
 }
 
 /**
