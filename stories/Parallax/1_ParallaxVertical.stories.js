@@ -10,6 +10,29 @@ import styles from './Parallax.scss';
 import '../styles.scss';
 
 storiesOf('<Parallax>', module)
+    .add('vertical with custom transformFunc', () => {
+        return (
+            <Container scrollAxis="vertical" className={styles.elements}>
+                <Parallax className={styles.parallax} transformFunc={(parallaxOffset, percentMoved) => {
+                    if(percentMoved < 0 ) {
+                        return 'scale(1)';
+                    }
+                    return `scale(${2 * percentMoved / 100})`;
+                }}>
+                    <Element name="A" />
+                </Parallax>
+                <Parallax className={styles.parallax} transformFunc={(parallaxOffset, percentMoved) => {
+                    if(percentMoved < 0 ) {
+                        return 'scale(1)';
+                    }
+                    return `scale(${2 - percentMoved / 100})`;
+                }}>
+                    <Element name="B" />
+                </Parallax>
+            </Container>
+        );
+    })
+
     .add('vertical with y offsets', () => {
         const a0 = text('A: y[0]', '-50%');
         const a1 = text('A: y[1]', '50%');
