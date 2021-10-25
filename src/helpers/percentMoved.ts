@@ -7,7 +7,12 @@
  * @return {number} percent moved
  */
 
-export function percentMoved(a, totalDist, size, scroll) {
+export function percentMoved(
+    a: number,
+    totalDist: number,
+    size: number,
+    scroll: number
+): number {
     // adjust cached value
     const ax = a - scroll;
 

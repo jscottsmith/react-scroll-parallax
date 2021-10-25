@@ -8,8 +8,24 @@ import {
 import { VERTICAL } from '../constants';
 import Bounds from './Bounds';
 import Rect from './Rect';
+import { ParallaxStartEndOffsets } from '../types';
 
 export class Element {
+    elInner: HTMLElement;
+    elOuter: HTMLElement;
+    // TODO
+    props: any;
+    scrollAxis: 'vertical' | 'horizontal';
+    id: number;
+    offsets: ParallaxStartEndOffsets;
+    isInView: boolean;
+    percent: number;
+
+    updatePosition: (view: any, scroll: any) => void;
+
+    rect: Rect;
+    bounds: Bounds;
+
     constructor(options) {
         this.elInner = options.elInner;
         this.elOuter = options.elOuter;

@@ -1,4 +1,11 @@
 class Bounds {
+    totalDistY: number;
+    totalDistX: number;
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+
     constructor(rect, offsets, view) {
         const { y0, y1, x1, x0 } = offsets;
 

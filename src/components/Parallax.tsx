@@ -1,9 +1,48 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Element } from '../classes/Element';
 import ParallaxController from '../classes/ParallaxController';
 import withController from './withController';
 
-class Parallax extends Component {
+export interface ParallaxProps {
+    parallaxController: any;
+
+    /**
+     * Offsets on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on
+     * the elements width.
+     */
+    x?: Array<string | number>;
+    /**
+     * Offsets on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on
+     * the elements width.
+     */
+    y?: Array<string | number>;
+    /**
+     * Optionally pass additional class names to be added to the outermost parallax element.
+     */
+    className?: string;
+    /**
+     * Disables parallax effects on individual elements when true.
+     */
+    disabled?: boolean;
+    /**
+     * Optionally pass a style object to be added to the innermost parallax element.
+     */
+    styleInner?: any;
+    /**
+     * Optionally pass a style object to be added to the outermost parallax element.
+     */
+    styleOuter?: any;
+    /**
+     * Optionally pass an element tag name to be applied to the innermost parallax element.
+     */
+    tagInner?: any;
+    /**
+     * Optionally pass an element tag name to be applied to the outermost parallax element.
+     */
+    tagOuter?: any;
+}
+
+class Parallax extends Component<ParallaxProps, {}> {
     static defaultProps = {
         disabled: false,
         tagInner: 'div',
@@ -12,22 +51,9 @@ class Parallax extends Component {
         y: [0, 0],
     };
 
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-        disabled: PropTypes.bool.isRequired,
-        parallaxController: PropTypes.object,
-        styleInner: PropTypes.object,
-        styleOuter: PropTypes.object,
-        tagInner: PropTypes.string.isRequired,
-        tagOuter: PropTypes.string.isRequired,
-        x: PropTypes.arrayOf(
-            PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        ),
-        y: PropTypes.arrayOf(
-            PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        ),
-    };
+    element: Element;
+    _outer: HTMLElement;
+    _inner: HTMLElement;
 
     componentDidMount() {
         // Make sure the provided controller is an instance of the Parallax Controller
@@ -85,11 +111,11 @@ class Parallax extends Component {
         return this.props.parallaxController;
     }
 
-    mapRefOuter = ref => {
+    mapRefOuter = (ref: HTMLElement) => {
         this._outer = ref;
     };
 
-    mapRefInner = ref => {
+    mapRefInner = (ref: HTMLElement) => {
         this._inner = ref;
     };
 

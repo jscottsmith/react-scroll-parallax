@@ -1,11 +1,16 @@
+import { ParallaxStartEndOffsets } from '../types';
 import { parseValueAndUnit } from '../utils/index';
 
 /**
  * Takes a parallax element and parses the offset props to get the value
  * and unit. Sets these values as offset object accessible on the element.
- * @param {object} element
  */
-export default function getOffsets(props) {
+export default function getOffsets(props: {
+    x0: string | number;
+    x1: string | number;
+    y0: string | number;
+    y1: string | number;
+}): ParallaxStartEndOffsets {
     const { y0: y0Prop, y1: y1Prop, x1: x1Prop, x0: x0Prop } = props;
 
     const y0 = parseValueAndUnit(y0Prop);

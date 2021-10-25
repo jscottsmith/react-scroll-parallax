@@ -1,11 +1,24 @@
+import { View } from './View';
+import { Scroll } from './Scroll';
+
 class Rect {
-    constructor(el, view, scroll) {
+    height: number;
+    width: number;
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+    originTotalDistY: number;
+    originTotalDistX: number;
+
+    constructor(el: HTMLElement, view: View, scroll: Scroll) {
         let rect = el.getBoundingClientRect();
 
         // rect is based on viewport -- must adjust for relative scroll container
         if (view.scrollContainer) {
             const scrollRect = view.scrollContainer.getBoundingClientRect();
             rect = {
+                ...rect,
                 top: rect.top - scrollRect.top,
                 right: rect.right - scrollRect.left,
                 bottom: rect.bottom - scrollRect.top,
