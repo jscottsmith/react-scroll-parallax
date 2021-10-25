@@ -17,47 +17,6 @@ export interface ParallaxProviderProps {
 }
 export const ParallaxProvider: React.ComponentType<ParallaxProviderProps>;
 
-// ================
-// === Parallax ===
-// ================
-export interface ParallaxProps {
-    /**
-     * Offsets on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on
-     * the elements width.
-     */
-    x?: Array<string | number>;
-    /**
-     * Offsets on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on
-     * the elements width.
-     */
-    y?: Array<string | number>;
-    /**
-     * Optionally pass additional class names to be added to the outermost parallax element.
-     */
-    className?: string;
-    /**
-     * Disables parallax effects on individual elements when true.
-     */
-    disabled?: boolean;
-    /**
-     * Optionally pass a style object to be added to the innermost parallax element.
-     */
-    styleInner?: any;
-    /**
-     * Optionally pass a style object to be added to the outermost parallax element.
-     */
-    styleOuter?: any;
-    /**
-     * Optionally pass an element tag name to be applied to the innermost parallax element.
-     */
-    tagInner?: any;
-    /**
-     * Optionally pass an element tag name to be applied to the outermost parallax element.
-     */
-    tagOuter?: any;
-}
-export const Parallax: React.ComponentType<ParallaxProps>;
-
 // =======================
 // === Parallax Banner ===
 // =======================

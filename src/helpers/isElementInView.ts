@@ -9,7 +9,12 @@
  * @return {boolean} isInView
  */
 
-export function isElementInView(a, b, size, scroll) {
+export function isElementInView(
+    a: number,
+    b: number,
+    size: number,
+    scroll: number
+): boolean {
     const ax = a - scroll;
     const bx = b - scroll;
 
