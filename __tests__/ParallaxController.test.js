@@ -1,7 +1,7 @@
-import ParallaxController from 'classes/ParallaxController';
-import { Element } from 'classes/Element';
-import Rect from 'classes/Rect';
-import Bounds from 'classes/Bounds';
+import ParallaxController from '../src/classes/ParallaxController';
+import { Element } from '../src/classes/Element';
+import Rect from '../src/classes/Rect';
+import Bounds from '../src/classes/Bounds';
 import { VERTICAL } from '../src/constants';
 
 const addEventListener = window.addEventListener;
@@ -136,7 +136,11 @@ describe('Expect the ParallaxController', () => {
 
         controller.destroy();
         expect(window.removeEventListener.mock.calls[1]).toEqual(
-            expect.arrayContaining(['scroll', expect.any(Function), false])
+            expect.arrayContaining([
+                'scroll',
+                expect.any(Function),
+                { passive: true },
+            ])
         );
         expect(window.removeEventListener.mock.calls[2]).toEqual(
             expect.arrayContaining(['resize', expect.any(Function), false])

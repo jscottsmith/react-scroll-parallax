@@ -1,5 +1,5 @@
-import { setParallaxStyles } from 'helpers/elementStyles';
-import getOffsets from 'helpers/getOffsets';
+import { setParallaxStyles } from '../src/helpers/elementStyles';
+import getOffsets from '../src/helpers/getOffsets';
 import createNodeMock from './testUtils/createNodeMock';
 
 function createOffsets(x0, x1, y0, y1) {

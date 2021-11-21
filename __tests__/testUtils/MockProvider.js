@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ParallaxContext from 'helpers/ParallaxContext';
+import ParallaxContext from '../../src/helpers/ParallaxContext';
 
 export default class MockProvider extends Component {
     static propTypes = {

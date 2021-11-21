@@ -1,101 +1,84 @@
 {
   "name": "react-scroll-parallax",
-  "version": "2.4.0",
+  "version": "3.0.0-alpha",
   "description": "React components to create parallax scroll effects for banners, images or any other DOM elements.",
   "repository": {
     "type": "git",
     "url": "https://github.com/jscottsmith/react-scroll-parallax"
   },
   "files": [
-    "cjs",
-    "README.md",
-    "LICENSE"
+    "dist",
+    "src"
   ],
-  "main": "./cjs/index.js",
-  "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "not dead"
-  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "start": "yarn storybook",
-    "test": "BABEL_ENV=test jest",
-    "test:watch": "BABEL_ENV=test jest --watch",
-    "lint": "eslint ./src ./__tests__",
-    "prettier": "prettier --config ./.prettierrc --write \"{src,stories,__tests__}/**/*.js\"",
-    "prepublishOnly": "yarn test && ./publish.sh",
-    "storybook": "start-storybook -p 3000",
-    "storybook:build": "build-storybook",
-    "storybook:export": "build-storybook -c .storybook -o build",
-    "deploy": "yarn run storybook:export"
-  },
-  "jest": {
-    "modulePaths": [
-      "<rootDir>/src/"
-    ],
-    "testMatch": [
-      "**/?(*.)+(spec|test).[jt]s?(x)"
-    ],
-    "coverageDirectory": "./coverage/",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "package.json",
-      "/stories/"
-    ],
-    "collectCoverage": true,
-    "testURL": "http://localhost"
-  },
-  "keywords": [
-    "react",
-    "scroll",
-    "parallax",
-    "banner",
-    "animation",
-    "component"
-  ],
-  "author": "J Scott Smith",
-  "license": "MIT",
-  "dependencies": {
-    "prop-types": "^15.5.10"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": "^16.3.0-0 || >=17.0.1",
-    "react-dom": "^16.3.0-0 || >=17.0.1"
+    "react": "^16.8.0-0 || >=17.0.1",
+    "react-dom": "^16.8.0-0 || >=17.0.1"
   },
+  "author": "J Scott Smith",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/react-scroll-parallax.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/react-scroll-parallax.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-scroll-parallax.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-knobs": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/addons": "^6.2.9",
-    "@storybook/react": "^6.2.9",
-    "@types/jest": "^24.0.11",
-    "@types/react": "^17.0.1",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.4.2",
-    "babel-loader": "^8.0.0",
-    "codecov": "^3.0.0",
-    "cross-env": "^3.1.4",
-    "css-loader": "^2.1.0",
-    "eslint": "^5.13.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-jest": "^22.2.2",
-    "eslint-plugin-react": "^7.12.4",
-    "express": "^4.14.1",
-    "jest": "^24.0.1",
-    "node-sass": "^4.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "@babel/core": "^7.16.0",
+    "@size-limit/preset-small-lib": "^6.0.4",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addons": "^6.3.12",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.3.12",
+    "@testing-library/react": "^12.1.2",
+    "@types/react": "^17.0.35",
+    "@types/react-dom": "^17.0.11",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^5.0.0",
+    "husky": "^7.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
     "react-test-renderer": "^17.0.1",
-    "regenerator-runtime": "^0.10.5",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.3"
+    "sass": "^1.43.4",
+    "sass-loader": "^10.1.0",
+    "size-limit": "^6.0.4",
+    "style-loader": "^2.0.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
   }
 }

@@ -1,6 +1,6 @@
-import { Element } from 'classes/Element';
-import { View } from 'classes/View';
-import { Scroll } from 'classes/Scroll';
+import { Element } from '../src/classes/Element';
+import { View } from '../src/classes/View';
+import { Scroll } from '../src/classes/Scroll';
 import { createElementMock } from './testUtils/createElementMock';
 
 const DEFAULT_OPTIONS = {
