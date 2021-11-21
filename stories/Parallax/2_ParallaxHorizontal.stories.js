@@ -9,7 +9,10 @@ export const WithYOffsets = (args) => {
     const a = args.y1.split(',');
     const b = args.y2.split(',');
     return (
-        <Container scrollAxis="vertical" className={styles.elements}>
+        <Container
+            scrollAxis="horizontal"
+            className={styles.elementsHorizontal}
+        >
             <Parallax y={a} className={styles.parallax}>
                 <Element name="1" />
             </Parallax>
@@ -29,7 +32,10 @@ export const WithXOffsets = (args) => {
     const a = args.x1.split(',');
     const b = args.x2.split(',');
     return (
-        <Container scrollAxis="vertical" className={styles.elements}>
+        <Container
+            scrollAxis="horizontal"
+            className={styles.elementsHorizontal}
+        >
             <Parallax x={a} className={styles.parallax}>
                 <Element name="1" />
             </Parallax>
@@ -51,7 +57,10 @@ export const WithXAndYOffsets = (args) => {
     const ya = args.y1.split(',');
     const yb = args.y2.split(',');
     return (
-        <Container scrollAxis="vertical" className={styles.elements}>
+        <Container
+            scrollAxis="horizontal"
+            className={styles.elementsHorizontal}
+        >
             <Parallax x={xa} y={ya} className={styles.parallax}>
                 <Element name="1" />
             </Parallax>
@@ -77,9 +86,11 @@ export const WithVaryingYOffsets = (args) => {
     const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
 
     return (
-        <ParallaxProvider>
-            <div className="vertical">
-                <div className={`${styles.elements} ${styles.linear}`}>
+        <ParallaxProvider scrollAxis="horizontal">
+            <div className="horizontal">
+                <div
+                    className={`${styles.elementsHorizontal} ${styles.linearHorizontal}`}
+                >
                     {elements.map((_, i) => {
                         const n = i - amount;
                         return (
@@ -111,9 +122,11 @@ export const WithVaryingXOffsets = (args) => {
     const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
 
     return (
-        <ParallaxProvider>
-            <div className="vertical">
-                <div className={`${styles.elements} ${styles.linear}`}>
+        <ParallaxProvider scrollAxis="horizontal">
+            <div className="horizontal">
+                <div
+                    className={`${styles.elementsHorizontal} ${styles.linearHorizontal}`}
+                >
                     {elements.map((_, i) => {
                         const n = i - amount;
                         return (
@@ -137,38 +150,6 @@ WithVaryingXOffsets.args = {
     MinOffset: -50,
 };
 
-export const WithAHundredElements = () => {
-    const amount = 100;
-    const offset = 50;
-    const elements = new Array(amount).fill(null).map((x, i) => i);
-
-    return (
-        <Container scrollAxis="vertical">
-            <div className={styles.elements}>
-                {elements.map((_, i) => {
-                    const even = i % 2 === 0;
-                    const props = {
-                        x: [
-                            even ? `${offset}%` : `${-offset}%`,
-                            even ? `${-offset}%` : `${offset}%`,
-                        ],
-                        y: [
-                            even ? `${offset}%` : `${-offset}%`,
-                            even ? `${-offset}%` : `${offset}%`,
-                        ],
-                    };
-
-                    return (
-                        <Parallax key={i} className={styles.small} {...props}>
-                            <Element name={i + 1} />
-                        </Parallax>
-                    );
-                })}
-            </div>
-        </Container>
-    );
-};
-
 export const InsideADiv = () => {
     const amount = 2;
     const offA = -50;
@@ -176,9 +157,11 @@ export const InsideADiv = () => {
     const unit = '%';
     const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
     return (
-        <ScrollContainer>
-            <div className="vertical">
-                <div className={`${styles.elements} ${styles.linear}`}>
+        <ScrollContainer scrollAxis="horizontal">
+            <div className="horizontal">
+                <div
+                    className={`${styles.elementsHorizontal} ${styles.linearHorizontal}`}
+                >
                     {elements.map((_, i) => {
                         const n = i - amount;
                         return (
@@ -198,6 +181,6 @@ export const InsideADiv = () => {
 };
 
 export default {
-    title: '<Parallax> Vertical Scroll',
+    title: '<Parallax> Horizontal Scroll',
     component: WithYOffsets,
 };
