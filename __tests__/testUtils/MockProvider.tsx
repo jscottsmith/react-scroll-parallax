@@ -7,6 +7,7 @@ export class MockProvider extends Component {
     children: PropTypes.node.isRequired,
     controllerMock: PropTypes.object.isRequired,
   };
+  controller = null;
 
   constructor(props) {
     super(props);

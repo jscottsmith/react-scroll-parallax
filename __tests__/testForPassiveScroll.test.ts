@@ -18,9 +18,11 @@ describe('Expect the testForPassiveScroll function', () => {
     window.addEventListener = jest.fn();
     window.removeEventListener = jest.fn();
     testForPassiveScroll();
+    // @ts-ignore
     expect(window.addEventListener.mock.calls[0]).toEqual(
       expect.arrayContaining(['test', null, expect.any(Object)])
     );
+    // @ts-ignore
     expect(window.removeEventListener.mock.calls[0]).toEqual(
       expect.arrayContaining(['test', null, expect.any(Object)])
     );

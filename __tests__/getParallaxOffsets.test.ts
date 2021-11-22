@@ -1,8 +1,11 @@
 import { getParallaxOffsets } from '../src/helpers/getParallaxOffsets';
+import { ParallaxStartEndOffsets } from '../src/types';
 import { parseValueAndUnit } from '../src/utils/parseValueAndUnit';
 import { scaleBetween } from '../src/utils/scaleBetween';
 
-const offset = {
+const offset: ParallaxStartEndOffsets = {
+  xUnit: 'px',
+  yUnit: '%',
   x0: parseValueAndUnit('-100px'),
   x1: parseValueAndUnit('40px'),
   y0: parseValueAndUnit('-80%'),

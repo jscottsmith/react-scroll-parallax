@@ -30,23 +30,20 @@ describe('A <ParallaxProvider>', () => {
   });
 
   it.skip('to pass the controller context', () => {
-    const node = document.createElement('div');
-
-    let parallaxController;
-    const ContextChecker = withController((props) => {
-      parallaxController = props.parallaxController;
-      return null;
-    });
-
-    ReactDOM.render(
-      <ParallaxProvider>
-        <ContextChecker />
-      </ParallaxProvider>,
-      node
-    );
-
-    // Expected methods and state
-    expect(parallaxController).toBeInstanceOf(ParallaxController);
+    // const node = document.createElement('div');
+    // let parallaxController;
+    // const ContextChecker = withController((props) => {
+    //   parallaxController = props.parallaxController;
+    //   return null;
+    // });
+    // ReactDOM.render(
+    //   <ParallaxProvider>
+    //     <ContextChecker />
+    //   </ParallaxProvider>,
+    //   node
+    // );
+    // // Expected methods and state
+    // expect(parallaxController).toBeInstanceOf(ParallaxController);
   });
 
   it('to destroy the controller when unmounting', () => {

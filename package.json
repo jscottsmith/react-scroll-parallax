@@ -27,6 +27,22 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "jest": {
+    "modulePaths": [
+      "<rootDir>/src/"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
+    "coverageDirectory": "./coverage/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "package.json",
+      "/stories/"
+    ],
+    "collectCoverage": true,
+    "testURL": "http://localhost"
+  },
   "peerDependencies": {
     "react": "^16.8.0-0 || >=17.0.1",
     "react-dom": "^16.8.0-0 || >=17.0.1"
@@ -66,6 +82,7 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.3.12",
     "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.3",
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
     "babel-loader": "^8.2.3",

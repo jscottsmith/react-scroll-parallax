@@ -92,6 +92,7 @@ describe.each([
   ],
 ])('Rect()', (element, view, scroll, expected) => {
   test(`returns expected Rect based on element, view, and scroll`, () => {
+    // @ts-ignore
     expect(new Rect(element, view, scroll)).toEqual(
       expect.objectContaining(expected)
     );
