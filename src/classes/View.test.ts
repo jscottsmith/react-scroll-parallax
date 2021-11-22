@@ -1,4 +1,4 @@
-import { View } from '../src/classes/View';
+import { View } from './View';
 
 describe('Expect the View class', () => {
   it('to construct', () => {

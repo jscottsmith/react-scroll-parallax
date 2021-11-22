@@ -1,6 +1,6 @@
-import { setParallaxStyles } from '../src/helpers/elementStyles';
-import { getOffsets } from '../src/helpers/getOffsets';
-import createNodeMock from './testUtils/createNodeMock';
+import createNodeMock from '../testUtils/createNodeMock';
+import { setParallaxStyles } from './elementStyles';
+import { getOffsets } from './getOffsets';
 
 function createOffsets(x0, x1, y0, y1) {
   return getOffsets({
@@ -82,6 +82,7 @@ describe.each([
   ],
 ])('.setParallaxStyles(%o, %i)', (elInner, offsets, percent, expected) => {
   test(`sets element styles to: ${expected}%`, () => {
+    // @ts-expect-error
     setParallaxStyles(elInner, offsets, percent);
     expect(elInner.style.transform).toBe(expected);
   });

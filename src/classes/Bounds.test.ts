@@ -1,4 +1,4 @@
-import { Bounds } from '../src/classes/Bounds';
+import { Bounds } from './Bounds';
 
 describe.each([
   [

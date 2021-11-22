@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import { ParallaxBanner } from '../src/components/ParallaxBanner';
-import { ParallaxProvider } from '../src/components/ParallaxProvider';
-import createNodeMock from './testUtils/createNodeMock';
+import createNodeMock from '../testUtils/createNodeMock';
+import { ParallaxBanner } from './ParallaxBanner';
+import { ParallaxProvider } from './ParallaxProvider';
 
 describe('Expect the <ParallaxBanner> component', () => {
   afterEach(() => {});

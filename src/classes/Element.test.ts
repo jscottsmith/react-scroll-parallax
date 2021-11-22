@@ -1,7 +1,7 @@
-import { Element } from '../src/classes/Element';
-import { View } from '../src/classes/View';
-import { Scroll } from '../src/classes/Scroll';
-import { createElementMock } from './testUtils/createElementMock';
+import { Element } from './Element';
+import { View } from './View';
+import { Scroll } from './Scroll';
+import { createElementMock } from '../testUtils/createElementMock';
 
 const DEFAULT_OPTIONS = {
   elInner: document.createElement('div'),
