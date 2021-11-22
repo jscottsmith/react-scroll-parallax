@@ -1,8 +1,8 @@
-import { ParallaxController } from '../src/classes/ParallaxController';
-import { Element } from '../src/classes/Element';
-import { Rect } from '../src/classes/Rect';
-import { Bounds } from '../src/classes/Bounds';
-import { VERTICAL } from '../src/constants';
+import { ParallaxController } from './ParallaxController';
+import { Element } from './Element';
+import { Rect } from './Rect';
+import { Bounds } from './Bounds';
+import { VERTICAL } from '../constants';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;

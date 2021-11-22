@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Parallax } from '../src/components/Parallax';
-import { ParallaxProvider } from '../src/components/ParallaxProvider';
-import { ParallaxController } from '../src/classes/ParallaxController';
-import { VERTICAL } from '../src/constants';
-
-import { MockProvider } from './testUtils/MockProvider';
-import expectRenderError from './testUtils/expectRenderError';
+import { Parallax } from './Parallax';
+import { ParallaxProvider } from './ParallaxProvider';
+import { ParallaxController } from '../classes/ParallaxController';
+import { VERTICAL } from '../constants';
+import { MockProvider } from '../testUtils/MockProvider';
+import expectRenderError from '../testUtils/expectRenderError';
 
 const consoleLog = global.console.log;
 

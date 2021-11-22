@@ -1,4 +1,4 @@
-import { testForPassiveScroll } from '../src/utils/testForPassiveScroll';
+import { testForPassiveScroll } from './testForPassiveScroll';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;

@@ -1,5 +1,6 @@
-import { Rect } from '../src/classes/Rect';
-import { createElementMock } from './testUtils/createElementMock';
+import { Rect } from './Rect';
+import { createElementMock } from '../testUtils/createElementMock';
+
 describe.each([
   [
     createElementMock(
