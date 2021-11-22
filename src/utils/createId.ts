@@ -5,6 +5,6 @@
 let id = 0;
 
 export function createId(): number {
-    ++id;
-    return id;
+  ++id;
+  return id;
 }

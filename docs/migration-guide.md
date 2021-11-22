@@ -46,13 +46,13 @@ The old way
 
 ```jsx
 class Foo extends Component {
-    static contextTypes = {
-        parallaxController: PropTypes.object.isRequired,
-    };
+  static contextTypes = {
+    parallaxController: PropTypes.object.isRequired,
+  };
 
-    bar() {
-        this.context.parallaxController.update();
-    }
+  bar() {
+    this.context.parallaxController.update();
+  }
 }
 ```
 

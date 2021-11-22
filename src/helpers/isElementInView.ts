@@ -10,19 +10,19 @@
  */
 
 export function isElementInView(
-    a: number,
-    b: number,
-    size: number,
-    scroll: number
+  a: number,
+  b: number,
+  size: number,
+  scroll: number
 ): boolean {
-    const ax = a - scroll;
-    const bx = b - scroll;
+  const ax = a - scroll;
+  const bx = b - scroll;
 
-    const aView = ax >= 0 && ax <= size;
-    const bInView = bx >= 0 && bx <= size;
-    const abCovering = ax <= 0 && bx >= size;
+  const aView = ax >= 0 && ax <= size;
+  const bInView = bx >= 0 && bx <= size;
+  const abCovering = ax <= 0 && bx >= size;
 
-    const isInView = aView || bInView || abCovering;
+  const isInView = aView || bInView || abCovering;
 
-    return isInView;
+  return isInView;
 }
