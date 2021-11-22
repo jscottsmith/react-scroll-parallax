@@ -24,12 +24,6 @@ Run Jest tests
 yarn test
 ```
 
-or in watch mode
-
-```
-yarn test:watch
-```
-
 ## Linting and Prettier
 
 Run prettier on source files
