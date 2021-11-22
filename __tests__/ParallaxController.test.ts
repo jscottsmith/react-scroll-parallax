@@ -34,12 +34,15 @@ describe('Expect the ParallaxController', () => {
   it('to add listeners when init', () => {
     window.addEventListener = jest.fn();
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    // @ts-ignore
     expect(window.addEventListener.mock.calls[0]).toEqual(
       expect.arrayContaining(['test', null, expect.any(Object)])
     );
+    // @ts-ignore
     expect(window.addEventListener.mock.calls[1]).toEqual(
       expect.arrayContaining(['scroll', expect.any(Function), false])
     );
+    // @ts-ignore
     expect(window.addEventListener.mock.calls[2]).toEqual(
       expect.arrayContaining(['resize', expect.any(Function), false])
     );
@@ -130,11 +133,13 @@ describe('Expect the ParallaxController', () => {
   it('to remove listeners when destroyed', () => {
     window.removeEventListener = jest.fn();
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    // @ts-ignore
     expect(window.removeEventListener.mock.calls[0]).toEqual(
       expect.arrayContaining(['test', null, expect.any(Object)])
     );
 
     controller.destroy();
+    // @ts-ignore
     expect(window.removeEventListener.mock.calls[1]).toEqual(
       expect.arrayContaining([
         'scroll',
@@ -142,6 +147,7 @@ describe('Expect the ParallaxController', () => {
         { passive: true },
       ])
     );
+    // @ts-ignore
     expect(window.removeEventListener.mock.calls[2]).toEqual(
       expect.arrayContaining(['resize', expect.any(Function), false])
     );

@@ -7,7 +7,6 @@ import { VERTICAL } from '../src/constants';
 
 import { MockProvider } from './testUtils/MockProvider';
 import expectRenderError from './testUtils/expectRenderError';
-import createNodeMock from './testUtils/createNodeMock';
 
 const consoleLog = global.console.log;
 
@@ -44,10 +43,7 @@ describe('Expect the <Parallax> component', () => {
         >
           <div className="foo" />
         </Parallax>
-      </ParallaxProvider>,
-      {
-        createNodeMock,
-      }
+      </ParallaxProvider>
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -77,13 +73,13 @@ describe('Expect the <Parallax> component', () => {
 
     expect(controller.createElement).toBeCalledWith({
       elInner: (
-        <div class="parallax-inner">
+        <div className="parallax-inner">
           <div />
         </div>
       ),
       elOuter: (
-        <div class="parallax-outer">
-          <div class="parallax-inner">
+        <div className="parallax-outer">
+          <div className="parallax-inner">
             <div />
           </div>
         </div>

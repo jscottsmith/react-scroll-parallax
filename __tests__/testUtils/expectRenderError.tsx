@@ -13,7 +13,7 @@ export default function expectRenderError(
       super(props);
       this.state = { didError: false };
     }
-    componentDidCatch(err) {
+    componentDidCatch() {
       this.setState({ didError: true });
     }
     render() {
@@ -32,6 +32,7 @@ export default function expectRenderError(
   const div = document.createElement('div');
   window.addEventListener('error', handleTopLevelError);
   try {
+    // @ts-ignore
     ReactDOM.render(<TestBoundary>{element}</TestBoundary>, div);
   } finally {
     window.removeEventListener('error', handleTopLevelError);
