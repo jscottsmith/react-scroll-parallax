@@ -3,8 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ParallaxProvider from '../src/components/ParallaxProvider';
-import ParallaxController from '../src/classes/ParallaxController';
+import { ParallaxProvider } from '../src/components/ParallaxProvider';
+import { ParallaxController } from '../src/classes/ParallaxController';
 
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {

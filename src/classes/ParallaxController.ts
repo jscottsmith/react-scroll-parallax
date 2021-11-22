@@ -3,7 +3,7 @@ import { View } from './View';
 import { Scroll } from './Scroll';
 import { Element } from './Element';
 import { VERTICAL } from '../constants';
-import testForPassiveScroll from '../utils/testForPassiveScroll';
+import { testForPassiveScroll } from '../utils/testForPassiveScroll';
 
 /**
  * -------------------------------------------------------
@@ -17,7 +17,7 @@ import testForPassiveScroll from '../utils/testForPassiveScroll';
  * based on x/y offsets and current scroll position.
  *
  */
-function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
+export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
   // All parallax elements to be updated
   let elements = [];
 
@@ -242,5 +242,3 @@ ParallaxController.init = function (options) {
 
   return new ParallaxController(options);
 };
-
-export default ParallaxController;

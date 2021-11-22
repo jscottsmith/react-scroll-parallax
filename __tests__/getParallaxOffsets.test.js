@@ -1,6 +1,6 @@
 import { getParallaxOffsets } from '../src/helpers/getParallaxOffsets';
-import parseValueAndUnit from '../src/utils/parseValueAndUnit';
-import scaleBetween from '../src/utils/scaleBetween';
+import { parseValueAndUnit } from '../src/utils/parseValueAndUnit';
+import { scaleBetween } from '../src/utils/scaleBetween';
 
 const offset = {
   x0: parseValueAndUnit('-100px'),

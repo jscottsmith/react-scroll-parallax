@@ -13,5 +13,3 @@ export const Image = (props) => {
     </div>
   );
 };
-
-export default Image;

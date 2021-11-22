@@ -1,4 +1,4 @@
-class Bounds {
+export class Bounds {
   totalDistY: number;
   totalDistX: number;
   top: number;
@@ -67,5 +67,3 @@ class Bounds {
     }
   }
 }
-
-export default Bounds;

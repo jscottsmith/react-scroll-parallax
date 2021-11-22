@@ -1,8 +1,8 @@
 import React from 'react';
 import { Parallax, ParallaxProvider } from '../../src';
-import Element from '../Element/Element';
-import Container from '../Container';
-import ScrollContainer from '../ScrollContainer';
+import { Element } from '../Element/Element';
+import { Container } from '../Container';
+import { ScrollContainer } from '../ScrollContainer';
 import styles from './Parallax.module.scss';
 
 export const WithYOffsets = (args) => {

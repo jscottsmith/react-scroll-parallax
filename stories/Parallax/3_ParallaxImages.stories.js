@@ -1,7 +1,7 @@
 import React from 'react';
 import { Parallax } from '../../src';
-import Container from '../Container';
-import Image from '../Image/Image';
+import { Container } from '../Container';
+import { Image } from '../Image/Image';
 
 import imageFile1 from '../static/alexander-tsang-1488076-unsplash.jpg';
 import imageFile2 from '../static/dimaz-fakhruddin-1477266-unsplash.jpg';

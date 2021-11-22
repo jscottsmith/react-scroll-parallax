@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ParallaxContext from '../helpers/ParallaxContext';
-import ParallaxController from '../classes/ParallaxController';
-import { VERTICAL, HORIZONTAL } from '../constants';
-import validHTMLElement from '../utils/validHTMLElement';
+
+import { ParallaxContext } from '../context/ParallaxContext';
+import { ParallaxController } from '../classes/ParallaxController';
+import { VERTICAL } from '../constants';
 
 const createController = (options) => {
   // Don't initialize on the server
@@ -26,21 +25,12 @@ export interface ParallaxProviderProps {
    * Optionally set the container that has overflow and will contain parallax elements. Defaults
    * to the HTML body
    */
-  scrollContainer?: any;
+  scrollContainer?: HTMLElement;
 }
 
-export default class ParallaxProvider extends Component<
-  ParallaxProviderProps,
-  {}
-> {
+export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
   static defaultProps = {
     scrollAxis: VERTICAL,
-  };
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    scrollAxis: PropTypes.oneOf([VERTICAL, HORIZONTAL]),
-    scrollContainer: validHTMLElement,
   };
 
   constructor(props) {

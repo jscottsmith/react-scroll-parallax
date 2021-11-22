@@ -1,5 +1,5 @@
 import { OffsetShape, ParallaxStartEndOffsets } from '../types';
-import scaleBetween from '../utils/scaleBetween';
+import { scaleBetween } from '../utils/scaleBetween';
 
 /**
  * Gets the parallax X and Y offsets to be applied to an element
