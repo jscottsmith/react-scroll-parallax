@@ -3,8 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { render } from '@testing-library/react';
 import { ParallaxProvider } from '../src/components/ParallaxProvider';
 import { ParallaxController } from '../src/classes/ParallaxController';
+import { useController } from '../src/hooks/useController';
 
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
@@ -29,21 +31,21 @@ describe('A <ParallaxProvider>', () => {
     expect(child).toBeCalled();
   });
 
-  it.skip('to pass the controller context', () => {
-    // const node = document.createElement('div');
-    // let parallaxController;
-    // const ContextChecker = withController((props) => {
-    //   parallaxController = props.parallaxController;
-    //   return null;
-    // });
-    // ReactDOM.render(
-    //   <ParallaxProvider>
-    //     <ContextChecker />
-    //   </ParallaxProvider>,
-    //   node
-    // );
-    // // Expected methods and state
-    // expect(parallaxController).toBeInstanceOf(ParallaxController);
+  it('to pass the controller context', () => {
+    let parallaxController;
+
+    const ContextChecker = () => {
+      parallaxController = useController();
+      return null;
+    };
+
+    render(
+      <ParallaxProvider>
+        <ContextChecker />
+      </ParallaxProvider>
+    );
+    // Expected methods and state
+    expect(parallaxController).toBeInstanceOf(ParallaxController);
   });
 
   it('to destroy the controller when unmounting', () => {
@@ -98,8 +100,9 @@ describe('A <ParallaxProvider>', () => {
     expect(spy).toBeCalledWith(el);
   });
 
+  // NOTE: I think this test can be removed
   it('to always create a new instance when re-mounting', () => {
-    // the provider isn't gauranteed to be destroyed before re-instantiated
+    // the provider isn't guaranteed to be destroyed before re-instantiated
     // in a route change.
 
     // this test asserts the controller on the provider will still be
