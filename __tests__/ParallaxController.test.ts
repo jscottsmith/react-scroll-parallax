@@ -7,7 +7,7 @@ import { VERTICAL } from '../src/constants';
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;
 
-const options = {
+const OPTIONS = {
   elInner: document.createElement('div'),
   elOuter: document.createElement('div'),
   props: {
@@ -51,7 +51,7 @@ describe('Expect the ParallaxController', () => {
 
   it('to create an element and return it', () => {
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-    const element = controller.createElement(options);
+    const element = controller.createElement(OPTIONS);
     expect(element).toBeInstanceOf(Element);
 
     const elInner = document.createElement('div');
@@ -90,7 +90,7 @@ describe('Expect the ParallaxController', () => {
 
   it('to add created elements into the controller', () => {
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-    const element = controller.createElement(options);
+    const element = controller.createElement(OPTIONS);
     const elements = controller.getElements();
 
     expect(elements[0]).toEqual(element);
@@ -99,7 +99,7 @@ describe('Expect the ParallaxController', () => {
 
   it('to remove elements from the controller', () => {
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
-    const element = controller.createElement(options);
+    const element = controller.createElement(OPTIONS);
     expect(controller.getElements()[0]).toEqual(element);
 
     controller.removeElementById(element.id);
@@ -141,11 +141,7 @@ describe('Expect the ParallaxController', () => {
     controller.destroy();
     // @ts-ignore
     expect(window.removeEventListener.mock.calls[1]).toEqual(
-      expect.arrayContaining([
-        'scroll',
-        expect.any(Function),
-        { passive: true },
-      ])
+      expect.arrayContaining(['scroll', expect.any(Function), false])
     );
     // @ts-ignore
     expect(window.removeEventListener.mock.calls[2]).toEqual(

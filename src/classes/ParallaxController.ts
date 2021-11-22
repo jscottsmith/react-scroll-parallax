@@ -4,6 +4,9 @@ import { Scroll } from './Scroll';
 import { Element } from './Element';
 import { VERTICAL } from '../constants';
 import { testForPassiveScroll } from '../utils/testForPassiveScroll';
+import { ParallaxControllerType } from '../types';
+
+type ViewElement = HTMLElement | Window;
 
 /**
  * -------------------------------------------------------
@@ -17,15 +20,26 @@ import { testForPassiveScroll } from '../utils/testForPassiveScroll';
  * based on x/y offsets and current scroll position.
  *
  */
-export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
+
+export type ParallaxControllerOptions = {
+  scrollAxis?: 'vertical' | 'horizontal';
+  scrollContainer?: HTMLElement;
+};
+
+export function ParallaxController({
+  scrollAxis = VERTICAL,
+  scrollContainer,
+}: ParallaxControllerOptions) {
   // All parallax elements to be updated
   let elements = [];
 
   let hasScrollContainer = !!scrollContainer;
-  let viewEl = scrollContainer || window;
+  let viewEl: ViewElement = scrollContainer || window;
 
   // Scroll and View
+  // @ts-expect-error
   const x = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+  // @ts-expect-error
   const y = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
   const scroll = new Scroll(x, y);
   let view = new View({ width: 0, height: 0, scrollContainer });
@@ -36,7 +50,7 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
   // Passive support
   const supportsPassive = testForPassiveScroll();
 
-  function _addListeners(el) {
+  function _addListeners(el: ViewElement) {
     el.addEventListener(
       'scroll',
       _handleScroll,
@@ -45,12 +59,8 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
     window.addEventListener('resize', _handleResize, false);
   }
 
-  function _removeListeners(el) {
-    el.removeEventListener(
-      'scroll',
-      _handleScroll,
-      supportsPassive ? { passive: true } : false
-    );
+  function _removeListeners(el: ViewElement) {
+    el.removeEventListener('scroll', _handleScroll, false);
     window.removeEventListener('resize', _handleResize, false);
   }
 
@@ -64,7 +74,9 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
   function _handleScroll() {
     // Save current scroll
     // Supports IE 9 and up.
+    // @ts-expect-error
     const nx = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+    // @ts-expect-error
     const ny = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
     scroll.setScroll(nx, ny);
 
@@ -92,7 +104,7 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
    * attributes, if so set the elements parallax styles.
    */
   // @ts-ignore
-  function _updateAllElements({ updateCache } = {}) {
+  function _updateAllElements({ updateCache }: { updateCache: boolean } = {}) {
     if (elements) {
       elements.forEach((element) => {
         _updateElementPosition(element);
@@ -120,7 +132,9 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
    */
   function _setViewSize() {
     if (hasScrollContainer) {
+      // @ts-ignore
       const width = viewEl.offsetWidth;
+      // @ts-ignore
       const height = viewEl.offsetHeight;
       return view.setSize(width, height);
     }
@@ -142,7 +156,7 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
    * Gets the parallax elements in the controller
    * @return {array} parallax elements
    */
-  this.getElements = function () {
+  this.getElements = function (): Element[] {
     return elements;
   };
 
@@ -231,7 +245,9 @@ export function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
  * Static method to instantiate the ParallaxController.
  * @returns {Object} ParallaxController
  */
-ParallaxController.init = function (options) {
+ParallaxController.init = function (
+  options: ParallaxControllerOptions
+): ParallaxControllerType {
   const hasWindow = typeof window !== 'undefined';
 
   if (!hasWindow) {
