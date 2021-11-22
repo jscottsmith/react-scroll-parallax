@@ -171,8 +171,7 @@ export class ParallaxController {
    * Determines if the element is in view based on the cached
    * attributes, if so set the elements parallax styles.
    */
-  // @ts-ignore
-  private _updateAllElements({ updateCache }: { updateCache: boolean } = {}) {
+  private _updateAllElements({ updateCache }: { updateCache?: boolean } = {}) {
     if (this.elements) {
       this.elements.forEach((element) => {
         this._updateElementPosition(element);
