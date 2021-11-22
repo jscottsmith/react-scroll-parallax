@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Image.module.scss';
 import { useController } from '../../src';
+import styles from './Image.module.scss';
 
 export const Image = (props) => {
   const parallaxController = useController();
