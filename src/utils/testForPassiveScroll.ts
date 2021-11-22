@@ -1,4 +1,4 @@
-export default function testForPassiveScroll() {
+export function testForPassiveScroll() {
   let supportsPassiveOption = false;
   try {
     const opts = Object.defineProperty({}, 'passive', {

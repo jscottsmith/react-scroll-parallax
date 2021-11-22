@@ -1,11 +1,11 @@
 import { ParallaxStartEndOffsets } from '../types';
-import parseValueAndUnit from '../utils/parseValueAndUnit';
+import { parseValueAndUnit } from '../utils/parseValueAndUnit';
 
 /**
  * Takes a parallax element and parses the offset props to get the value
  * and unit. Sets these values as offset object accessible on the element.
  */
-export default function getOffsets(props: {
+export function getOffsets(props: {
   x0: string | number;
   x1: string | number;
   y0: string | number;

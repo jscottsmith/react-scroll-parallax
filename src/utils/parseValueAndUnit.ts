@@ -4,7 +4,7 @@ import { OffsetShape } from '../types';
  * Determines the unit of a string and parses the value
  */
 
-export default function parseValueAndUnit(
+export function parseValueAndUnit(
   str: string | number,
   out: OffsetShape = { value: 0, unit: 'px' }
 ): OffsetShape {

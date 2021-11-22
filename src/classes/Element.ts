@@ -1,8 +1,8 @@
 import { VERTICAL } from '../constants';
-import Bounds from './Bounds';
-import Rect from './Rect';
+import { Bounds } from './Bounds';
+import { Rect } from './Rect';
 import { ParallaxStartEndOffsets } from '../types';
-import getOffsets from '../helpers/getOffsets';
+import { getOffsets } from '../helpers/getOffsets';
 import { isElementInView } from '../helpers/isElementInView';
 import { percentMoved } from '../helpers/percentMoved';
 import { setParallaxStyles } from '../helpers/elementStyles';

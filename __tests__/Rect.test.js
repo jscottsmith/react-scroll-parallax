@@ -1,4 +1,4 @@
-import Rect from '../src/classes/Rect';
+import { Rect } from '../src/classes/Rect';
 import { createElementMock } from './testUtils/createElementMock';
 describe.each([
   [

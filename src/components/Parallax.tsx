@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import ParallaxController from '../classes/ParallaxController';
-import { useController } from './useController';
+import { ParallaxController } from '../classes/ParallaxController';
+import { useController } from '../hooks/useController';
 
 export interface ParallaxProps {
   /**

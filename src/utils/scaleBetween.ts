@@ -1,5 +1,5 @@
 // Scale between AKA normalize
-export default function scaleBetween(
+export function scaleBetween(
   value: number,
   newMin: number,
   newMax: number,

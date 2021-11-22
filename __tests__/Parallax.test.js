@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Parallax } from '../src/components/Parallax';
-import ParallaxProvider from '../src/components/ParallaxProvider';
-import ParallaxController from '../src/classes/ParallaxController';
+import { ParallaxProvider } from '../src/components/ParallaxProvider';
+import { ParallaxController } from '../src/classes/ParallaxController';
 import { VERTICAL } from '../src/constants';
 
-import MockProvider from './testUtils/MockProvider';
+import { MockProvider } from './testUtils/MockProvider';
 import expectRenderError from './testUtils/expectRenderError';
 import createNodeMock from './testUtils/createNodeMock';
 

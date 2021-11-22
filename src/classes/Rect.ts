@@ -1,7 +1,7 @@
 import { View } from './View';
 import { Scroll } from './Scroll';
 
-class Rect {
+export class Rect {
   height: number;
   width: number;
   left: number;
@@ -36,5 +36,3 @@ class Rect {
     this.originTotalDistX = view.width + this.width;
   }
 }
-
-export default Rect;

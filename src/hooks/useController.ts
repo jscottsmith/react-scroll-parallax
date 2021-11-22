@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ParallaxContext from '../helpers/ParallaxContext';
+import { ParallaxContext } from '../context/ParallaxContext';
 import { ParallaxController } from '../types';
 
 export function useController(): ParallaxController {

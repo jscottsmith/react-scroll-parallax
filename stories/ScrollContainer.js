@@ -1,7 +1,7 @@
 import React from 'react';
 import { ParallaxProvider } from '../src';
 
-export default class ScrollContainer extends React.Component {
+export class ScrollContainer extends React.Component {
   static defaultProps = {
     scrollAxis: 'vertical',
   };

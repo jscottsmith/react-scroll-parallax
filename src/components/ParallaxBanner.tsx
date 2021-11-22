@@ -60,7 +60,7 @@ export interface ParallaxBannerProps {
   style?: any;
 }
 
-const ParallaxBanner = ({
+export const ParallaxBanner = ({
   children,
   className,
   layers,
@@ -143,5 +143,3 @@ const ParallaxBanner = ({
 ParallaxBanner.defaultProps = {
   disabled: false,
 };
-
-export default ParallaxBanner;
