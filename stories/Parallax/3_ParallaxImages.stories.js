@@ -13,33 +13,33 @@ import imageFile6 from '../static/julien-moreau-83192-unsplash.jpg';
 import styles from '../Image/Image.module.scss';
 
 export const WithVaryingYOffsets = () => {
-    return (
-        <Container scrollAxis="vertical">
-            <div className={styles.images}>
-                <Parallax y={[20, -20]} className={styles.parallaxImage}>
-                    <Image src={imageFile1} />
-                </Parallax>
-                <Parallax y={[-20, 20]} className={styles.parallaxImage}>
-                    <Image src={imageFile2} />
-                </Parallax>
-                <Parallax y={[20, -20]} className={styles.parallaxImage2}>
-                    <Image src={imageFile4} />
-                </Parallax>
-                <Parallax y={[-10, 10]} className={styles.parallaxImage}>
-                    <Image src={imageFile5} />
-                </Parallax>
-                <Parallax y={[10, -10]} className={styles.parallaxImage}>
-                    <Image src={imageFile3} />
-                </Parallax>
-                <Parallax y={[30, -30]} className={styles.parallaxImage2}>
-                    <Image src={imageFile6} />
-                </Parallax>
-            </div>
-        </Container>
-    );
+  return (
+    <Container scrollAxis="vertical">
+      <div className={styles.images}>
+        <Parallax y={[20, -20]} className={styles.parallaxImage}>
+          <Image src={imageFile1} />
+        </Parallax>
+        <Parallax y={[-20, 20]} className={styles.parallaxImage}>
+          <Image src={imageFile2} />
+        </Parallax>
+        <Parallax y={[20, -20]} className={styles.parallaxImage2}>
+          <Image src={imageFile4} />
+        </Parallax>
+        <Parallax y={[-10, 10]} className={styles.parallaxImage}>
+          <Image src={imageFile5} />
+        </Parallax>
+        <Parallax y={[10, -10]} className={styles.parallaxImage}>
+          <Image src={imageFile3} />
+        </Parallax>
+        <Parallax y={[30, -30]} className={styles.parallaxImage2}>
+          <Image src={imageFile6} />
+        </Parallax>
+      </div>
+    </Container>
+  );
 };
 
 export default {
-    title: '<Parallax> Images',
-    component: WithVaryingYOffsets,
+  title: '<Parallax> Images',
+  component: WithVaryingYOffsets,
 };

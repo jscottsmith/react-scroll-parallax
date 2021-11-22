@@ -8,16 +8,16 @@
  */
 
 export function percentMoved(
-    a: number,
-    totalDist: number,
-    size: number,
-    scroll: number
+  a: number,
+  totalDist: number,
+  size: number,
+  scroll: number
 ): number {
-    // adjust cached value
-    const ax = a - scroll;
+  // adjust cached value
+  const ax = a - scroll;
 
-    // Percent the element has moved based on current and total distance to move
-    const percent = ((ax * -1 + size) / totalDist) * 100;
+  // Percent the element has moved based on current and total distance to move
+  const percent = ((ax * -1 + size) / totalDist) * 100;
 
-    return percent;
+  return percent;
 }

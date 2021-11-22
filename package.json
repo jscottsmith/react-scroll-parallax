@@ -19,6 +19,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
+    "prettier": "prettier ./ --write",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -39,6 +40,7 @@
   },
   "prettier": {
     "printWidth": 80,
+    "tabWidth": 2,
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
