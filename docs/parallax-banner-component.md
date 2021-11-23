@@ -1,8 +1,8 @@
-## \<ParallaxBanner>
+# \<ParallaxBanner>
 
 Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect. Allows a single or multiple images to be parallaxed at different rates within the banner area.
 
-### Banner Usage
+## Banner Usage
 
 Use the `layers` prop to indicate all images, offset amounts, and scroll rates. Optionally pass additional children to be rendered. Styles of the outermost banner element can also be changed. Here's an example:
 
@@ -27,7 +27,7 @@ Use the `layers` prop to indicate all images, offset amounts, and scroll rates. 
 </ParallaxBanner>
 ```
 
-### Banner Props
+## Banner Props
 
 The following are all props that can be passed to the `<ParallaxBanner>` component:
 
@@ -38,7 +38,7 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 | **layers**    |  `array`  |         | A required `array` of `objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg' }]`. [See layers prop below](#banner-layers-prop) |
 | **style**     | `object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                       |
 
-### Banner Layers Prop
+## Banner Layers Prop
 
 The `layers` prop takes an array of objects that will represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
