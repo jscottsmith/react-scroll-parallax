@@ -28,10 +28,8 @@ export type ParallaxControllerOptions = {
 
 export type ParallaxElementProperties = {
   disabled?: boolean;
-  x0: string | number;
-  x1: string | number;
-  y0: string | number;
-  y1: string | number;
+  translateX: string[] | number[];
+  translateY: string[] | number[];
 };
 
 export type CreateElementOptions = {

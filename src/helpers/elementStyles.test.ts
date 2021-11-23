@@ -6,10 +6,10 @@ type Offset = string | number;
 
 function createOffsets(x0: Offset, x1: Offset, y0: Offset, y1: Offset) {
   return getOffsets({
-    x0,
-    x1,
-    y0,
-    y1,
+    // @ts-expect-error
+    translateX: [x0, x1],
+    // @ts-expect-error
+    translateY: [y0, y1],
   });
 }
 

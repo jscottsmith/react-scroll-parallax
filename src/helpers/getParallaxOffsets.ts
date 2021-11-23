@@ -16,13 +16,22 @@ export function getParallaxOffsets(
   offsets: ParallaxStartEndOffsets,
   percentMoved: number
 ): ParallaxOffset {
-  const { y0, y1, x0, x1 } = offsets;
+  const { translateY, translateX, yUnit, xUnit } = offsets;
 
-  const yUnit = y1.unit;
-  const xUnit = x1.unit;
-
-  const x = scaleBetween(percentMoved, x0.value, x1.value, 0, 100);
-  const y = scaleBetween(percentMoved, y0.value, y1.value, 0, 100);
+  const x = scaleBetween(
+    percentMoved,
+    translateX[0].value,
+    translateX[1].value,
+    0,
+    100
+  );
+  const y = scaleBetween(
+    percentMoved,
+    translateY[0].value,
+    translateY[1].value,
+    0,
+    100
+  );
 
   return {
     x: {

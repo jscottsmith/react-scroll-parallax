@@ -74,7 +74,7 @@ describe('Expect the <Parallax> component', () => {
     expect(controller.createElement).toBeCalledWith({
       elInner: expect.any(HTMLElement),
       elOuter: expect.any(HTMLElement),
-      props: { disabled: false, x0: 0, x1: 0, y0: -100, y1: 100 },
+      props: { disabled: false, translateX: [0, 0], translateY: [-100, 100] },
     });
   });
 
@@ -116,10 +116,8 @@ describe('Expect the <Parallax> component', () => {
 
     expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
       disabled: false,
-      x0: 100,
-      x1: -100,
-      y0: -100,
-      y1: 100,
+      translateX: [100, -100],
+      translateY: [-100, 100],
     });
 
     const newProps = { disabled: false, x: [-40, -60], y: [10, 80] };
@@ -130,10 +128,8 @@ describe('Expect the <Parallax> component', () => {
 
     expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
       disabled: false,
-      x0: -40,
-      x1: -60,
-      y0: 10,
-      y1: 80,
+      translateX: [-40, -60],
+      translateY: [10, 80],
     });
 
     // only update with valid props
