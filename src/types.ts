@@ -1,10 +1,8 @@
 export type ParallaxStartEndOffsets = {
   xUnit: ValidUnits;
   yUnit: ValidUnits;
-  y0: OffsetShape;
-  y1: OffsetShape;
-  x0: OffsetShape;
-  x1: OffsetShape;
+  translateX: OffsetShape[];
+  translateY: OffsetShape[];
 };
 
 export enum Units {

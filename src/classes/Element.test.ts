@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS = {
   elInner: document.createElement('div'),
   elOuter: document.createElement('div'),
   scrollAxis: ScrollAxis.vertical,
-  props: { x0: 0, x1: 0, y0: 0, y1: 0 },
+  props: { translateX: [0, 0], translateY: [0, 0] },
 };
 
 describe('Expect the Element class', () => {
@@ -19,7 +19,11 @@ describe('Expect the Element class', () => {
 
   it('to update props and return the instance', () => {
     const element = new Element(DEFAULT_OPTIONS);
-    const updates = { disabled: true, x0: 100, x1: 100, y0: 0, y1: 0 };
+    const updates = {
+      disabled: true,
+      translateX: [100, 100],
+      translateY: [0, 0],
+    };
     const instance = element.updateProps(updates);
     expect(instance.props).toMatchObject(updates);
     expect(instance).toBeInstanceOf(Element);

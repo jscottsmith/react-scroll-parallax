@@ -8,15 +8,29 @@ import { useController } from '../hooks/useController';
 
 export interface ParallaxProps {
   /**
-   * Offsets on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on
+   * Start and end translation on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on
    * the elements width.
+   *
+   * Example:
+   *
+   * x={[-100, 100]}
+   *
+   * First value is the starting translation
+   * Second value is the ending translation
    */
-  x?: Array<string | number>;
+  x?: string[] | number[];
   /**
-   * Offsets on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on
-   * the elements width.
+   * Start and end translation on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on
+   * the elements height.
+   *
+   * Example:
+   *
+   * y={[-100, 100]}
+   *
+   * First value is the starting translation
+   * Second value is the ending translation
    */
-  y?: Array<string | number>;
+  y?: string[] | number[];
   /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
@@ -56,7 +70,7 @@ function useVerifyController(controller: ParallaxController) {
   }, [controller]);
 }
 
-function Parallax(props: PropsWithChildren<ParallaxProps>) {
+export function Parallax(props: PropsWithChildren<ParallaxProps>) {
   const controller = useController();
   const refInner = useRef<HTMLElement>();
   const refOuter = useRef<HTMLElement>();
@@ -71,13 +85,9 @@ function Parallax(props: PropsWithChildren<ParallaxProps>) {
         disabled: props.disabled,
         // Defaults set in Parallax.defaultProps
         // @ts-expect-error
-        x0: props.x[0],
+        translateX: props.x,
         // @ts-expect-error
-        x1: props.x[1],
-        // @ts-expect-error
-        y0: props.y[0],
-        // @ts-expect-error
-        y1: props.y[1],
+        translateY: props.y,
       },
     };
   }
@@ -128,5 +138,3 @@ Parallax.defaultProps = {
   x: [0, 0],
   y: [0, 0],
 };
-
-export { Parallax };

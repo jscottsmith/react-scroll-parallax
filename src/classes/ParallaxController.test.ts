@@ -12,10 +12,8 @@ const OPTIONS = {
   elOuter: document.createElement('div'),
   props: {
     disabled: false,
-    x1: 0,
-    x0: 0,
-    y1: 0,
-    y0: 0,
+    translateX: [0, 0],
+    translateY: [0, 0],
   },
 };
 
@@ -66,19 +64,21 @@ describe('Expect the ParallaxController', () => {
       percent: 100,
       updatePosition: expect.any(Function),
       offsets: {
-        x1: { unit: '%', value: 0 },
-        x0: { unit: '%', value: 0 },
+        translateY: [
+          { unit: '%', value: 0 },
+          { unit: '%', value: 0 },
+        ],
+        translateX: [
+          { unit: '%', value: 0 },
+          { unit: '%', value: 0 },
+        ],
         xUnit: '%',
-        y1: { unit: '%', value: 0 },
-        y0: { unit: '%', value: 0 },
         yUnit: '%',
       },
       props: {
         disabled: false,
-        x1: 0,
-        x0: 0,
-        y1: 0,
-        y0: 0,
+        translateX: [0, 0],
+        translateY: [0, 0],
       },
     };
     expect(element).toMatchObject(expectedElement);
@@ -116,13 +116,11 @@ describe('Expect the ParallaxController', () => {
       elOuter: document.createElement('div'),
       props: {
         disabled: false,
-        x1: '100px',
-        x0: '-10%',
-        y1: '50px',
-        y0: 100, // defaults to %
+        translateX: ['-10%', '100px'],
+        translateY: [100, '50px'],
       },
     };
-
+    // @ts-expect-error
     expect(() => controller.createElement(incorrectOffsets)).toThrowError(
       'Must provide matching units for the min and max offset values of each axis.'
     );

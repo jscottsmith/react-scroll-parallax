@@ -11,7 +11,10 @@ export class Bounds {
   right: number;
 
   constructor(rect: Rect, offsets: ParallaxStartEndOffsets, view: View) {
-    const { y0, y1, x1, x0 } = offsets;
+    const {
+      translateY: [y0, y1],
+      translateX: [x0, x1],
+    } = offsets;
 
     // Y offsets
     const yPercent = y1.unit === '%' && y0.unit === '%';

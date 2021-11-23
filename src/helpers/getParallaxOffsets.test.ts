@@ -6,10 +6,8 @@ import { scaleBetween } from '../utils/scaleBetween';
 const offset: ParallaxStartEndOffsets = {
   xUnit: 'px',
   yUnit: '%',
-  x0: parseValueAndUnit('-100px'),
-  x1: parseValueAndUnit('40px'),
-  y0: parseValueAndUnit('-80%'),
-  y1: parseValueAndUnit('50%'),
+  translateX: [parseValueAndUnit('-100px'), parseValueAndUnit('40px')],
+  translateY: [parseValueAndUnit('-80%'), parseValueAndUnit('50%')],
 };
 
 const percentMoved = 44;
@@ -19,22 +17,22 @@ test('Gets offsets based on percent in view', () => {
     x: {
       value: scaleBetween(
         percentMoved,
-        offset.x0.value,
-        offset.x1.value,
+        offset.translateX[0].value,
+        offset.translateX[1].value,
         0,
         100
       ),
-      unit: offset.x1.unit,
+      unit: offset.xUnit,
     },
     y: {
       value: scaleBetween(
         percentMoved,
-        offset.y0.value,
-        offset.y1.value,
+        offset.translateY[0].value,
+        offset.translateY[1].value,
         0,
         100
       ),
-      unit: offset.y1.unit,
+      unit: offset.yUnit,
     },
   });
 });

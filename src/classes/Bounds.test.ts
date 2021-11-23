@@ -13,10 +13,14 @@ describe.each([
       originTotalDistX: 1700,
     },
     {
-      y0: { value: 0, unit: 'px' },
-      y1: { value: 0, unit: 'px' },
-      x1: { value: 0, unit: 'px' },
-      x0: { value: 0, unit: 'px' },
+      translateY: [
+        { value: 0, unit: 'px' },
+        { value: 0, unit: 'px' },
+      ],
+      translateX: [
+        { value: 0, unit: 'px' },
+        { value: 0, unit: 'px' },
+      ],
     },
     { width: 1000, height: 100 },
     {
@@ -40,10 +44,14 @@ describe.each([
       originTotalDistX: 700,
     },
     {
-      y0: { value: -10, unit: '%' },
-      y1: { value: 10, unit: '%' },
-      x1: { value: -10, unit: '%' },
-      x0: { value: 10, unit: '%' },
+      translateY: [
+        { value: -10, unit: '%' },
+        { value: 10, unit: '%' },
+      ],
+      translateX: [
+        { value: 10, unit: '%' },
+        { value: -10, unit: '%' },
+      ],
     },
     { width: 500, height: 500 },
     {
@@ -69,10 +77,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: 50, unit: '%' },
-      y1: { value: -50, unit: '%' },
-      x0: { value: 0, unit: '%' },
-      x1: { value: 0, unit: '%' },
+      translateY: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
+      translateX: [
+        { value: 0, unit: '%' },
+        { value: 0, unit: '%' },
+      ],
     },
     { width: 805, height: 675 },
     {
@@ -98,10 +110,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: 50, unit: '%' },
-      y1: { value: -50, unit: '%' },
-      x0: { value: 0, unit: '%' },
-      x1: { value: 0, unit: '%' },
+      translateY: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
+      translateX: [
+        { value: 0, unit: '%' },
+        { value: 0, unit: '%' },
+      ],
     },
     { width: 1024, height: 675 },
     {
@@ -127,10 +143,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: 0, unit: '%' },
-      y1: { value: 0, unit: '%' },
-      x0: { value: -50, unit: '%' },
-      x1: { value: 50, unit: '%' },
+      translateY: [
+        { value: 0, unit: '%' },
+        { value: 0, unit: '%' },
+      ],
+      translateX: [
+        { value: -50, unit: '%' },
+        { value: 50, unit: '%' },
+      ],
     },
     { width: 1024, height: 675 },
     {
@@ -156,10 +176,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: 50, unit: '%' },
-      y1: { value: -50, unit: '%' },
-      x0: { value: 50, unit: '%' },
-      x1: { value: -50, unit: '%' },
+      translateY: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
+      translateX: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
     },
     { width: 1024, height: 813 },
     {
@@ -185,10 +209,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: -50, unit: '%' },
-      y1: { value: 50, unit: '%' },
-      x0: { value: -50, unit: '%' },
-      x1: { value: 50, unit: '%' },
+      translateY: [
+        { value: -50, unit: '%' },
+        { value: 50, unit: '%' },
+      ],
+      translateX: [
+        { value: -50, unit: '%' },
+        { value: 50, unit: '%' },
+      ],
     },
     { width: 1024, height: 813 },
     {
@@ -214,10 +242,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: '%',
-      y0: { value: 50, unit: '%' },
-      y1: { value: -50, unit: '%' },
-      x0: { value: 50, unit: '%' },
-      x1: { value: -50, unit: '%' },
+      translateY: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
+      translateX: [
+        { value: 50, unit: '%' },
+        { value: -50, unit: '%' },
+      ],
     },
     { width: 1024, height: 813 },
     {
@@ -243,10 +275,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: 'px',
-      y0: { value: 85, unit: 'px' },
-      y1: { value: -85, unit: 'px' },
-      x0: { value: 0, unit: '%' },
-      x1: { value: 0, unit: '%' },
+      translateY: [
+        { value: 85, unit: 'px' },
+        { value: -85, unit: 'px' },
+      ],
+      translateX: [
+        { value: 0, unit: '%' },
+        { value: 0, unit: '%' },
+      ],
     },
     { width: 979, height: 643 },
     {
@@ -272,10 +308,14 @@ describe.each([
     {
       xUnit: '%',
       yUnit: 'px',
-      y0: { value: -200, unit: 'px' },
-      y1: { value: 125, unit: 'px' },
-      x0: { value: 0, unit: '%' },
-      x1: { value: 0, unit: '%' },
+      translateY: [
+        { value: -200, unit: 'px' },
+        { value: 125, unit: 'px' },
+      ],
+      translateX: [
+        { value: 0, unit: '%' },
+        { value: 0, unit: '%' },
+      ],
     },
     { width: 891, height: 643 },
     {
