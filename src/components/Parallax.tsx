@@ -8,8 +8,7 @@ import { useController } from '../hooks/useController';
 
 export interface ParallaxProps {
   /**
-   * Start and end translation on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on
-   * the elements width.
+   * Start and end translation on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on the elements width.
    *
    * Example:
    *
@@ -20,8 +19,7 @@ export interface ParallaxProps {
    */
   x?: string[] | number[];
   /**
-   * Start and end translation on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on
-   * the elements height.
+   * Start and end translation on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on the elements height.
    *
    * Example:
    *
