@@ -100,8 +100,16 @@ React scroll parallax should support the last two versions of all major browsers
 
 ## Optimizations to Reduce Jank
 
-Considerations to reduce have been taken to reduce jank. [Please read more here](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) on how this is done
+Considerations to have been taken to reduce jank -- [please read more here](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) on how this is done
 
 ### **PSA**
 
-Even with these optimizations scroll effects can cause jank. If you use this lib make sure to keep images small and optimized, reduce the number of moving elements in view and on the page in total, and disable scroll effects on mobile devices. That should keep scrolling smooth and users happy.
+Even with optimizations _scroll effects can cause jank_. It's also important to keep in mind that scroll effects are usually not critical to a users experience and sometimes can be annoying.
+
+If you use these components make sure you seriously consider the following:
+
+- Keep images small (do not use inappropriately high resolutions) and optimized (use appropriate compression)
+- Reduce the number of scroll effects on elements in view and on the page in total
+- Disable the use — or limit the amount — of scroll effects for users on mobile devices
+
+Follow the above and you should keep scrolling smooth and users happy.
