@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from 'react';
+import { ParallaxController, ScrollAxis } from 'parallax-controller';
 import { render } from '@testing-library/react';
 import { Parallax } from './Parallax';
 import { ParallaxProvider } from './ParallaxProvider';
-import { ParallaxController } from '../classes/ParallaxController';
-import { VERTICAL } from '../constants';
+
 import { MockProvider } from '../testUtils/MockProvider';
 import expectRenderError from '../testUtils/expectRenderError';
 
@@ -60,7 +60,9 @@ describe('Expect the <Parallax> component', () => {
   });
 
   it('to create an element in the controller on mount', () => {
-    const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    const controller = ParallaxController.init({
+      scrollAxis: ScrollAxis.vertical,
+    });
     controller.createElement = jest.fn(controller.createElement);
 
     render(
@@ -79,7 +81,9 @@ describe('Expect the <Parallax> component', () => {
   });
 
   it('to remove an element in the controller when unmounting', () => {
-    const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    const controller = ParallaxController.init({
+      scrollAxis: ScrollAxis.vertical,
+    });
     controller.removeElementById = jest.fn();
 
     const { unmount } = render(
@@ -95,7 +99,9 @@ describe('Expect the <Parallax> component', () => {
   });
 
   it('to update an element in the controller when receiving relevant new props', () => {
-    const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    const controller = ParallaxController.init({
+      scrollAxis: ScrollAxis.vertical,
+    });
     controller.updateElementPropsById = jest.fn();
 
     function Wrapper(props: PropsWithChildren<{}>) {
@@ -147,7 +153,9 @@ describe('Expect the <Parallax> component', () => {
   });
 
   it('to reset styles on an element if the disabled prop is true', () => {
-    const controller = ParallaxController.init({ scrollAxis: VERTICAL });
+    const controller = ParallaxController.init({
+      scrollAxis: ScrollAxis.vertical,
+    });
     controller.resetElementStyles = jest.fn();
 
     function Wrapper(props: PropsWithChildren<{}>) {

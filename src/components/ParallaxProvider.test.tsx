@@ -2,10 +2,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ParallaxController } from 'parallax-controller';
 
 import { render } from '@testing-library/react';
 import { ParallaxProvider } from './ParallaxProvider';
-import { ParallaxController } from '../classes/ParallaxController';
 import { useController } from '../hooks/useController';
 
 describe('A <ParallaxProvider>', () => {

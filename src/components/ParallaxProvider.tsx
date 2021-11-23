@@ -4,9 +4,9 @@ import { ParallaxContext } from '../context/ParallaxContext';
 import {
   ParallaxController,
   ParallaxControllerOptions,
-} from '../classes/ParallaxController';
-import { VERTICAL } from '../constants';
-import { ValidScrollAxis } from '../types';
+  ValidScrollAxis,
+  ScrollAxis,
+} from 'parallax-controller';
 
 const createController = (options: ParallaxControllerOptions) => {
   // Don't initialize on the server
@@ -34,7 +34,7 @@ export interface ParallaxProviderProps {
 
 export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
   static defaultProps = {
-    scrollAxis: VERTICAL,
+    scrollAxis: ScrollAxis.vertical,
   };
 
   controller: ParallaxController | null;
