@@ -1,5 +1,9 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import { ParallaxController } from '../classes/ParallaxController';
+import { Element } from '../classes/Element';
+import {
+  CreateElementOptions,
+  ParallaxController,
+} from '../classes/ParallaxController';
 import { useController } from '../hooks/useController';
 
 export interface ParallaxProps {
@@ -39,7 +43,7 @@ export interface ParallaxProps {
   tagOuter?: any;
 }
 
-function useVerifyController(controller) {
+function useVerifyController(controller: ParallaxController) {
   useEffect(() => {
     // Make sure the provided controller is an instance of the Parallax Controller
     const isInstance = controller instanceof ParallaxController;
@@ -54,34 +58,37 @@ function useVerifyController(controller) {
 
 function Parallax(props: PropsWithChildren<ParallaxProps>) {
   const controller = useController();
-  const refInner = useRef();
-  const refOuter = useRef();
+  const refInner = useRef<HTMLElement>();
+  const refOuter = useRef<HTMLElement>();
 
   useVerifyController(controller);
 
-  function _getElementOptions() {
+  function _getElementOptions(): CreateElementOptions {
     return {
       elInner: refInner.current,
       elOuter: refOuter.current,
       props: {
         disabled: props.disabled,
+        // Defaults set in Parallax.defaultProps
+        // @ts-expect-error
         x0: props.x[0],
+        // @ts-expect-error
         x1: props.x[1],
+        // @ts-expect-error
         y0: props.y[0],
+        // @ts-expect-error
         y1: props.y[1],
       },
     };
   }
 
-  const [element, setElement] = useState(null);
+  const [element, setElement] = useState<Element>();
 
   // create element
   useEffect(() => {
-    // @ts-ignore
     const newElement = controller.createElement(_getElementOptions());
     setElement(newElement);
 
-    // @ts-ignore
     return () => controller.removeElementById(newElement.id);
   }, []);
 
@@ -89,10 +96,8 @@ function Parallax(props: PropsWithChildren<ParallaxProps>) {
   useEffect(() => {
     if (element) {
       if (props.disabled) {
-        // @ts-ignore
         controller.resetElementStyles(element);
       } else {
-        // @ts-ignore
         controller.updateElementPropsById(
           element.id,
           _getElementOptions().props

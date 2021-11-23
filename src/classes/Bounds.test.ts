@@ -287,7 +287,7 @@ describe.each([
       right: 887.8125,
     },
   ],
-])('Bounds()', (rect, offsets, view, expected) => {
+])('Bounds()', (rect: any, offsets: any, view: any, expected) => {
   test(`returns expected bounds based on rect, offsets, and view`, () => {
     expect(new Bounds(rect, offsets, view)).toEqual(
       expect.objectContaining(expected)

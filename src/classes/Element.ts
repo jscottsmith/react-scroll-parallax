@@ -7,24 +7,31 @@ import { isElementInView } from '../helpers/isElementInView';
 import { percentMoved } from '../helpers/percentMoved';
 import { setParallaxStyles } from '../helpers/elementStyles';
 import { createId } from '../utils/createId';
+import {
+  CreateElementOptions,
+  ParallaxElementProperties,
+} from './ParallaxController';
+import { View } from './View';
+import { Scroll } from './Scroll';
+
+type ElementConstructorOptions = CreateElementOptions & {
+  scrollAxis: 'vertical' | 'horizontal';
+};
 
 export class Element {
-  elInner: HTMLElement;
-  elOuter: HTMLElement;
-  // TODO
-  props: any;
+  elInner?: HTMLElement;
+  elOuter?: HTMLElement;
+  props: ParallaxElementProperties;
   scrollAxis: 'vertical' | 'horizontal';
   id: number;
   offsets: ParallaxStartEndOffsets;
-  isInView: boolean;
+  isInView: boolean | null;
   percent: number;
+  rect?: Rect;
+  bounds?: Bounds;
+  updatePosition: (view: View, scroll: Scroll) => Element;
 
-  updatePosition: (view: any, scroll: any) => void;
-
-  rect: Rect;
-  bounds: Bounds;
-
-  constructor(options) {
+  constructor(options: ElementConstructorOptions) {
     this.elInner = options.elInner;
     this.elOuter = options.elOuter;
     this.props = options.props;
@@ -40,19 +47,23 @@ export class Element {
         : this._updatePositionHorizontal;
   }
 
-  updateProps(nextProps) {
+  updateProps(nextProps: ParallaxElementProperties) {
     this.props = { ...this.props, ...nextProps };
     this.offsets = getOffsets(nextProps);
     return this;
   }
 
-  setCachedAttributes(view, scroll) {
+  setCachedAttributes(view: View, scroll: Scroll): Element {
+    if (!this.elOuter) return this;
+
     this.rect = new Rect(this.elOuter, view, scroll);
     this.bounds = new Bounds(this.rect, this.offsets, view);
     return this;
   }
 
-  _updatePositionHorizontal(view, scroll) {
+  _updatePositionHorizontal(view: View, scroll: Scroll): Element {
+    if (!this.bounds || !this.rect || !this.elInner) return this;
+
     this.isInView = isElementInView(
       this.bounds.left,
       this.bounds.right,
@@ -74,7 +85,9 @@ export class Element {
     return this;
   }
 
-  _updatePositionVertical(view, scroll) {
+  _updatePositionVertical(view: View, scroll: Scroll): Element {
+    if (!this.bounds || !this.rect || !this.elInner) return this;
+
     this.isInView = isElementInView(
       this.bounds.top,
       this.bounds.bottom,

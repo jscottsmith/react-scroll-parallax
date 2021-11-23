@@ -27,5 +27,6 @@ export function setParallaxStyles(
  */
 export function resetStyles(element: Element) {
   const el = element.elInner;
+  if (!el) return;
   el.style.transform = '';
 }

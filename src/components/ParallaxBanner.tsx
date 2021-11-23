@@ -36,7 +36,7 @@ export interface BannerLayer {
    */
   image?: string;
   /*
-   * 	Props to apply to the layer element.
+   * Props to apply to the layer element.
    */
   props?: any;
 }

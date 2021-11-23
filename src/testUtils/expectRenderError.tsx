@@ -3,13 +3,13 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 export default function expectRenderError(
-  element,
-  expectedError,
-  expectedErrorLength = 1
+  element: any,
+  expectedError: string,
+  expectedErrorLength: number = 1
 ) {
   // Noop error boundary for testing.
   class TestBoundary extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
       super(props);
       this.state = { didError: false };
     }
@@ -22,8 +22,8 @@ export default function expectRenderError(
   }
 
   // Record all errors.
-  let topLevelErrors = [];
-  function handleTopLevelError(event) {
+  let topLevelErrors: ErrorEvent[] = [];
+  function handleTopLevelError(event: ErrorEvent) {
     topLevelErrors.push(event.error);
     // Prevent logging
     event.preventDefault();

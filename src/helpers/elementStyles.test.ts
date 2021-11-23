@@ -2,7 +2,9 @@ import createNodeMock from '../testUtils/createNodeMock';
 import { setParallaxStyles } from './elementStyles';
 import { getOffsets } from './getOffsets';
 
-function createOffsets(x0, x1, y0, y1) {
+type Offset = string | number;
+
+function createOffsets(x0: Offset, x1: Offset, y0: Offset, y1: Offset) {
   return getOffsets({
     x0,
     x1,
