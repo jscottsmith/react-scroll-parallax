@@ -12,6 +12,13 @@ export enum Units {
   '%' = '%',
 }
 
+export enum ScrollAxis {
+  'vertical' = 'vertical',
+  'horizontal' = 'horizontal',
+}
+
+export type ValidScrollAxis = keyof typeof ScrollAxis;
+
 export type ValidUnits = keyof typeof Units;
 
 export type OffsetShape = {

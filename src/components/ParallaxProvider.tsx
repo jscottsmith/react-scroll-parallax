@@ -6,6 +6,7 @@ import {
   ParallaxControllerOptions,
 } from '../classes/ParallaxController';
 import { VERTICAL } from '../constants';
+import { ValidScrollAxis } from '../types';
 
 const createController = (options: ParallaxControllerOptions) => {
   // Don't initialize on the server
@@ -23,7 +24,7 @@ export interface ParallaxProviderProps {
    * Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of vertical or
    * horizontal
    */
-  scrollAxis?: 'vertical' | 'horizontal';
+  scrollAxis?: ValidScrollAxis;
   /**
    * Optionally set the container that has overflow and will contain parallax elements. Defaults
    * to the HTML body

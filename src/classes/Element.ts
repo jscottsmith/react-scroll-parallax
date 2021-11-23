@@ -1,7 +1,7 @@
 import { VERTICAL } from '../constants';
 import { Bounds } from './Bounds';
 import { Rect } from './Rect';
-import { ParallaxStartEndOffsets } from '../types';
+import { ParallaxStartEndOffsets, ValidScrollAxis } from '../types';
 import { getOffsets } from '../helpers/getOffsets';
 import { isElementInView } from '../helpers/isElementInView';
 import { percentMoved } from '../helpers/percentMoved';
@@ -15,14 +15,14 @@ import { View } from './View';
 import { Scroll } from './Scroll';
 
 type ElementConstructorOptions = CreateElementOptions & {
-  scrollAxis: 'vertical' | 'horizontal';
+  scrollAxis: ValidScrollAxis;
 };
 
 export class Element {
   elInner?: HTMLElement;
   elOuter?: HTMLElement;
   props: ParallaxElementProperties;
-  scrollAxis: 'vertical' | 'horizontal';
+  scrollAxis: ValidScrollAxis;
   id: number;
   offsets: ParallaxStartEndOffsets;
   isInView: boolean | null;
