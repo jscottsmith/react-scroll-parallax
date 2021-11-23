@@ -1,9 +1,9 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import { Element } from '../classes/Element';
 import {
   CreateElementOptions,
   ParallaxController,
-} from '../classes/ParallaxController';
+  Element,
+} from 'parallax-controller';
 import { useController } from '../hooks/useController';
 
 export interface ParallaxProps {

@@ -72,6 +72,9 @@
       "limit": "10 KB"
     }
   ],
+  "dependencies": {
+    "parallax-controller": "0.1.6"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@size-limit/preset-small-lib": "^6.0.4",

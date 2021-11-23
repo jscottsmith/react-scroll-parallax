@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ParallaxContext } from '../../src/context/ParallaxContext';
-import { ParallaxController } from '../classes/ParallaxController';
+import { ParallaxController } from 'parallax-controller';
 
 export class MockProvider extends Component {
   static propTypes = {
