@@ -15,7 +15,7 @@ const MyComponent = () => {
 };
 ```
 
-### Available Methods
+## Available Methods
 
 Access the following methods on `parallaxController` via context:
 
@@ -27,7 +27,7 @@ Updates all cached attributes for parallax elements then updates their positions
 
 Removes window scroll and resize listeners then resets all styles applied to parallax elements.
 
-### Example usage of context
+## Example usage of context
 
 The most common use case that would require access to the controller is dealing with images. Since the controller caches attributes for performance they will need to be updated with the correct values once the image loads. Here's an example of how you could do that with an `<Image />` component:
 

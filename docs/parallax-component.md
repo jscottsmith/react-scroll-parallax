@@ -1,8 +1,8 @@
-## \<Parallax>
+# \<Parallax>
 
 The main component for manipulating a DOM element's position based on it's position within the viewport.
 
-### Parallax Props
+## Parallax Props
 
 The following are all props that can be passed to the `<Parallax>` component:
 
