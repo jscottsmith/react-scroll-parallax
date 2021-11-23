@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener to add vertical or horizontal scrolling based offsets to elements based on their position in the viewport. [Optimized](#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
+React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener via [Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based offsets to elements based on their position in the viewport. [Optimized](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
 
 If you're coming from [v1](https://github.com/jscottsmith/react-scroll-parallax/tree/v1), here's a [migration guide](https://github.com/jscottsmith/react-scroll-parallax/blob/master/docs/migration-guide.md).
 
@@ -100,7 +100,7 @@ React scroll parallax should support the last two versions of all major browsers
 
 ## Optimizations to Reduce Jank
 
-React Scroll Parallax uses a single [passive scroll listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners) (dependent on browser support) with the minimal amount of work done on the scroll event to prevent [jank](http://jankfree.org/) (calculations that cause layout, reflow and paint are cached initially and only updated when layout changes). Request animation frame is then used to decouple the scroll handler and further reduce jank. All offsets are applied with 3D transforms to utilize the GPU and prevent paints. If you have ideas to further optimize scrolling please PR or post an issue.
+Considerations to reduce have been taken to reduce jank. [Please read more here](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) on how this is done
 
 ### **PSA**
 
