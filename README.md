@@ -8,9 +8,9 @@ If you're coming from [v1](https://github.com/jscottsmith/react-scroll-parallax/
 
 ## Examples
 
--   [Storybook](https://react-scroll-parallax-next.surge.sh)
--   [Demo 1](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/) - [Source](https://github.com/jscottsmith/react-scroll-parallax-examples)
--   [Demo 2](https://react-scroll-parallax.netlify.com/) - [Source](https://github.com/jscottsmith/react-parallax-site)
+- [Storybook](https://react-scroll-parallax-next.surge.sh)
+- [Demo 1](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/) - [Source](https://github.com/jscottsmith/react-scroll-parallax-examples)
+- [Demo 2](https://react-scroll-parallax.netlify.com/) - [Source](https://github.com/jscottsmith/react-parallax-site)
 
 ## Install
 
@@ -28,48 +28,60 @@ yarn add react-scroll-parallax
 
 ## Overview
 
--   [Usage](#usage)
--   [`<Parallax>`](#parallax)
-    -   [Parallax Props](#parallax-props)
--   [`<ParallaxBanner>`](#parallaxbanner)
-    -   [Banner Usage](#banner-usage)
-    -   [Banner Props](#banner-props)
-    -   [Banner Layers Prop](#banner-layers-prop)
--   [`<ParallaxProvider>`](#parallaxprovider)
-    -   [ParallaxProvider Props](#parallaxprovider-props)
-    -   [Parallax Controller Context](#parallax-controller-context)
-    -   [Available Methods](#available-methods)
--   [Browser Support](#browser-support)
--   [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
-    -   [PSA](#psa)
+- [Usage](#usage)
+- [`<Parallax>`](#parallax)
+  - [Parallax Props](#parallax-props)
+- [`<ParallaxBanner>`](#parallaxbanner)
+  - [Banner Usage](#banner-usage)
+  - [Banner Props](#banner-props)
+  - [Banner Layers Prop](#banner-layers-prop)
+- [`<ParallaxProvider>`](#parallaxprovider)
+  - [ParallaxProvider Props](#parallaxprovider-props)
+  - [Parallax Controller Context](#parallax-controller-context)
+  - [Available Methods](#available-methods)
+- [Browser Support](#browser-support)
+- [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
+  - [PSA](#psa)
 
 ## Usage
 
-The [`<ParallaxProvider>`](#parallaxprovider) should wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<AppContainer>`. For example:
+The [`<ParallaxProvider>`](#parallaxprovider) must wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<App>`. For example:
 
 ```jsx
 import { ParallaxProvider } from 'react-scroll-parallax';
 
-class AppContainer extends Component {
-    render() {
-        return (
-            <ParallaxProvider>
-                <App />
-            </ParallaxProvider>
-        );
-    }
+function App() {
+  render() {
+    return (
+      <ParallaxProvider>
+        <AppRoutes />
+      </ParallaxProvider>
+    );
+  }
 }
 ```
 
-Import the `Parallax` component and use it anywhere within the provider like so:
+Then import the `Parallax` component and use it anywhere within the provider. Here's an example that will transform the element on the `y` axis starting at `-20%` and ending at `20%` (`y = [-20, 20]` \*percent is assumed with no provided unit).
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
-const ParallaxImage = () => (
-    <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
-        <Image src="/image.jpg" />
-    </Parallax>
+const VerticalParallax = () => (
+  <Parallax y={[-20, 20]}>
+    <div className="my-thing" />
+  </Parallax>
+);
+```
+
+Example with transforms on the `x` axis starting at `-100px` and ending at `200px` (`x = ['-100px', '200px']`).
+
+```jsx
+import { Parallax } from 'react-scroll-parallax';
+
+const HorizontalParallax = () => (
+  <Parallax x={['-100px', '200px']}>
+    <div className="my-thing" />
+  </Parallax>
 );
 ```
 
@@ -107,22 +119,22 @@ Use the `layers` prop to indicate all images, offset amounts, and scroll rates. 
 
 ```jsx
 <ParallaxBanner
-    className="your-class"
-    layers={[
-        {
-            image: 'https://foo.com/foo.jpg',
-            amount: 0.1,
-        },
-        {
-            image: 'https://foo.com/bar.png',
-            amount: 0.2,
-        },
-    ]}
-    style={{
-        height: '500px',
-    }}
+  className="your-class"
+  layers={[
+    {
+      image: 'https://foo.com/foo.jpg',
+      amount: 0.1,
+    },
+    {
+      image: 'https://foo.com/bar.png',
+      amount: 0.2,
+    },
+  ]}
+  style={{
+    height: '500px',
+  }}
 >
-    <h1>Banner Children</h1>
+  <h1>Banner Children</h1>
 </ParallaxBanner>
 ```
 
@@ -155,11 +167,11 @@ The `<ParallaxProvider />` component is meant to wrap a top level component in y
 
 ```jsx
 const AppContainer = () => (
-    <ParallaxProvider>
-        <Router>
-            <App />
-        </Router>
-    </ParallaxProvider>
+  <ParallaxProvider>
+    <Router>
+      <App />
+    </Router>
+  </ParallaxProvider>
 );
 ```
 
@@ -174,38 +186,18 @@ The following props configure the `<ParallaxProvider>` component:
 
 ### Parallax Controller Context
 
-Access the controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider>` by using the `withController()` HOC:
+Access the controller via [React context](https://facebook.github.io/react/docs/context.html) in any components rendered within a `<ParallaxProvider>`.
 
-```jsx
-
-import { withController } from 'react-scroll-parallax';
-
-class MyComponent extends Component {
-    static propTypes = {
-        parallaxController: PropTypes.object,
-    };
-
-    doSomething() {
-        const { parallaxController } = this.props;
-        // do stuff with `parallaxController`
-    }
-}
-
-// Compose your component with the Higher Order Component
-export withController(MyComponent);
-
-```
-
-Also `parallaxController` is accessible using `useController()` [React hook](https://reactjs.org/docs/hooks-intro.html) in components without writing a class or wrapping them in HOC.
+This is accessible by using `useController()` [React hook](https://reactjs.org/docs/hooks-intro.html) in components without writing a class or wrapping them in HOC.
 
 ```jsx
 import { useController } from 'react-scroll-parallax';
 
 const MyComponent = () => {
-    const { parallaxController } = useController();
-    // do stuff with `parallaxController`
+  const parallaxController = useController();
 
-    return <div />;
+  // do stuff with `parallaxController`
+  return <div />;
 };
 ```
 
@@ -226,35 +218,31 @@ Removes window scroll and resize listeners then resets all styles applied to par
 The most common use case that would require access to the controller is dealing with images. Since the controller caches attributes for performance they will need to be updated with the correct values once the image loads. Here's an example of how you could do that with an `<Image />` component:
 
 ```jsx
-import { withController } from 'react-scroll-parallax';
+import { useController } from 'react-scroll-parallax';
 
-class Image extends Component {
-    handleLoad = () => {
-        // updates cached values after image dimensions have loaded
-        this.props.parallaxController.update();
-    };
+function Image(props) {
+  const parallaxController = useController();
 
-    render() {
-        return <img src={this.props.src} onLoad={this.handleLoad} />;
-    }
+  // updates cached values after image dimensions have loaded
+  const handleLoad = () => parallaxController.update();
+
+  return <img src={props.src} onLoad={handleLoad} />;
 }
-
-export withController(Image);
 ```
 
 If your parallax components are stuck and acting weird, this is most likely due to the fact that your page initial scroll was not at the top on load. Here's a possible solution to this problem using `useController()` hook. It can be used in your application top level component or specifically in the part of your application where you are experiencing problems.
 
 ```jsx
 const ParallaxCache = () => {
-    const { parallaxController } = useController();
+  const parallaxController = useController();
 
-    useLayoutEffect(() => {
-        const handler = () => parallaxController.update();
-        window.addEventListener('load', handler);
-        return () => window.removeEventListener('load', handler);
-    }, [parallaxController]);
+  useLayoutEffect(() => {
+    const handler = () => parallaxController.update();
+    window.addEventListener('load', handler);
+    return () => window.removeEventListener('load', handler);
+  }, [parallaxController]);
 
-    return null;
+  return null;
 };
 
 // <ParallaxCache /> now can be used anywhere you have problems with cached attributes
