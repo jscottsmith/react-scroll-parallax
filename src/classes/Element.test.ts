@@ -2,11 +2,12 @@ import { Element } from './Element';
 import { View } from './View';
 import { Scroll } from './Scroll';
 import { createElementMock } from '../testUtils/createElementMock';
+import { ScrollAxis } from '../types';
 
 const DEFAULT_OPTIONS = {
   elInner: document.createElement('div'),
   elOuter: document.createElement('div'),
-  scrollAxis: 'vertical',
+  scrollAxis: ScrollAxis.vertical,
   props: { x0: 0, x1: 0, y0: 0, y1: 0 },
 };
 
@@ -31,7 +32,7 @@ describe('Expect the Element class', () => {
     );
     const horizontalElement = new Element({
       ...DEFAULT_OPTIONS,
-      scrollAxis: 'horizontal',
+      scrollAxis: ScrollAxis.horizontal,
     });
     expect(horizontalElement.updatePosition).toEqual(
       horizontalElement._updatePositionHorizontal

@@ -4,6 +4,7 @@ import { Scroll } from './Scroll';
 import { Element } from './Element';
 import { VERTICAL } from '../constants';
 import { testForPassiveScroll } from '../utils/testForPassiveScroll';
+import { ValidScrollAxis } from '../types';
 
 export type ViewElement = HTMLElement | Window;
 
@@ -21,7 +22,7 @@ export type ViewElement = HTMLElement | Window;
  */
 
 export type ParallaxControllerOptions = {
-  scrollAxis?: 'vertical' | 'horizontal';
+  scrollAxis?: ValidScrollAxis;
   scrollContainer?: HTMLElement;
 };
 
@@ -41,7 +42,7 @@ export type CreateElementOptions = {
 
 export class ParallaxController {
   elements: Element[];
-  scrollAxis: 'vertical' | 'horizontal';
+  scrollAxis: ValidScrollAxis;
   viewEl: ViewElement;
   scroll: Scroll;
   view: View;
