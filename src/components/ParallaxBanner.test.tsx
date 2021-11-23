@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// @ts-ignore
 import renderer from 'react-test-renderer';
 import createNodeMock from '../testUtils/createNodeMock';
 import { ParallaxBanner } from './ParallaxBanner';

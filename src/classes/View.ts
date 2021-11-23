@@ -1,5 +1,5 @@
 export class View {
-  scrollContainer: HTMLElement;
+  scrollContainer: HTMLElement | undefined;
   width: number;
   height: number;
 
@@ -10,10 +10,11 @@ export class View {
   }: {
     width: number;
     height: number;
-    scrollContainer: HTMLElement;
+    scrollContainer?: HTMLElement;
   }) {
     this.scrollContainer = scrollContainer;
-    this.setSize(width, height);
+    this.width = width;
+    this.height = height;
   }
 
   setSize(width: number, height: number) {

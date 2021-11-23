@@ -6,7 +6,9 @@ export function testForPassiveScroll() {
         supportsPassiveOption = true;
       },
     });
+    // @ts-expect-error
     window.addEventListener('test', null, opts);
+    // @ts-expect-error
     window.removeEventListener('test', null, opts);
   } catch (e) {}
   return supportsPassiveOption;

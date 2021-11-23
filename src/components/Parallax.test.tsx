@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { render } from '@testing-library/react';
 import { Parallax } from './Parallax';
 import { ParallaxProvider } from './ParallaxProvider';
@@ -10,7 +10,7 @@ import expectRenderError from '../testUtils/expectRenderError';
 const consoleLog = global.console.log;
 
 describe('Expect the <Parallax> component', () => {
-  const preventError = (e) => e.preventDefault();
+  const preventError = (e: ErrorEvent) => e.preventDefault();
 
   beforeEach(() => {
     window.addEventListener('error', preventError);
@@ -18,6 +18,8 @@ describe('Expect the <Parallax> component', () => {
 
   afterEach(() => {
     global.console.log = consoleLog;
+    // NOTE: this can probably be removed now
+    // @ts-ignore
     global.ParallaxController = undefined;
 
     window.removeEventListener('error', preventError);
@@ -96,7 +98,7 @@ describe('Expect the <Parallax> component', () => {
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
     controller.updateElementPropsById = jest.fn();
 
-    function Wrapper(props) {
+    function Wrapper(props: PropsWithChildren<{}>) {
       return (
         <MockProvider controllerMock={controller}>
           {props.children}
@@ -152,7 +154,7 @@ describe('Expect the <Parallax> component', () => {
     const controller = ParallaxController.init({ scrollAxis: VERTICAL });
     controller.resetElementStyles = jest.fn();
 
-    function Wrapper(props) {
+    function Wrapper(props: PropsWithChildren<{}>) {
       return (
         <MockProvider controllerMock={controller}>
           {props.children}

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ParallaxContext } from '../../src/context/ParallaxContext';
+import { ParallaxController } from '../classes/ParallaxController';
 
 export class MockProvider extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     controllerMock: PropTypes.object.isRequired,
   };
-  controller = null;
+  controller: ParallaxController;
 
-  constructor(props) {
+  constructor(props: { controllerMock: ParallaxController }) {
     super(props);
     this.controller = props.controllerMock;
   }
 
   componentWillUnmount() {
-    this.controller = this.controller.destroy();
+    if (!this.controller) return;
+    this.controller.destroy();
+    // @ts-ignore
+    this.controller = undefined;
   }
 
   render() {

@@ -1,3 +1,7 @@
+import { ParallaxStartEndOffsets } from '../types';
+import { Rect } from './Rect';
+import { View } from './View';
+
 export class Bounds {
   totalDistY: number;
   totalDistX: number;
@@ -6,7 +10,7 @@ export class Bounds {
   left: number;
   right: number;
 
-  constructor(rect, offsets, view) {
+  constructor(rect: Rect, offsets: ParallaxStartEndOffsets, view: View) {
     const { y0, y1, x1, x0 } = offsets;
 
     // Y offsets

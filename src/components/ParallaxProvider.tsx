@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
 import { ParallaxContext } from '../context/ParallaxContext';
-import { ParallaxController } from '../classes/ParallaxController';
+import {
+  ParallaxController,
+  ParallaxControllerOptions,
+} from '../classes/ParallaxController';
 import { VERTICAL } from '../constants';
 
-const createController = (options) => {
+const createController = (options: ParallaxControllerOptions) => {
   // Don't initialize on the server
   const isServer = typeof window === 'undefined';
 
@@ -33,16 +36,17 @@ export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
     scrollAxis: VERTICAL,
   };
 
-  constructor(props) {
+  controller: ParallaxController | null;
+
+  constructor(props: ParallaxProviderProps) {
     super(props);
-    // @ts-ignore
     this.controller = createController({
       scrollAxis: props.scrollAxis,
       scrollContainer: props.scrollContainer,
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ParallaxProviderProps) {
     if (prevProps.scrollContainer !== this.props.scrollContainer) {
       // @ts-ignore
       this.controller.updateScrollContainer(this.props.scrollContainer);

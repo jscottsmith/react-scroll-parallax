@@ -3,7 +3,8 @@ export class Scroll {
   y: number;
 
   constructor(x: number, y: number) {
-    this.setScroll(x, y);
+    this.x = x;
+    this.y = y;
   }
 
   setScroll(x: number, y: number) {

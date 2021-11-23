@@ -21,7 +21,6 @@ describe('Expect', () => {
     const serverRender = () =>
       ParallaxController.init({
         scrollAxis: VERTICAL,
-        scrollContainer: undefined,
       });
 
     expect(serverRender).toThrowError(

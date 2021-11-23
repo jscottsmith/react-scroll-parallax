@@ -5,7 +5,7 @@ import { Element } from './Element';
 import { VERTICAL } from '../constants';
 import { testForPassiveScroll } from '../utils/testForPassiveScroll';
 
-type ViewElement = HTMLElement | Window;
+export type ViewElement = HTMLElement | Window;
 
 /**
  * -------------------------------------------------------
@@ -26,11 +26,17 @@ export type ParallaxControllerOptions = {
 };
 
 export type ParallaxElementProperties = {
-  disabled: boolean;
+  disabled?: boolean;
   x0: string | number;
   x1: string | number;
   y0: string | number;
   y1: string | number;
+};
+
+export type CreateElementOptions = {
+  elInner?: HTMLElement;
+  elOuter?: HTMLElement;
+  props: ParallaxElementProperties;
 };
 
 export class ParallaxController {
@@ -68,7 +74,7 @@ export class ParallaxController {
     this.elements = [];
 
     this._hasScrollContainer = !!scrollContainer;
-    this.viewEl = scrollContainer || window;
+    this.viewEl = scrollContainer ?? window;
 
     // Scroll and View
     const x = this._hasScrollContainer
@@ -81,7 +87,11 @@ export class ParallaxController {
       : window.pageYOffset;
 
     this.scroll = new Scroll(x, y);
-    this.view = new View({ width: 0, height: 0, scrollContainer });
+    this.view = new View({
+      width: 0,
+      height: 0,
+      scrollContainer: this._hasScrollContainer ? scrollContainer : undefined,
+    });
 
     // Ticking
     this._ticking = false;
@@ -112,7 +122,8 @@ export class ParallaxController {
       'update',
       'updateScrollContainer',
       'destroy',
-    ].forEach((method) => {
+    ].forEach((method: string) => {
+      // @ts-expect-error
       this[method] = this[method].bind(this);
     });
   }
@@ -189,7 +200,7 @@ export class ParallaxController {
    * Determines if the element is in view based on the cached
    * attributes, if so set the elements parallax styles.
    */
-  private _updateElementPosition(element) {
+  private _updateElementPosition(element: Element) {
     if (element.props.disabled) return;
     element.updatePosition(this.view, this.scroll);
   }
@@ -233,11 +244,7 @@ export class ParallaxController {
    * @param {object} options
    * @return {object} element
    */
-  createElement(options: {
-    elInner: HTMLElement;
-    elOuter: HTMLElement;
-    props: ParallaxElementProperties;
-  }): Element {
+  createElement(options: CreateElementOptions): Element {
     const newElement = new Element({ ...options, scrollAxis: this.scrollAxis });
     newElement.setCachedAttributes(this.view, this.scroll);
     this.elements = this.elements
@@ -310,6 +317,7 @@ export class ParallaxController {
     if (this.elements) {
       this.elements.forEach((element) => resetStyles(element));
     }
+    // @ts-expect-error
     this.elements = undefined;
   }
 }

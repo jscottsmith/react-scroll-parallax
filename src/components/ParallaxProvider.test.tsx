@@ -59,7 +59,9 @@ describe('A <ParallaxProvider>', () => {
       node
     );
 
+    // @ts-ignore
     instance.controller.destroy = jest.fn();
+    // @ts-ignore
     const spy = instance.controller.destroy;
 
     ReactDOM.unmountComponentAtNode(node);
@@ -73,7 +75,7 @@ describe('A <ParallaxProvider>', () => {
     let providerInstance;
 
     class StateChanger extends React.Component {
-      state = { el: null };
+      state = { el: undefined };
       render() {
         return (
           <ParallaxProvider
@@ -90,9 +92,11 @@ describe('A <ParallaxProvider>', () => {
 
     const el = document.createElement('div');
 
+    // @ts-ignore
     providerInstance.controller.updateScrollContainer = jest.fn();
+    // @ts-ignore
     const spy = providerInstance.controller.updateScrollContainer;
-
+    // @ts-ignore
     instance.setState({ el });
 
     ReactDOM.unmountComponentAtNode(node);
@@ -110,7 +114,7 @@ describe('A <ParallaxProvider>', () => {
     const node1 = document.createElement('div');
     const node2 = document.createElement('div');
 
-    const render = (node) => {
+    const render = (node: HTMLDivElement) => {
       let instance;
       ReactDOM.render(
         <ParallaxProvider ref={(ref) => (instance = ref)}>
@@ -123,16 +127,19 @@ describe('A <ParallaxProvider>', () => {
 
     // first instance mounted
     const instance1 = render(node1);
+    // @ts-ignore
     expect(instance1.controller).toBeInstanceOf(ParallaxController);
 
     // second instance mounted
     const instance2 = render(node2);
+    // @ts-ignore
     expect(instance2.controller).toBeInstanceOf(ParallaxController);
 
     // unmount first instance
     ReactDOM.unmountComponentAtNode(node1);
 
     // this must still be defined
+    // @ts-ignore
     expect(instance2.controller).toBeInstanceOf(ParallaxController);
   });
 });
