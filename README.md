@@ -8,7 +8,14 @@ If you're coming from [v1](https://github.com/jscottsmith/react-scroll-parallax/
 
 ## Examples
 
-- [Storybook](https://react-scroll-parallax-next.surge.sh)
+### Storybook
+
+See the [Storybook](https://react-scroll-parallax-v3.surge.sh) for example usage of each component
+
+- [Storybook](https://react-scroll-parallax-v3.surge.sh) - [Source](/stories)
+
+Or see some demo websites using Parallax components
+
 - [Demo 1](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/) - [Source](https://github.com/jscottsmith/react-scroll-parallax-examples)
 - [Demo 2](https://react-scroll-parallax.netlify.com/) - [Source](https://github.com/jscottsmith/react-parallax-site)
 
