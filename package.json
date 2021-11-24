@@ -73,7 +73,7 @@
     }
   ],
   "dependencies": {
-    "parallax-controller": "0.1.6"
+    "parallax-controller": "0.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
