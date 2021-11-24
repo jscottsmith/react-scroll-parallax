@@ -22,11 +22,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: borales/actions-yarn@v2.0.0 # `yarn install`
-        with:
-          cmd: install
-      # - name: Build module
-      # run: yarn build
+      - name: Install dependencies
+        run: yarn install
 
       - name: Build Storybook
         run: yarn build-storybook
