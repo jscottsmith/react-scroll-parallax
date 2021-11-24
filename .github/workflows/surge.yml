@@ -1,10 +1,12 @@
-name: Deploy Surge Website   
-on: [push]   
+name: Deploy Surge Website
+
+on: [push]
+
 jobs:
-  build:                           
+  build:
     runs-on: ubuntu-latest 
     name: Deploying to surge 
-    steps:    
+    steps:
     - uses: actions/checkout@v2 
     - name: Install Node.js
       uses: actions/setup-node@v2-beta
