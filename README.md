@@ -85,6 +85,10 @@ const HorizontalParallax = () => (
 );
 ```
 
+## How it works
+
+TODO: **Explain how and when effects are applied** with some illustrations and demos.
+
 **Warnings:**
 
 1. This lib was designed to be used on `relative` or `absolute` positioned elements that scroll naturally with the page. If you use `fixed` positioning on either the element itself or the parent you will encounter issues. More on that in [troubleshooting](#troubleshooting).
