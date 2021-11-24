@@ -1,0 +1,23 @@
+name: Deploy Surge Website   
+on: [push]   
+jobs:
+  build:                           
+    runs-on: ubuntu-latest 
+    name: Deploying to surge 
+    steps:    
+    - uses: actions/checkout@v2 
+    - name: Install Node.js
+      uses: actions/setup-node@v2-beta
+      with: 
+        node-version: 12 
+    - uses: borales/actions-yarn@v2.0.0 # `yarn install`
+      with:
+        cmd: install 
+    # - name: Build module
+      # run: yarn build 
+    - name: Build Storybook
+      run: yarn build-storybook
+    - name: Install Surge
+      run:npm install --global surge  
+    - name: Surge deploy
+      run: surge ./storybook-static react-scroll-parallax-v3.surge.sh --token ${{ secrets.SURGE_TOKEN }}

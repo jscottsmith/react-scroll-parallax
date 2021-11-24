@@ -1,7 +1,7 @@
 /cjs
 /coverage
 /esm
-
+storybook-static
 npm-debug.log
 .DS_STORE
 *.log
