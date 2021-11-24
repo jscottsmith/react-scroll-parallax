@@ -6,13 +6,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Deploying to surge
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2-beta
+       - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: ${{ matrix.node-version }}
 
       - uses: borales/actions-yarn@v2.0.0 # `yarn install`
         with:
