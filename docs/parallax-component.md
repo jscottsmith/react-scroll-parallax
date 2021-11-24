@@ -2,6 +2,18 @@
 
 The main component for manipulating a DOM element's position based on it's position within the viewport.
 
+## Example
+
+```jsx
+import { Parallax } from 'react-scroll-parallax';
+
+const VerticalParallax = () => (
+  <Parallax y={[-20, 20]}>
+    <div className="my-thing" />
+  </Parallax>
+);
+```
+
 ## Parallax Props
 
 The following are all props that can be passed to the `<Parallax>` component:
