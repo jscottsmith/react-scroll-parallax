@@ -82,9 +82,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
       props: {
         disabled: props.disabled,
         // Defaults set in Parallax.defaultProps
-        // @ts-expect-error
         translateX: props.x,
-        // @ts-expect-error
         translateY: props.y,
       },
     };
