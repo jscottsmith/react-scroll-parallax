@@ -29,6 +29,18 @@ export interface ParallaxProps {
    * Second value is the ending translation
    */
   y?: string[] | number[];
+
+  /**
+   * Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.
+   *
+   * Example:
+   *
+   * rotate={['0deg', '360deg']}
+   *
+   * First value is the starting rotation
+   * Second value is the ending rotation
+   */
+  rotate?: string[] | number[];
   /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
@@ -84,6 +96,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         // Defaults set in Parallax.defaultProps
         translateX: props.x,
         translateY: props.y,
+        rotate: props.rotate,
       },
     };
   }
