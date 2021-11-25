@@ -123,7 +123,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         );
       }
     }
-  }, [props.disabled, props.x, props.y]);
+  }, [props.disabled, props.x, props.y, props.rotate]);
 
   const Outer = props.tagOuter;
   const Inner = props.tagInner;
