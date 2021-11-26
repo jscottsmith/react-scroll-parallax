@@ -42,6 +42,39 @@ export interface ParallaxProps {
    */
   rotate?: string[] | number[];
   /**
+   * Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.
+   *
+   * Example:
+   *
+   * rotateX={['0deg', '360deg']}
+   *
+   * First value is the starting rotation
+   * Second value is the ending rotation
+   */
+  rotateX?: string[] | number[];
+  /**
+   * Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.
+   *
+   * Example:
+   *
+   * rotateY={['0deg', '360deg']}
+   *
+   * First value is the starting rotation
+   * Second value is the ending rotation
+   */
+  rotateY?: string[] | number[];
+  /**
+   * Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.
+   *
+   * Example:
+   *
+   * rotateZ={['0deg', '360deg']}
+   *
+   * First value is the starting rotation
+   * Second value is the ending rotation
+   */
+  rotateZ?: string[] | number[];
+  /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
   className?: string;
@@ -97,6 +130,9 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         translateX: props.x,
         translateY: props.y,
         rotate: props.rotate,
+        rotateX: props.rotateX,
+        rotateY: props.rotateY,
+        rotateZ: props.rotateZ,
       },
     };
   }
@@ -123,7 +159,15 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         );
       }
     }
-  }, [props.disabled, props.x, props.y, props.rotate]);
+  }, [
+    props.disabled,
+    props.x,
+    props.y,
+    props.rotate,
+    props.rotateX,
+    props.rotateY,
+    props.rotateZ,
+  ]);
 
   const Outer = props.tagOuter;
   const Inner = props.tagInner;
@@ -144,6 +188,4 @@ Parallax.defaultProps = {
   disabled: false,
   tagInner: 'div',
   tagOuter: 'div',
-  x: [0, 0],
-  y: [0, 0],
 };

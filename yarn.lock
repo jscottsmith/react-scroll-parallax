@@ -10153,10 +10153,10 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
-parallax-controller@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-0.1.9.tgz#3fb47409a3aded7dc067d8ddde530cab5d622562"
-  integrity sha512-czH4ic3IQIerN7Wt3uPgY0UkZYT0BihQroREQel8rBGK2Jj0mltmS6Dvc5io9T38pg6L5AcLVVbnM5F9mw1LrQ==
+parallax-controller@0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-0.1.10.tgz#47071d9ac4bd30ae2a0aabfe8b11fde20616ee64"
+  integrity sha512-aV4arXEiKfhbaBtg95t1OHr9fJ+rlhjZUfmbu5BwG1LTVThBQH0ZrTdu1aZVwJv9yUjFThCFuB/vkP9ZquNkzQ==
 
 parallel-transform@^1.1.0:
   version "1.2.0"
