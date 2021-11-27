@@ -51,8 +51,8 @@ The following are all props that can be passed to the `<Parallax>` component:
 | Name           |           Type           | Default | Description                                                                                                                                  |
 | -------------- | :----------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **speed**      |         `number`         |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster. |
-| **x**          | `string[]` or `number[]` |         | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.         |
-| **y**          | `string[]` or `number[]` |         | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.        |
+| **translateX** | `string[]` or `number[]` |         | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.         |
+| **translateY** | `string[]` or `number[]` |         | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.        |
 | **rotate**     | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
 | **rotateX**    | `string[]` or `number[]` |         | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
 | **rotateY**    | `string[]` or `number[]` |         | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
