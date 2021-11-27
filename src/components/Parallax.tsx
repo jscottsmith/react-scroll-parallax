@@ -5,8 +5,18 @@ import {
   Element,
 } from 'parallax-controller';
 import { useController } from '../hooks/useController';
+import { removeUndefinedObjectKeys } from '../utils/removeUndefinedObjectKeys';
 
 export interface ParallaxProps {
+  /**
+   * A number to slowdown `n < 0` or speed up `n > 0` the scroll speed of an element
+   *
+   * Example:
+   *
+   * x={-1}
+   *
+   */
+  speed?: number;
   /**
    * Start and end translation on x-axis in % or px. If no unit is passed percent is assumed. Percent is based on the elements width.
    *
@@ -121,19 +131,39 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
   useVerifyController(controller);
 
   function _getElementOptions(): CreateElementOptions {
+    const useSpeedProp = typeof props.speed !== 'undefined';
+    const isHorizontal = controller.scrollAxis == 'horizontal';
+    const isVertical = controller.scrollAxis == 'vertical';
+
+    let translateX = props.x;
+    let translateY = props.y;
+
+    if (useSpeedProp && isHorizontal) {
+      translateX = [
+        `${(props.speed || 0) * 10}px`,
+        `${(props.speed || 0) * -10}px`,
+      ];
+    }
+
+    if (useSpeedProp && isVertical) {
+      translateY = [
+        `${(props.speed || 0) * 10}px`,
+        `${(props.speed || 0) * -10}px`,
+      ];
+    }
+
     return {
       elInner: refInner.current,
       elOuter: refOuter.current,
-      props: {
+      props: removeUndefinedObjectKeys({
         disabled: props.disabled,
-        // Defaults set in Parallax.defaultProps
-        translateX: props.x,
-        translateY: props.y,
+        translateX,
+        translateY,
         rotate: props.rotate,
         rotateX: props.rotateX,
         rotateY: props.rotateY,
         rotateZ: props.rotateZ,
-      },
+      }),
     };
   }
 
@@ -167,6 +197,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     props.rotateX,
     props.rotateY,
     props.rotateZ,
+    props.speed,
   ]);
 
   const Outer = props.tagOuter;

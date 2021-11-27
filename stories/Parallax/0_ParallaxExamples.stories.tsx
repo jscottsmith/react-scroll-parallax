@@ -64,6 +64,12 @@ WithRotationXYZ.args = {
   rotateZ: '0deg,360deg',
 };
 
+export const WithTranslateYAndRotation = Template.bind({});
+WithTranslateYAndRotation.args = {
+  y: '-100,100',
+  rotate: '0deg,360deg',
+};
+
 export default {
   title: '<Parallax> New Transforms',
   component: WithRotation,
