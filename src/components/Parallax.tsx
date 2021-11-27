@@ -84,6 +84,18 @@ export interface ParallaxProps {
    * Second value is the ending rotation
    */
   rotateZ?: string[] | number[];
+
+  /**
+   * Start and end scale on x-axis and y-axis.
+   *
+   * Example:
+   *
+   * scale={[0, 1]}
+   *
+   * First value is the starting scale
+   * Second value is the ending scale
+   */
+  scale?: number[];
   /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
@@ -163,6 +175,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         rotateX: props.rotateX,
         rotateY: props.rotateY,
         rotateZ: props.rotateZ,
+        scale: props.scale,
       }),
     };
   }
@@ -197,6 +210,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     props.rotateX,
     props.rotateY,
     props.rotateZ,
+    props.scale,
     props.speed,
   ]);
 
