@@ -35,11 +35,11 @@ or yarn
 yarn add react-scroll-parallax
 ```
 
-## Overview
+## Documentation
 
-- [Usage](#usage)
+- [Example Usage](#usage)
 - [`<Parallax>`](/docs/parallax-component.md)
-  - [Parallax Props](/docs/parallax-component.md#parallax-props)
+  - [Parallax Props](/docs/parallax-component.md#props)
 - [`<ParallaxBanner>`](/docs/parallax-banner-component.md)
   - [Banner Usage](/docs/parallax-banner-component.md#banner-usage)
   - [Banner Props](/docs/parallax-banner-component.md#banner-props)
@@ -52,7 +52,7 @@ yarn add react-scroll-parallax
 - [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
   - [PSA](#psa)
 
-## Example Usage
+## Usage
 
 The [`<ParallaxProvider>`](#parallaxprovider) must wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<App>`. For example:
 
