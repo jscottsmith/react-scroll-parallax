@@ -30,8 +30,8 @@ const SlowAndFast = () => (
 If you need more fine tune control of the scroll position you can apply start and end transforms more directly. In this example the element begins with a `translateY(-20%)` and ends with `translateY(10%)`
 
 ```jsx
-const VerticalParallax = () => (
-  <Parallax y={[-20, 10]}>
+const TranslateY = () => (
+  <Parallax translateY={[-20, 10]}>
     <div className="my-thing" />
   </Parallax>
 );

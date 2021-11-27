@@ -30,10 +30,10 @@ export const WithXOffsets = (args) => {
   const b = args.x2.split(',');
   return (
     <Container scrollAxis="horizontal" className={styles.elementsHorizontal}>
-      <Parallax x={a} className={styles.parallax}>
+      <Parallax translateX={a} className={styles.parallax}>
         <Element name="1" />
       </Parallax>
-      <Parallax x={b} className={styles.parallax}>
+      <Parallax translateX={b} className={styles.parallax}>
         <Element name="2" />
       </Parallax>
     </Container>
@@ -52,10 +52,10 @@ export const WithXAndYOffsets = (args) => {
   const yb = args.y2.split(',');
   return (
     <Container scrollAxis="horizontal" className={styles.elementsHorizontal}>
-      <Parallax x={xa} y={ya} className={styles.parallax}>
+      <Parallax translateX={xa} y={ya} className={styles.parallax}>
         <Element name="1" />
       </Parallax>
-      <Parallax x={xb} y={yb} className={styles.parallax}>
+      <Parallax translateX={xb} y={yb} className={styles.parallax}>
         <Element name="2" />
       </Parallax>
     </Container>
@@ -124,7 +124,7 @@ export const WithVaryingXOffsets = (args) => {
               <Parallax
                 key={n}
                 className={styles.smallLinear}
-                x={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
               </Parallax>

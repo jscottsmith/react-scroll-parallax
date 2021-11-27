@@ -114,7 +114,7 @@ export const ParallaxBanner = ({
           return (
             <Parallax
               key={`layer-${i}`}
-              y={[amount * -1 * 100 + '%', amount * 100 + '%']}
+              translateY={[amount * -1 * 100 + '%', amount * 100 + '%']}
               styleInner={absoluteStyle}
               styleOuter={absoluteStyle}
               disabled={disabled}

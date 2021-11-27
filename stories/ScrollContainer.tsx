@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import { ParallaxProvider } from '../src';
-import { ValidScrollAxis } from '../src/types';
+import { ValidScrollAxis } from 'parallax-controller';
 
 export const ScrollContainer = (
   props: PropsWithChildren<{
-    scrollAxis: ValidScrollAxis;
+    scrollAxis?: ValidScrollAxis;
   }>
 ) => {
   const [scrollEl, setScrollElement] = React.useState(null);

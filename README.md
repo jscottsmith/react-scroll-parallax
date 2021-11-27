@@ -70,25 +70,25 @@ function App() {
 }
 ```
 
-Then import the `Parallax` component and use it anywhere within the provider. Here's an example that will transform the element on the `y` axis starting at `-20%` and ending at `20%` (`y = [-20, 20]` \*percent is assumed with no provided unit).
+Then import the `Parallax` component and use it anywhere within the provider. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`translateY = [-20, 20]` \*percent is assumed with no provided unit).
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
 const VerticalParallax = () => (
-  <Parallax y={[-20, 20]}>
+  <Parallax translateY={[-20, 20]}>
     <div className="my-thing" />
   </Parallax>
 );
 ```
 
-Example with transforms on the `x` axis starting at `-100px` and ending at `200px` (`x = ['-100px', '200px']`).
+Example with transforms on the `translateX` axis starting at `-100px` and ending at `200px` (`translateX = ['-100px', '200px']`).
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
 const HorizontalParallax = () => (
-  <Parallax x={['-100px', '200px']}>
+  <Parallax translateX={['-100px', '200px']}>
     <div className="my-thing" />
   </Parallax>
 );
