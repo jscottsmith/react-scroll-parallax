@@ -76,7 +76,35 @@ describe('Expect the <Parallax> component', () => {
     expect(controller.createElement).toBeCalledWith({
       elInner: expect.any(HTMLElement),
       elOuter: expect.any(HTMLElement),
-      props: { disabled: false, translateX: [0, 0], translateY: [-100, 100] },
+      props: { disabled: false, translateY: [-100, 100] },
+    });
+  });
+
+  it('to handle rotate props', () => {
+    const controller = ParallaxController.init({
+      scrollAxis: ScrollAxis.vertical,
+    });
+    controller.createElement = jest.fn(controller.createElement);
+    controller.updateElementPropsById = jest.fn(
+      controller.updateElementPropsById
+    );
+
+    function Wrapper(props: PropsWithChildren<{}>) {
+      return (
+        <MockProvider controllerMock={controller}>
+          {props.children}
+        </MockProvider>
+      );
+    }
+
+    render(<Parallax rotate={['0deg', '100deg']} />, {
+      wrapper: Wrapper,
+    });
+
+    expect(controller.createElement).toBeCalledWith({
+      elInner: expect.any(HTMLElement),
+      elOuter: expect.any(HTMLElement),
+      props: { disabled: false, rotate: ['0deg', '100deg'] },
     });
   });
 
