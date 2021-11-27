@@ -31,8 +31,8 @@ describe('Expect the <Parallax> component', () => {
         <Parallax
           className="class-foo"
           disabled={false}
-          x={[-100, 100]}
-          y={['-100%', '100%']}
+          translateX={[-100, 100]}
+          translateY={['-100%', '100%']}
           styleOuter={{
             border: 'solid red 2px',
           }}
@@ -67,7 +67,7 @@ describe('Expect the <Parallax> component', () => {
 
     render(
       <MockProvider controllerMock={controller}>
-        <Parallax y={[-100, 100]}>
+        <Parallax translateY={[-100, 100]}>
           <div />
         </Parallax>
       </MockProvider>
@@ -144,7 +144,13 @@ describe('Expect the <Parallax> component', () => {
       wrapper: Wrapper,
     });
 
-    rerender(<Parallax disabled={false} x={[100, -100]} y={[-100, 100]} />);
+    rerender(
+      <Parallax
+        disabled={false}
+        translateX={[100, -100]}
+        translateY={[-100, 100]}
+      />
+    );
 
     const element = controller.getElements()[0];
 
@@ -157,7 +163,11 @@ describe('Expect the <Parallax> component', () => {
     const newProps = { disabled: false, x: [-40, -60], y: [10, 80] };
 
     rerender(
-      <Parallax disabled={newProps.disabled} x={newProps.x} y={newProps.y} />
+      <Parallax
+        disabled={newProps.disabled}
+        translateX={newProps.x}
+        translateY={newProps.y}
+      />
     );
 
     expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
@@ -170,8 +180,8 @@ describe('Expect the <Parallax> component', () => {
     rerender(
       <Parallax
         disabled={newProps.disabled}
-        x={newProps.x}
-        y={newProps.y}
+        translateX={newProps.x}
+        translateY={newProps.y}
         // @ts-expect-error
         nope="bad"
       />
@@ -198,13 +208,13 @@ describe('Expect the <Parallax> component', () => {
     const offY = [100, -100];
 
     const { rerender } = render(
-      <Parallax disabled={false} x={offX} y={offY} />,
+      <Parallax disabled={false} translateX={offX} translateY={offY} />,
       {
         wrapper: Wrapper,
       }
     );
 
-    rerender(<Parallax disabled={true} x={offX} y={offY} />);
+    rerender(<Parallax disabled={true} translateX={offX} translateY={offY} />);
 
     expect(controller.resetElementStyles).toBeCalled();
   });

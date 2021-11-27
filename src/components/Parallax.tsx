@@ -13,7 +13,7 @@ export interface ParallaxProps {
    *
    * Example:
    *
-   * x={-1}
+   * speed={-1}
    *
    */
   speed?: number;
@@ -22,23 +22,23 @@ export interface ParallaxProps {
    *
    * Example:
    *
-   * x={[-100, 100]}
+   * translateX={[-100, 100]}
    *
    * First value is the starting translation
    * Second value is the ending translation
    */
-  x?: string[] | number[];
+  translateX?: string[] | number[];
   /**
    * Start and end translation on y-axis in % or px. If no unit is passed percent is assumed. Percent is based on the elements height.
    *
    * Example:
    *
-   * y={[-100, 100]}
+   * translateY={[-100, 100]}
    *
    * First value is the starting translation
    * Second value is the ending translation
    */
-  y?: string[] | number[];
+  translateY?: string[] | number[];
 
   /**
    * Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.
@@ -135,8 +135,8 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     const isHorizontal = controller.scrollAxis == 'horizontal';
     const isVertical = controller.scrollAxis == 'vertical';
 
-    let translateX = props.x;
-    let translateY = props.y;
+    let translateX = props.translateX;
+    let translateY = props.translateY;
 
     if (useSpeedProp && isHorizontal) {
       translateX = [
@@ -191,8 +191,8 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     }
   }, [
     props.disabled,
-    props.x,
-    props.y,
+    props.translateX,
+    props.translateY,
     props.rotate,
     props.rotateX,
     props.rotateY,

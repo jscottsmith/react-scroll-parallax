@@ -30,10 +30,10 @@ export const WithYOffsets = (args) => {
   const b = args.y2.split(',');
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax y={a} className={styles.parallax}>
+      <Parallax translateY={a} className={styles.parallax}>
         <Element name="1" />
       </Parallax>
-      <Parallax y={b} className={styles.parallax}>
+      <Parallax translateY={b} className={styles.parallax}>
         <Element name="2" />
       </Parallax>
     </Container>
@@ -50,10 +50,10 @@ export const WithXOffsets = (args) => {
   const b = args.x2.split(',');
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax x={a} className={styles.parallax}>
+      <Parallax translateX={a} className={styles.parallax}>
         <Element name="1" />
       </Parallax>
-      <Parallax x={b} className={styles.parallax}>
+      <Parallax translateX={b} className={styles.parallax}>
         <Element name="2" />
       </Parallax>
     </Container>
@@ -72,10 +72,10 @@ export const WithXAndYOffsets = (args) => {
   const yb = args.y2.split(',');
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax x={xa} y={ya} className={styles.parallax}>
+      <Parallax translateX={xa} translateY={ya} className={styles.parallax}>
         <Element name="1" />
       </Parallax>
-      <Parallax x={xb} y={yb} className={styles.parallax}>
+      <Parallax translateX={xb} translateY={yb} className={styles.parallax}>
         <Element name="2" />
       </Parallax>
     </Container>
@@ -106,7 +106,7 @@ export const WithVaryingYOffsets = (args) => {
               <Parallax
                 key={n}
                 className={styles.smallLinear}
-                y={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
               </Parallax>
@@ -140,7 +140,7 @@ export const WithVaryingXOffsets = (args) => {
               <Parallax
                 key={n}
                 className={styles.smallLinear}
-                x={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
               </Parallax>
@@ -205,7 +205,7 @@ export const InsideADiv = () => {
               <Parallax
                 key={n}
                 className={styles.smallLinear}
-                y={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
               </Parallax>
