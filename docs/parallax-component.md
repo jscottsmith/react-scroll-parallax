@@ -57,6 +57,10 @@ The following are all props that can be passed to the `<Parallax>` component:
 | **rotateX**    | `string[]` or `number[]` |         | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
 | **rotateY**    | `string[]` or `number[]` |         | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
 | **rotateZ**    | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
+| **scale**      |        `number[]`        |         | Start and end scale on x-axis and y-axis.                                                                                                    |
+| **scaleX**     |        `number[]`        |         | Start and end scale on x-axis.                                                                                                               |
+| **scaleY**     |        `number[]`        |         | Start and end scale on y-axis.                                                                                                               |
+| **scaleZ**     |        `number[]`        |         | Start and end scale on z-axis.                                                                                                               |
 | **className**  |         `string`         |         | Optionally pass additional class names to be added to the outermost parallax element.                                                        |
 | **disabled**   |        `boolean`         | `false` | Disables parallax effects on individual elements when `true`.                                                                                |
 | **styleInner** |         `object`         |         | Optionally pass a style object to be added to the innermost parallax element.                                                                |

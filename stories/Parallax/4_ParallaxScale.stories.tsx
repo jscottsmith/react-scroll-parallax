@@ -16,8 +16,27 @@ const Template = (args) => {
 };
 
 export const WithScale = Template.bind({});
+
 WithScale.args = {
   scale: [0, 1],
+};
+
+export const WithScaleX = Template.bind({});
+
+WithScaleX.args = {
+  scaleX: [0, 1],
+};
+
+export const WithScaleY = Template.bind({});
+
+WithScaleY.args = {
+  scaleY: [0, 1],
+};
+
+export const WithScaleZ = Template.bind({});
+
+WithScaleZ.args = {
+  scaleZ: [0, 1],
 };
 
 export default {
