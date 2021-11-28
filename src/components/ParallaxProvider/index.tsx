@@ -1,36 +1,9 @@
 import React, { Component } from 'react';
 
-import { ParallaxContext } from '../context/ParallaxContext';
-import {
-  ParallaxController,
-  ParallaxControllerOptions,
-  ValidScrollAxis,
-  ScrollAxis,
-} from 'parallax-controller';
-
-const createController = (options: ParallaxControllerOptions) => {
-  // Don't initialize on the server
-  const isServer = typeof window === 'undefined';
-
-  if (!isServer) {
-    // Must not be the server so kick it off...
-    return ParallaxController.init(options);
-  }
-  return null;
-};
-
-export interface ParallaxProviderProps {
-  /**
-   * Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of vertical or
-   * horizontal
-   */
-  scrollAxis?: ValidScrollAxis;
-  /**
-   * Optionally set the container that has overflow and will contain parallax elements. Defaults
-   * to the HTML body
-   */
-  scrollContainer?: HTMLElement;
-}
+import { ParallaxContext } from '../../context/ParallaxContext';
+import { ParallaxController, ScrollAxis } from 'parallax-controller';
+import { ParallaxProviderProps } from './types';
+import { createController } from './helpers';
 
 export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
   static defaultProps = {
