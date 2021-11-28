@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { ParallaxController, ScrollAxis } from 'parallax-controller';
 import { render } from '@testing-library/react';
-import { Parallax } from './Parallax';
-import { ParallaxProvider } from './ParallaxProvider';
+import { Parallax } from '.';
+import { ParallaxProvider } from '../ParallaxProvider';
 
-import { MockProvider } from '../testUtils/MockProvider';
-import expectRenderError from '../testUtils/expectRenderError';
+import { MockProvider } from '../../testUtils/MockProvider';
+import expectRenderError from '../../testUtils/expectRenderError';
 
 const consoleLog = global.console.log;
 

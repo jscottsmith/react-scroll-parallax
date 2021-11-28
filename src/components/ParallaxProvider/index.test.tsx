@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import { ParallaxController } from 'parallax-controller';
 
 import { render } from '@testing-library/react';
-import { ParallaxProvider } from './ParallaxProvider';
-import { useController } from '../hooks/useController';
+import { ParallaxProvider } from '.';
+import { useController } from '../../hooks/useController';
 
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
