@@ -25,7 +25,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "release": "np"
   },
   "jest": {
     "modulePaths": [
@@ -91,6 +92,7 @@
     "babel-loader": "^8.2.3",
     "css-loader": "^5.0.0",
     "husky": "^7.0.4",
+    "np": "^7.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
