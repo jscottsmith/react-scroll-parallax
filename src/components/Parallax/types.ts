@@ -121,6 +121,17 @@ export interface ParallaxProps {
    */
   scaleZ?: number[];
   /**
+   * Start and end opacity value
+   *
+   * Example:
+   *
+   * opacity={[0, 1]}
+   *
+   * First value is the starting opacity
+   * Second value is the ending opacity
+   */
+  opacity?: number[];
+  /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
   className?: string;

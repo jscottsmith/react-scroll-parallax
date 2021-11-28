@@ -71,6 +71,6 @@ WithTranslateYAndRotation.args = {
 };
 
 export default {
-  title: '<Parallax> New Transforms',
+  title: '<Parallax> Rotation',
   component: WithRotation,
 };
