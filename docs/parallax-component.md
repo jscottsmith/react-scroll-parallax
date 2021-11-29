@@ -48,23 +48,71 @@ All props for creating effects are defined by a _start_ and _end_ value represen
 
 The following are all props that can be passed to the `<Parallax>` component:
 
-| Name           |           Type           | Default | Description                                                                                                                                  |
-| -------------- | :----------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **speed**      |         `number`         |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster. |
-| **translateX** | `string[]` or `number[]` |         | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.         |
-| **translateY** | `string[]` or `number[]` |         | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.        |
-| **rotate**     | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
-| **rotateX**    | `string[]` or `number[]` |         | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
-| **rotateY**    | `string[]` or `number[]` |         | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
-| **rotateZ**    | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                          |
-| **scale**      |        `number[]`        |         | Start and end scale on x-axis and y-axis.                                                                                                    |
-| **scaleX**     |        `number[]`        |         | Start and end scale on x-axis.                                                                                                               |
-| **scaleY**     |        `number[]`        |         | Start and end scale on y-axis.                                                                                                               |
-| **scaleZ**     |        `number[]`        |         | Start and end scale on z-axis.                                                                                                               |
-| **opacity**    |        `number[]`        |         | Start and end opacity value.                                                                                                                 |
-| **className**  |         `string`         |         | Optionally pass additional class names to be added to the outermost parallax element.                                                        |
-| **disabled**   |        `boolean`         | `false` | Disables parallax effects on individual elements when `true`.                                                                                |
-| **styleInner** |         `object`         |         | Optionally pass a style object to be added to the innermost parallax element.                                                                |
-| **styleOuter** |         `object`         |         | Optionally pass a style object to be added to the outermost parallax element.                                                                |
-| **tagInner**   |         `string`         | `div`   | Optionally pass an element tag name to be applied to the innermost parallax element.                                                         |
-| **tagOuter**   |         `string`         | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                         |
+| Name           |           Type           | Default | Description                                                                                                                                             |
+| -------------- | :----------------------: | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **speed**      |         `number`         |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.            |
+| **translateX** | `string[]` or `number[]` |         | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.                    |
+| **translateY** | `string[]` or `number[]` |         | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height.                   |
+| **rotate**     | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                                     |
+| **rotateX**    | `string[]` or `number[]` |         | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                                     |
+| **rotateY**    | `string[]` or `number[]` |         | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                                     |
+| **rotateZ**    | `string[]` or `number[]` |         | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                                     |
+| **scale**      |        `number[]`        |         | Start and end scale on x-axis and y-axis.                                                                                                               |
+| **scaleX**     |        `number[]`        |         | Start and end scale on x-axis.                                                                                                                          |
+| **scaleY**     |        `number[]`        |         | Start and end scale on y-axis.                                                                                                                          |
+| **scaleZ**     |        `number[]`        |         | Start and end scale on z-axis.                                                                                                                          |
+| **opacity**    |        `number[]`        |         | Start and end opacity value.                                                                                                                            |
+| **easing**     |  `string` or `number[]`  |         | String representing an [easing preset](#easing-preset) or array of params to supply to a [cubic bezier easing function](#cubic-bezier-easing-function). |
+| **className**  |         `string`         |         | Optionally pass additional class names to be added to the outermost parallax element.                                                                   |
+| **disabled**   |        `boolean`         | `false` | Disables parallax effects on individual elements when `true`.                                                                                           |
+| **styleInner** |         `object`         |         | Optionally pass a style object to be added to the innermost parallax element.                                                                           |
+| **styleOuter** |         `object`         |         | Optionally pass a style object to be added to the outermost parallax element.                                                                           |
+| **tagInner**   |         `string`         | `div`   | Optionally pass an element tag name to be applied to the innermost parallax element.                                                                    |
+| **tagOuter**   |         `string`         | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                    |
+
+### Easing Presets
+
+The following easing values are preset and can be used as easing
+
+```jsx
+<Parallax easing="easeInCubic" />
+```
+
+```
+ease
+easeIn
+easeOut
+easeInOut
+easeInQuad
+easeInCubic
+easeInQuart
+easeInQuint
+easeInSine
+easeInExpo
+easeInCirc
+easeOutQuad
+easeOutCubic
+easeOutQuart
+easeOutQuint
+easeOutSine
+easeOutExpo
+easeOutCirc
+easeInOutQuad
+easeInOutCubic
+easeInOutQuart
+easeInOutQuint
+easeInOutSine
+easeInOutExpo
+easeInOutCirc
+easeInBack
+easeOutBack
+easeInOutBack
+```
+
+### Cubic Bezier Easing Function
+
+Just like with CSS `cubic-bezier(0.2,-0.67,1,-0.62);`, you can supply the 4 params to a custom bezier function.
+
+```jsx
+<Parallax easing={[0.2, -0.6, 1, -0.6]} />
+```

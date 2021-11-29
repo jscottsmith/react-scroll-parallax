@@ -50,6 +50,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         scaleY: props.scaleY,
         scaleZ: props.scaleZ,
         opacity: props.opacity,
+        easing: props.easing,
       }),
     };
   }
@@ -90,6 +91,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     props.scaleZ,
     props.speed,
     props.opacity,
+    props.easing,
   ]);
 
   const Outer = props.tagOuter;
