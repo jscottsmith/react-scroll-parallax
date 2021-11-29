@@ -1,3 +1,5 @@
+import { ValidEasingPresets } from 'parallax-controller';
+
 export interface ParallaxProps {
   /**
    * A number to slowdown `n < 0` or speed up `n > 0` the scroll speed of an element
@@ -131,6 +133,13 @@ export interface ParallaxProps {
    * Second value is the ending opacity
    */
   opacity?: number[];
+  /**
+   * Easing preset or custom params for a cubic bezier easing function.
+   *
+   * Example preset: 'easeInOut'
+   * Example params: [0.42, 0, 0.58, 1]
+   */
+  easing?: number[] | ValidEasingPresets;
   /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
