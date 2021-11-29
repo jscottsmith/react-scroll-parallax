@@ -61,6 +61,7 @@ The following are all props that can be passed to the `<Parallax>` component:
 | **scaleX**     |        `number[]`        |         | Start and end scale on x-axis.                                                                                                               |
 | **scaleY**     |        `number[]`        |         | Start and end scale on y-axis.                                                                                                               |
 | **scaleZ**     |        `number[]`        |         | Start and end scale on z-axis.                                                                                                               |
+| **opacity**    |        `number[]`        |         | Start and end opacity value.                                                                                                                 |
 | **className**  |         `string`         |         | Optionally pass additional class names to be added to the outermost parallax element.                                                        |
 | **disabled**   |        `boolean`         | `false` | Disables parallax effects on individual elements when `true`.                                                                                |
 | **styleInner** |         `object`         |         | Optionally pass a style object to be added to the innermost parallax element.                                                                |
