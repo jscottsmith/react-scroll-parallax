@@ -41,11 +41,6 @@ const TranslateY = () => (
 
 ## Props
 
-All props for creating effects are defined by a _start_ and _end_ value represented by an `array` -- for example: `[start, end]`.
-
-- The _start_ of an effect begins when the element's original position enters the viewport -- the top of the element enters the bottom of the view.
-- The _end_ of an effect begins when the element's original position exits the viewport -- the bottom of the element exits the top of the view.
-
 The following are all props that can be passed to the `<Parallax>` component:
 
 ### Props: Configuration
@@ -62,6 +57,20 @@ The following are all props that can be passed to the `<Parallax>` component:
 | **tagOuter**   |        `string`        | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                     |
 
 ### Props: CSS Effects
+
+All props for creating CSS effects are defined by a **_start_** and **_end_** value represented by an `array`
+
+```jsx
+<Parallax scale={[start, end]}`/>
+```
+
+The **_start_** of an effect begins when the element's original position enters the viewport.
+
+- The top of the element enters the bottom of the view.
+
+The **_end_** of an effect begins when the element's original position exits the viewport.
+
+- the bottom of the element exits the top of the view.
 
 | Name           |           Type           | Description                                                                                                                           |
 | -------------- | :----------------------: | ------------------------------------------------------------------------------------------------------------------------------------- |
