@@ -1,4 +1,4 @@
-import { ValidEasingPresets } from 'parallax-controller';
+import { RootMarginShape, ValidEasingPresets } from 'parallax-controller';
 
 export interface ParallaxProps {
   /**
@@ -140,6 +140,13 @@ export interface ParallaxProps {
    * Example params: [0.42, 0, 0.58, 1]
    */
   easing?: number[] | ValidEasingPresets;
+  /**
+   * Margin to be applied as the bounds around an element.
+   * This will affect when an element is determined to be considered in the viewport.
+   *
+   * Example: rootMargin={{ top: 100, right: 100, bottom: 100, left: 100 }}
+   */
+  rootMargin?: RootMarginShape;
   /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */

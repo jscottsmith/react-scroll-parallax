@@ -45,16 +45,17 @@ The following are all props that can be passed to the `<Parallax>` component:
 
 ### Props: Configuration
 
-| Name           |          Type          | Default | Description                                                                                                                                              |
-| -------------- | :--------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **speed**      |        `number`        |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.             |
-| **easing**     | `string` or `number[]` |         | String representing an [easing preset](#easing-presets) or array of params to supply to a [cubic bezier easing function](#cubic-bezier-easing-function). |
-| **className**  |        `string`        |         | Optionally pass additional class names to be added to the outermost parallax element.                                                                    |
-| **disabled**   |       `boolean`        | `false` | Disables parallax effects on individual elements when `true`.                                                                                            |
-| **styleInner** |        `object`        |         | Optionally pass a style object to be added to the innermost parallax element.                                                                            |
-| **styleOuter** |        `object`        |         | Optionally pass a style object to be added to the outermost parallax element.                                                                            |
-| **tagInner**   |        `string`        | `div`   | Optionally pass an element tag name to be applied to the innermost parallax element.                                                                     |
-| **tagOuter**   |        `string`        | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                     |
+| Name           |          Type          | Default | Description                                                                                                                                                                                        |
+| -------------- | :--------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **speed**      |        `number`        |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.                                                       |
+| **easing**     | `string` or `number[]` |         | String representing an [easing preset](#easing-presets) or array of params to supply to a [cubic bezier easing function](#cubic-bezier-easing-function).                                           |
+| **rootMargin** |        `object`        |         | Margin to be applied as the bounds around an element. This will affect when an element is determined to be considered in the viewport. Example: `{ top: 100, right: 100, bottom: 100, left: 100 }` |
+| **className**  |        `string`        |         | Optionally pass additional class names to be added to the outermost parallax element.                                                                                                              |
+| **disabled**   |       `boolean`        | `false` | Disables parallax effects on individual elements when `true`.                                                                                                                                      |
+| **styleInner** |        `object`        |         | Optionally pass a style object to be added to the innermost parallax element.                                                                                                                      |
+| **styleOuter** |        `object`        |         | Optionally pass a style object to be added to the outermost parallax element.                                                                                                                      |
+| **tagInner**   |        `string`        | `div`   | Optionally pass an element tag name to be applied to the innermost parallax element.                                                                                                               |
+| **tagOuter**   |        `string`        | `div`   | Optionally pass an element tag name to be applied to the outermost parallax element.                                                                                                               |
 
 ### Props: CSS Effects
 
