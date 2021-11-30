@@ -4,6 +4,7 @@ import { Element } from '../Element/Element';
 import styles from './Parallax.module.scss';
 
 const options = [
+  '',
   'ease',
   'easeIn',
   'easeOut',
@@ -52,7 +53,8 @@ const Template = (args) => {
                 key={n}
                 className={styles.smallLinear}
                 easing={args.easing}
-                translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                rootMargin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
               </Parallax>
