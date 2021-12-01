@@ -5,26 +5,6 @@ import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
 import styles from './Parallax.module.scss';
 
-export const WithRotation = (args) => {
-  const a = args.rotate1.split(',');
-  const b = args.rotate2.split(',');
-  return (
-    <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax rotate={a} className={styles.parallax}>
-        <Element name="1" />
-      </Parallax>
-      <Parallax rotate={b} className={styles.parallax}>
-        <Element name="2" />
-      </Parallax>
-    </Container>
-  );
-};
-
-WithRotation.args = {
-  rotate1: '0deg,360deg',
-  rotate2: '0deg,-360deg',
-};
-
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');
   const b = args.y2.split(',');
@@ -218,6 +198,6 @@ export const InsideADiv = () => {
 };
 
 export default {
-  title: '<Parallax> Vertical Scroll',
+  title: 'Components / <Parallax> / Vertical Scroll',
   component: WithYOffsets,
 };

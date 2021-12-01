@@ -40,6 +40,6 @@ export const WithVaryingYOffsets = () => {
 };
 
 export default {
-  title: '<Parallax> Images',
+  title: 'Components / <Parallax> / Images',
   component: WithVaryingYOffsets,
 };

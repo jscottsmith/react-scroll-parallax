@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { ParallaxBanner, ParallaxProvider } from '../../src';
 import styles from './ParallaxBanner.module.scss';
 
-storiesOf('<ParallaxBanner>', module)
+storiesOf('Components / <ParallaxBanner>', module)
   .add('with a single background', () => (
     <ParallaxProvider>
       <div className="vertical">

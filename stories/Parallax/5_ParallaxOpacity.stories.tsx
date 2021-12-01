@@ -22,6 +22,6 @@ WithOpacity.args = {
 };
 
 export default {
-  title: '<Parallax> Opacity',
+  title: 'Components / <Parallax> / Opacity Prop',
   component: WithOpacity,
 };
