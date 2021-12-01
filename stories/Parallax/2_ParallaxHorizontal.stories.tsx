@@ -172,6 +172,6 @@ export const InsideADiv = () => {
 };
 
 export default {
-  title: '<Parallax> Horizontal Scroll',
+  title: 'Components / <Parallax> / Horizontal Scrolling',
   component: WithYOffsets,
 };

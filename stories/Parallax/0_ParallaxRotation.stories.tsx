@@ -6,7 +6,6 @@ import styles from './Parallax.module.scss';
 
 const Template = (args) => {
   const props = Object.entries(args).reduce((acc: any, entry: any) => {
-    console.log(entry);
     acc[entry[0]] = entry[1].split(',');
     return acc;
   }, {} as any);
@@ -66,11 +65,11 @@ WithRotationXYZ.args = {
 
 export const WithTranslateYAndRotation = Template.bind({});
 WithTranslateYAndRotation.args = {
-  y: '-100,100',
+  translateY: '-100,100',
   rotate: '0deg,360deg',
 };
 
 export default {
-  title: '<Parallax> Rotation',
+  title: 'Components / <Parallax> / Rotate Props',
   component: WithRotation,
 };

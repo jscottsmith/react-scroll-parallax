@@ -40,6 +40,6 @@ WithScaleZ.args = {
 };
 
 export default {
-  title: '<Parallax> Scale',
+  title: 'Components / <Parallax> / Scale Props',
   component: WithScale,
 };

@@ -1,9 +1,11 @@
 import React from 'react';
+import { ValidEasingPresets } from 'parallax-controller';
 import { Parallax, ParallaxProvider } from '../../src';
 import { Element } from '../Element/Element';
 import styles from './Parallax.module.scss';
 
-const options = [
+const options: ValidEasingPresets[] = [
+  // @ts-expect-error
   '',
   'ease',
   'easeIn',
@@ -150,6 +152,6 @@ const Template2 = () => {
 export const WithAllEasing = Template2.bind({});
 
 export default {
-  title: '<Parallax> Easing',
+  title: 'Components / <Parallax> / Easing Prop',
   component: WithEasing,
 };

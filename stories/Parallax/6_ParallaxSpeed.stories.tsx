@@ -21,12 +21,17 @@ const Template = (args) => {
   );
 };
 
-export const WithSpeed = Template.bind({});
-WithSpeed.args = {
-  speed: -1,
+export const WithSlowerSpeed = Template.bind({});
+WithSlowerSpeed.args = {
+  speed: -10,
+};
+
+export const WithFasterSpeed = Template.bind({});
+WithFasterSpeed.args = {
+  speed: 10,
 };
 
 export default {
-  title: '<Parallax> Speed',
-  component: WithSpeed,
+  title: 'Components / <Parallax> / Speed Prop',
+  component: WithSlowerSpeed,
 };
