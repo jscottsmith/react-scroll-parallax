@@ -1,6 +1,14 @@
 module.exports = {
   stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
   addons: [
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     {
