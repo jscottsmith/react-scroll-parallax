@@ -76,6 +76,79 @@ WithEasing.args = {
   easing: options[0],
 };
 
+const Template2 = () => {
+  const amount = 16;
+  const offA = 0;
+  const offB = 500;
+  const unit = 'px';
+  const elements = new Array(amount).fill(null).map((x, i) => i);
+
+  return (
+    <ParallaxProvider>
+      <div className="w-full p-20">
+        {options.map((easing) => (
+          <div
+            className="relative flex flex-row items-center justify-between"
+            style={{ height: '150vh' }}
+          >
+            <h1 className="absolute top-1/2 left-0 w-full text-center text-white text-4xl z-10">
+              {easing}
+            </h1>
+            <div className="w-1/2 flex flex-col">
+              {elements.map((_, i) => {
+                const n = amount - i;
+                return (
+                  <Parallax
+                    key={n}
+                    className="bg-blue-500 m-1 opacity-1 w-10 h-10"
+                    easing={easing}
+                    rootMargin={{
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0,
+                    }}
+                    rotate={[0, 90]}
+                    translateX={[`${offA}${unit}`, `${offB}${unit}`]}
+                    // translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                  >
+                    <div className="w-10 h-10 bg-purple-400 rounded-md" />
+                  </Parallax>
+                );
+              })}
+            </div>
+            <div className="w-1/2 flex flex-col items-end">
+              {elements.map((_, i) => {
+                const n = amount - i;
+                return (
+                  <Parallax
+                    key={n}
+                    className="bg-blue-500 m-1 opacity-1 w-10 h-10"
+                    easing={easing}
+                    rootMargin={{
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0,
+                    }}
+                    rotate={[0, 90]}
+                    translateX={[`${-1 * offA}${unit}`, `${-1 * offB}${unit}`]}
+                    // translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                  >
+                    <div className="w-10 h-10 bg-green-400 rounded-md" />
+                  </Parallax>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </ParallaxProvider>
+  );
+};
+
+export const WithAllEasing = Template2.bind({});
+
 export default {
   title: '<Parallax> Easing',
   component: WithEasing,
