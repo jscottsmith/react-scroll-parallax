@@ -87,7 +87,7 @@ The **_end_** of an effect begins when the element's original position exits the
 | **scaleZ**     |        `number[]`        | Start and end scale on z-axis.                                                                                                        |
 | **opacity**    |        `number[]`        | Start and end opacity value.                                                                                                          |
 
-### Easing Presets
+#### Easing Presets
 
 The following easing values are preset and can be used as easing
 
@@ -126,10 +126,18 @@ easeOutBack
 easeInOutBack
 ```
 
-### Cubic Bezier Easing Function
+#### Cubic Bezier Easing Function
 
 Just like with CSS `cubic-bezier(0.2,-0.67,1,-0.62);`, you can supply the 4 params to a custom bezier function.
 
 ```jsx
 <Parallax easing={[0.2, -0.6, 1, -0.6]} />
 ```
+
+### Props: Callbacks
+
+| Name                 |    Type    | Description                                                           |
+| -------------------- | :--------: | --------------------------------------------------------------------- |
+| **onProgressChange** | `function` | Callback for when the progress of an element in the viewport changes. |
+| **onEnter**          | `function` | Callback for when an element enters the viewport.                     |
+| **onExit**           | `function` | Callback for when an element exits the viewport.                      |

@@ -171,4 +171,17 @@ export interface ParallaxProps {
    * Optionally pass an element tag name to be applied to the outermost parallax element.
    */
   tagOuter?: any;
+
+  /**
+   * Callback for when the progress of an element in the viewport changes.
+   */
+  onProgressChange?: (progress: number) => any;
+  /**
+   * Callback for when an element enters the viewport.
+   */
+  onEnter?: () => any;
+  /**
+   * Callback for when an element exits the viewport.
+   */
+  onExit?: () => any;
 }

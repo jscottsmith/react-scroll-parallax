@@ -11278,10 +11278,10 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
-parallax-controller@0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-0.1.22.tgz#775f2d2008dc01a7d2490a4ae4c4d1cb08b87365"
-  integrity sha512-wUYgVaT4A223Zr4HvXubVnnjK9tNQE9GVgOBB+QIPFEkorgDrhLCpb2sLqNpIcRGBO/YgQLEEKUBmznNVrDjTA==
+parallax-controller@0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-0.1.23.tgz#dcde479c69524e8ca373abc29ce3194b8ebeeb52"
+  integrity sha512-S85cR/WaCZyC2Iuac3a2q9Q1ljMW75OTSol3Ds9vvqnjCAf+Z2r/JAqIjGeDndO98LwSe0jDtLMcGSB29S5AJw==
   dependencies:
     bezier-easing "^2.1.0"
 
