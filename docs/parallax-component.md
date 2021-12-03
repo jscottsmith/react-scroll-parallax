@@ -43,6 +43,12 @@ const TranslateY = () => (
 
 The following are all props that can be passed to the `<Parallax>` component:
 
+- [Props: Configuration](#props-configuration)
+- [Props: CSS Effects](#props-css-effects)
+  - [Easing Presets](#easing-presets)
+  - [Cubic Bezier Easing Function](#cubic-bezier-easing-function)
+- [Props: Callbacks](#props-callbacks)
+
 ### Props: Configuration
 
 | Name           |          Type          | Default | Description                                                                                                                                                                                        |
