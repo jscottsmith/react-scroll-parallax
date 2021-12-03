@@ -46,7 +46,7 @@ Supply the `layers` prop with additional configuration for more images. Each lay
 
 ## Customized Layers
 
-Supply the `layers` prop with [additional configuration](#banner-layers-props) for more images. Each layer can contain unique configurations.
+Supply the `layers` prop with [additional configuration](#banner-layers-prop) for more images. Each layer can contain unique configurations.
 
 ```jsx
 <ParallaxBanner
