@@ -12,11 +12,11 @@ Use the `layers` prop to indicate all images, offset amounts, and scroll rates. 
   layers={[
     {
       image: 'https://foo.com/foo.jpg',
-      amount: 0.1,
+      speed: 0.1,
     },
     {
       image: 'https://foo.com/bar.png',
-      amount: 0.2,
+      speed: 0.2,
     },
   ]}
   style={{
@@ -27,7 +27,7 @@ Use the `layers` prop to indicate all images, offset amounts, and scroll rates. 
 </ParallaxBanner>
 ```
 
-## Banner Props
+## Props
 
 The following are all props that can be passed to the `<ParallaxBanner>` component:
 
@@ -44,7 +44,7 @@ The `layers` prop takes an array of objects that will represent each image (or c
 
 | Name         |      Type      | Default | Description                                                                                                                                              |
 | ------------ | :------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **amount**   |    `number`    |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
+| **speed**    |    `number`    |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
 | **children** | `ReactElement` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
 | **expanded** |   `boolean`    | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
 | **image**    |    `string`    |         | Image source that will be applied as a CSS background image on the layer.                                                                                |

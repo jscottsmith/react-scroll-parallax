@@ -19,7 +19,7 @@ describe('Expect the <ParallaxBanner> component', () => {
             layers={[
               {
                 image: 'https://foo.com/bar.jpg',
-                amount: 0.2,
+                speed: 2,
               },
             ]}
             style={{
@@ -50,7 +50,7 @@ describe('Expect the <ParallaxBanner> component', () => {
             layers={[
               {
                 children: <div>test</div>,
-                amount: 0.2,
+                speed: 2,
               },
             ]}
             style={{
@@ -75,7 +75,7 @@ describe('Expect the <ParallaxBanner> component', () => {
             layers={[
               {
                 children: <div>test</div>,
-                amount: 0.2,
+                speed: 2,
                 expanded: false,
               },
             ]}
@@ -125,7 +125,7 @@ describe('Expect the <ParallaxBanner> component', () => {
           layers={[
             {
               children: <Child />,
-              amount: 0.2,
+              speed: 2,
             },
           ]}
         />
@@ -143,7 +143,7 @@ describe('Expect the <ParallaxBanner> component', () => {
           <ParallaxBanner
             layers={[
               {
-                amount: 0.2,
+                speed: 2,
                 props: {
                   style: {
                     backgroundColor: 'red',

@@ -15,7 +15,7 @@ storiesOf('Components / <ParallaxBanner>', module)
               {
                 image:
                   'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
-                amount: 0.2,
+                speed: -20,
               },
             ]}
           />
@@ -36,7 +36,7 @@ storiesOf('Components / <ParallaxBanner>', module)
               {
                 image:
                   'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
-                amount: 0.2,
+                speed: -20,
               },
             ]}
           />
@@ -54,7 +54,7 @@ storiesOf('Components / <ParallaxBanner>', module)
               {
                 image:
                   'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
-                amount: 0.2,
+                speed: -20,
               },
             ]}
           >
@@ -71,12 +71,12 @@ storiesOf('Components / <ParallaxBanner>', module)
       {
         image:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
-        amount: 0.5,
+        speed: -20,
       },
       {
         image:
           'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png',
-        amount: 0.25,
+        speed: -10,
       },
     ];
     return (
@@ -101,7 +101,7 @@ storiesOf('Components / <ParallaxBanner>', module)
             className={styles.bannerBg}
             layers={[
               {
-                amount: 0.3,
+                speed: -30,
                 children: (
                   <video
                     className={styles.video}
@@ -138,7 +138,7 @@ storiesOf('Components / <ParallaxBanner>', module)
                     Red
                   </div>
                 ),
-                amount: 0.2,
+                speed: -10,
                 expanded: false,
               },
               {
@@ -147,7 +147,7 @@ storiesOf('Components / <ParallaxBanner>', module)
                     Green
                   </div>
                 ),
-                amount: 0.4,
+                speed: -20,
                 expanded: false,
               },
               {
@@ -156,7 +156,7 @@ storiesOf('Components / <ParallaxBanner>', module)
                     Blue
                   </div>
                 ),
-                amount: 0.6,
+                speed: -30,
                 expanded: false,
               },
             ]}
@@ -176,7 +176,7 @@ storiesOf('Components / <ParallaxBanner>', module)
               {
                 image:
                   'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner.jpg',
-                amount: 0.2,
+                speed: -20,
               },
             ]}
           >

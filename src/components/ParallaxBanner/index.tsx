@@ -32,7 +32,7 @@ export const ParallaxBanner = ({
       {layers.map(
         (
           {
-            amount,
+            speed,
             children: layerChildren,
             expanded = true,
             image,
@@ -55,10 +55,11 @@ export const ParallaxBanner = ({
           // if this is an expanded layer overwrite the top/bottom styles with negative margins
           const expandedStyle = expanded
             ? {
-                top: Math.abs(amount) * 100 * -1 + '%',
-                bottom: Math.abs(amount) * 100 * -1 + '%',
+                top: Math.abs(speed) * 10 * -1 + 'px',
+                bottom: Math.abs(speed) * 10 * -1 + 'px',
               }
             : {};
+
           // optional image styles
           const imageStyle = image
             ? {
@@ -71,7 +72,7 @@ export const ParallaxBanner = ({
           return (
             <Parallax
               key={`layer-${i}`}
-              translateY={[amount * -1 * 100 + '%', amount * 100 + '%']}
+              speed={speed}
               styleInner={absoluteStyle}
               styleOuter={absoluteStyle}
               disabled={disabled}

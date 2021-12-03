@@ -1,9 +1,8 @@
 export interface BannerLayer {
   /**
-   * A value from `-1` to `1` that represents the vertical offset to be applied to the current
-   * layer, `0.1` would equal a `10%` offset on the top and bottom.
+   * A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.
    */
-  amount: number;
+  speed: number;
   /**
    * Custom layer children provided as a React element, for example `<Video />`
    */
