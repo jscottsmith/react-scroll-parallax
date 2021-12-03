@@ -2,29 +2,68 @@
 
 Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect. Allows a single or multiple images to be parallaxed at different rates within the banner area.
 
-## Banner Usage
+## Basic Example
 
-Use the `layers` prop to indicate all images, offset amounts, and scroll rates. Optionally pass additional children to be rendered. Styles of the outermost banner element can also be changed. Here's an example:
+Use the `layers` to supply a `speed` and `image` to your banner. In this case, it will create a banner using a single image, that moves slower than the rate of scroll, and the edges of the image will never be visible.
+
+**NOTE:** You MUST add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
 
 ```jsx
 <ParallaxBanner
-  className="your-class"
   layers={[
     {
       image: 'https://foo.com/foo.jpg',
-      speed: 0.1,
-    },
-    {
-      image: 'https://foo.com/bar.png',
-      speed: 0.2,
+      speed: -20,
     },
   ]}
   style={{
     height: '500px',
   }}
->
-  <h1>Banner Children</h1>
-</ParallaxBanner>
+/>
+```
+
+## Multiple Layers
+
+Supply the `layers` prop with additional configuration for more images. Each layer can contain unique configurations.
+
+```jsx
+<ParallaxBanner
+  layers={[
+    {
+      image: 'https://foo.com/foo.jpg',
+      speed: -20,
+    },
+    {
+      image: 'https://foo.com/bar.png',
+      speed: -10,
+    },
+  ]}
+  style={{
+    height: '500px',
+  }}
+/>
+```
+
+## Customized Layers
+
+Supply the `layers` prop with additional configuration for more images. Each layer can contain unique configurations.
+
+```jsx
+<ParallaxBanner
+  layers={[
+    {
+      image: 'https://foo.com/foo.jpg',
+      speed: -20,
+    },
+    {
+      children: <h1>My Headline</h1>,
+      speed: -10,
+    },
+  ]}
+  style={{
+    height: '500px',
+  }}
+/>
 ```
 
 ## Props
