@@ -1,7 +1,7 @@
 import { ParallaxController } from 'parallax-controller';
 import { useEffect } from 'react';
 
-export function useVerifyController(controller: ParallaxController) {
+export function useVerifyController(controller: ParallaxController | unknown) {
   useEffect(() => {
     const isServer = typeof window === 'undefined';
     // Make sure the provided controller is an instance of the Parallax Controller
