@@ -42,11 +42,11 @@ exports[`Expect the <ParallaxBanner> component to render custom child banners co
         className="parallax-banner-layer-0"
         style={
           Object {
-            "bottom": "-20%",
+            "bottom": "-20px",
             "left": 0,
             "position": "absolute",
             "right": 0,
-            "top": "-20%",
+            "top": "-20px",
           }
         }
       >
@@ -104,11 +104,11 @@ exports[`Expect the <ParallaxBanner> component to render image banners correctly
             "backgroundImage": "url(https://foo.com/bar.jpg)",
             "backgroundPosition": "center",
             "backgroundSize": "cover",
-            "bottom": "-20%",
+            "bottom": "-20px",
             "left": 0,
             "position": "absolute",
             "right": 0,
-            "top": "-20%",
+            "top": "-20px",
           }
         }
       />
@@ -164,11 +164,11 @@ exports[`Expect the <ParallaxBanner> component to render layers with custom prop
         style={
           Object {
             "backgroundColor": "red",
-            "bottom": "-20%",
+            "bottom": "-20px",
             "left": 0,
             "position": "absolute",
             "right": 0,
-            "top": "-20%",
+            "top": "-20px",
           }
         }
       />
