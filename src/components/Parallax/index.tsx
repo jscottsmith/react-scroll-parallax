@@ -14,8 +14,8 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
 
   function _getElementOptions(): CreateElementOptions {
     const useSpeedProp = typeof props.speed !== 'undefined';
-    const isHorizontal = controller.scrollAxis == 'horizontal';
-    const isVertical = controller.scrollAxis == 'vertical';
+    const isHorizontal = controller?.scrollAxis == 'horizontal';
+    const isVertical = controller?.scrollAxis == 'vertical';
 
     let translateX = props.translateX;
     let translateY = props.translateY;
@@ -63,19 +63,23 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
 
   // create element
   useEffect(() => {
-    const newElement = controller.createElement(_getElementOptions());
+    const newElement = controller?.createElement(_getElementOptions());
     setElement(newElement);
 
-    return () => controller.removeElementById(newElement.id);
+    return () => {
+      if (newElement) {
+        controller?.removeElementById(newElement.id);
+      }
+    };
   }, []);
 
   // update element
   useEffect(() => {
     if (element) {
       if (props.disabled) {
-        controller.resetElementStyles(element);
+        controller?.resetElementStyles(element);
       } else {
-        controller.updateElementPropsById(
+        controller?.updateElementPropsById(
           element.id,
           _getElementOptions().props
         );
