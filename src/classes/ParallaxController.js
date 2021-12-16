@@ -197,6 +197,10 @@ function ParallaxController({ scrollAxis = VERTICAL, scrollContainer }) {
      * Updates all parallax element attributes and positions.
      */
     this.update = function() {
+        const nx = hasScrollContainer ? viewEl.scrollLeft : window.pageXOffset;
+        const ny = hasScrollContainer ? viewEl.scrollTop : window.pageYOffset;
+        scroll.setScroll(nx, ny);
+
         _setViewSize();
         _updateAllElements({ updateCache: true });
     };

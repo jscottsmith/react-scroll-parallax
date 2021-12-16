@@ -88,8 +88,8 @@ The following are all props that can be passed to the `<Parallax>` component:
 
 | Name           |              Type               | Default  | Description                                                                                                        |
 | -------------- | :-----------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------ |
-| **x**          | `Array` of `String` or `Number` | `[0, 0]` | Offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **y**          | `Array` of `String` or `Number` | `[0, 0]` | Offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
+| **x**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
+| **y**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
 | **className**  |            `String`             |          | Optionally pass additional class names to be added to the outermost parallax element.                              |
 | **disabled**   |            `Boolean`            | `false`  | Disables parallax effects on individual elements when `true`.                                                      |
 | **styleInner** |            `Object`             |          | Optionally pass a style object to be added to the innermost parallax element.                                      |
