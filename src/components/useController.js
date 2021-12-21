@@ -3,6 +3,10 @@ import ParallaxContext from '../helpers/ParallaxContext';
 
 export default () => {
     const parallaxController = useContext(ParallaxContext);
+    const isServer = typeof window === 'undefined';
+    if (isServer) {
+        return null;
+    }
 
     if (!parallaxController) {
         throw new Error(
