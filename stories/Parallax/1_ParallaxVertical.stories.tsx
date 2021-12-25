@@ -148,11 +148,11 @@ export const WithAHundredElements = () => {
         {elements.map((_, i) => {
           const even = i % 2 === 0;
           const props = {
-            x: [
+            translateX: [
               even ? `${offset}%` : `${-offset}%`,
               even ? `${-offset}%` : `${offset}%`,
             ],
-            y: [
+            translateY: [
               even ? `${offset}%` : `${-offset}%`,
               even ? `${-offset}%` : `${offset}%`,
             ],
