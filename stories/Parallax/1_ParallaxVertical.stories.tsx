@@ -137,6 +137,41 @@ WithVaryingXOffsets.args = {
   MinOffset: -50,
 };
 
+export const StartAnimationAtInitialPosition = (args) => {
+  const amount = 10;
+  const unit = 'px';
+  const elements = new Array(amount).fill(null).map((x, i) => i);
+
+  return (
+    <ParallaxProvider>
+      <div className="w-full flex" style={{ height: '300vh' }}>
+        <div className="w-full flex flex-col items-center">
+          {elements.map((_, i) => {
+            return (
+              <Parallax
+                key={i}
+                className={styles.smallLinear}
+                translateX={[
+                  `${args.startTranslateX}${unit}`,
+                  `${args.endTranslateX}${unit}`,
+                ]}
+                shouldStartAnimationInitialInView
+              >
+                <Element name={i} />
+              </Parallax>
+            );
+          })}
+        </div>
+      </div>
+    </ParallaxProvider>
+  );
+};
+
+StartAnimationAtInitialPosition.args = {
+  startTranslateX: 80,
+  endTranslateX: -80,
+};
+
 export const WithAHundredElements = () => {
   const amount = 100;
   const offset = 50;

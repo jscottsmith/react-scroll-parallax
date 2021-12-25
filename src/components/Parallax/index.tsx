@@ -52,6 +52,8 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         opacity: props.opacity,
         easing: props.easing,
         rootMargin: props.rootMargin,
+        shouldStartAnimationInitialInView:
+          props.shouldStartAnimationInitialInView,
         onProgressChange: props.onProgressChange,
         onEnter: props.onEnter,
         onExit: props.onExit,
