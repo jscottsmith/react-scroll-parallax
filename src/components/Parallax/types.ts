@@ -148,6 +148,10 @@ export interface ParallaxProps {
    */
   rootMargin?: RootMarginShape;
   /**
+   * Will start the animation at initial element position if the element is positioned inside the view when scroll is at zero
+   */
+  shouldStartAnimationInitialInView?: boolean;
+  /**
    * Optionally pass additional class names to be added to the outermost parallax element.
    */
   className?: string;
