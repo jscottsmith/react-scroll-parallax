@@ -8,7 +8,7 @@ exports[`Expect the <Parallax> component to render correctly 1`] = `
   >
     <div
       class="parallax-inner"
-      style="border: 2px solid blue; transform: translateX(100%)translateY(100%);"
+      style="border: 2px solid blue; will-change: transform,opacity; transform: translateX(100%)translateY(100%);"
     >
       <div
         class="foo"
