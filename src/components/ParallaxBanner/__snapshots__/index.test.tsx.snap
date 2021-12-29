@@ -15,7 +15,6 @@ exports[`Expect the <ParallaxBanner> component to render custom child banners co
   }
 >
   <div
-    className="parallax-outer"
     style={
       Object {
         "bottom": 0,
@@ -27,7 +26,6 @@ exports[`Expect the <ParallaxBanner> component to render custom child banners co
     }
   >
     <div
-      className="parallax-inner"
       style={
         Object {
           "bottom": 0,
@@ -74,7 +72,6 @@ exports[`Expect the <ParallaxBanner> component to render image banners correctly
   }
 >
   <div
-    className="parallax-outer"
     style={
       Object {
         "bottom": 0,
@@ -86,7 +83,6 @@ exports[`Expect the <ParallaxBanner> component to render image banners correctly
     }
   >
     <div
-      className="parallax-inner"
       style={
         Object {
           "bottom": 0,
@@ -135,7 +131,6 @@ exports[`Expect the <ParallaxBanner> component to render layers with custom prop
   }
 >
   <div
-    className="parallax-outer"
     style={
       Object {
         "bottom": 0,
@@ -147,7 +142,6 @@ exports[`Expect the <ParallaxBanner> component to render layers with custom prop
     }
   >
     <div
-      className="parallax-inner"
       style={
         Object {
           "bottom": 0,
@@ -190,7 +184,6 @@ exports[`Expect the <ParallaxBanner> component to render without expanded margin
   }
 >
   <div
-    className="parallax-outer"
     style={
       Object {
         "bottom": 0,
@@ -202,7 +195,6 @@ exports[`Expect the <ParallaxBanner> component to render without expanded margin
     }
   >
     <div
-      className="parallax-inner"
       style={
         Object {
           "bottom": 0,

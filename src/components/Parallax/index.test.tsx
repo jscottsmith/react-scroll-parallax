@@ -33,13 +33,13 @@ describe('Expect the <Parallax> component', () => {
           disabled={false}
           translateX={[-100, 100]}
           translateY={['-100%', '100%']}
-          styleOuter={{
+          style={{
             border: 'solid red 2px',
           }}
           styleInner={{
             border: 'solid blue 2px',
           }}
-          tagOuter="figure"
+          tag="figure"
           tagInner="div"
         >
           <div className="foo" />

@@ -152,29 +152,33 @@ export interface ParallaxProps {
    */
   shouldStartAnimationInitialInView?: boolean;
   /**
-   * Optionally pass additional class names to be added to the outermost parallax element.
+   * Class names to be added to the outermost parallax element.
    */
   className?: string;
+  /**
+   * Class names to be added to the outermost parallax element.
+   */
+  innerClassName?: string;
   /**
    * Disables parallax effects on individual elements when true.
    */
   disabled?: boolean;
   /**
-   * Optionally pass a style object to be added to the innermost parallax element.
+   * Style object to be added to the innermost parallax element.
    */
   styleInner?: any;
   /**
-   * Optionally pass a style object to be added to the outermost parallax element.
+   * Style object to be added to the outermost parallax element.
    */
-  styleOuter?: any;
+  style?: any;
   /**
-   * Optionally pass an element tag name to be applied to the innermost parallax element.
+   * HTML element tag name to be applied to the innermost parallax element.
    */
   tagInner?: any;
   /**
-   * Optionally pass an element tag name to be applied to the outermost parallax element.
+   * HTML element tag name to be applied to the outermost parallax element.
    */
-  tagOuter?: any;
+  tag?: any;
 
   /**
    * Callback for when the progress of an element in the viewport changes.

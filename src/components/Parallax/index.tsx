@@ -108,15 +108,16 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     props.onExit,
   ]);
 
-  const Outer = props.tagOuter;
+  const Outer = props.tag;
   const Inner = props.tagInner;
 
-  const rootClass =
-    'parallax-outer' + (props.className ? ` ${props.className}` : '');
-
   return (
-    <Outer className={rootClass} ref={refOuter} style={props.styleOuter}>
-      <Inner className="parallax-inner" ref={refInner} style={props.styleInner}>
+    <Outer className={props.className} ref={refOuter} style={props.style}>
+      <Inner
+        className={props.innerClassName}
+        ref={refInner}
+        style={props.styleInner}
+      >
         {props.children}
       </Inner>
     </Outer>
@@ -126,5 +127,5 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
 Parallax.defaultProps = {
   disabled: false,
   tagInner: 'div',
-  tagOuter: 'div',
+  tag: 'div',
 };
