@@ -1,4 +1,41 @@
-# Migration Guide
+# V2 Migration Guide
+
+With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.
+
+### Renamed Props
+
+If you've used any of the following props simply rename to the new ones.
+
+1. `styleOuter` becomes `style`.
+2. `tagOuter` becomes `tag`.
+3. `x` becomes `translateX`.
+4. `y` becomes `translateY`.
+
+### Using the context hook.
+
+The hook to access the parallax controller is now returned directly.
+
+If you used the following:
+
+```js
+const { parallaxController } = useController();
+```
+
+change it to:
+
+```js
+const parallaxController = useController();
+```
+
+### Removed default class names
+
+If you relied on either the `parallax-outer` or `parallax-inner` class names for styling you will need to explicitly define them.
+
+```jsx
+<Parallax className="parallax-outer" innerClassName="parallax-inner" />
+```
+
+# V1 Migration Guide
 
 Some breaking changes were introduced in v2. Here's the simple changes that need to be made if you're coming from v1.
 
