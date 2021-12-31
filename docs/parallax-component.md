@@ -64,6 +64,8 @@ The following are all props that can be passed to the `<Parallax>` component:
 | **tag**                               |        `string`        | `div`   | HTML element tag name to be applied to the outermost parallax element.                                                                                                                             |
 | **innerTag**                          |        `string`        | `div`   | HTML element tag name to be applied to the innermost parallax element.                                                                                                                             |
 | **shouldStartAnimationInitialInView** |       `boolean`        | `false` | Will start the animation at initial element position if the element is positioned inside the view when scroll is at zero.                                                                          |
+| **startScroll**                       |        `number`        |         | Scroll top value to begin the animation. When provided along with `endScroll` relative scroll values will be ignored.                                                                              |
+| **endScroll**                         |        `number`        |         | Scroll top value to end the animation. When provided along with `startScroll` relative scroll values will be ignored.                                                                              |
 
 ### Props: CSS Effects
 
