@@ -181,6 +181,16 @@ export interface ParallaxProps {
   tag?: any;
 
   /**
+   * Scroll top value to begin the animation. When provided along with `endScroll` relative scroll values will be ignored.
+   */
+  startScroll?: number;
+
+  /**
+   * Scroll top value to end the animation. When provided along with `startScroll` relative scroll values will be ignored.
+   */
+  endScroll?: number;
+
+  /**
    * Callback for when the progress of an element in the viewport changes.
    */
   onProgressChange?: (progress: number) => any;

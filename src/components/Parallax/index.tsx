@@ -35,7 +35,9 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     }
 
     return {
+      // @ts-expect-error
       elInner: refInner.current,
+      // @ts-expect-error
       elOuter: refOuter.current,
       props: removeUndefinedObjectKeys({
         disabled: props.disabled,
@@ -57,6 +59,8 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         onProgressChange: props.onProgressChange,
         onEnter: props.onEnter,
         onExit: props.onExit,
+        startScroll: props.startScroll,
+        endScroll: props.endScroll,
       }),
     };
   }

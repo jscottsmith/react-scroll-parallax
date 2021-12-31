@@ -232,6 +232,36 @@ export const InsideADiv = () => {
   );
 };
 
+export const WithDefinedStartEndScroll = (args) => {
+  const a = [0, window.innerWidth / 2];
+  const b = [0, -window.innerWidth / 2];
+  return (
+    <Container scrollAxis="vertical" className={styles.elements}>
+      <Parallax
+        translateX={a}
+        startScroll={args.startScroll}
+        endScroll={args.endScroll}
+        className="fixed top-0 left-0 w-32 h-32"
+      >
+        <Element name="1" />
+      </Parallax>
+      <Parallax
+        translateX={b}
+        startScroll={args.startScroll}
+        endScroll={args.endScroll}
+        className="fixed top-0 right-0 w-32 h-32"
+      >
+        <Element name="2" />
+      </Parallax>
+    </Container>
+  );
+};
+
+WithDefinedStartEndScroll.args = {
+  startScroll: 0,
+  endScroll: 1000,
+};
+
 export default {
   title: 'Components / <Parallax> / Vertical Scroll',
   component: WithYOffsets,
