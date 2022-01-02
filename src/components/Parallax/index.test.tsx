@@ -1,5 +1,9 @@
 import React, { PropsWithChildren } from 'react';
-import { ParallaxController, ScrollAxis } from 'parallax-controller';
+import {
+  EffectNumber,
+  ParallaxController,
+  ScrollAxis,
+} from 'parallax-controller';
 import { render } from '@testing-library/react';
 import { Parallax } from '.';
 import { ParallaxProvider } from '../ParallaxProvider';
@@ -160,7 +164,11 @@ describe('Expect the <Parallax> component', () => {
       translateY: [-100, 100],
     });
 
-    const newProps = { disabled: false, x: [-40, -60], y: [10, 80] };
+    const newProps = {
+      disabled: false,
+      x: [-40, -60] as EffectNumber,
+      y: [10, 80] as EffectNumber,
+    };
 
     rerender(
       <Parallax
@@ -204,8 +212,8 @@ describe('Expect the <Parallax> component', () => {
       );
     }
 
-    const offX = [100, -100];
-    const offY = [100, -100];
+    const offX: EffectNumber = [100, -100];
+    const offY: EffectNumber = [100, -100];
 
     const { rerender } = render(
       <Parallax disabled={false} translateX={offX} translateY={offY} />,
