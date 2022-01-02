@@ -40,9 +40,9 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
       // @ts-expect-error
       elOuter: refOuter.current,
       props: removeUndefinedObjectKeys({
-        disabled: props.disabled,
         translateX,
         translateY,
+        disabled: props.disabled,
         rotate: props.rotate,
         rotateX: props.rotateX,
         rotateY: props.rotateY,
