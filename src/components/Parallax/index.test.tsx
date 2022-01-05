@@ -11,8 +11,6 @@ import { ParallaxProvider } from '../ParallaxProvider';
 import { MockProvider } from '../../testUtils/MockProvider';
 import expectRenderError from '../../testUtils/expectRenderError';
 
-const consoleLog = global.console.log;
-
 describe('Expect the <Parallax> component', () => {
   const preventError = (e: ErrorEvent) => e.preventDefault();
 
@@ -21,11 +19,6 @@ describe('Expect the <Parallax> component', () => {
   });
 
   afterEach(() => {
-    global.console.log = consoleLog;
-    // NOTE: this can probably be removed now
-    // @ts-ignore
-    global.ParallaxController = undefined;
-
     window.removeEventListener('error', preventError);
   });
 
@@ -34,22 +27,24 @@ describe('Expect the <Parallax> component', () => {
       <ParallaxProvider>
         <Parallax
           className="class-foo"
+          innerClassName="class-foo"
           disabled={false}
           translateX={[-100, 100]}
           translateY={['-100%', '100%']}
           style={{
             border: 'solid red 2px',
           }}
-          styleInner={{
-            border: 'solid blue 2px',
+          innerStyle={{
+            border: 'solid blue 23px',
           }}
           tag="figure"
-          tagInner="div"
+          innerTag="div"
         >
           <div className="foo" />
         </Parallax>
       </ParallaxProvider>
     );
+
     expect(asFragment()).toMatchSnapshot();
   });
 
