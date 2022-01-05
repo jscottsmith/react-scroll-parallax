@@ -7,9 +7,11 @@ With mostly just new features, V3 also makes a few breaking changes. See the fol
 If you've used any of the following props simply rename to the new ones.
 
 1. `styleOuter` becomes `style`.
-2. `tagOuter` becomes `tag`.
-3. `x` becomes `translateX`.
-4. `y` becomes `translateY`.
+2. `styleInner` becomes `innerStyle`.
+3. `tagOuter` becomes `tag`.
+4. `tagInner` becomes `innerTag`.
+5. `x` becomes `translateX`.
+6. `y` becomes `translateY`.
 
 ### Using the context hook.
 
