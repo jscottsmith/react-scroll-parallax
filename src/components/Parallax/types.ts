@@ -21,7 +21,7 @@ export interface ParallaxProps extends ParallaxElementConfig {
   /**
    * Style object to be added to the innermost parallax element.
    */
-  styleInner?: any;
+  innerStyle?: any;
   /**
    * Style object to be added to the outermost parallax element.
    */
@@ -29,7 +29,7 @@ export interface ParallaxProps extends ParallaxElementConfig {
   /**
    * HTML element tag name to be applied to the innermost parallax element.
    */
-  tagInner?: any;
+  innerTag?: any;
   /**
    * HTML element tag name to be applied to the outermost parallax element.
    */

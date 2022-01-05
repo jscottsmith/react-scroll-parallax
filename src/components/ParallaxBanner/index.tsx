@@ -73,7 +73,7 @@ export const ParallaxBanner = ({
             <Parallax
               key={`layer-${i}`}
               speed={speed}
-              styleInner={absoluteStyle}
+              innerStyle={absoluteStyle}
               style={absoluteStyle}
               disabled={disabled}
             >
