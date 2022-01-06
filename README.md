@@ -26,6 +26,14 @@ or yarn
 yarn add react-scroll-parallax
 ```
 
+## Test the Latest Version
+
+A new `beta` version is in the works that offers a simpler setup but more flexibility for advanced scroll effects. You can find more information here or leave feedback: [V3 Issue](https://github.com/jscottsmith/react-scroll-parallax/issues/123).
+
+```
+yarn add react-scroll-parallax@beta
+```
+
 ## Overview
 
 -   [Usage](#usage)
@@ -86,16 +94,16 @@ The main component for manipulating a DOM element's position based on it's posit
 
 The following are all props that can be passed to the `<Parallax>` component:
 
-| Name           |              Type               | Default  | Description                                                                                                        |
-| -------------- | :-----------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------ |
+| Name           |              Type               | Default  | Description                                                                                                                          |
+| -------------- | :-----------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | **x**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
 | **y**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **className**  |            `String`             |          | Optionally pass additional class names to be added to the outermost parallax element.                              |
-| **disabled**   |            `Boolean`            | `false`  | Disables parallax effects on individual elements when `true`.                                                      |
-| **styleInner** |            `Object`             |          | Optionally pass a style object to be added to the innermost parallax element.                                      |
-| **styleOuter** |            `Object`             |          | Optionally pass a style object to be added to the outermost parallax element.                                      |
-| **tagInner**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                               |
-| **tagOuter**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                               |
+| **className**  |            `String`             |          | Optionally pass additional class names to be added to the outermost parallax element.                                                |
+| **disabled**   |            `Boolean`            | `false`  | Disables parallax effects on individual elements when `true`.                                                                        |
+| **styleInner** |            `Object`             |          | Optionally pass a style object to be added to the innermost parallax element.                                                        |
+| **styleOuter** |            `Object`             |          | Optionally pass a style object to be added to the outermost parallax element.                                                        |
+| **tagInner**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                                                 |
+| **tagOuter**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                                                 |
 
 ## \<ParallaxBanner>
 
