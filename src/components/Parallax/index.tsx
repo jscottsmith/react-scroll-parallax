@@ -57,10 +57,12 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
         shouldStartAnimationInitialInView:
           props.shouldStartAnimationInitialInView,
         onProgressChange: props.onProgressChange,
+        onChange: props.onChange,
         onEnter: props.onEnter,
         onExit: props.onExit,
         startScroll: props.startScroll,
         endScroll: props.endScroll,
+        targetElement: props.targetElement,
       }),
     };
   }
@@ -108,8 +110,10 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     props.easing,
     props.rootMargin,
     props.onProgressChange,
+    props.onChange,
     props.onEnter,
     props.onExit,
+    props.targetElement,
   ]);
 
   const Outer = props.tag;

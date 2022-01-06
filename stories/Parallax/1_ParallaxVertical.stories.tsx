@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Parallax, ParallaxProvider } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
 import styles from './Parallax.module.scss';
+import { useRef } from 'react';
+import { CSSEffect } from 'parallax-controller';
+import { useState } from 'react';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');
@@ -260,6 +263,42 @@ export const WithDefinedStartEndScroll = (args) => {
 WithDefinedStartEndScroll.args = {
   startScroll: 0,
   endScroll: 1000,
+};
+
+export const WithDefinedTargetElement = () => {
+  const a: CSSEffect = [0, 200];
+  const b: CSSEffect = [0, -200];
+  const targetRef = useRef();
+
+  const [targetElement, setElement] = useState();
+  useEffect(() => {
+    setElement(targetRef.current);
+  }, []);
+
+  return (
+    <Container scrollAxis="vertical" className={styles.elements}>
+      <Parallax
+        translateX={a}
+        className="fixed top-0 left-0 w-32 h-32"
+        targetElement={targetElement}
+      >
+        <Element name="1" />
+      </Parallax>
+      <Parallax
+        translateX={b}
+        className="fixed top-0 right-0 w-32 h-32"
+        targetElement={targetElement}
+      >
+        <Element name="2" />
+      </Parallax>
+      <div
+        className="w-screen h-screen bg-blue-500 bg-opacity-20 text-white flex items-center justify-center "
+        ref={targetRef}
+      >
+        Target Element
+      </div>
+    </Container>
+  );
 };
 
 export default {
