@@ -8,7 +8,6 @@ import { useVerifyController } from './hooks';
 export function Parallax(props: PropsWithChildren<ParallaxProps>) {
   const controller = useController();
   const refInner = useRef<HTMLElement>();
-  const refOuter = useRef<HTMLElement>();
 
   useVerifyController(controller);
 
@@ -36,9 +35,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
 
     return {
       // @ts-expect-error
-      elInner: refInner.current,
-      // @ts-expect-error
-      elOuter: refOuter.current,
+      el: refInner.current,
       props: removeUndefinedObjectKeys({
         translateX,
         translateY,
@@ -120,7 +117,7 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
   const Inner = props.innerTag;
 
   return (
-    <Outer className={props.className} ref={refOuter} style={props.style}>
+    <Outer className={props.className} style={props.style}>
       <Inner
         className={props.innerClassName}
         ref={refInner}
