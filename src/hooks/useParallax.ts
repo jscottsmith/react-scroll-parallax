@@ -5,9 +5,9 @@ import { ParallaxProps } from '../types';
 import { removeUndefinedObjectKeys } from '../utils/removeUndefinedObjectKeys';
 import { useController } from './useController';
 
-export function useParallax(props: ParallaxProps) {
+export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
   const controller = useController();
-  const ref = useRef<HTMLElement>();
+  const ref = useRef<T>(null);
 
   useVerifyController(controller);
 
