@@ -73,8 +73,7 @@ describe('Expect the <Parallax> component', () => {
     );
 
     expect(controller.createElement).toBeCalledWith({
-      elInner: expect.any(HTMLElement),
-      elOuter: expect.any(HTMLElement),
+      el: expect.any(HTMLElement),
       props: { disabled: false, translateY: [-100, 100] },
     });
   });
@@ -101,8 +100,7 @@ describe('Expect the <Parallax> component', () => {
     });
 
     expect(controller.createElement).toBeCalledWith({
-      elInner: expect.any(HTMLElement),
-      elOuter: expect.any(HTMLElement),
+      el: expect.any(HTMLElement),
       props: { disabled: false, rotate: ['0deg', '100deg'] },
     });
   });
