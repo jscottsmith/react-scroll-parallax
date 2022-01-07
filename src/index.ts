@@ -4,8 +4,12 @@ import { Parallax } from './components/Parallax';
 import { ParallaxBanner } from './components/ParallaxBanner';
 import { ParallaxProvider } from './components/ParallaxProvider';
 import { ParallaxContext } from './context/ParallaxContext';
-export { useController } from './hooks/useController';
+import { useParallax } from './hooks/useParallax';
+import { useController } from './hooks/useController';
+
 export {
+  useParallax,
+  useController,
   Parallax,
   ParallaxBanner,
   ParallaxProvider,
