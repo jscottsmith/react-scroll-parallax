@@ -19,6 +19,15 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
   );
 }
 
+export const Component = () => {
+  const { ref } = useParallax<HTMLDivElement>({ translateY: [100, -100] });
+  return (
+    <div ref={ref}>
+      <div />
+    </div>
+  );
+};
+
 Parallax.defaultProps = {
   disabled: false,
   innerTag: 'div',
