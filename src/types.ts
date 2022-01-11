@@ -15,21 +15,9 @@ export interface ParallaxProps extends ParallaxElementConfig {
    */
   className?: string;
   /**
-   * Class names to be added to the outermost parallax element.
-   */
-  innerClassName?: string;
-  /**
-   * Style object to be added to the innermost parallax element.
-   */
-  innerStyle?: any;
-  /**
    * Style object to be added to the outermost parallax element.
    */
   style?: any;
-  /**
-   * HTML element tag name to be applied to the innermost parallax element.
-   */
-  innerTag?: any;
   /**
    * HTML element tag name to be applied to the outermost parallax element.
    */
