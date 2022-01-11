@@ -26,31 +26,19 @@ exports[`Expect the <ParallaxBanner> component to render custom child banners co
     }
   >
     <div
+      className="parallax-banner-layer-0"
       style={
         Object {
-          "bottom": 0,
+          "bottom": "-20px",
           "left": 0,
           "position": "absolute",
           "right": 0,
-          "top": 0,
+          "top": "-20px",
         }
       }
     >
-      <div
-        className="parallax-banner-layer-0"
-        style={
-          Object {
-            "bottom": "-20px",
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": "-20px",
-          }
-        }
-      >
-        <div>
-          test
-        </div>
+      <div>
+        test
       </div>
     </div>
   </div>
@@ -83,32 +71,20 @@ exports[`Expect the <ParallaxBanner> component to render image banners correctly
     }
   >
     <div
+      className="parallax-banner-layer-0"
       style={
         Object {
-          "bottom": 0,
+          "backgroundImage": "url(https://foo.com/bar.jpg)",
+          "backgroundPosition": "center",
+          "backgroundSize": "cover",
+          "bottom": "-20px",
           "left": 0,
           "position": "absolute",
           "right": 0,
-          "top": 0,
+          "top": "-20px",
         }
       }
-    >
-      <div
-        className="parallax-banner-layer-0"
-        style={
-          Object {
-            "backgroundImage": "url(https://foo.com/bar.jpg)",
-            "backgroundPosition": "center",
-            "backgroundSize": "cover",
-            "bottom": "-20px",
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": "-20px",
-          }
-        }
-      />
-    </div>
+    />
   </div>
   <div>
     <h1>
@@ -142,31 +118,19 @@ exports[`Expect the <ParallaxBanner> component to render layers with custom prop
     }
   >
     <div
+      className="parallax-banner-layer-0 my-custom-class"
+      id="my-id"
       style={
         Object {
-          "bottom": 0,
+          "backgroundColor": "red",
+          "bottom": "-20px",
           "left": 0,
           "position": "absolute",
           "right": 0,
-          "top": 0,
+          "top": "-20px",
         }
       }
-    >
-      <div
-        className="parallax-banner-layer-0 my-custom-class"
-        id="my-id"
-        style={
-          Object {
-            "backgroundColor": "red",
-            "bottom": "-20px",
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": "-20px",
-          }
-        }
-      />
-    </div>
+    />
   </div>
 </div>
 `;
@@ -195,6 +159,7 @@ exports[`Expect the <ParallaxBanner> component to render without expanded margin
     }
   >
     <div
+      className="parallax-banner-layer-0"
       style={
         Object {
           "bottom": 0,
@@ -205,21 +170,8 @@ exports[`Expect the <ParallaxBanner> component to render without expanded margin
         }
       }
     >
-      <div
-        className="parallax-banner-layer-0"
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      >
-        <div>
-          test
-        </div>
+      <div>
+        test
       </div>
     </div>
   </div>

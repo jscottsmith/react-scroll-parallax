@@ -4,16 +4,11 @@ exports[`Expect the <Parallax> component to render correctly 1`] = `
 <DocumentFragment>
   <figure
     class="class-foo"
-    style="border: 2px solid red;"
+    style="border: 2px solid red; will-change: transform; transform: translateX(100%)translateY(100%);"
   >
     <div
-      class="class-foo"
-      style="border: 23px solid blue; will-change: transform; transform: translateX(100%)translateY(100%);"
-    >
-      <div
-        class="foo"
-      />
-    </div>
+      class="foo"
+    />
   </figure>
 </DocumentFragment>
 `;
