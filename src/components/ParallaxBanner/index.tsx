@@ -69,14 +69,17 @@ export const ParallaxBanner = ({
               }
             : {};
 
+          const key = `layer-${i}`;
+
           return (
             <Parallax
-              key={`layer-${i}`}
+              key={key}
               speed={speed}
               style={absoluteStyle}
               disabled={disabled}
             >
               <div
+                data-testid={key}
                 className={layerClassMerged}
                 style={{
                   ...imageStyle,
