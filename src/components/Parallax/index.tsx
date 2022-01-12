@@ -3,7 +3,7 @@ import { useParallax } from '../../hooks/useParallax';
 import { ParallaxProps } from '../../types';
 
 export function Parallax(props: PropsWithChildren<ParallaxProps>) {
-  const Tag = props.tag;
+  const Tag = props.tag || 'div';
   const { ref } = useParallax(props);
   return (
     <Tag className={props.className} style={props.style} ref={ref}>
@@ -11,8 +11,3 @@ export function Parallax(props: PropsWithChildren<ParallaxProps>) {
     </Tag>
   );
 }
-
-Parallax.defaultProps = {
-  disabled: false,
-  tag: 'div',
-};

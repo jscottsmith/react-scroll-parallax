@@ -99,7 +99,3 @@ export const ParallaxBanner = ({
     </div>
   );
 };
-
-ParallaxBanner.defaultProps = {
-  disabled: false,
-};
