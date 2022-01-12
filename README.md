@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes[Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.vercel.app/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
+React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes [Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.vercel.app/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
 
 If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2.4.2), here's a [migration guide](https://github.com/jscottsmith/react-scroll-parallax/blob/master/docs/migration-guide.md).
 
@@ -46,6 +46,8 @@ yarn add react-scroll-parallax
 
 ## Usage
 
+### Wrap with a ParallaxProvider
+
 The [`<ParallaxProvider>`](#parallaxprovider) must wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<App>`. For example:
 
 ```jsx
@@ -62,6 +64,8 @@ function App() {
 }
 ```
 
+### Create effects with useParallax()
+
 Then import the `useParallax` hook and use it anywhere within the provider. Here's an example that uses the `speed` prop so simply speed up (or slowdown) the rate of scroll.
 
 ```jsx
@@ -72,6 +76,8 @@ const Component = () => {
   return <div ref={ref} className="my-thing" />;
 };
 ```
+
+### Create effects with \<Parallax>
 
 You can also use the `Parallax` component. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`translateY = [-20, 20]` \*percent is assumed with no provided unit).
 
