@@ -38,15 +38,23 @@ yarn add react-scroll-parallax
 ## Documentation
 
 - [Example Usage](#usage)
+- [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
+
+### Docs: Components
+
 - [`<Parallax>`](/docs/parallax-component.md)
 - [`<ParallaxBanner>`](/docs/parallax-banner-component.md)
 - [`<ParallaxProvider>`](/docs/parallax-provider-component.md)
-- [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
-  - [PSA](#psa)
+
+### Docs: Hooks
+
+- [`useParallax()`](/docs/use-parallax-hook.md)
+- [`useController()`](/#todo)
+- [`useParallaxImage`](/#todo)
 
 ## Usage
 
-### Wrap with a ParallaxProvider
+### First: Wrap with a ParallaxProvider
 
 The [`<ParallaxProvider>`](#parallaxprovider) must wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<App>`. For example:
 
@@ -64,7 +72,7 @@ function App() {
 }
 ```
 
-### Create effects with useParallax()
+### Then: Create effects with useParallax()
 
 Then import the `useParallax` hook and use it anywhere within the provider. Here's an example that uses the `speed` prop so simply speed up (or slowdown) the rate of scroll.
 
@@ -77,7 +85,7 @@ const Component = () => {
 };
 ```
 
-### Create effects with \<Parallax>
+### Or: Create effects with \<Parallax>
 
 You can also use the `Parallax` component. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`translateY = [-20, 20]` \*percent is assumed with no provided unit).
 
