@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-scroll-parallax.svg)](https://badge.fury.io/js/react-scroll-parallax) [![Build Status](https://travis-ci.org/jscottsmith/react-scroll-parallax.svg?branch=master)](https://travis-ci.org/jscottsmith/react-scroll-parallax) [![codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
-React components to create parallax scroll effects for banners, images or any other DOM elements. Uses a single scroll listener via [Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based offsets to elements based on their position in the viewport. [Optimized](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) to _reduce_ jank on scroll and works with universal (server-side rendered) React apps.
+React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes[Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.vercel.app/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
 
 If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2.4.2), here's a [migration guide](https://github.com/jscottsmith/react-scroll-parallax/blob/master/docs/migration-guide.md).
 
@@ -39,16 +39,8 @@ yarn add react-scroll-parallax
 
 - [Example Usage](#usage)
 - [`<Parallax>`](/docs/parallax-component.md)
-  - [Parallax Props](/docs/parallax-component.md#props)
 - [`<ParallaxBanner>`](/docs/parallax-banner-component.md)
-  - [Banner Usage](/docs/parallax-banner-component.md#banner-usage)
-  - [Banner Props](/docs/parallax-banner-component.md#banner-props)
-  - [Banner Layers Prop](/docs/parallax-banner-component.md#banner-layers-prop)
 - [`<ParallaxProvider>`](/docs/parallax-provider-component.md)
-  - [ParallaxProvider Props](/docs/parallax-provider-component.md#parallaxprovider-props)
-- [Parallax Controller Context](/docs/parallax-controller-context.md)
-  - [Available Methods](/docs/parallax-controller-context.md#available-methods)
-- [Browser Support](#browser-support)
 - [Optimizations to Reduce Jank](#optimizations-to-reduce-jank)
   - [PSA](#psa)
 
@@ -70,12 +62,23 @@ function App() {
 }
 ```
 
-Then import the `Parallax` component and use it anywhere within the provider. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`translateY = [-20, 20]` \*percent is assumed with no provided unit).
+Then import the `useParallax` hook and use it anywhere within the provider. Here's an example that uses the `speed` prop so simply speed up (or slowdown) the rate of scroll.
+
+```jsx
+import { useParallax } from 'react-scroll-parallax';
+
+const Component = () => {
+  const { ref } = useParallax({ speed: 10 });
+  return <div ref={ref} className="my-thing" />;
+};
+```
+
+You can also use the `Parallax` component. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`translateY = [-20, 20]` \*percent is assumed with no provided unit).
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
-const VerticalParallax = () => (
+const Component = () => (
   <Parallax translateY={[-20, 20]}>
     <div className="my-thing" />
   </Parallax>
@@ -87,7 +90,7 @@ Example with transforms on the `translateX` axis starting at `-100px` and ending
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
 
-const HorizontalParallax = () => (
+const Component = () => (
   <Parallax translateX={['-100px', '200px']}>
     <div className="my-thing" />
   </Parallax>
@@ -107,16 +110,4 @@ If you're encountering issues like the parallax element jumping around or becomi
 
 ## Optimizations to Reduce Jank
 
-Considerations have been taken to reduce jank -- [please read more here](https://github.com/jscottsmith/parallax-controller#optimizations-to-reduce-jank) on how this is done
-
-### **PSA**
-
-Even with optimizations _scroll effects can cause jank_. It's also important to keep in mind that scroll effects are usually not critical to a users experience and sometimes can be annoying.
-
-If you use these components make sure you seriously consider the following:
-
-- Keep images small (do not use inappropriately high resolutions) and optimized (use appropriate compression)
-- Reduce the number of scroll effects on elements in view and on the page in total
-- Disable the use — or limit the amount — of scroll effects for users on mobile devices
-
-Follow the above and you should keep scrolling smooth and users happy.
+Considerations have been taken to reduce jank -- [please read more here](https://parallax-controller.vercel.app/docs/performance) on how this is done
