@@ -12,34 +12,13 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
   useVerifyController(controller);
 
   function _getElementOptions(): CreateElementOptions {
-    const shouldUseSpeedProp = typeof props.speed !== 'undefined';
-    const isHorizontal = controller?.scrollAxis == 'horizontal';
-    const isVertical = controller?.scrollAxis == 'vertical';
-
-    let translateX = props.translateX;
-    let translateY = props.translateY;
-
-    // TODO: move to parallax-controller
-    if (shouldUseSpeedProp && isHorizontal) {
-      translateX = [
-        `${(props.speed || 0) * 10}px`,
-        `${(props.speed || 0) * -10}px`,
-      ];
-    }
-
-    if (shouldUseSpeedProp && isVertical) {
-      translateY = [
-        `${(props.speed || 0) * 10}px`,
-        `${(props.speed || 0) * -10}px`,
-      ];
-    }
-
     return {
       // @ts-expect-error
       el: ref.current,
       props: removeUndefinedObjectKeys({
-        translateX,
-        translateY,
+        speed: props.speed,
+        translateX: props.translateX,
+        translateY: props.translateY,
         disabled: props.disabled,
         rotate: props.rotate,
         rotateX: props.rotateX,
