@@ -6,6 +6,12 @@ module.exports = {
       options: {
         postcssLoaderOptions: {
           implementation: require('postcss'),
+          postcssOptions: {
+            plugins: {
+              tailwindcss: {},
+              autoprefixer: {},
+            },
+          },
         },
       },
     },
