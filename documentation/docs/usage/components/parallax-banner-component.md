@@ -1,4 +1,4 @@
-# \<ParallaxBanner>
+# ParallaxBanner
 
 Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect. Allows a single or multiple images to be parallaxed at different rates within the banner area.
 

@@ -1,4 +1,4 @@
-# \<Parallax>
+# Parallax
 
 The main component for applying scroll effects based on an elements position within the viewport.
 

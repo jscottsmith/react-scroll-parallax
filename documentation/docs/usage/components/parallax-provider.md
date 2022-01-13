@@ -1,4 +1,4 @@
-# \<ParallaxProvider>
+# ParallaxProvider
 
 The `<ParallaxProvider />` component is meant to wrap a top level component in your application and is necessary to provide access though React context API to the parallax controller. This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
 
