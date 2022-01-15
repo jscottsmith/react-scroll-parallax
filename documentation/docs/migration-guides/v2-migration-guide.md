@@ -2,7 +2,7 @@
 
 With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.
 
-### Renamed Props for <Parallax\>
+### Prop changes for <Parallax\>
 
 If you've used any of the following props simply rename to new ones or refactor if if they are no longer supported.
 
