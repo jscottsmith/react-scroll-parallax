@@ -51,6 +51,18 @@ const config = {
             position: 'left',
             label: 'Usage',
           },
+          {
+            type: 'doc',
+            docId: 'usage/hooks/hooks',
+            position: 'left',
+            label: 'Hooks',
+          },
+          {
+            type: 'doc',
+            docId: 'usage/components/components',
+            position: 'left',
+            label: 'Components',
+          },
         ],
       },
       footer: {
