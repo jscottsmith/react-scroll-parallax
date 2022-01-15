@@ -24,8 +24,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/jscottsmith/react-scroll-parallax',
+          // TODO: update url after v3 is latest
+          editUrl:
+            'https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
