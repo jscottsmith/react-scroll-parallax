@@ -39,6 +39,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
+        hideOnScroll: true,
         title: 'React Scroll Parallax',
         logo: {
           alt: 'Squares Overlapping',
@@ -65,7 +66,8 @@ const config = {
           },
           {
             href: 'https://github.com/jscottsmith/react-scroll-parallax',
-            label: 'GitHub',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
             position: 'right',
           },
         ],
