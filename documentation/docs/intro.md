@@ -33,14 +33,13 @@ yarn add react-scroll-parallax@beta
 
 - [Usage](/docs/usage/)
 
+### Docs: Hooks
+
+- [`useParallax()`](/docs/usage/hooks/use-parallax)
+- [`useController()`](/docs/usage/hooks/use-controller)
+
 ### Docs: Components
 
 - [`<Parallax>`](/docs/usage/components/parallax-component)
 - [`<ParallaxBanner>`](/docs/usage/components/parallax-banner-component)
 - [`<ParallaxProvider>`](/docs/usage/components/parallax-provider)
-
-### Docs: Hooks
-
-- [`useParallax()`](/docs/usage/components/use-parallax-hook.md)
-- [`useController()`](/#todo)
-- [`useParallaxImage`](/#todo)
