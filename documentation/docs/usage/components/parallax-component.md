@@ -45,6 +45,8 @@ const TranslateY = () => (
 
 # Props
 
+## Props: Effects
+
 Most props to configure a parallax element like CSS effects are documented and managed by the `parallax-controller`.
 
 [See all the parallax props](https://parallax-controller.vercel.app/docs/usage/props) that this component will accept.
