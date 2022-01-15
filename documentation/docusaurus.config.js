@@ -9,7 +9,7 @@ const config = {
   title: 'React Scroll Parallax',
   tagline:
     'React components to create parallax scroll effects for banners, images or any other DOM elements.',
-  url: 'https://todo',
+  url: 'https://react-scroll-parallax.v3.damnthat.tv',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -25,8 +25,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/jscottsmith/react-scroll-parallax',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -62,6 +61,11 @@ const config = {
             docId: 'usage/components/components',
             position: 'left',
             label: 'Components',
+          },
+          {
+            href: 'https://github.com/jscottsmith/react-scroll-parallax',
+            label: 'GitHub',
+            position: 'right',
           },
         ],
       },
