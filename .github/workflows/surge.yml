@@ -1,4 +1,4 @@
-name: Deploy Surge Website
+name: Deploy Storybook
 
 on: [push]
 
