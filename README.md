@@ -7,7 +7,7 @@
 
 [![Test and Lint](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml)
 [![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml)
-[![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml)
+[![Coverage](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml)
 
 React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes [Parallax Controller](https://github.com/jscottsmith/parallax-controller) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.vercel.app/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
 
@@ -33,7 +33,7 @@ Some demo websites using Parallax components
 With npm
 
 ```
-npm i react-scroll-parallax --save
+npm install react-scroll-parallax
 ```
 
 or yarn

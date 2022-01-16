@@ -8,7 +8,7 @@ sidebar_position: 1
 [![NPM Version Latest](https://img.shields.io/npm/v/react-scroll-parallax/latest)](https://www.npmjs.com/package/react-scroll-parallax)
 [![NPM Version Beta](https://img.shields.io/npm/v/react-scroll-parallax/beta)](https://www.npmjs.com/package/react-scroll-parallax)
 [![NPM Downloads](https://img.shields.io/npm/dm/react-scroll-parallax)](https://www.npmjs.com/package/react-scroll-parallax)
-[![Codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/master/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
+[![Codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/v3/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
 [![Test and Lint](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml)
 [![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml)
@@ -23,7 +23,7 @@ If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/
 With npm
 
 ```
-npm i react-scroll-parallax@beta --save
+npm install react-scroll-parallax@beta
 ```
 
 or yarn
