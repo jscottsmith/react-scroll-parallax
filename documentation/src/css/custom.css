@@ -1,3 +1,8 @@
+/* @tailwind base; */
+@import url(./tailwind-custom-base.css);
+@tailwind components;
+@tailwind utilities;
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -14,6 +19,18 @@
   --ifm-color-primary-lighter: rgb(75, 115, 233);
   --ifm-color-primary-lightest: rgb(104, 139, 241);
   --ifm-code-font-size: 95%;
+}
+
+.px-bg {
+  background-image: url(/static/img/bg-px-light.svg);
+  background-color: rgb(246, 248, 250);
+  border: 1px solid #eee;
+}
+
+html[data-theme='dark'] .px-bg {
+  background-image: url(/static/img/bg-px.svg);
+  background-color: rgb(40, 42, 54);
+  border: 1px solid #444;
 }
 
 .docusaurus-highlight-code-line {
