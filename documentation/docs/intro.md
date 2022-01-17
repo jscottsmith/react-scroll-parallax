@@ -35,6 +35,7 @@ yarn add react-scroll-parallax@beta
 ## Getting Started
 
 - [Usage](/docs/usage/)
+- [How it works](/docs/examples/how-it-works)
 
 ### Docs: Hooks
 

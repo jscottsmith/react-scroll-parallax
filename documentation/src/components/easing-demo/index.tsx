@@ -6,12 +6,12 @@ import { BgContainer } from '../bg-container';
 export const EasingDemo = (props: { easing: EasingParam }) => {
   const parallaxLinear = useParallax<HTMLDivElement>({
     translateX: [0, 100],
-    shouldStartAnimationInitialInView: true,
+    shouldAlwaysCompleteAnimation: true,
   });
 
   const parallaxEased = useParallax<HTMLDivElement>({
     translateX: [0, 100],
-    shouldStartAnimationInitialInView: true,
+    shouldAlwaysCompleteAnimation: true,
     easing: props.easing,
   });
 
