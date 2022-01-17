@@ -158,7 +158,7 @@ export const StartAnimationAtInitialPosition = (args) => {
                   `${args.startTranslateX}${unit}`,
                   `${args.endTranslateX}${unit}`,
                 ]}
-                shouldStartAnimationInitialInView
+                shouldAlwaysCompleteAnimation
               >
                 <Element name={i} />
               </Parallax>

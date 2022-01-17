@@ -20,7 +20,7 @@ export function getParallaxProps(
     opacity: props.opacity,
     easing: props.easing,
     rootMargin: props.rootMargin,
-    shouldStartAnimationInitialInView: props.shouldStartAnimationInitialInView,
+    shouldAlwaysCompleteAnimation: props.shouldAlwaysCompleteAnimation,
     onProgressChange: props.onProgressChange,
     onChange: props.onChange,
     onEnter: props.onEnter,
