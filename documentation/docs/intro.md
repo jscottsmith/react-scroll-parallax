@@ -37,6 +37,12 @@ yarn add react-scroll-parallax@beta
 - [Usage](/docs/usage/)
 - [How it works](/docs/examples/how-it-works)
 
+### Demos
+
+- [Storybook v3](https://react-scroll-parallax-v3.surge.sh/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax/tree/v3/stories)
+- [Demo 1](https://jscottsmith.github.io/react-scroll-parallax-examples/examples/parallax-example/) - [Source Code (old 1.x version)](https://github.com/jscottsmith/react-scroll-parallax-examples)
+- [Demo 2](https://react-scroll-parallax.netlify.app/) - [Source Code (old 2.x version)](https://github.com/jscottsmith/react-parallax-site)
+
 ### Docs: Hooks
 
 - [`useParallax()`](/docs/usage/hooks/use-parallax)
