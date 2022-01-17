@@ -1,18 +1,22 @@
-import { EasingParam } from 'parallax-controller';
 import React from 'react';
 import { useParallax } from 'react-scroll-parallax';
+import { ParallaxProps } from 'react-scroll-parallax/dist/types';
 import { BgContainer } from '../bg-container';
 
-export const EasingDemo = (props: { easing: EasingParam }) => {
+export const EasingDemo = (props: {
+  eased: ParallaxProps;
+  default: ParallaxProps;
+}) => {
   const parallaxLinear = useParallax<HTMLDivElement>({
     translateX: [0, 100],
     shouldAlwaysCompleteAnimation: true,
+    ...props.default,
   });
 
   const parallaxEased = useParallax<HTMLDivElement>({
     translateX: [0, 100],
     shouldAlwaysCompleteAnimation: true,
-    easing: props.easing,
+    ...props.eased,
   });
 
   return (

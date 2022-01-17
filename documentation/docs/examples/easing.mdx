@@ -1,6 +1,10 @@
+---
+sidebar_position: 2
+---
+
 import { EasingDemo } from '/src/components/easing-demo';
 
-# Easing
+# Easing Animation
 
 You can provide [easing presets](https://parallax-controller.v1.damnthat.tv/docs/usage/props#cubic-bezier-easing-function) or [cubic-bezier curve params](https://parallax-controller.v1.damnthat.tv/docs/usage/props#cubic-bezier-easing-function) to the `useParallax` hook or `<Parallax />` component.
 
@@ -20,9 +24,9 @@ function Component() {
 
 **Note:** When defining an `easing` prop like above, ALL provided CSS effects will be eased.
 
-<EasingDemo easing="easeOutQuad" />
+<EasingDemo eased={{ easing: 'easeOutQuad' }} />
 
-# Custom cubic-bezier
+## Custom cubic-bezier
 
 Define a custom cubic-bezier curve by providing the 4 params to the `easing` prop.
 
@@ -36,4 +40,29 @@ function Component() {
 }
 ```
 
-<EasingDemo easing={[1, -0.75, 0.5, 1.34]} />
+<EasingDemo eased={{ easing: [1, -0.75, 0.5, 1.34] }} />
+
+## Independent Easing
+
+Each effect can define it's own easing by passing a third param to the effect.
+
+```tsx
+function Component() {
+  const parallax = useParallax<HTMLDivElement>({
+    translateX: [0, 100, 'easeOutQuint'],
+    translateY: [-100, 100, 'easeInQuint'],
+  });
+  return <div ref={parallax.ref} />;
+}
+```
+
+<EasingDemo
+  default={{
+    translateX: [0, 100],
+    translateY: [-100, 100],
+  }}
+  eased={{
+    translateX: [0, 100, 'easeOutQuint'],
+    translateY: [-100, 100, 'easeInQuint'],
+  }}
+/>
