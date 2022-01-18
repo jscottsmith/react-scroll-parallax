@@ -41,7 +41,7 @@ yarn add react-scroll-parallax@beta
 ### Docs: Hooks
 
 - [`useParallax()`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/hooks/use-parallax)
-- [`useController()`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/hooks/use-controller)
+- [`useParallaxController()`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/hooks/use-parallax-controller)
 
 ### Docs: Components
 

@@ -1,10 +1,14 @@
+---
+sidebar_position: 1
+---
+
 # V2 Migration Guide
 
 With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.
 
 ### Prop changes for <Parallax\>
 
-If you've used any of the following props simply rename to new ones or refactor if if they are no longer supported.
+If you've used any of the following props rename to new ones, or refactor if they are no longer supported.
 
 1. `styleOuter` becomes `style`.
 2. `tagOuter` becomes `tag`.
@@ -15,7 +19,8 @@ If you've used any of the following props simply rename to new ones or refactor 
 
 ### Using the useController hook.
 
-The hook to access the parallax controller is now returned directly.
+1. The hook `useController` has been renamed to `useParallaxController`.
+2. The hook returns the instance of the controller directly.
 
 If you used the following:
 
@@ -26,7 +31,7 @@ const { parallaxController } = useController();
 change it to:
 
 ```js
-const parallaxController = useController();
+const parallaxController = useParallaxController();
 ```
 
 ### Removed default class names

@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { ParallaxController } from 'parallax-controller';
 import { MockProvider } from '../testUtils/MockProvider';
-import { useController } from './useController';
+import { useParallaxController } from './useParallaxController';
 
 const controller = ParallaxController.init({ scrollAxis: 'vertical' });
 
@@ -10,7 +10,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => (
   <MockProvider controllerMock={controller}>{props.children}</MockProvider>
 );
 
-describe('given useController hook', () => {
+describe('given useParallaxController hook', () => {
   const { window } = global;
   afterEach(() => {
     global.window = window;
@@ -21,7 +21,7 @@ describe('given useController hook', () => {
         const { result } = renderHook(() => {
           // @ts-expect-error
           delete global.window;
-          return useController();
+          return useParallaxController();
         });
         expect(result.current).toBe(null);
       } catch (e) {}
@@ -30,7 +30,7 @@ describe('given useController hook', () => {
   describe('when not wrapped by the ParallaxProvider', () => {
     test('then it should throw an error', () => {
       try {
-        const { result } = renderHook(() => useController());
+        const { result } = renderHook(() => useParallaxController());
         expect(result.error).toEqual(
           Error(
             'Could not find `react-scroll-parallax` context value. Please ensure the component is wrapped in a <ParallaxProvider>'
@@ -42,7 +42,7 @@ describe('given useController hook', () => {
   describe('when wrapped by the ParallaxProvider', () => {
     test('then it should return the controller from context', () => {
       try {
-        const { result } = renderHook(() => useController(), {
+        const { result } = renderHook(() => useParallaxController(), {
           wrapper: Wrapper,
         });
         expect(result.current).toEqual(controller);

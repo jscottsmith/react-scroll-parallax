@@ -88,11 +88,11 @@ Depending on your app setup, you may need to update the [Parallax Controller](ht
 ```tsx
 import { useEffect } from 'react';
 import { useLocation } from '@reach/router';
-import { useController } from 'react-scroll-parallax';
+import { useParallaxController } from 'react-scroll-parallax';
 
 function useUpdateControllerOnRouteChange() {
   const location = useLocation();
-  const parallaxController = useController();
+  const parallaxController = useParallaxController();
 
   useEffect(() => {
     parallaxController.update();
@@ -110,10 +110,10 @@ const ParallaxRouteUpdate = () => {
 Often times images impact the position of content on the page. This is another common scenario that will require updating the cache which can be done using an `onLoad` event.
 
 ```tsx
-import { useController } from 'react-scroll-parallax';
+import { useParallaxController } from 'react-scroll-parallax';
 
 const Image = () => {
-  const parallaxController = useController();
+  const parallaxController = useParallaxController();
   return <img src="image.jpg" onLoad={() => parallaxController.update()} />;
 };
 ```

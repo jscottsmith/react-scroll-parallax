@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useVerifyController } from '../components/Parallax/hooks';
 import { getParallaxProps } from '../helpers/getParallaxProps';
 import { ParallaxProps } from '../types';
-import { useController } from './useController';
+import { useParallaxController } from './useParallaxController';
 
 export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
-  const controller = useController();
+  const controller = useParallaxController();
   const ref = useRef<T>(null);
 
   useVerifyController(controller);
