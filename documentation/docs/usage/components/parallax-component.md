@@ -6,11 +6,11 @@ The main component for applying scroll effects based on an elements position wit
 import { Parallax } from 'react-scroll-parallax';
 ```
 
-# Examples
+## Examples
 
 Some basic example of how to use the `<Parallax>` component.
 
-## Speed Control
+### Speed Control
 
 The `speed` prop that will make an element's scroll speed appear to speed up or slow down. This is the simplest way to achieve a parallax effect.
 
@@ -27,9 +27,13 @@ const SlowAndFast = () => (
 );
 ```
 
-**NOTE:** The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See <ParallaxProvider\> Props](/docs/usage/components/parallax-provider#parallaxprovider-props)
+:::info
 
-## Translate Controls
+The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See <ParallaxProvider\> Props](/docs/usage/components/parallax-provider#parallaxprovider-props)
+
+:::
+
+### Translate Controls
 
 If you need more fine tune control of the scroll position you can apply start and end transforms more directly. In this example the element begins with a `translateY(-20%)` and ends with `translateY(10%)`
 
@@ -41,17 +45,21 @@ const TranslateY = () => (
 );
 ```
 
-**NOTE:** Translate values without units default to `%` so `-20` becomes `-20%`.
+:::info
 
-# Props
+Translate values without units default to `%` so `-20` becomes `-20%`.
 
-## Props: Effects
+:::
+
+## Props
+
+### Props: Effects
 
 Most props to configure a parallax element like CSS effects are documented and managed by the `parallax-controller`.
 
 [See all the parallax props](https://parallax-controller.vercel.app/docs/usage/props) that this component will accept.
 
-## Props: Component Configuration
+### Props: Component Configuration
 
 The following props allow some configuration of the react component:
 

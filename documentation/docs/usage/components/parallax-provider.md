@@ -18,7 +18,11 @@ const AppContainer = () => (
 );
 ```
 
-**NOTE:** You can have multiple providers, however they will all be independent instances of a `ParallaxController`. It's recommended to only use one when possible.
+:::info
+
+You can have multiple providers, however they will all be independent instances of a `ParallaxController`. It's recommended to only use one when possible.
+
+:::
 
 ## ParallaxProvider Props
 
