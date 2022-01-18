@@ -22,7 +22,7 @@ Use the `layers` to supply a `speed` and `image` to your banner. In this case, i
 
 :::caution
 
-You MUST add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
+You **must** add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
 
 :::
 
