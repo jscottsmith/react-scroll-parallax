@@ -1,3 +1,5 @@
+<img src="https://react-scroll-parallax.v3.damnthat.tv/img/logo.png" style="width:96px;height:auto;">
+
 # React Scroll Parallax
 
 [![NPM Version Latest](https://img.shields.io/npm/v/react-scroll-parallax/latest)](https://www.npmjs.com/package/react-scroll-parallax)
