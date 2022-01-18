@@ -1,4 +1,4 @@
-<img src="https://react-scroll-parallax.v3.damnthat.tv/img/logo.png" style="width:96px;height:auto;">
+<a href="https://react-scroll-parallax.v3.damnthat.tv/"><img src="https://react-scroll-parallax.v3.damnthat.tv/img/logo.png" style="width:96px;height:auto;"></a>
 
 # React Scroll Parallax
 
@@ -30,6 +30,8 @@ yarn add react-scroll-parallax@beta
 ```
 
 ## Getting Started
+
+Read the [documentation](https://react-scroll-parallax.v3.damnthat.tv/) for setup and usage instructions.
 
 - [Usage](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/)
 - [How it works](https://react-scroll-parallax.v3.damnthat.tv/docs/examples/how-it-works)
