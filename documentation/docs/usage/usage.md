@@ -39,7 +39,11 @@ const Component = () => {
 };
 ```
 
-**Note** that the hook will apply the effect styles directly to the element that the `ref` is attached.
+:::info
+
+The hook will apply the effect styles directly to the element that the `ref` is attached.
+
+:::
 
 Any of the [documented effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as params to the hook.
 
@@ -57,7 +61,11 @@ const Component = () => (
 );
 ```
 
-**Note** that the component will apply the effect styles to a `div` managed by the component and not the children.
+:::info
+
+The component will apply the effect styles to a `div` managed by the component and **not** the children.
+
+:::
 
 Any of the [documented effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as props to the component.
 

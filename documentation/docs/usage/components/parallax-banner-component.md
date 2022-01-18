@@ -6,8 +6,6 @@ Component that utilizes `<Parallax>` components to achieve a parallaxing banner 
 
 Use the `layers` to supply a `speed` and `image` to your banner. In this case, it will create a banner using a single image, that moves slower than the rate of scroll, and the edges of the image will never be visible.
 
-**NOTE:** You MUST add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
-
 ```jsx
 <ParallaxBanner
   layers={[
@@ -21,6 +19,12 @@ Use the `layers` to supply a `speed` and `image` to your banner. In this case, i
   }}
 />
 ```
+
+:::caution
+
+You MUST add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
+
+:::
 
 ## Multiple Layers
 
