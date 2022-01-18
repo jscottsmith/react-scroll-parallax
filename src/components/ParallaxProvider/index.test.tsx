@@ -6,7 +6,7 @@ import { ParallaxController } from 'parallax-controller';
 
 import { render } from '@testing-library/react';
 import { ParallaxProvider } from '.';
-import { useController } from '../../hooks/useController';
+import { useParallaxController } from '../../hooks/useParallaxController';
 
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
@@ -35,7 +35,7 @@ describe('A <ParallaxProvider>', () => {
     let parallaxController;
 
     const ContextChecker = () => {
-      parallaxController = useController();
+      parallaxController = useParallaxController();
       return null;
     };
 

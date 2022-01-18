@@ -5,11 +5,11 @@ import { ParallaxBanner } from './components/ParallaxBanner';
 import { ParallaxProvider } from './components/ParallaxProvider';
 import { ParallaxContext } from './context/ParallaxContext';
 import { useParallax } from './hooks/useParallax';
-import { useController } from './hooks/useController';
+import { useParallaxController } from './hooks/useParallaxController';
 
 export {
   useParallax,
-  useController,
+  useParallaxController,
   Parallax,
   ParallaxBanner,
   ParallaxProvider,

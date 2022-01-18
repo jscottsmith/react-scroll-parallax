@@ -1,9 +1,9 @@
 import React from 'react';
-import { useController } from '../../src';
+import { useParallaxController } from '../../src';
 import styles from './Image.module.scss';
 
 export const Image = (props) => {
-  const parallaxController = useController();
+  const parallaxController = useParallaxController();
   function handleLoad() {
     parallaxController.update();
   }

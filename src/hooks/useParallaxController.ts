@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ParallaxController } from 'parallax-controller';
 import { ParallaxContext } from '../context/ParallaxContext';
 
-export function useController(): ParallaxController | null {
+export function useParallaxController(): ParallaxController | null {
   const parallaxController = useContext(ParallaxContext);
   const isServer = typeof window === 'undefined';
   if (isServer) {
