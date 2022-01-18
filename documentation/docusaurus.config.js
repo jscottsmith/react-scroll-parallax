@@ -43,7 +43,7 @@ const config = {
         title: 'React Scroll Parallax',
         logo: {
           alt: 'Squares Overlapping',
-          src: 'img/logo.png',
+          src: 'img/icon-logo.png',
         },
         items: [
           {
@@ -63,6 +63,12 @@ const config = {
             docId: 'usage/components/components',
             position: 'left',
             label: 'Components',
+          },
+          {
+            type: 'doc',
+            docId: 'examples/how-it-works',
+            position: 'left',
+            label: 'Examples',
           },
           {
             href: 'https://github.com/jscottsmith/react-scroll-parallax',

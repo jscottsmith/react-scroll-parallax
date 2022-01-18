@@ -14,7 +14,9 @@ export const BeyondCSSEffects = () => {
         shouldAlwaysCompleteAnimation
       >
         <div className="border-2 border-blue-200 border-solid flex items-center justify-center bg-blue-400 h-48 w-48 rounded-lg">
-          <p className="text-center font-bold uppercase">Heyo!</p>
+          <p className="text-center font-bold uppercase">
+            <span className="text-3xl">👋🏻</span> Heyo!
+          </p>
         </div>
       </Parallax>
     </BgContainer>
