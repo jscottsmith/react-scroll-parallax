@@ -35,7 +35,7 @@ The following props configure the `<ParallaxProvider>` component:
 
 ## Example: Scroll Container
 
-By default the <ParallaxProvider\> defaults to the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`. Here's how:
+By default the <ParallaxProvider\> uses the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`. Here's how:
 
 ```tsx
 import * as React from 'react';
