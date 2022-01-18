@@ -42,7 +42,7 @@ import * as React from 'react';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 const ScrollContainer = () => {
-  const [scrollEl, setScrollElement] = React.useState(null);
+  const [scrollEl, setScrollElement] = React.useState<HTMLDivElement>(null);
   const ref = React.useRef<HTMLDivElement>();
   React.useEffect(() => {
     setScrollElement(ref.current);
