@@ -1,13 +1,14 @@
 import React, { PropsWithChildren } from 'react';
+import { getIsolatedParallaxProps } from '../../helpers/getIsolatedParallaxProps';
 import { useParallax } from '../../hooks/useParallax';
-import { ParallaxProps } from '../../types';
+import { ParallaxProps } from './types';
 
 export function Parallax(props: PropsWithChildren<ParallaxProps>) {
-  const Tag = props.tag || 'div';
-  const { ref } = useParallax(props);
+  const { parallaxProps, rest } = getIsolatedParallaxProps(props);
+  const { ref } = useParallax<HTMLDivElement>(parallaxProps);
   return (
-    <Tag className={props.className} style={props.style} ref={ref}>
+    <div ref={ref} {...rest}>
       {props.children}
-    </Tag>
+    </div>
   );
 }

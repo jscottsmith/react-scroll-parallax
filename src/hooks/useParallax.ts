@@ -1,8 +1,8 @@
 import { CreateElementOptions, Element } from 'parallax-controller';
 import { useEffect, useRef, useState } from 'react';
 import { useVerifyController } from '../components/Parallax/hooks';
+import { ParallaxProps } from '../components/Parallax/types';
 import { getParallaxProps } from '../helpers/getParallaxProps';
-import { ParallaxProps } from '../types';
 import { useParallaxController } from './useParallaxController';
 
 export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
