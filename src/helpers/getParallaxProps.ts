@@ -1,32 +1,13 @@
 import { ParallaxElementConfig } from 'parallax-controller';
 import { removeUndefinedObjectKeys } from '../utils/removeUndefinedObjectKeys';
+import { getIsolatedParallaxProps } from './getIsolatedParallaxProps';
 
 export function getParallaxProps(
   props: ParallaxElementConfig
 ): ParallaxElementConfig {
+  const { parallaxProps } = getIsolatedParallaxProps(props);
+
   return removeUndefinedObjectKeys({
-    speed: props.speed,
-    translateX: props.translateX,
-    translateY: props.translateY,
-    disabled: props.disabled,
-    rotate: props.rotate,
-    rotateX: props.rotateX,
-    rotateY: props.rotateY,
-    rotateZ: props.rotateZ,
-    scale: props.scale,
-    scaleX: props.scaleX,
-    scaleY: props.scaleY,
-    scaleZ: props.scaleZ,
-    opacity: props.opacity,
-    easing: props.easing,
-    rootMargin: props.rootMargin,
-    shouldAlwaysCompleteAnimation: props.shouldAlwaysCompleteAnimation,
-    onProgressChange: props.onProgressChange,
-    onChange: props.onChange,
-    onEnter: props.onEnter,
-    onExit: props.onExit,
-    startScroll: props.startScroll,
-    endScroll: props.endScroll,
-    targetElement: props.targetElement,
+    ...parallaxProps,
   });
 }

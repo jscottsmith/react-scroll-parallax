@@ -52,6 +52,9 @@
     ],
     "collectCoverage": true,
     "testURL": "http://localhost",
+    "setupFiles": [
+      "<rootDir>/src/setupTests.ts"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/jest-setup.ts"
     ]
