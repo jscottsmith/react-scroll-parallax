@@ -66,17 +66,14 @@ describe('given the <Parallax> component', () => {
             id="test-id"
             data-testid="data-test-id"
             data-foo="bar"
-            aria-role="button"
+            aria-label="Cool"
           />
         </ParallaxProvider>
       );
       expect(getByTestId('data-test-id')).toBeInTheDocument();
       expect(container.querySelector('.my-class')).toBeInTheDocument();
       expect(container.querySelector('#test-id')).toBeInTheDocument();
-      expect(getByTestId('data-test-id')).toHaveAttribute(
-        'aria-role',
-        'button'
-      );
+      expect(getByTestId('data-test-id')).toHaveAttribute('aria-label', 'Cool');
       expect(getByTestId('data-test-id')).toHaveAttribute('data-foo', 'bar');
       expect(getByTestId('data-test-id').style.background).toBe('red');
     });

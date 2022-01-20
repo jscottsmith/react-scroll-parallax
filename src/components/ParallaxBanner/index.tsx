@@ -1,15 +1,16 @@
 import React, { PropsWithChildren } from 'react';
+import { CSSProperties } from 'react';
 import { Parallax } from '../Parallax';
 import { ParallaxBannerProps } from './types';
 
-const containerStyle = {
+const containerStyle: CSSProperties = {
   position: 'relative',
   overflow: 'hidden',
   width: '100%',
   height: '50vh',
 };
 
-const absoluteStyle = {
+const absoluteStyle: CSSProperties = {
   position: 'absolute',
   top: 0,
   right: 0,
