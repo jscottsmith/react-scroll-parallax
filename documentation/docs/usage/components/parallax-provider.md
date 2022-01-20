@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # ParallaxProvider
 
 The `<ParallaxProvider />` component is meant to wrap a root level component in your application and is necessary to provide access through the React context API to the [Parallax Controller](https://parallax-controller.vercel.app/docs/intro).
