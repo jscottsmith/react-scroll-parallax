@@ -10,11 +10,11 @@ With mostly just new features, V3 also makes a few breaking changes. See the fol
 
 If you've used any of the following props rename to new ones, or refactor if they are no longer supported.
 
-1. `styleOuter` becomes `style`.
-2. `tagOuter` becomes `tag`.
-3. `x` becomes `translateX`.
-4. `y` becomes `translateY`.
-5. `styleInner` is no longer supported - There's only a single element returned by the component.
+1. `x` becomes `translateX`.
+2. `y` becomes `translateY`.
+3. `styleOuter` becomes `style`.
+4. `styleInner` is no longer supported - There's only a single element returned by the component.
+5. `tagOuter` is no longer supported - If you need a custom element use the `useParallax` hook instead.
 6. `tagInner` is no longer supported - There's only a single element returned by the component.
 
 ### Using the useController hook.
