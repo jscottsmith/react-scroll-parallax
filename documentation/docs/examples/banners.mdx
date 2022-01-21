@@ -29,7 +29,7 @@ const Component = () => {
         { image: '/static/banner-background.jpg', speed: -20 },
         { image: '/static/banner-foreground.png', speed: -10 },
       ]}
-      className="ratio-2/1"
+      className="aspect-[2/1]"
     />
   );
 };
@@ -57,7 +57,7 @@ const Component = () => {
         { image: '/static/banner-background.jpg', speed: -20 },
         { image: '/static/banner-foreground.png', speed: -10 },
       ]}
-      className="ratio-2/1"
+      className="aspect-[2/1]"
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <h1 className="text-8xl text-white font-thin">Hello World!</h1>
@@ -82,7 +82,7 @@ const Component = () => {
       layers={[
         { image: '/static/banner-background.jpg', speed: -20 },
         {
-          speed: -12,
+          speed: -15,
           children: (
             <div className="absolute inset-0 flex items-center justify-center">
               <h1 className="text-8xl text-white font-thin">Hello World!</h1>
@@ -91,7 +91,7 @@ const Component = () => {
         },
         { image: '/static/banner-foreground.png', speed: -10 },
       ]}
-      className="ratio-2/1"
+      className="aspect-[2/1]"
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <h1 className="text-8xl text-white font-thin">Hello World!</h1>

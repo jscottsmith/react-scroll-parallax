@@ -18,7 +18,7 @@ export const ParallaxBannerImages = () => {
           shouldAlwaysCompleteAnimation: true,
         },
       ]}
-      className="h-48"
+      className="aspect-[2/1]"
     />
   );
 };
