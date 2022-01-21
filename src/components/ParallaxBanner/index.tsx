@@ -1,8 +1,12 @@
-import React, { PropsWithChildren } from 'react';
-import { CSSProperties } from 'react';
-import { useParallax } from '../..';
-import { getIsolatedParallaxProps } from '../../helpers/getIsolatedParallaxProps';
-import { BannerLayer, ParallaxBannerProps } from './types';
+import React, {
+  PropsWithChildren,
+  CSSProperties,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { ParallaxBannerLayer } from './components/ParallaxBannerLayer';
+import { ParallaxBannerProps } from './types';
 
 const containerStyle: CSSProperties = {
   position: 'relative',
@@ -10,37 +14,16 @@ const containerStyle: CSSProperties = {
   width: '100%',
 };
 
-const absoluteStyle: CSSProperties = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-};
-
-function getExpandedStyle(expanded: boolean, layer: BannerLayer) {
-  const speed = layer.speed || 0;
-  return expanded
-    ? {
-        top: Math.abs(speed) * 10 * -1 + 'px',
-        bottom: Math.abs(speed) * 10 * -1 + 'px',
-      }
-    : {};
-}
-
-function getImageStyle(layer: BannerLayer) {
-  return layer.image
-    ? {
-        backgroundImage: `url(${layer.image})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-      }
-    : {};
-}
-
 export const ParallaxBanner = (
   props: PropsWithChildren<ParallaxBannerProps>
 ) => {
+  const [targetElement, setTargetElement] = useState<HTMLDivElement | null>(
+    null
+  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setTargetElement(containerRef.current);
+  }, []);
   const {
     disabled: disableAllLayers,
     style: rootStyle,
@@ -48,43 +31,22 @@ export const ParallaxBanner = (
     ...rootRest
   } = props;
   return (
-    <div style={{ ...containerStyle, ...rootStyle }} {...rootRest}>
-      {layers.map((layer, i) => {
-        const { parallaxProps, rest } = getIsolatedParallaxProps(layer);
-        const {
-          children,
-          disabled,
-          style,
-          expanded = true,
-          image,
-          ...divProps
-        } = rest;
-
-        const key = `layer-${i}`;
-        const imageStyle = getImageStyle(layer);
-        const expandedStyle = getExpandedStyle(expanded, layer);
-        const parallax = useParallax<HTMLDivElement>({
-          shouldDisableScalingTranslations: true,
-          ...parallaxProps,
-        });
-
-        return (
-          <div
-            data-testid={key}
-            key={key}
-            ref={parallax.ref}
-            style={{
-              ...imageStyle,
-              ...absoluteStyle,
-              ...expandedStyle,
-              ...style,
-            }}
-            {...divProps}
-          >
-            {rest.children}
-          </div>
-        );
-      })}
+    <div
+      ref={containerRef}
+      style={{ ...containerStyle, ...rootStyle }}
+      {...rootRest}
+    >
+      {layers.map(
+        (layer, i) =>
+          targetElement && (
+            <ParallaxBannerLayer
+              {...layer}
+              targetElement={targetElement}
+              key={`layer-${i}`}
+              testId={`layer-${i}`}
+            />
+          )
+      )}
       {props.children}
     </div>
   );

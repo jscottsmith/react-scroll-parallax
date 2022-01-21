@@ -26,6 +26,7 @@ describe('given a <ParallaxBanner> component', () => {
       expect(asFragment()).toMatchSnapshot();
     });
   });
+
   describe.each(ALL_PARALLAX_PROPS)('when the prop %s is given', (props) => {
     it('then it renders without issue and calls create element with props', () => {
       const controller = ParallaxController.init({
@@ -48,7 +49,11 @@ describe('given a <ParallaxBanner> component', () => {
       expect(asFragment()).toMatchSnapshot();
       expect(controller.createElement).toBeCalledWith({
         el: expect.any(HTMLElement),
-        props: { ...props, shouldDisableScalingTranslations: true },
+        props: {
+          ...props,
+          shouldDisableScalingTranslations: true,
+          targetElement: expect.any(HTMLElement),
+        },
       });
     });
   });
@@ -73,6 +78,7 @@ describe('given a <ParallaxBanner> component', () => {
         el: expect.any(HTMLElement),
         props: {
           shouldDisableScalingTranslations: true,
+          targetElement: expect.any(HTMLElement),
         },
       });
     });
@@ -121,18 +127,76 @@ describe('given a <ParallaxBanner> component', () => {
     });
   });
 
-  describe('with layer expanded', () => {
-    it('then it will render with expanded styles based on speed', () => {
-      const { getByTestId } = render(
-        <ParallaxProvider>
-          <ParallaxBanner layers={[{ speed: 2 }]} />
-        </ParallaxProvider>
-      );
-      expect(getByTestId('layer-0').style.top).toBe('-20px');
-      expect(getByTestId('layer-0').style.right).toBe('0px');
-      expect(getByTestId('layer-0').style.left).toBe('0px');
-      expect(getByTestId('layer-0').style.bottom).toBe('-20px');
-      expect(getByTestId('layer-0').style.position).toBe('absolute');
+  describe('when the layer is expanded and', () => {
+    describe('when the speed prop is set to a positive number', () => {
+      it('then it will render with expanded styles based on speed', () => {
+        const { getByTestId } = render(
+          <ParallaxProvider>
+            <ParallaxBanner layers={[{ speed: 2 }]} />
+          </ParallaxProvider>
+        );
+        expect(getByTestId('layer-0').style.top).toBe('-20px');
+        expect(getByTestId('layer-0').style.right).toBe('0px');
+        expect(getByTestId('layer-0').style.left).toBe('0px');
+        expect(getByTestId('layer-0').style.bottom).toBe('-20px');
+        expect(getByTestId('layer-0').style.position).toBe('absolute');
+      });
+    });
+    describe('when the speed prop is set to a negative number', () => {
+      it('then it will render with expanded styles based on speed', () => {
+        const { getByTestId } = render(
+          <ParallaxProvider>
+            <ParallaxBanner layers={[{ speed: -4 }]} />
+          </ParallaxProvider>
+        );
+        expect(getByTestId('layer-0').style.top).toBe('-40px');
+        expect(getByTestId('layer-0').style.right).toBe('0px');
+        expect(getByTestId('layer-0').style.left).toBe('0px');
+        expect(getByTestId('layer-0').style.bottom).toBe('-40px');
+        expect(getByTestId('layer-0').style.position).toBe('absolute');
+      });
+    });
+    describe('when the translateY prop is set [0px, 10px]', () => {
+      it('then it will render with expanded styles based on the translate start end values', () => {
+        const { getByTestId } = render(
+          <ParallaxProvider>
+            <ParallaxBanner layers={[{ translateY: ['0px', '10px'] }]} />
+          </ParallaxProvider>
+        );
+        expect(getByTestId('layer-0').style.top).toBe('-10px');
+        expect(getByTestId('layer-0').style.right).toBe('0px');
+        expect(getByTestId('layer-0').style.left).toBe('0px');
+        expect(getByTestId('layer-0').style.bottom).toBe('0px');
+        expect(getByTestId('layer-0').style.position).toBe('absolute');
+      });
+    });
+    describe('when the translateY prop is set [-40px, 30px]', () => {
+      it('then it will render with expanded styles based on the translate start end values', () => {
+        const { getByTestId } = render(
+          <ParallaxProvider>
+            <ParallaxBanner layers={[{ translateY: ['-40px', '30px'] }]} />
+          </ParallaxProvider>
+        );
+        expect(getByTestId('layer-0').style.top).toBe('-30px');
+        expect(getByTestId('layer-0').style.right).toBe('0px');
+        expect(getByTestId('layer-0').style.left).toBe('0px');
+        expect(getByTestId('layer-0').style.bottom).toBe('-40px');
+        expect(getByTestId('layer-0').style.position).toBe('absolute');
+      });
+    });
+    describe('when the translateY prop is set [0px, 100px]', () => {
+      it('then it will render with expanded styles based on the translate start end values', () => {
+        const { getByTestId } = render(
+          <ParallaxProvider>
+            <ParallaxBanner layers={[{ translateY: ['0px', '100px'] }]} />
+          </ParallaxProvider>
+        );
+        expect(getByTestId('layer-0').style.top).toBe('-100px');
+        expect(getByTestId('layer-0').style.right).toBe('0px');
+        expect(getByTestId('layer-0').style.left).toBe('0px');
+        expect(getByTestId('layer-0').style.bottom).toBe('0px');
+        expect(getByTestId('layer-0').style.position).toBe('absolute');
+      });
     });
   });
   describe('with custom props', () => {
