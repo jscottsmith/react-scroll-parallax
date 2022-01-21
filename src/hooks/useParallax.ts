@@ -48,8 +48,14 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     }
   }, [
     props.disabled,
-    props.translateX,
-    props.translateY,
+    props.easing,
+    props.endScroll,
+    props.onChange,
+    props.onEnter,
+    props.onExit,
+    props.onProgressChange,
+    props.opacity,
+    props.rootMargin,
     props.rotate,
     props.rotateX,
     props.rotateY,
@@ -58,15 +64,13 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     props.scaleX,
     props.scaleY,
     props.scaleZ,
+    props.shouldAlwaysCompleteAnimation,
+    props.shouldDisableScalingTranslations,
     props.speed,
-    props.opacity,
-    props.easing,
-    props.rootMargin,
-    props.onProgressChange,
-    props.onChange,
-    props.onEnter,
-    props.onExit,
+    props.startScroll,
     props.targetElement,
+    props.translateX,
+    props.translateY,
   ]);
 
   return { ref, controller, element };
