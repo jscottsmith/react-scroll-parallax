@@ -57,7 +57,7 @@ describe('given the <Parallax> component', () => {
   });
 
   describe('when given html attributes', () => {
-    it('then it add them to the returned div', () => {
+    it('then it adds them to the returned div', () => {
       const { container, getByTestId } = render(
         <ParallaxProvider>
           <Parallax
