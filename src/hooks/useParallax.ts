@@ -2,12 +2,13 @@ import { CreateElementOptions, Element } from 'parallax-controller';
 import { useEffect, useRef, useState } from 'react';
 import { useVerifyController } from '../components/Parallax/hooks';
 import { ParallaxProps } from '../components/Parallax/types';
-import { getParallaxProps } from '../helpers/getParallaxProps';
+import { getIsolatedParallaxProps } from '../helpers/getIsolatedParallaxProps';
 import { useParallaxController } from './useParallaxController';
 
 export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
   const controller = useParallaxController();
   const ref = useRef<T>(null);
+  const { parallaxProps } = getIsolatedParallaxProps(props);
 
   useVerifyController(controller);
 
@@ -19,7 +20,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     if (ref.current instanceof HTMLElement) {
       const options: CreateElementOptions = {
         el: ref.current,
-        props: getParallaxProps(props),
+        props: parallaxProps,
       };
       newElement = controller?.createElement(options);
       setElement(newElement);
@@ -42,8 +43,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
       if (props.disabled) {
         controller?.resetElementStyles(element);
       } else {
-        const newProps = getParallaxProps(props);
-        controller?.updateElementPropsById(element.id, newProps);
+        controller?.updateElementPropsById(element.id, parallaxProps);
       }
     }
   }, [

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { render } from '@testing-library/react';
 import { ParallaxBanner } from '.';
 import { ParallaxProvider } from '../ParallaxProvider';
+import { ALL_PARALLAX_PROPS } from '../../testUtils/tests.constants';
+import { ParallaxController, ScrollAxis } from 'parallax-controller';
+import { MockProvider } from '../../testUtils/MockProvider';
 
 describe('given a <ParallaxBanner> component', () => {
   describe('with all props', () => {
@@ -21,6 +24,57 @@ describe('given a <ParallaxBanner> component', () => {
         </ParallaxProvider>
       );
       expect(asFragment()).toMatchSnapshot();
+    });
+  });
+  describe.each(ALL_PARALLAX_PROPS)('when the prop %s is given', (props) => {
+    it('then it renders without issue and calls create element with props', () => {
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      controller.createElement = jest.fn(controller.createElement);
+      function Wrapper(props: PropsWithChildren<{}>) {
+        return (
+          <MockProvider controllerMock={controller}>
+            {props.children}
+          </MockProvider>
+        );
+      }
+      const { asFragment } = render(
+        <ParallaxBanner layers={[{ ...props }]} />,
+        {
+          wrapper: Wrapper,
+        }
+      );
+      expect(asFragment()).toMatchSnapshot();
+      expect(controller.createElement).toBeCalledWith({
+        el: expect.any(HTMLElement),
+        props: { ...props, shouldDisableScalingTranslations: true },
+      });
+    });
+  });
+
+  describe('when creating layers in the controller', () => {
+    it('then it defaults shouldDisableScalingTranslations to true', () => {
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      controller.createElement = jest.fn(controller.createElement);
+      function Wrapper(props: PropsWithChildren<{}>) {
+        return (
+          <MockProvider controllerMock={controller}>
+            {props.children}
+          </MockProvider>
+        );
+      }
+      render(<ParallaxBanner layers={[{ children: <div /> }]} />, {
+        wrapper: Wrapper,
+      });
+      expect(controller.createElement).toBeCalledWith({
+        el: expect.any(HTMLElement),
+        props: {
+          shouldDisableScalingTranslations: true,
+        },
+      });
     });
   });
   describe('when children are defined', () => {
