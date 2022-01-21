@@ -28,7 +28,7 @@ export const ParallaxBannerLayer = (
   } = rest;
 
   const imageStyle = getImageStyle(props);
-  const expandedStyle = getExpandedStyle(expanded, props);
+  const expandedStyle = expanded ? getExpandedStyle(props) : {};
   const parallax = useParallax<HTMLDivElement>({
     targetElement: props.targetElement,
     shouldDisableScalingTranslations: true,
