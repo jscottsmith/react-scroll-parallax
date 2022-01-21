@@ -1,4 +1,5 @@
 import { ParallaxElementConfig } from 'parallax-controller';
+import { removeUndefinedObjectKeys } from '../utils/removeUndefinedObjectKeys';
 
 export function getIsolatedParallaxProps(props: any): {
   parallaxProps: ParallaxElementConfig;
@@ -32,7 +33,7 @@ export function getIsolatedParallaxProps(props: any): {
     ...rest
   } = props;
 
-  const parallaxProps = {
+  const parallaxProps = removeUndefinedObjectKeys({
     disabled,
     easing,
     endScroll,
@@ -57,7 +58,7 @@ export function getIsolatedParallaxProps(props: any): {
     targetElement,
     translateX,
     translateY,
-  };
+  });
 
   return {
     parallaxProps,
