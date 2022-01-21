@@ -12,10 +12,12 @@ export const ParallaxBannerEmbedHeadline = () => {
           shouldAlwaysCompleteAnimation: true,
         },
         {
-          speed: -12,
+          speed: -20,
           children: (
             <div className="absolute inset-0 flex items-center justify-center">
-              <h1 className="text-8xl text-white font-thin">Hello World!</h1>
+              <h1 className="text-6xl md:text-8xl text-white font-thin">
+                Hello World!
+              </h1>
             </div>
           ),
           shouldAlwaysCompleteAnimation: true,
@@ -27,7 +29,7 @@ export const ParallaxBannerEmbedHeadline = () => {
           shouldAlwaysCompleteAnimation: true,
         },
       ]}
-      className="h-48"
+      className="aspect-[2/1]"
     />
   );
 };

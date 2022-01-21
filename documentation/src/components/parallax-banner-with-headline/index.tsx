@@ -18,10 +18,12 @@ export const ParallaxBannerWithHeadline = () => {
           shouldAlwaysCompleteAnimation: true,
         },
       ]}
-      className="h-48"
+      className="aspect-[2/1]"
     >
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-8xl text-white font-thin">Hello World!</h1>
+        <h1 className="text-6xl md:text-8xl  text-white font-thin">
+          Hello World!
+        </h1>
       </div>
     </ParallaxBanner>
   );
