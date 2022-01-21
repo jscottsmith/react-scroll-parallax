@@ -4,9 +4,13 @@ sidebar_position: 3
 
 # ParallaxBanner
 
-Component that utilizes `<Parallax>` components to achieve a parallaxing banner effect. Allows a single or multiple images to be parallaxed at different rates within the banner area.
+Component that sets up layers of `useParallax` elements to achieve a parallaxing banner. Enables the layering of images, or custom markup, with scroll effects in a container that hides overflow.
 
-## Basic Example
+### Working Demos
+
+See some example [code with demos](/docs/examples/banners).
+
+## Examples
 
 Use the `layers` to supply a `speed` and `image` to your banner. In this case, it will create a banner using a single image, that moves slower than the rate of scroll, and the edges of the image will never be visible.
 
@@ -18,19 +22,17 @@ Use the `layers` to supply a `speed` and `image` to your banner. In this case, i
       speed: -20,
     },
   ]}
-  style={{
-    height: '500px',
-  }}
+  style={{ aspectRatio: '2 / 1' }}
 />
 ```
 
 :::caution
 
-You **must** add a `height` value either as a `style` or through a `className` otherwise the banner will have no height and be hidden.
+You **must** define a style that gives the root `<div>` a `height` value otherwise the banner will have no height and be hidden. This can be through a `style`, through a `className`, or other method of styling.
 
 :::
 
-## Multiple Layers
+### Multiple Layers
 
 Supply the `layers` prop with additional configuration for more images. Each layer can contain unique configurations.
 
@@ -46,15 +48,19 @@ Supply the `layers` prop with additional configuration for more images. Each lay
       speed: -10,
     },
   ]}
-  style={{
-    height: '500px',
-  }}
+  style={{ aspectRatio: '2 / 1' }}
 />
 ```
 
-## Customized Layers
+:::caution
 
-Supply the `layers` prop with [additional configuration](#banner-layers-prop) for more images. Each layer can contain unique configurations.
+**Layer order matters.** First element in the the array will appear on the bottom of the stacking context; last layer of the array will appear on top.
+
+:::
+
+### Customized Layers
+
+You can pass your own markup or components to the `children` property of a `layer`.
 
 ```jsx
 <ParallaxBanner
@@ -68,9 +74,7 @@ Supply the `layers` prop with [additional configuration](#banner-layers-prop) fo
       speed: -10,
     },
   ]}
-  style={{
-    height: '500px',
-  }}
+  style={{ aspectRatio: '2 / 1' }}
 />
 ```
 
@@ -78,21 +82,42 @@ Supply the `layers` prop with [additional configuration](#banner-layers-prop) fo
 
 The following are all props that can be passed to the `<ParallaxBanner>` component:
 
-| Name          |   Type    | Default | Description                                                                                                                                |
-| ------------- | :-------: | :------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **className** | `string`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                               |
-| **disabled**  | `boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                      |
-| **layers**    |  `array`  |         | A required `array` of `objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg' }]`. [See layers prop below](#banner-layers-prop) |
-| **style**     | `object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                       |
+| Name         |       Type       | Description                                                                                                                                 |
+| ------------ | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **disabled** |    `boolean`     | Disables _all_ parallax layers when enabled.                                                                                                |
+| **layers**   |     `array`      | An `array` of `objects` with layer properties: [see layer props below](/docs/usage/components/parallax-banner-component#banner-layers-prop) |
+| `...rest`    | `HTMLDivElement` | All other properties are spread to the `<div>`.                                                                                             |
+
+:::info
+
+All other props are defined on the root `div` element.
+
+```jsx
+<ParallaxBanner className="custom-class" id="hero-banner" />
+```
+
+:::
 
 ## Banner Layers Prop
 
-The `layers` prop takes an array of objects that will represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
+The `layers` prop takes an array of objects that represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
-| Name         |      Type      | Default | Description                                                                                                                                              |
-| ------------ | :------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **speed**    |    `number`    |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
-| **children** | `ReactElement` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
-| **expanded** |   `boolean`    | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
-| **image**    |    `string`    |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
-| **props**    |    `object`    |         | Props to apply to the layer element. Example: `{ props: style: { background: 'red' }}`                                                                   |
+| Name         |          Type           | Default | Description                                                                                                                                                                                                                                        |
+| ------------ | :---------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **children** |     `ReactElement`      |         | Custom layer children provided as a React element, for example `<Video />`                                                                                                                                                                         |
+| **expanded** |        `boolean`        | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                                                                                                                      |
+| **image**    |        `string`         |         | Image source that will be applied as a CSS `background-image` on the layer set to `cover`.                                                                                                                                                         |
+| `...rest`    | `ParallaxElementConfig` |         | All known parallax props will be passed to `useParallax`. [See all the parallax props](https://parallax-controller.vercel.app/docs/usage/props) that this hook will accept. All other properties are spread to the `<div>` representing the layer. |
+
+```jsx
+<ParallaxBanner
+  layers={[
+    {
+      children: <div />,
+      speed: -10,
+      scale: [1, 1.2],
+      opacity: [0.9, 1],
+    },
+  ]}
+/>
+```
