@@ -1,0 +1,104 @@
+---
+sidebar_position: 2
+---
+
+import { ParallaxBannerImages } from '/src/components/parallax-banner-images';
+import { ParallaxBannerWithHeadline } from '/src/components/parallax-banner-with-headline';
+import { ParallaxBannerEmbedHeadline } from '/src/components/parallax-banner-embed-headline';
+
+# Parallax Banners
+
+The following demonstrates some common usage of the [`<ParallaxBanner>`](/docs/usage/components/parallax-banner-component) component.
+
+## Example with Multiple Layers
+
+This example uses two layers, one background and one foreground. The order of the defined layer determines the stacking of the each image: First in the array will appear at the back and be covered by subsequent layers.
+
+The `image` prop defines the layer image.
+The `speed` prop is used to make the layer move at it's own pace.
+
+The foreground `speed` is defined so that it will move faster than the background:
+
+```tsx
+import { ParallaxBanner } from 'react-scroll-parallax';
+
+const Component = () => {
+  return (
+    <ParallaxBanner
+      layers={[
+        { image: '/static/banner-background.jpg', speed: -20 },
+        { image: '/static/banner-foreground.png', speed: -10 },
+      ]}
+      className="ratio-2/1"
+    />
+  );
+};
+```
+
+:::info
+
+For the most _natural_ visual effect make the layer `speed` depend on the distance of the image: the closer the items in the image the **faster** they should move; the further away the **slower** they should move.
+
+:::
+
+<ParallaxBannerImages />
+
+## Example with a headline
+
+By defining `children` you can add any markup for a headline or any other custom elements. In the following example the headline is positioned absolutely over each banner layer.
+
+```tsx
+import { ParallaxBanner } from 'react-scroll-parallax';
+
+const Component = () => {
+  return (
+    <ParallaxBanner
+      layers={[
+        { image: '/static/banner-background.jpg', speed: -20 },
+        { image: '/static/banner-foreground.png', speed: -10 },
+      ]}
+      className="ratio-2/1"
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-8xl text-white font-thin">Hello World!</h1>
+      </div>
+    </ParallaxBanner>
+  );
+};
+```
+
+<ParallaxBannerWithHeadline />
+
+## Embed the headline in the scene
+
+You can take the effect even further by embedding the headline in the scene. This can be done by defining another layer and assigning the markup to the `children` of that layer.
+
+```tsx
+import { ParallaxBanner } from 'react-scroll-parallax';
+
+const Component = () => {
+  return (
+    <ParallaxBanner
+      layers={[
+        { image: '/static/banner-background.jpg', speed: -20 },
+        {
+          speed: -12,
+          children: (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1 className="text-8xl text-white font-thin">Hello World!</h1>
+            </div>
+          ),
+        },
+        { image: '/static/banner-foreground.png', speed: -10 },
+      ]}
+      className="ratio-2/1"
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-8xl text-white font-thin">Hello World!</h1>
+      </div>
+    </ParallaxBanner>
+  );
+};
+```
+
+<ParallaxBannerEmbedHeadline />
