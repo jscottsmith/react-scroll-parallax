@@ -8,7 +8,7 @@ The `<ParallaxProvider />` component is meant to wrap a root level component in 
 
 ## Basic Example
 
-This component should only be used once in you app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
+This component should only be used once in your app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
 
 ```tsx
 import { ParallaxProvider } from 'react-scroll-parallax';
