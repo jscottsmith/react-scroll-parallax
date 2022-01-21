@@ -1,12 +1,9 @@
-export interface BannerLayer {
-  /**
-   * A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.
-   */
-  speed: number;
-  /**
-   * Custom layer children provided as a React element, for example `<Video />`
-   */
-  children?: any;
+import { ParallaxElementConfig } from 'parallax-controller';
+import { HTMLAttributes } from 'react';
+
+export interface BannerLayer
+  extends ParallaxElementConfig,
+    Omit<HTMLAttributes<{}>, 'onChange'> {
   /**
    * Indicate if the layer should be expanded with negative top/bottom margins so the edges will
    * never be visible.
@@ -16,27 +13,16 @@ export interface BannerLayer {
    * Image source that will be applied as a CSS background image on the layer.
    */
   image?: string;
-  /*
-   * Props to apply to the layer element.
-   */
-  props?: any;
 }
 
-export interface ParallaxBannerProps {
+export interface ParallaxBannerProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   /**
-   * Optionally pass additional class names to be added to the outermost parallax banner element.
+   * An Array of banner layers.
    */
-  className?: string;
+  layers?: BannerLayer[];
   /**
-   * Determines if the internal parallax layers will have offsets applied.
+   * Determines if all internal layers will be disabled
    */
   disabled?: boolean;
-  /**
-   * A required Array of Objects with layer properties: `[{ amount: 0.1, image: 'foo.jpg' }]`.
-   */
-  layers: BannerLayer[];
-  /**
-   * Optionally pass a style object to be added to the outermost parallax banner element.
-   */
-  style?: any;
 }
