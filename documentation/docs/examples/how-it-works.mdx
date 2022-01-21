@@ -31,6 +31,15 @@ All effects are applied based on the original element's progress. Progress begin
 
 <ElementProgress />
 
+:::info
+
+By design and by default, all elements progress relative to the view. However, there are optional ways to change how progress is calculated:
+
+1. Manually setting [`startScroll` and `endScroll`](https://parallax-controller.v1.damnthat.tv/docs/usage/props#configuration-props) props allows complete control over when the progress starts and ends.
+2. You can also set [`shouldAlwaysCompleteAnimation`](https://parallax-controller.v1.damnthat.tv/docs/usage/props#configuration-props) to true and if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size.
+
+:::
+
 ## Beyond Parallax: CSS effects
 
 Additional CSS effects, like opacity, scale and rotation can be applied based on progress, even with some easing.
