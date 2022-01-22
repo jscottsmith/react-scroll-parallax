@@ -91,7 +91,7 @@ const config = {
             title: 'Introduction',
             items: [
               {
-                to: '/docs/usage/usage',
+                to: '/docs/usage',
                 label: 'Usage',
               },
               {
@@ -108,11 +108,11 @@ const config = {
                 label: 'Props',
               },
               {
-                to: '/docs/usage/hooks/hooks',
+                to: '/docs/usage/hooks',
                 label: 'Hooks',
               },
               {
-                to: '/docs/usage/components/components',
+                to: '/docs/usage/components',
                 label: 'Components',
               },
             ],
