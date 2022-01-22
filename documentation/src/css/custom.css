@@ -1,8 +1,8 @@
-/* @tailwind base; */
-@import url(./tailwind-custom-base.css);
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url(./custom-preflight.css);
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
