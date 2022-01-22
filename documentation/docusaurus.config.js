@@ -54,6 +54,12 @@ const config = {
           },
           {
             type: 'doc',
+            docId: 'usage/parallax-props',
+            position: 'left',
+            label: 'Props',
+          },
+          {
+            type: 'doc',
             docId: 'usage/hooks/hooks',
             position: 'left',
             label: 'Hooks',
@@ -82,11 +88,32 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Introduction',
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/intro',
+                to: '/docs/usage/usage',
+                label: 'Usage',
+              },
+              {
+                to: '/docs/examples/how-it-works',
+                label: 'Examples',
+              },
+            ],
+          },
+          {
+            title: 'Reference',
+            items: [
+              {
+                to: '/docs/usage/parallax-props',
+                label: 'Props',
+              },
+              {
+                to: '/docs/usage/hooks/hooks',
+                label: 'Hooks',
+              },
+              {
+                to: '/docs/usage/components/components',
+                label: 'Components',
               },
             ],
           },
