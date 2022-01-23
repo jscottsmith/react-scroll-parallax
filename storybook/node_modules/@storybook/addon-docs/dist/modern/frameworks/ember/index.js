@@ -1,0 +1,1 @@
+export { setJSONDoc } from './jsondoc';

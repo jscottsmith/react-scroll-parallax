@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/remark/utils/index.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAIH,OAAO,KAAK,EAAC,MAAM,EAAC,MAAM,OAAO,CAAC;AAClC,OAAO,KAAK,EAAC,qBAAqB,EAAE,OAAO,EAAC,MAAM,OAAO,CAAC;AAE1D,wBAAgB,gBAAgB,CAAC,IAAI,EAAE,MAAM,GAAG,MAAM,CAIrD;AAED,wBAAgB,OAAO,CAAC,IAAI,EAAE,qBAAqB,GAAG,OAAO,GAAG,MAAM,CAoBrE"}

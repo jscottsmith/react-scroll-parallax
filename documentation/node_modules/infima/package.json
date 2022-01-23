@@ -1,0 +1,76 @@
+{
+  "name": "infima",
+  "version": "0.2.0-alpha.37",
+  "description": "A UI framework for content-centric websites.",
+  "author": "Yangshun Tay",
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "responsive",
+    "front-end",
+    "framework",
+    "web",
+    "dark mode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/facebookincubator/infima.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/facebookincubator/infima/issues"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-rtlcss": "^1.4.1",
+    "gulp-webserver": "^0.9.1",
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
+    "natives": "^1.1.6",
+    "postcss": "^8.2.10",
+    "postcss-preset-infima": "^0.2.0-alpha.37",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.10.0",
+    "stylelint-copyright": "^2.0.0-alpha.69",
+    "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+    "stylelint-high-performance-animation": "^1.5.2",
+    "stylelint-order": "^4.1.0"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "start": "gulp",
+    "lint": "stylelint \"styles/**/*.pcss\"",
+    "lint:fix": "stylelint \"styles/**/*.pcss\" --fix"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": [
+    "dist/{css,js}/**/*.{css,js}",
+    "styles/**/*.pcss"
+  ],
+  "stylelint": {
+    "plugins": [
+      "stylelint-copyright",
+      "stylelint-declaration-block-no-ignored-properties",
+      "stylelint-high-performance-animation",
+      "stylelint-order"
+    ],
+    "rules": {
+      "docusaurus/copyright-header": true,
+      "order/properties-alphabetical-order": true,
+      "plugin/declaration-block-no-ignored-properties": true,
+      "plugin/no-low-performance-animation-properties": true
+    },
+    "ignoreFiles": [
+      "**/variables.pcss"
+    ]
+  },
+  "lint-staged": {
+    "*.pcss": "npm run lint:fix"
+  }
+}

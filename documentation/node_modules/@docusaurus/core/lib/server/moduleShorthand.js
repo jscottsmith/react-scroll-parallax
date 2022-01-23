@@ -1,0 +1,42 @@
+"use strict";
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resolveModuleName = exports.getNamePatterns = void 0;
+function getNamePatterns(moduleName, moduleType) {
+    if (moduleName.startsWith('@')) {
+        // Pure scope: `@scope` => `@scope/docusaurus-plugin`
+        if (!moduleName.includes('/')) {
+            return [`${moduleName}/docusaurus-${moduleType}`];
+        }
+        const [scope, packageName] = moduleName.split(/\/(.*)/);
+        return [
+            `${scope}/${packageName}`,
+            `${scope}/docusaurus-${moduleType}-${packageName}`,
+        ];
+    }
+    return [
+        moduleName,
+        `@docusaurus/${moduleType}-${moduleName}`,
+        `docusaurus-${moduleType}-${moduleName}`,
+    ];
+}
+exports.getNamePatterns = getNamePatterns;
+function resolveModuleName(moduleName, moduleRequire, moduleType) {
+    const modulePatterns = getNamePatterns(moduleName, moduleType);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const module of modulePatterns) {
+        try {
+            moduleRequire.resolve(module);
+            return module;
+        }
+        catch (e) { }
+    }
+    throw new Error(`Docusaurus was unable to resolve the "${moduleName}" ${moduleType}. Make sure one of the following packages are installed:
+${modulePatterns.map((module) => `- ${module}`).join('\n')}`);
+}
+exports.resolveModuleName = resolveModuleName;

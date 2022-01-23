@@ -1,0 +1,33 @@
+{
+  "name": "fast-json-parse",
+  "version": "1.0.3",
+  "description": "Parse json safely and at max speed",
+  "main": "parse.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcollina/fast-json-parse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcollina/fast-json-parse/issues"
+  },
+  "homepage": "https://github.com/mcollina/fast-json-parse#readme",
+  "scripts": {
+    "test": "standard && tap test.js"
+  },
+  "pre-commit": "test",
+  "keywords": [
+    "parse",
+    "json",
+    "fast",
+    "safe"
+  ],
+  "author": "Matteo Collina <hello@matteocollina.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "benchmark": "^2.1.0",
+    "json-parse-safe": "^1.0.3",
+    "pre-commit": "^1.1.2",
+    "standard": "^6.0.5",
+    "tap": "^5.5.0"
+  }
+}

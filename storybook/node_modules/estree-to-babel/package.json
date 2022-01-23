@@ -1,0 +1,55 @@
+{
+  "name": "estree-to-babel",
+  "version": "3.2.1",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "convert estree ast to babel",
+  "homepage": "http://github.com/coderaiser/estree-to-babel",
+  "main": "lib/estree-to-babel.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/estree-to-babel.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "fixture": "madrun fixture"
+  },
+  "dependencies": {
+    "@babel/traverse": "^7.1.6",
+    "@babel/types": "^7.2.0",
+    "c8": "^7.6.0"
+  },
+  "keywords": [
+    "ast",
+    "convert",
+    "estree",
+    "babel",
+    "espree"
+  ],
+  "devDependencies": {
+    "@babel/parser": "^7.3.1",
+    "acorn": "^8.0.1",
+    "acorn-stage3": "^4.0.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-putout": "^7.0.0",
+    "espree": "^7.2.0",
+    "estree-util-attach-comments": "^1.0.0",
+    "madrun": "^8.0.1",
+    "nodemon": "^2.0.2",
+    "putout": "^15.4.3",
+    "supertape": "^5.0.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

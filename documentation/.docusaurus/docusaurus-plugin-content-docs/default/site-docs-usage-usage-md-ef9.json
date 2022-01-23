@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/usage",
+  "id": "usage/usage",
+  "title": "Usage",
+  "description": "First Step",
+  "source": "@site/docs/usage/usage.md",
+  "sourceDirName": "usage",
+  "slug": "/usage/",
+  "permalink": "/docs/usage/",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/usage.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Intro",
+    "permalink": "/docs/intro"
+  },
+  "next": {
+    "title": "Parallax Props",
+    "permalink": "/docs/usage/parallax-props"
+  }
+}

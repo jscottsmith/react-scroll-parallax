@@ -1,0 +1,26 @@
+{
+  "unversionedId": "migration-guides/v2-migration-guide",
+  "id": "migration-guides/v2-migration-guide",
+  "title": "V2 Migration Guide",
+  "description": "With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.",
+  "source": "@site/docs/migration-guides/v2-migration-guide.md",
+  "sourceDirName": "migration-guides",
+  "slug": "/migration-guides/v2-migration-guide",
+  "permalink": "/docs/migration-guides/v2-migration-guide",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/migration-guides/v2-migration-guide.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Easing Animation",
+    "permalink": "/docs/examples/easing"
+  },
+  "next": {
+    "title": "V1 Migration Guide",
+    "permalink": "/docs/migration-guides/v1-migration-guide"
+  }
+}

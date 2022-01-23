@@ -1,0 +1,48 @@
+{
+  "name": "@slorber/static-site-generator-webpack-plugin",
+  "version": "4.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Minimal, unopinionated static site generator powered by webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test",
+    "coverage": "jest --coverage",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/endiliey/static-site-generator-webpack-plugin"
+  },
+  "author": "Mark Dalgleish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/endiliey/static-site-generator-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/endiliey/static-site-generator-webpack-plugin",
+  "dependencies": {
+    "bluebird": "^3.7.1",
+    "cheerio": "^0.22.0",
+    "eval": "^0.1.4",
+    "url": "^0.11.0",
+    "webpack-sources": "^1.4.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "async": "^2.0.1",
+    "babel-loader": "^8.0.0",
+    "compression-webpack-plugin": "^3.0.0",
+    "coveralls": "^3.0.2",
+    "dir-compare": "^1.4.0",
+    "ejs": "^2.3.4",
+    "es6-promisify": "^6.0.0",
+    "glob": "^7.0.3",
+    "jest": "^24.9.0",
+    "node-dir": "^0.1.17",
+    "rimraf": "^2.4.4",
+    "webpack": "^4.41.2",
+    "webpack-stats-plugin": "^0.3.0"
+  }
+}

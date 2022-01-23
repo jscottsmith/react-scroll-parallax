@@ -1,0 +1,89 @@
+{
+  "name": "react-docgen",
+  "version": "5.4.0",
+  "description": "A CLI and toolkit to extract information from React components for documentation generation.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactjs/react-docgen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reactjs/react-docgen/issues"
+  },
+  "bin": {
+    "react-docgen": "bin/react-docgen.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "rimraf dist/ && babel src/ --out-dir dist/ --ignore **/__tests__,**/__mocks__,**/src/types.js",
+    "build:website": "cd website/ && yarn && yarn build",
+    "lint": "eslint . --report-unused-disable-directives",
+    "fix": "eslint . --fix --report-unused-disable-directives",
+    "prepare": "yarn build",
+    "preversion": "yarn lint",
+    "start": "cd website && yarn && yarn start",
+    "test": "jest",
+    "test:ci": "yarn lint && yarn flow && yarn test --runInBand",
+    "watch": "yarn build --watch"
+  },
+  "keywords": [
+    "react",
+    "documentation-generation"
+  ],
+  "author": {
+    "name": "Felix Kling"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/generator": "^7.12.11",
+    "@babel/runtime": "^7.7.6",
+    "ast-types": "^0.14.2",
+    "commander": "^2.19.0",
+    "doctrine": "^3.0.0",
+    "estree-to-babel": "^3.1.0",
+    "neo-async": "^2.6.1",
+    "node-dir": "^0.1.10",
+    "strip-indent": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-flow": "^7.7.4",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^25.1.0",
+    "benchmark": "^2.1.4",
+    "cli-table": "^0.3.1",
+    "cross-spawn": "^7.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "flow-bin": "^0.98.0",
+    "jest": "^25.1.0",
+    "jest-diff": "^25.1.0",
+    "jest-matcher-utils": "^25.1.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "temp": "^0.9.1"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "./tests/NodePathSerializer.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setupTestFramework.js"
+    ],
+    "roots": [
+      "bin",
+      "src"
+    ],
+    "testRegex": "/__tests__/.*-test\\.js$"
+  }
+}

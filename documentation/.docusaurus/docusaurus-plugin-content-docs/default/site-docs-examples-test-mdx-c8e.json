@@ -1,0 +1,19 @@
+{
+  "unversionedId": "examples/test",
+  "id": "examples/test",
+  "title": "test",
+  "description": "",
+  "source": "@site/docs/examples/test.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/test",
+  "permalink": "/docs/examples/test",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/test.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "V2 Migration Guide",
+    "permalink": "/docs/migration-guides/v2-migration-guide"
+  }
+}

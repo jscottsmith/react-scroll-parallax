@@ -1,0 +1,12 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import { Configuration } from 'webpack';
+import { Props } from '@docusaurus/types';
+export declare const clientDir: string;
+export declare function excludeJS(modulePath: string): boolean;
+export declare function getDocusaurusAliases(): Record<string, string>;
+export declare function createBaseConfig(props: Props, isServer: boolean, minify?: boolean): Configuration;

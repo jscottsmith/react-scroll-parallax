@@ -1,0 +1,47 @@
+{
+  "name": "use-latest",
+  "version": "1.2.0",
+  "description": "A React helper hook for storing latest value in ref object (updated in useEffect's callback).",
+  "main": "dist/use-latest.cjs.js",
+  "module": "dist/use-latest.esm.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Warning: no test specified\"",
+    "build": "preconstruct build",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andarist/use-latest.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andarist/use-latest/issues"
+  },
+  "homepage": "https://github.com/Andarist/use-latest#readme",
+  "dependencies": {
+    "use-isomorphic-layout-effect": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@preconstruct/cli": "^1.1.14",
+    "@types/react": "^16.9.41",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "typescript": "^3.9.5"
+  }
+}

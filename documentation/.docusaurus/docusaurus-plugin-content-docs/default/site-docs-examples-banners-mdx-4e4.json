@@ -1,0 +1,26 @@
+{
+  "unversionedId": "examples/banners",
+  "id": "examples/banners",
+  "title": "Parallax Banners",
+  "description": "The following demonstrates some common usage of the `` component.",
+  "source": "@site/docs/examples/banners.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/banners",
+  "permalink": "/docs/examples/banners",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/banners.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Scroll Effects",
+    "permalink": "/docs/examples/scroll-effects"
+  },
+  "next": {
+    "title": "Advanced Banners",
+    "permalink": "/docs/examples/advanced-banners"
+  }
+}

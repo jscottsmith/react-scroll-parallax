@@ -1,0 +1,26 @@
+{
+  "unversionedId": "usage/components/parallax-provider",
+  "id": "usage/components/parallax-provider",
+  "title": "ParallaxProvider",
+  "description": "The `` component is meant to wrap a root level component in your application and is necessary to provide access through the React context API to the Parallax Controller.",
+  "source": "@site/docs/usage/components/parallax-provider.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/parallax-provider",
+  "permalink": "/docs/usage/components/parallax-provider",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/components/parallax-provider.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Parallax",
+    "permalink": "/docs/usage/components/parallax-component"
+  },
+  "next": {
+    "title": "ParallaxBanner",
+    "permalink": "/docs/usage/components/parallax-banner-component"
+  }
+}

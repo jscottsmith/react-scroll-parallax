@@ -1,0 +1,27 @@
+{
+  "name": "objectorarray",
+  "version": "1.0.5",
+  "description": "Is the value an object or an array but not null?",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZhouHansen/objectnotnull.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": {
+    "name": "zhouhancheng",
+    "email": "z308114274@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZhouHansen/objectnotnull/issues"
+  },
+  "homepage": "https://github.com/ZhouHansen/objectnotnull#readme",
+  "devDependencies": {
+    "tape": "^4.8.0"
+  }
+}

@@ -1,0 +1,12 @@
+import React from 'react';
+import { StorybookLogo } from './StorybookLogo';
+export default {
+  component: StorybookLogo,
+  title: 'Basics/Brand/StorybookLogo'
+};
+export var Normal = function Normal() {
+  return /*#__PURE__*/React.createElement(StorybookLogo, {
+    alt: "Storybook logo"
+  });
+};
+Normal.displayName = "Normal";

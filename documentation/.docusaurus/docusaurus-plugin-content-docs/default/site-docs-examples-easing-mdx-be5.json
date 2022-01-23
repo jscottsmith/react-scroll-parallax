@@ -1,0 +1,26 @@
+{
+  "unversionedId": "examples/easing",
+  "id": "examples/easing",
+  "title": "Easing Animation",
+  "description": "You can provide easing presets or cubic-bezier curve params to the useParallax hook or `` component.",
+  "source": "@site/docs/examples/easing.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/easing",
+  "permalink": "/docs/examples/easing",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/easing.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Advanced Banners",
+    "permalink": "/docs/examples/advanced-banners"
+  },
+  "next": {
+    "title": "V2 Migration Guide",
+    "permalink": "/docs/migration-guides/v2-migration-guide"
+  }
+}

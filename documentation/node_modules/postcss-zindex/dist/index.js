@@ -1,0 +1,59 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _layerCache = _interopRequireDefault(require("./lib/layerCache"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function pluginCreator(opts = {}) {
+  return {
+    postcssPlugin: 'postcss-zindex',
+
+    prepare() {
+      const cache = new _layerCache.default(opts);
+      return {
+        OnceExit(css) {
+          const nodes = [];
+          let abort = false; // First pass; cache all z indexes
+
+          css.walkDecls(/z-index/i, decl => {
+            // Check that no negative values exist. Rebasing is only
+            // safe if all indices are positive numbers.
+            if (decl.value[0] === '-') {
+              abort = true; // Stop PostCSS iterating through the rest of the decls
+
+              return false;
+            }
+
+            nodes.push(decl);
+            cache.addValue(decl.value);
+          }); // Abort if we found any negative values
+          // or there are no z-index declarations
+
+          if (abort || !nodes.length) {
+            return;
+          }
+
+          cache.optimizeValues(opts.startIndex || 1); // Second pass; optimize
+
+          nodes.forEach(decl => {
+            // Need to coerce to string so that the
+            // AST is updated correctly
+            decl.value = cache.getValue(decl.value).toString();
+          });
+        }
+
+      };
+    }
+
+  };
+}
+
+pluginCreator.postcss = true;
+var _default = pluginCreator;
+exports.default = _default;
+module.exports = exports.default;

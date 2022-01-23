@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/components/index",
+  "id": "usage/components/index",
+  "title": "foo",
+  "description": "",
+  "source": "@site/docs/usage/components/index.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/",
+  "permalink": "/docs/usage/components/",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/usage/components/index.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "useParallax",
+    "permalink": "/docs/usage/hooks/use-parallax"
+  },
+  "next": {
+    "title": "ParallaxBanner",
+    "permalink": "/docs/usage/components/parallax-banner-component"
+  }
+}

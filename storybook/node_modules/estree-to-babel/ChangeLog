@@ -1,0 +1,211 @@
+2021.03.01, v3.2.1
+
+fix:
+- fix(estree-to-babel) comments: simplify
+
+
+
+2021.03.01, v3.2.0
+
+feature:
+- feature(estree-to-babel) rm useless classPrivateMethod, which is not part of estree
+- feature(package) putout v15.4.3
+- feature(package) supertape v5.0.0
+
+
+
+2021.01.28, v3.1.1
+
+fix:
+- (estree-to-babel) translation to RegExpLiteral (#5)
+
+feature:
+- (package) supertape v4.8.1
+- (package) eslint-plugin-putout v7.0.0
+- (package) putout v14.0.1
+
+
+2020.12.23, v3.1.0
+
+feature:
+- (estree-to-babel) add support for attached comments (#4)
+- (package) putout v12.5.1
+
+
+2020.12.17, v3.0.1
+
+fix:
+- (estree-to-babel) Literals
+- test(estree-to-babel) update fixtures
+
+feature:
+- (package) eslint-plugin-putout v6.8.1
+- (package) putout v11.14.0
+- (package) madrun v8.0.1
+- (package) supertape v3.5.0
+- (package) putout v10.0.3
+- (package) acorn-stage3 v4.0.0
+- (package) acorn v8.0.1
+- (package) eslint-plugin-putout v5.0.1
+- (package) acorn-stage3 v3.0.0
+- (package) supertape v2.0.1
+- (package) putout v9.11.3
+- (package) madrun v7.0.2
+- (package) espree v7.2.0
+- (package) eslint v7.6.0
+
+
+2020.03.30, v3.0.0
+
+fix:
+- chore(estre-to-babel) update fixtures
+
+feature:
+- (estree-to-babel) avoid directives overwrite
+- (package) putout v7.10.1
+- (package) madrun v5.4.1
+- (package) eslint-plugin-putout v3.2.1
+- (package) eslint-plugin-node v11.0.0
+- (package) nodemon v2.0.2
+- (package) nyc v15.0.0
+- (package) madrun v3.0.6
+- (package) putout v6.15.1
+- (package) eslint-plugin-node v10.0.0
+
+
+2019.08.20, v2.1.0
+
+feature:
+- (package) eslint-plugin-putout v2.0.0
+- (package) putout v5.7.1
+- (estree-to-babel) add support of acorns FieldDefinition, ClassPrivateName
+
+
+2019.07.27, v2.0.5
+
+fix:
+- (estree-to-babel) directives
+
+
+2019.07.26, v2.0.4
+
+fix:
+- (estree-to-babel) lint
+
+
+2019.07.26, v2.0.3
+
+feature:
+- (ast) add support of interpreter
+
+
+2019.07.26, v2.0.2
+
+fix:
+- (estree-to-babel) directives an array
+
+
+2019.07.26, v2.0.1
+
+fix:
+- (estree-to-babel) always remove first expression
+
+
+2019.07.26, v2.0.0
+
+feature:
+- (estree-to-babel) add support of strict mode directive
+
+
+2019.07.18, v1.8.2
+
+fix:
+- (estree-to-babel) add directives to get transform-minify-booleans work (https://babeljs.io/docs/en/babel-plugin-transform-minify-booleans)
+
+feature:
+- (package) eslint v6.0.1
+- (package) eslint-plugin-node v9.1.0
+- (package) espree v6.0.0
+- (package) nyc v14.1.1
+
+
+2019.03.19, v1.8.1
+
+fix:
+- (estree-to-babel) ObjectMethod
+- test(class-method-babel) fixture
+
+feature:
+- (package) madrun v2.0.1
+- (package) putout v4.0.1
+
+
+2019.02.13, v1.8.0
+
+feature:
+- (estree-to-babel) add support of ClassPrivateMethod
+
+
+2019.01.28, v1.7.0
+
+feature:
+- (estree-to-babel) add support of BooleanLiteral, RegExpLiteral
+
+
+2019.01.23, v1.6.0
+
+feature:
+- (estree-to-babel) add support of babel estree
+
+
+2019.01.16, v1.5.0
+
+feature:
+- (estree-to-babel) add tokens support
+
+
+2019.01.15, v1.4.2
+
+fix:
+- (estree-to-babel) ClassMethod: loc
+
+feature:
+- (package) tape -> supertape
+
+
+2019.01.11, v1.4.1
+
+fix:
+- (estree-to-babel) Literal in ObjectMmethod
+
+
+2019.01.10, v1.4.0
+
+feature:
+- (estree-to-babel) add support of NullLiteral
+
+
+2019.01.10, v1.3.0
+
+feature:
+- (package) add putout
+- (estree-to-babel) add support of ClassMethod
+
+
+2019.01.08, v1.2.0
+
+feature:
+- (estree-to-babel) add comments support
+
+
+2019.01.05, v1.1.0
+
+feature:
+- (estree-to-babel) add support of StringLiteral, NumericLiteral
+
+
+2018.12.29, v1.0.1
+
+fix:
+- (bin) rm
+

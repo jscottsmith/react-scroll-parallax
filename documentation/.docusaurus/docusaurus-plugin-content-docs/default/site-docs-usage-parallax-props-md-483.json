@@ -1,0 +1,26 @@
+{
+  "unversionedId": "usage/parallax-props",
+  "id": "usage/parallax-props",
+  "title": "Parallax Props",
+  "description": "The following hooks and components accept the parallax prop configurations that setup scroll effects in the Parallax Controller.",
+  "source": "@site/docs/usage/parallax-props.md",
+  "sourceDirName": "usage",
+  "slug": "/usage/parallax-props",
+  "permalink": "/docs/usage/parallax-props",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/parallax-props.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Usage",
+    "permalink": "/docs/usage/"
+  },
+  "next": {
+    "title": "Hooks",
+    "permalink": "/docs/usage/hooks/"
+  }
+}

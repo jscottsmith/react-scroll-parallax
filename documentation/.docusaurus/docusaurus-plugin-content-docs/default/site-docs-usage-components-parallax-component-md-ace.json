@@ -1,0 +1,26 @@
+{
+  "unversionedId": "usage/components/parallax-component",
+  "id": "usage/components/parallax-component",
+  "title": "Parallax",
+  "description": "The main component for applying scroll effects based on an elements position within the viewport.",
+  "source": "@site/docs/usage/components/parallax-component.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/parallax-component",
+  "permalink": "/docs/usage/components/parallax-component",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/components/parallax-component.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Components",
+    "permalink": "/docs/usage/components/"
+  },
+  "next": {
+    "title": "ParallaxProvider",
+    "permalink": "/docs/usage/components/parallax-provider"
+  }
+}

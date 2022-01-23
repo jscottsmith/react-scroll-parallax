@@ -1,0 +1,30 @@
+{
+    "name": "@types/webpack-env",
+    "version": "1.16.3",
+    "description": "TypeScript definitions for webpack (module API)",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/webpack-env",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "use-strict",
+            "url": "https://github.com/use-strict",
+            "githubUsername": "use-strict"
+        },
+        {
+            "name": "rhonsby",
+            "url": "https://github.com/rhonsby",
+            "githubUsername": "rhonsby"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/webpack-env"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "20818f300ddaffdf4e5937e0117721a2134ce8d3d047d77d0d426858368cd42c",
+    "typeScriptVersion": "3.7"
+}

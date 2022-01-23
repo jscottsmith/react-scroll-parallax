@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/hooks/index",
+  "id": "usage/hooks/index",
+  "title": "Hooks",
+  "description": "- useParallax()",
+  "source": "@site/docs/usage/hooks/index.md",
+  "sourceDirName": "usage/hooks",
+  "slug": "/usage/hooks/",
+  "permalink": "/docs/usage/hooks/",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/usage/hooks/index.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Usage",
+    "permalink": "/docs/usage/"
+  },
+  "next": {
+    "title": "useController",
+    "permalink": "/docs/usage/hooks/use-controller"
+  }
+}

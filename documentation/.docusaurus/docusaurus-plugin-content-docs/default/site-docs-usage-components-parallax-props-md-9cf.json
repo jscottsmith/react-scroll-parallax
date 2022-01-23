@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/components/parallax-props",
+  "id": "usage/components/parallax-props",
+  "title": "Parallax Props",
+  "description": "Configuration Props",
+  "source": "@site/docs/usage/components/parallax-props.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/parallax-props",
+  "permalink": "/docs/usage/components/parallax-props",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/components/parallax-props.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ParallaxBanner",
+    "permalink": "/docs/usage/components/parallax-banner-component"
+  },
+  "next": {
+    "title": "How it works",
+    "permalink": "/docs/examples/how-it-works"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "unversionedId": "migration-guides/v1-migration-guide",
+  "id": "migration-guides/v1-migration-guide",
+  "title": "V1 Migration Guide",
+  "description": "Some breaking changes were introduced in v2. Here's the simple changes that need to be made if you're coming from v1.",
+  "source": "@site/docs/migration-guides/v1-migration-guide.md",
+  "sourceDirName": "migration-guides",
+  "slug": "/migration-guides/v1-migration-guide",
+  "permalink": "/docs/migration-guides/v1-migration-guide",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/migration-guides/v1-migration-guide.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "V2 Migration Guide",
+    "permalink": "/docs/migration-guides/v2-migration-guide"
+  }
+}

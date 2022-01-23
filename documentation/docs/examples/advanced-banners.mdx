@@ -1,0 +1,82 @@
+---
+hide_title: true
+title: Advanced Banners
+sidebar_position: 4
+---
+
+import { AdvancedBannerTop } from '/src/components/advanced-banner-top';
+import { ParallaxBannerWithHeadline } from '/src/components/parallax-banner-with-headline';
+import { ParallaxBannerEmbedHeadline } from '/src/components/parallax-banner-embed-headline';
+
+<AdvancedBannerTop />
+
+# Advanced Banners
+
+The `<ParallaxBanner>` accepts advanced configurations that can allow you to really push the effect. Building off the [previous banner demos](/docs/examples/banners), this one adds a number of configuration options.
+
+## How it's done
+
+The following is a breakdown of some of the more advanced configuration for the banner seen above.
+
+1. You are not limited to using only `speed` to control movement. In this example `translateY` is defined with custom start and end values. This is helpful when the banner starts at the top of the page.
+2. Setting `shouldAlwaysCompleteAnimation` ensures that the animation begins at the initial position in the view, and since this banner is placed at the top of the page this option is enabled.
+3. Additional `scale` effects are used to further enhance the scenes depth and are also provided individual `easing` values.
+4. Certain layers set `expanded` to `false`. This is because they don't move or have no edge that would appear visible so there is no need to expand them.
+5. Lastly, a gradient overlay is added to dim the scene with an `opacity` transition.
+
+```tsx
+const Component = () => {
+  const background: BannerLayer = {
+    image:
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
+    translateY: [0, 50],
+    opacity: [1, 0.3],
+    scale: [1.05, 1, 'easeOutCubic'],
+    shouldAlwaysCompleteAnimation: true,
+  };
+
+  const headline: BannerLayer = {
+    translateY: [0, 30],
+    scale: [1, 1.05, 'easeOutCubic'],
+    shouldAlwaysCompleteAnimation: true,
+    expanded: false,
+    children: (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-6xl md:text-8xl text-white font-thin">
+          Hello World!
+        </h1>
+      </div>
+    ),
+  };
+
+  const foreground: BannerLayer = {
+    image:
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png',
+    translateY: [0, 15],
+    scale: [1, 1.1, 'easeOutCubic'],
+    shouldAlwaysCompleteAnimation: true,
+  };
+
+  const gradientOverlay: BannerLayer = {
+    opacity: [0, 0.9],
+    shouldAlwaysCompleteAnimation: true,
+    expanded: false,
+    children: (
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-blue-900" />
+    ),
+  };
+
+  return (
+    <ParallaxBanner
+      layers={[background, headline, foreground, gradientOverlay]}
+      className="aspect-[2/1] bg-gray-900"
+    />
+  );
+};
+```
+
+:::info
+
+Each layer of the `<ParallaxBanner>` is just a `useParallax` hook targeting a `<div>`. Which means anything you can use to configure [`useParallax`](/docs/usage/hooks/use-parallax) can be used as a property of a `layer`. See all [effects and configuration](/docs/usage/parallax-props) accepted.
+
+:::

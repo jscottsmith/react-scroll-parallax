@@ -1,0 +1,104 @@
+{
+  "name": "markdown-to-jsx",
+  "description": "Convert markdown to JSX with ease for React and React-like projects. Super lightweight and highly configurable.",
+  "homepage": "https://probablyup.github.io/markdown-to-jsx",
+  "license": "MIT",
+  "version": "7.1.5",
+  "engines": {
+    "node": ">= 10"
+  },
+  "keywords": [
+    "markdown",
+    "markdown converter",
+    "react",
+    "preact",
+    "jsx",
+    "html"
+  ],
+  "author": "Evan Jacobs <probablyup@gmail.com>",
+  "repository": "probablyup/markdown-to-jsx",
+  "bugs": "https://github.com/probablyup/markdown-to-jsx/issues",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    "import": "./dist/index.modern.js",
+    "require": "./dist/index.js"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "source": "index.tsx",
+  "unpkg": "./dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-transform-typescript": "^7.11.0",
+    "@size-limit/preset-small-lib": "^5.0.1",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^16.3.2",
+    "@types/react": "^16.9.49",
+    "@types/styled-components": "^5.1.7",
+    "benchtable": "^0.1.0",
+    "cli-progress": "^3.8.2",
+    "codecov": "^3.1.0",
+    "esm": "^3.0.84",
+    "in-publish": "^2.0.0",
+    "jest": "^27.0.6",
+    "jest-serializer-html": "^7.0.0",
+    "markdown-it": "^11.0.0",
+    "microbundle": "^0.13.0",
+    "microtime": "^3.0.0",
+    "mkdirp": "^1.0.4",
+    "polished": "^3.0.3",
+    "preact": "^10.5.9",
+    "prettier": "^2.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-markdown": "^4.0.3",
+    "rimraf": "^3.0.2",
+    "simple-markdown": "^0.7.2",
+    "size-limit": "^5.0.1",
+    "styled-components": "^5.1.1",
+    "theredoc": "^1.0.0",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.1.3",
+    "unquote": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": ">= 0.14.0"
+  },
+  "scripts": {
+    "prepublish": "in-publish && npm run build && npm run release || not-in-publish",
+    "prebuild": "rimraf dist && mkdirp dist",
+    "build": "microbundle --tsconfig tsconfig.json -f cjs,umd index.cjs.tsx --name MarkdownToJSX --define process.env.NODE_ENV=production --globals react=React && microbundle --tsconfig tsconfig.json -f es,modern --name MarkdownToJSX --define process.env.NODE_ENV=production",
+    "release": "microbundle site.tsx -o docs -f iife --tsconfig tsconfig.site.json --define process.env.NODE_ENV=production --jsx React.createElement --external react,react-dom,styled-components --globals react=React,react-dom=ReactDOM,styled-components=styled",
+    "dev": "microbundle watch site.tsx -o docs -f iife --tsconfig tsconfig.site.json --define process.env.NODE_ENV=development --no-compress --jsx React.createElement --external react,react-dom,styled-components --globals react=React,react-dom=ReactDOM,styled-components=styled",
+    "test": "jest --verbose",
+    "size": "size-limit",
+    "benchmark": "node -r esm benchmark.js"
+  },
+  "mangle": {
+    "regex": "^_"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "5.5 kB"
+    }
+  ],
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "snapshotSerializers": [
+      "jest-serializer-html"
+    ]
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/markdown-to-jsx"
+  }
+}

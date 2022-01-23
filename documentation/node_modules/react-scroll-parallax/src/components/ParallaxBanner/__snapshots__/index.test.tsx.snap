@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given a <ParallaxBanner> component when the prop { disabled: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { easing: 'easeInQuad' } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { easing: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { onChange: [Function: onChange] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { onEnter: [Function: onEnter] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { onExit: [Function: onExit] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { onProgressChange: [Function: onProgressChange] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { opacity: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform,opacity; opacity: 1;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { rootMargin: [Object] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { rotate: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: rotate(1turn);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { rotateX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: rotateX(1turn);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { rotateY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: rotateY(1turn);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { rotateZ: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: rotateZ(1turn);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { scale: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: scale(1);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { scaleX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: scaleX(1);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { scaleY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: scaleY(1);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { scaleZ: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: scaleZ(1);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { shouldAlwaysCompleteAnimation: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { shouldDisableScalingTranslations: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { speed: 10 } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: -100px; left: 0px; right: 0px; bottom: -100px; will-change: transform; transform: translateY(-100px);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { startScroll: 0, endScroll: 1000 } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { targetElement: HTMLDivElement {} } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { translateX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: translateX(100%);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component when the prop { translateY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; will-change: transform; transform: translateY(100%);"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component with all props then it will render banners correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+    style="position: relative; overflow: hidden; width: 100%; background-color: blue; border: 1px solid red;"
+  >
+    <div
+      data-testid="layer-0"
+      style="background-image: url(https://foo.com/bar.jpg); background-position: center; background-size: cover; position: absolute; top: -20px; left: 0px; right: 0px; bottom: -20px; will-change: transform; transform: translateY(-20px);"
+    />
+    <div>
+      <h1>
+        Foo Bar
+      </h1>
+    </div>
+  </div>
+</DocumentFragment>
+`;

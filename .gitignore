@@ -1,11 +1,11 @@
-/.cache
-/build
 /cjs
 /coverage
-/dist
 /esm
-/node_modules
-/yarn-error.log
-
+storybook-static
 npm-debug.log
 .DS_STORE
+*.log
+.DS_Store
+node_modules
+.cache
+dist

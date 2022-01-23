@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/components/components",
+  "id": "usage/components/components",
+  "title": "Components",
+  "description": "All provided React components.",
+  "source": "@site/docs/usage/components/components.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/",
+  "permalink": "/docs/usage/components/",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/components/components.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "useParallax",
+    "permalink": "/docs/usage/hooks/use-parallax"
+  },
+  "next": {
+    "title": "Parallax",
+    "permalink": "/docs/usage/components/parallax-component"
+  }
+}

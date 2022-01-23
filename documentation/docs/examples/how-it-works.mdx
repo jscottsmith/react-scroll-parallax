@@ -1,0 +1,65 @@
+---
+sidebar_position: 1
+---
+
+import { ElementProgress } from '/src/components/element-progress';
+import { HowItWorks } from '/src/components/how-it-works';
+import { BeyondCSSEffects } from '/src/components/beyond-css-effects';
+
+# How it works
+
+As the element scrolls past the viewport a css translate effect is applied based on the original element's position relative to the viewport. Using the speed will automatically apply a translateY css style (or translateX if the scroll axis is horizontal).
+
+```tsx
+<Parallax speed={-10} />
+<Parallax speed={10} />
+```
+
+<HowItWorks />
+
+:::info
+
+Note that `speed` is only an abstraction for setting `translateY` or `translateX` based on the scroll axis. Each increment of **speed** by one will increase the translate effect by `10px`.
+
+Example: With a vertical scroll axis, `speed: 10` is equivalent to `translateY: ['10px', '-10px']` and `speed: -10` is equivalent to `translateY: ['-10px', '10px']`.
+
+:::
+
+## Progress is relative to the view
+
+All effects are applied based on the original element's progress. Progress begins as the elements top edge enters the bottom of the view. It ends as the bottom of the element leaves the top of the view.
+
+```tsx
+<Parallax
+  onProgressChange={(progress) => setProgress(progress)}
+  onEnter={() => setEntered(true)}
+  onExit={() => setEntered(false)}
+/>
+```
+
+<ElementProgress />
+
+:::info
+
+By design and by default, all elements progress relative to the view. However, there are optional ways to change how progress is calculated:
+
+1. Manually setting [`startScroll` and `endScroll`](/docs/usage/parallax-props#configuration-props) props allows complete control over when the progress starts and ends.
+2. Setting a [`rootMargin`](/docs/usage/parallax-props#configuration-props) will add a invisible margin around the element that can be used to change when the element is in view and its progress.
+3. You can also set [`shouldAlwaysCompleteAnimation`](/docs/usage/parallax-props#configuration-props) to true and if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size.
+
+:::
+
+## Beyond Parallax: CSS effects
+
+Additional CSS effects, like opacity, scale and rotation can be applied based on progress, even with some easing.
+
+```tsx
+<Parallax
+  translateX={['-400px', '0px']}
+  scale={[0.75, 1]}
+  rotate={[-180, 0]}
+  easing="easeInQuad"
+/>
+```
+
+<BeyondCSSEffects />

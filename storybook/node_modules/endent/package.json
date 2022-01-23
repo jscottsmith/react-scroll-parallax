@@ -1,0 +1,42 @@
+{
+  "name": "endent",
+  "version": "2.1.0",
+  "description": "➡️ An ES6 string tag that makes indentation right",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "prepublishOnly": "npm test",
+  "scripts": {
+    "test": "jest",
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ZhouHansen/endent.git"
+  },
+  "author": {
+    "name": "zhouhancheng",
+    "email": "z308114274@gmail.com"
+  },
+  "keywords": [
+    "dedent",
+    "tag",
+    "multi-line string"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZhouHansen/endent/issues"
+  },
+  "homepage": "https://github.com/ZhouHansen/endent#readme",
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "fast-json-parse": "^1.0.3",
+    "objectorarray": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^25.3.0",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  }
+}
