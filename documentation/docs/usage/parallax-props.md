@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Parallax Props
 
-The following hooks and components accept the parallax prop configurations that setup scroll effects in the [Parallax Controller](https://parallax-controller.v1.damnthat.tv/docs/usage/props).
+The following hooks and components accept the parallax prop configurations that setup scroll effects in the [Parallax Controller](/docs/usage/parallax-props).
 
 - [`useParallax()`](/docs/usage/hooks/use-parallax)
 - [`<Parallax>`](/docs/usage/components/parallax-component)
