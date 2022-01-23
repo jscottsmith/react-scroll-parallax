@@ -1,4 +1,4 @@
-import scaleBetween from 'utils/scaleBetween.js';
+import scaleBetween from '../src/utils/scaleBetween';
 
 const oldMin = 0;
 const oldMax = 1;

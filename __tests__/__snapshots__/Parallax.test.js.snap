@@ -1,25 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Expect the <Parallax> component to render correctly 1`] = `
-<figure
-  className="parallax-outer class-foo"
-  style={
-    Object {
-      "border": "solid red 2px",
-    }
-  }
->
-  <div
-    className="parallax-inner"
-    style={
-      Object {
-        "border": "solid blue 2px",
-      }
-    }
+<DocumentFragment>
+  <figure
+    class="parallax-outer class-foo"
+    style="border: 2px solid red;"
   >
     <div
-      className="foo"
-    />
-  </div>
-</figure>
+      class="parallax-inner"
+      style="border: 2px solid blue; transform: translate3d(100%, 100%, 0);"
+    >
+      <div
+        class="foo"
+      />
+    </div>
+  </figure>
+</DocumentFragment>
 `;

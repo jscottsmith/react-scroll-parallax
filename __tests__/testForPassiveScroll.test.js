@@ -1,4 +1,4 @@
-import { testForPassiveScroll } from 'utils';
+import testForPassiveScroll from '../src/utils/testForPassiveScroll';
 
 const addEventListener = window.addEventListener;
 const removeEventListener = window.removeEventListener;
@@ -11,7 +11,7 @@ describe('Expect the testForPassiveScroll function', () => {
 
     it('to return a boolean', () => {
         const bool = testForPassiveScroll();
-        expect(bool).toBe(false);
+        expect(bool).toBe(true);
     });
 
     it('to add and remove a test listener', () => {

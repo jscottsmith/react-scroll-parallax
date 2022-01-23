@@ -1,4 +1,4 @@
-import { Scroll } from 'classes/Scroll';
+import { Scroll } from '../src/classes/Scroll';
 
 describe('Expect the Scroll class', () => {
     it('to construct', () => {

@@ -1,9 +1,7 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import '/stories/styles.css';
 
-// reset the window on each story
-const withWindowReset = (storyFn) => {
-    window.scrollTo(0, 0);
-    return storyFn();
+// https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
+export const parameters = {
+  // https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
+  actions: { argTypesRegex: '^on.*' },
 };
-
-export const decorators = [withKnobs, withWindowReset];

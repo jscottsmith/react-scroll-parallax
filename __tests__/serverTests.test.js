@@ -4,8 +4,8 @@
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import ParallaxProvider from 'components/ParallaxProvider';
-import ParallaxController from 'classes/ParallaxController';
+import ParallaxProvider from '../src/components/ParallaxProvider';
+import ParallaxController from '../src/classes/ParallaxController';
 
 describe('Expect', () => {
     it('<ParallaxProvider> to not init the controller on the server', () => {

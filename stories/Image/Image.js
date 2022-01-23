@@ -1,26 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withController } from 'react-scroll-parallax';
-import style from './Image.scss';
+import React from 'react';
+import * as style from './Image.module.scss';
+import { useController } from '../../src';
 
-class Image extends Component {
-    static propTypes = {
-        parallaxController: PropTypes.object.isRequired,
-        src: PropTypes.string.isRequired,
-    };
+export const Image = () => {
+  const parallaxController = useController();
+  function handleLoad() {
+    parallaxController.update();
+  }
+  return (
+    <div className={style.image}>
+      <img src={props.src} onLoad={handleLoad} />
+    </div>
+  );
+};
 
-    handleLoad = () => {
-        // updates cached values after image dimensions have loaded
-        this.props.parallaxController.update();
-    };
-
-    render() {
-        return (
-            <div className={style.image}>
-                <img src={this.props.src} onLoad={this.handleLoad} />
-            </div>
-        );
-    }
-}
-
-export default withController(Image);
+export default Image;

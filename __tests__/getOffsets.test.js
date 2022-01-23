@@ -1,5 +1,5 @@
-import getOffsets from 'helpers/getOffsets';
-import { parseValueAndUnit } from 'utils/index';
+import getOffsets from '../src/helpers/getOffsets';
+import parseValueAndUnit from '../src/utils/parseValueAndUnit';
 
 describe('getOffsets', () => {
     it('returns the offset properties to an element with defaults', () => {
