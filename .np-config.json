@@ -1,5 +1,4 @@
 {
-  "branch": "v3",
-  "preview": false,
-  "tag": "beta"
+  "branch": "master",
+  "preview": false
 }
