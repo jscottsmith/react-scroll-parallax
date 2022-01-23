@@ -13,7 +13,7 @@
 
 React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes [Parallax Controller](https://parallax-controller.v1.damnthat.tv) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.v1.damnthat.tv/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
 
-If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2.4.2), here's a [migration guide](https://react-scroll-parallax.v3.damnthat.tv/docs/migration-guides/v2-migration-guide).
+If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](https://react-scroll-parallax.v3.damnthat.tv/docs/migration-guides/v2-migration-guide).
 
 ## Install (v3 beta)
 
