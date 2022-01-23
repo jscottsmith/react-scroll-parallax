@@ -17,6 +17,14 @@ As the element scrolls past the viewport a css translate effect is applied based
 
 <HowItWorks />
 
+:::info
+
+Note that `speed` is only an abstraction for setting `translateY` or `translateX` based on the scroll axis. Each increment of **speed** by one will increase the translate effect by `10px`.
+
+Example: With a vertical scroll axis, `speed: 10` is equivalent to `translateY: ['10px', '-10px']` and `speed: -10` is equivalent to `translateY: ['-10px', '10px']`.
+
+:::
+
 ## Progress is relative to the view
 
 All effects are applied based on the original element's progress. Progress begins as the elements top edge enters the bottom of the view. It ends as the bottom of the element leaves the top of the view.
