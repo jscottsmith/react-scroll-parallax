@@ -3,7 +3,6 @@
 # React Scroll Parallax
 
 [![NPM Version Latest](https://img.shields.io/npm/v/react-scroll-parallax/latest)](https://www.npmjs.com/package/react-scroll-parallax)
-[![NPM Version Beta](https://img.shields.io/npm/v/react-scroll-parallax/beta)](https://www.npmjs.com/package/react-scroll-parallax)
 [![NPM Downloads](https://img.shields.io/npm/dm/react-scroll-parallax)](https://www.npmjs.com/package/react-scroll-parallax)
 [![Codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/v3/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 
