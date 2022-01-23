@@ -34,6 +34,14 @@ change it to:
 const parallaxController = useParallaxController();
 ```
 
+### Prop changes for <ParallaxBanner\>
+
+Layers now accept all [parallax props](/docs/usage/parallax-props) but you will need to update if you used the `layer.amount` prop.
+
+1. `layer.amount` is no longer supported. Try `speed` or any new parallax props.
+2. `layer.props` is no longer supported. If you need to add props to the layer DOM element just define them in the `layer`.
+3. All `HTMLElement` props are now spread to the root element.
+
 ### Removed default class names
 
-If you relied on either the `parallax-outer` or `parallax-inner` class names for styling you will need to refactor or set them manually.
+If you relied on either the `parallax-outer`, `parallax-inner`, `parallax-banner` or `parallax-banner-layer-[x]` class names for styling you will need to refactor or set them manually.
