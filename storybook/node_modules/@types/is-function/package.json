@@ -1,0 +1,25 @@
+{
+    "name": "@types/is-function",
+    "version": "1.0.1",
+    "description": "TypeScript definitions for is-function",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/is-function",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evangelos Zotos",
+            "url": "https://github.com/evangeloszotos",
+            "githubUsername": "evangeloszotos"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/is-function"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "cb1edae8c2529d53c3314d6c8fcc4ebf17f148767a6684b8beef72db7924e7e9",
+    "typeScriptVersion": "3.7"
+}

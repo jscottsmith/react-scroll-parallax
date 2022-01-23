@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="customVMPath" />
+    <option name="maximumHeapSize" value="1500" />
+    <option name="vmParameters" value="-XX:MaxPermSize=600M" />
+  </component>
+</project>

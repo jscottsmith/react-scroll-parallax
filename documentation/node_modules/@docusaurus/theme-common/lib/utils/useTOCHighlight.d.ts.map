@@ -1,0 +1,1 @@
+{"version":3,"file":"useTOCHighlight.d.ts","sourceRoot":"","sources":["../../src/utils/useTOCHighlight.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AA6GH,oBAAY,kBAAkB,GAAG;IAC/B,aAAa,EAAE,MAAM,CAAC;IACtB,mBAAmB,EAAE,MAAM,CAAC;IAC5B,eAAe,EAAE,MAAM,CAAC;IACxB,eAAe,EAAE,MAAM,CAAC;CACzB,CAAC;AAEF,iBAAS,eAAe,CAAC,MAAM,EAAE,kBAAkB,GAAG,SAAS,GAAG,IAAI,CAuDrE;AAED,eAAe,eAAe,CAAC"}

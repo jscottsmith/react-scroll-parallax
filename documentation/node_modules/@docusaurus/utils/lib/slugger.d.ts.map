@@ -1,0 +1,1 @@
+{"version":3,"file":"slugger.d.ts","sourceRoot":"","sources":["../src/slugger.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAOH,oBAAY,cAAc,GAAG;IAAC,YAAY,CAAC,EAAE,OAAO,CAAA;CAAC,CAAC;AAEtD,oBAAY,OAAO,GAAG;IACpB,IAAI,EAAE,CAAC,KAAK,EAAE,MAAM,EAAE,OAAO,CAAC,EAAE,cAAc,KAAK,MAAM,CAAC;CAC3D,CAAC;AAEF,wBAAgB,aAAa,IAAI,OAAO,CAKvC"}

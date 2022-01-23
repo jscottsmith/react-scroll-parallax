@@ -1,0 +1,26 @@
+{
+  "unversionedId": "examples/scroll-effects",
+  "id": "examples/scroll-effects",
+  "title": "Scroll Effects",
+  "description": "More than just translate effects are possible. Here's some examples of the various effects possible.",
+  "source": "@site/docs/examples/scroll-effects.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/scroll-effects",
+  "permalink": "/docs/examples/scroll-effects",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/scroll-effects.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "How it works",
+    "permalink": "/docs/examples/how-it-works"
+  },
+  "next": {
+    "title": "Parallax Banners",
+    "permalink": "/docs/examples/banners"
+  }
+}

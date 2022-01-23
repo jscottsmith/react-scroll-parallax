@@ -1,0 +1,244 @@
+{
+  "pluginId": "default",
+  "version": "current",
+  "label": "Next",
+  "banner": null,
+  "badge": false,
+  "className": "docs-version-current",
+  "isLast": true,
+  "docsSidebars": {
+    "tutorialSidebar": [
+      {
+        "type": "link",
+        "label": "Intro",
+        "href": "/docs/intro",
+        "docId": "intro"
+      },
+      {
+        "type": "category",
+        "label": "Usage",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "Parallax Props",
+            "href": "/docs/usage/parallax-props",
+            "docId": "usage/parallax-props"
+          },
+          {
+            "type": "category",
+            "label": "Hooks",
+            "collapsible": true,
+            "collapsed": true,
+            "items": [
+              {
+                "type": "link",
+                "label": "useParallaxController",
+                "href": "/docs/usage/hooks/use-parallax-controller",
+                "docId": "usage/hooks/use-parallax-controller"
+              },
+              {
+                "type": "link",
+                "label": "useParallax",
+                "href": "/docs/usage/hooks/use-parallax",
+                "docId": "usage/hooks/use-parallax"
+              }
+            ],
+            "href": "/docs/usage/hooks/"
+          },
+          {
+            "type": "category",
+            "label": "Components",
+            "collapsible": true,
+            "collapsed": true,
+            "items": [
+              {
+                "type": "link",
+                "label": "Parallax",
+                "href": "/docs/usage/components/parallax-component",
+                "docId": "usage/components/parallax-component"
+              },
+              {
+                "type": "link",
+                "label": "ParallaxProvider",
+                "href": "/docs/usage/components/parallax-provider",
+                "docId": "usage/components/parallax-provider"
+              },
+              {
+                "type": "link",
+                "label": "ParallaxBanner",
+                "href": "/docs/usage/components/parallax-banner-component",
+                "docId": "usage/components/parallax-banner-component"
+              }
+            ],
+            "href": "/docs/usage/components/"
+          }
+        ],
+        "href": "/docs/usage/"
+      },
+      {
+        "type": "category",
+        "label": "Examples",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "How it works",
+            "href": "/docs/examples/how-it-works",
+            "docId": "examples/how-it-works"
+          },
+          {
+            "type": "link",
+            "label": "Scroll Effects",
+            "href": "/docs/examples/scroll-effects",
+            "docId": "examples/scroll-effects"
+          },
+          {
+            "type": "link",
+            "label": "Parallax Banners",
+            "href": "/docs/examples/banners",
+            "docId": "examples/banners"
+          },
+          {
+            "type": "link",
+            "label": "Advanced Banners",
+            "href": "/docs/examples/advanced-banners",
+            "docId": "examples/advanced-banners"
+          },
+          {
+            "type": "link",
+            "label": "Easing Animation",
+            "href": "/docs/examples/easing",
+            "docId": "examples/easing"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Migration Guides",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "V2 Migration Guide",
+            "href": "/docs/migration-guides/v2-migration-guide",
+            "docId": "migration-guides/v2-migration-guide"
+          },
+          {
+            "type": "link",
+            "label": "V1 Migration Guide",
+            "href": "/docs/migration-guides/v1-migration-guide",
+            "docId": "migration-guides/v1-migration-guide"
+          }
+        ]
+      }
+    ]
+  },
+  "docs": {
+    "examples/advanced-banners": {
+      "id": "examples/advanced-banners",
+      "title": "Advanced Banners",
+      "description": "The `` accepts advanced configurations that can allow you to really push the effect. Building off the previous banner demos, this one adds a number of configuration options.",
+      "sidebar": "tutorialSidebar"
+    },
+    "examples/banners": {
+      "id": "examples/banners",
+      "title": "Parallax Banners",
+      "description": "The following demonstrates some common usage of the `` component.",
+      "sidebar": "tutorialSidebar"
+    },
+    "examples/easing": {
+      "id": "examples/easing",
+      "title": "Easing Animation",
+      "description": "You can provide easing presets or cubic-bezier curve params to the useParallax hook or `` component.",
+      "sidebar": "tutorialSidebar"
+    },
+    "examples/how-it-works": {
+      "id": "examples/how-it-works",
+      "title": "How it works",
+      "description": "As the element scrolls past the viewport a css translate effect is applied based on the original element's position relative to the viewport. Using the speed will automatically apply a translateY css style (or translateX if the scroll axis is horizontal).",
+      "sidebar": "tutorialSidebar"
+    },
+    "examples/scroll-effects": {
+      "id": "examples/scroll-effects",
+      "title": "Scroll Effects",
+      "description": "More than just translate effects are possible. Here's some examples of the various effects possible.",
+      "sidebar": "tutorialSidebar"
+    },
+    "intro": {
+      "id": "intro",
+      "title": "React Scroll Parallax",
+      "description": "NPM Version Latest",
+      "sidebar": "tutorialSidebar"
+    },
+    "migration-guides/v1-migration-guide": {
+      "id": "migration-guides/v1-migration-guide",
+      "title": "V1 Migration Guide",
+      "description": "Some breaking changes were introduced in v2. Here's the simple changes that need to be made if you're coming from v1.",
+      "sidebar": "tutorialSidebar"
+    },
+    "migration-guides/v2-migration-guide": {
+      "id": "migration-guides/v2-migration-guide",
+      "title": "V2 Migration Guide",
+      "description": "With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/components/components": {
+      "id": "usage/components/components",
+      "title": "Components",
+      "description": "All provided React components.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/components/parallax-banner-component": {
+      "id": "usage/components/parallax-banner-component",
+      "title": "ParallaxBanner",
+      "description": "Component that sets up layers of useParallax elements to achieve a parallaxing banner. Enables the layering of images, or custom markup, with scroll effects in a container that hides overflow.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/components/parallax-component": {
+      "id": "usage/components/parallax-component",
+      "title": "Parallax",
+      "description": "The main component for applying scroll effects based on an elements position within the viewport.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/components/parallax-provider": {
+      "id": "usage/components/parallax-provider",
+      "title": "ParallaxProvider",
+      "description": "The `` component is meant to wrap a root level component in your application and is necessary to provide access through the React context API to the Parallax Controller.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/hooks/hooks": {
+      "id": "usage/hooks/hooks",
+      "title": "Hooks",
+      "description": "All provided React hooks.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/hooks/use-parallax": {
+      "id": "usage/hooks/use-parallax",
+      "title": "useParallax",
+      "description": "Main hook for applying parallax effects to a DOM element. Any of the documented effects and configurations can be passed as params to the hook.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/hooks/use-parallax-controller": {
+      "id": "usage/hooks/use-parallax-controller",
+      "title": "useParallaxController",
+      "description": "This hook provides you access to the ParallaxController via React context. The hook must be called in a component rendered within the ``. The most common usage of the controller is to update cache if the page layout has changed.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/parallax-props": {
+      "id": "usage/parallax-props",
+      "title": "Parallax Props",
+      "description": "The following hooks and components accept the parallax prop configurations that setup scroll effects in the Parallax Controller.",
+      "sidebar": "tutorialSidebar"
+    },
+    "usage/usage": {
+      "id": "usage/usage",
+      "title": "Usage",
+      "description": "First Step",
+      "sidebar": "tutorialSidebar"
+    }
+  }
+}

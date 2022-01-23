@@ -1,0 +1,28 @@
+{
+  "unversionedId": "examples/advanced-banners",
+  "id": "examples/advanced-banners",
+  "title": "Advanced Banners",
+  "description": "The `` accepts advanced configurations that can allow you to really push the effect. Building off the previous banner demos, this one adds a number of configuration options.",
+  "source": "@site/docs/examples/advanced-banners.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/advanced-banners",
+  "permalink": "/docs/examples/advanced-banners",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/advanced-banners.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "hide_title": true,
+    "title": "Advanced Banners",
+    "sidebar_position": 4
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Parallax Banners",
+    "permalink": "/docs/examples/banners"
+  },
+  "next": {
+    "title": "Easing Animation",
+    "permalink": "/docs/examples/easing"
+  }
+}

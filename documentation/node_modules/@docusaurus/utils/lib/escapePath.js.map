@@ -1,0 +1,1 @@
+{"version":3,"file":"escapePath.js","sourceRoot":"","sources":["../src/escapePath.ts"],"names":[],"mappings":";AAAA;;;;;GAKG;;;AAEH;;;;;;;;;GASG;AACH,SAAgB,UAAU,CAAC,GAAW;IACpC,MAAM,OAAO,GAAG,IAAI,CAAC,SAAS,CAAC,GAAG,CAAC,CAAC;IAEpC,uCAAuC;IACvC,OAAO,OAAO,CAAC,SAAS,CAAC,CAAC,EAAE,OAAO,CAAC,MAAM,GAAG,CAAC,CAAC,CAAC;AAClD,CAAC;AALD,gCAKC"}

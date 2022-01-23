@@ -1,0 +1,70 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+:root {
+  --ifm-pills-color-active: var(--ifm-color-primary);
+  --ifm-pills-color-background-active: var(--ifm-hover-overlay);
+  --ifm-pills-spacing: 0.0625rem;
+}
+
+.pills {
+  font-weight: var(--ifm-font-weight-bold);
+  padding-left: 0;
+
+  &__item {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    @mixin transition background;
+
+    &--active {
+      background: var(--ifm-pills-color-background-active);
+      color: var(--ifm-pills-color-active);
+    }
+
+    &:not(&--active):hover {
+      background-color: var(--ifm-pills-color-background-active);
+    }
+
+    &:not(:first-child) {
+      margin-left: var(--ifm-pills-spacing);
+    }
+
+    &:not(:last-child) {
+      margin-right: var(--ifm-pills-spacing);
+    }
+
+    & + & {
+      margin-top: 0;
+    }
+  }
+
+  &--block {
+    display: flex;
+    justify-content: stretch;
+
+    @media (--ifm-narrow-window) {
+      flex-direction: column;
+    }
+
+    ^&__item {
+      flex-grow: 1;
+      text-align: center;
+
+      @media (--ifm-narrow-window) {
+        &:not(:first-child) {
+          margin-top: var(--ifm-pills-spacing);
+        }
+
+        &:not(:last-child) {
+          margin-bottom: var(--ifm-pills-spacing);
+        }
+      }
+    }
+  }
+}

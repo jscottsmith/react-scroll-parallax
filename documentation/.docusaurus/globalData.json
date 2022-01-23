@@ -1,0 +1,103 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "examples/advanced-banners",
+              "path": "/docs/examples/advanced-banners",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "examples/banners",
+              "path": "/docs/examples/banners",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "examples/easing",
+              "path": "/docs/examples/easing",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "examples/how-it-works",
+              "path": "/docs/examples/how-it-works",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "examples/scroll-effects",
+              "path": "/docs/examples/scroll-effects",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "migration-guides/v1-migration-guide",
+              "path": "/docs/migration-guides/v1-migration-guide",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "migration-guides/v2-migration-guide",
+              "path": "/docs/migration-guides/v2-migration-guide",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/components/components",
+              "path": "/docs/usage/components/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/components/parallax-banner-component",
+              "path": "/docs/usage/components/parallax-banner-component",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/components/parallax-component",
+              "path": "/docs/usage/components/parallax-component",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/components/parallax-provider",
+              "path": "/docs/usage/components/parallax-provider",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/hooks/hooks",
+              "path": "/docs/usage/hooks/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/hooks/use-parallax",
+              "path": "/docs/usage/hooks/use-parallax",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/hooks/use-parallax-controller",
+              "path": "/docs/usage/hooks/use-parallax-controller",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/parallax-props",
+              "path": "/docs/usage/parallax-props",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "usage/usage",
+              "path": "/docs/usage/",
+              "sidebar": "tutorialSidebar"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

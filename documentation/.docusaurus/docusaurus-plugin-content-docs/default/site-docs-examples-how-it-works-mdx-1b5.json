@@ -1,0 +1,26 @@
+{
+  "unversionedId": "examples/how-it-works",
+  "id": "examples/how-it-works",
+  "title": "How it works",
+  "description": "As the element scrolls past the viewport a css translate effect is applied based on the original element's position relative to the viewport. Using the speed will automatically apply a translateY css style (or translateX if the scroll axis is horizontal).",
+  "source": "@site/docs/examples/how-it-works.mdx",
+  "sourceDirName": "examples",
+  "slug": "/examples/how-it-works",
+  "permalink": "/docs/examples/how-it-works",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/examples/how-it-works.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ParallaxBanner",
+    "permalink": "/docs/usage/components/parallax-banner-component"
+  },
+  "next": {
+    "title": "Scroll Effects",
+    "permalink": "/docs/examples/scroll-effects"
+  }
+}

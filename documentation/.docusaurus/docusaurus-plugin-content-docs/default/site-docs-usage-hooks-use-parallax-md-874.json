@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/hooks/use-parallax",
+  "id": "usage/hooks/use-parallax",
+  "title": "useParallax",
+  "description": "Main hook for applying parallax effects to a DOM element. Any of the documented effects and configurations can be passed as params to the hook.",
+  "source": "@site/docs/usage/hooks/use-parallax.md",
+  "sourceDirName": "usage/hooks",
+  "slug": "/usage/hooks/use-parallax",
+  "permalink": "/docs/usage/hooks/use-parallax",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/hooks/use-parallax.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "useParallaxController",
+    "permalink": "/docs/usage/hooks/use-parallax-controller"
+  },
+  "next": {
+    "title": "Components",
+    "permalink": "/docs/usage/components/"
+  }
+}

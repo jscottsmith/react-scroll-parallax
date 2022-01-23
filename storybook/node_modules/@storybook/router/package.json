@@ -1,0 +1,64 @@
+{
+  "name": "@storybook/router",
+  "version": "6.4.12",
+  "description": "Core Storybook Router",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/main/lib/router",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "lib/router"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/ts3.9/index.d.ts",
+  "typesVersions": {
+    "<3.8": {
+      "dist/ts3.9/*": [
+        "dist/ts3.4/*"
+      ]
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare.js"
+  },
+  "dependencies": {
+    "@storybook/client-logger": "6.4.12",
+    "core-js": "^3.8.2",
+    "fast-deep-equal": "^3.1.3",
+    "global": "^4.4.0",
+    "history": "5.0.0",
+    "lodash": "^4.17.21",
+    "memoizerific": "^1.11.3",
+    "qs": "^6.10.0",
+    "react-router": "^6.0.0",
+    "react-router-dom": "^6.0.0",
+    "ts-dedent": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "9ce1a3b24f39b4a3307a1a23531271ce1fc738c2",
+  "sbmodern": "dist/modern/index.js"
+}

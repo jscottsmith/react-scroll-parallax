@@ -1,0 +1,26 @@
+{
+  "unversionedId": "usage/components/parallax-banner-component",
+  "id": "usage/components/parallax-banner-component",
+  "title": "ParallaxBanner",
+  "description": "Component that sets up layers of useParallax elements to achieve a parallaxing banner. Enables the layering of images, or custom markup, with scroll effects in a container that hides overflow.",
+  "source": "@site/docs/usage/components/parallax-banner-component.md",
+  "sourceDirName": "usage/components",
+  "slug": "/usage/components/parallax-banner-component",
+  "permalink": "/docs/usage/components/parallax-banner-component",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/components/parallax-banner-component.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ParallaxProvider",
+    "permalink": "/docs/usage/components/parallax-provider"
+  },
+  "next": {
+    "title": "How it works",
+    "permalink": "/docs/examples/how-it-works"
+  }
+}

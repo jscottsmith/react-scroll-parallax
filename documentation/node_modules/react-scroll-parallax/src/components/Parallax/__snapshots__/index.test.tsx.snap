@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given the <Parallax> component when normal configurations are given then it renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="class-foo"
+    style="border: 2px solid red; will-change: transform; transform: translateX(100%)translateY(100%);"
+  >
+    <div
+      class="foo"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { disabled: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { easing: 'easeInQuad' } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { easing: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { onChange: [Function: onChange] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { onEnter: [Function: onEnter] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { onExit: [Function: onExit] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { onProgressChange: [Function: onProgressChange] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { opacity: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform,opacity; opacity: 1;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { rootMargin: [Object] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { rotate: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: rotate(1turn);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { rotateX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: rotateX(1turn);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { rotateY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: rotateY(1turn);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { rotateZ: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: rotateZ(1turn);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { scale: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: scale(1);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { scaleX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: scaleX(1);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { scaleY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: scaleY(1);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { scaleZ: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: scaleZ(1);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { shouldAlwaysCompleteAnimation: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { shouldDisableScalingTranslations: true } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { speed: 10 } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: translateY(-100px);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { startScroll: 0, endScroll: 1000 } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { targetElement: HTMLDivElement {} } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { translateX: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: translateX(100%);"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component when the prop { translateY: [Array] } is given then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="will-change: transform; transform: translateY(100%);"
+  />
+</DocumentFragment>
+`;

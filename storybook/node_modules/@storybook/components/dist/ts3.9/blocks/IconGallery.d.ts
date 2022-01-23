@@ -1,0 +1,13 @@
+import { FunctionComponent } from 'react';
+interface IconItemProps {
+    name: string;
+}
+/**
+ * An individual icon with a caption and an example (passed as `children`).
+ */
+export declare const IconItem: FunctionComponent<IconItemProps>;
+/**
+ * Show a grid of icons, as specified by `IconItem`.
+ */
+export declare const IconGallery: FunctionComponent;
+export {};

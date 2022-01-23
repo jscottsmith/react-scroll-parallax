@@ -1,0 +1,34 @@
+{
+  "name": "@svgr/babel-plugin-remove-jsx-attribute",
+  "description": "Remove JSX attribute",
+  "version": "6.0.0",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "repository": "https://github.com/gregberge/svgr/tree/master/packages/babel-plugin-remove-jsx-attribute",
+  "author": "Greg Bergé <berge.greg@gmail.com>",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "babel-plugin"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "homepage": "https://react-svgr.com",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/gregberge"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  },
+  "scripts": {
+    "reset": "rm -rf dist",
+    "build": "rollup -c ../../build/rollup.config.js",
+    "prepublishOnly": "npm run reset && npm run build"
+  },
+  "gitHead": "af9a6cbd4387180c7d6683713330a7ffcfb600e9"
+}

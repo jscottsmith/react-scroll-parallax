@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/hooks/use-parallax-controller",
+  "id": "usage/hooks/use-parallax-controller",
+  "title": "useParallaxController",
+  "description": "This hook provides you access to the ParallaxController via React context. The hook must be called in a component rendered within the ``. The most common usage of the controller is to update cache if the page layout has changed.",
+  "source": "@site/docs/usage/hooks/use-parallax-controller.md",
+  "sourceDirName": "usage/hooks",
+  "slug": "/usage/hooks/use-parallax-controller",
+  "permalink": "/docs/usage/hooks/use-parallax-controller",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/hooks/use-parallax-controller.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Hooks",
+    "permalink": "/docs/usage/hooks/"
+  },
+  "next": {
+    "title": "useParallax",
+    "permalink": "/docs/usage/hooks/use-parallax"
+  }
+}

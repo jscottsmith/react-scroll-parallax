@@ -1,0 +1,104 @@
+{
+  "/__docusaurus/debug-3d6": {
+    "component": "component---theme-debug-config-23-a-2ff"
+  },
+  "/__docusaurus/debug/config-914": {
+    "component": "component---theme-debug-config-23-a-2ff"
+  },
+  "/__docusaurus/debug/content-c28": {
+    "component": "component---theme-debug-contentba-8-ce7",
+    "allContent": "allContent---docusaurus-debug-content-246-9aa"
+  },
+  "/__docusaurus/debug/globalData-3cf": {
+    "component": "component---theme-debug-global-dataede-0fa"
+  },
+  "/__docusaurus/debug/metadata-31b": {
+    "component": "component---theme-debug-site-metadata-68-e-3d4"
+  },
+  "/__docusaurus/debug/registry-0da": {
+    "component": "component---theme-debug-registry-679-501"
+  },
+  "/__docusaurus/debug/routes-244": {
+    "component": "component---theme-debug-routes-946-699"
+  },
+  "/blog/archive-f4c": {
+    "component": "component---theme-blog-archive-page-9-e-4-1d8",
+    "archive": "archive---blog-archiveb-2-f-393"
+  },
+  "/docs-dce": {
+    "component": "component---theme-doc-page-1-be-9be",
+    "versionMetadata": "versionMetadata---docs-935-398"
+  },
+  "/docs/examples/advanced-banners-abe": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-examples-advanced-bannersd-73-0c5"
+  },
+  "/docs/examples/banners-f85": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-examples-banners-4-e-4-dc3"
+  },
+  "/docs/examples/easing-59f": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-examples-easingbe-5-ab9"
+  },
+  "/docs/examples/how-it-works-6e3": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-examples-how-it-works-1-b-5-27b"
+  },
+  "/docs/examples/scroll-effects-244": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-examples-scroll-effectsf-4-d-9e3"
+  },
+  "/docs/intro-99a": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-introf-84-2b4"
+  },
+  "/docs/migration-guides/v1-migration-guide-5f0": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-migration-guides-v-1-migration-guide-7-d-0-943"
+  },
+  "/docs/migration-guides/v2-migration-guide-242": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-migration-guides-v-2-migration-guide-6-fb-57b"
+  },
+  "/docs/usage/-214": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-ef-9-3e2"
+  },
+  "/docs/usage/components/-c2a": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-components-cd-0-7ee"
+  },
+  "/docs/usage/components/parallax-banner-component-216": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-components-parallax-banner-component-011-216"
+  },
+  "/docs/usage/components/parallax-component-eca": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-components-parallax-componentace-798"
+  },
+  "/docs/usage/components/parallax-provider-de6": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-components-parallax-providere-61-482"
+  },
+  "/docs/usage/hooks/-f38": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-hooks-545-f18"
+  },
+  "/docs/usage/hooks/use-parallax-013": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-hooks-use-parallax-874-632"
+  },
+  "/docs/usage/hooks/use-parallax-controller-6e9": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-hooks-use-parallax-controller-4-f-1-005"
+  },
+  "/docs/usage/parallax-props-fa9": {
+    "component": "component---theme-doc-item-178-a40",
+    "content": "content---docs-usage-parallax-props-483-27b"
+  },
+  "/-f49": {
+    "component": "component---site-src-pages-index-tsx-1-df-d3e",
+    "config": "config---5-e-9-4f3"
+  }
+}

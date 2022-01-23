@@ -1,0 +1,57 @@
+{
+  "name": "remark-admonitions",
+  "version": "1.2.1",
+  "description": "Add admonitions support to remark",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node test/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:fix"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elviswolcott/remark-admonitions.git"
+  },
+  "keywords": [
+    "remark",
+    "docusaurus",
+    "admonitions",
+    "markdown",
+    "mdx",
+    "plugin"
+  ],
+  "author": "Elvis Wolcott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elviswolcott/remark-admonitions/issues"
+  },
+  "homepage": "https://github.com/elviswolcott/remark-admonitions#readme",
+  "dependencies": {
+    "rehype-parse": "^6.0.2",
+    "unified": "^8.4.2",
+    "unist-util-visit": "^2.0.1"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "compiler": "^0.1.2",
+    "diff": "^4.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.0.6",
+    "prettier": "^1.19.1",
+    "rehype-document": "^3.2.1",
+    "rehype-format": "^3.0.0",
+    "rehype-stringify": "^6.0.1",
+    "remark-parse": "^7.0.2",
+    "remark-rehype": "^5.0.0",
+    "to-vfile": "^6.0.0",
+    "vfile-reporter": "^6.0.0"
+  }
+}

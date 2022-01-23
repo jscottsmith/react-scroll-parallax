@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usage/hooks/hooks",
+  "id": "usage/hooks/hooks",
+  "title": "Hooks",
+  "description": "All provided React hooks.",
+  "source": "@site/docs/usage/hooks/hooks.md",
+  "sourceDirName": "usage/hooks",
+  "slug": "/usage/hooks/",
+  "permalink": "/docs/usage/hooks/",
+  "editUrl": "https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation/docs/usage/hooks/hooks.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Parallax Props",
+    "permalink": "/docs/usage/parallax-props"
+  },
+  "next": {
+    "title": "useParallaxController",
+    "permalink": "/docs/usage/hooks/use-parallax-controller"
+  }
+}

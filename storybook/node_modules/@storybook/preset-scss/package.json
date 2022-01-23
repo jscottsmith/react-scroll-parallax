@@ -1,0 +1,40 @@
+{
+  "name": "@storybook/preset-scss",
+  "version": "1.0.3",
+  "description": "SCSS preset for Storybook",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/storybookjs/presets/tree/master/packages/preset-scss",
+  "bugs": {
+    "url": "https://github.com/storybookjs/presets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/presets.git",
+    "directory": "packages/preset-scss"
+  },
+  "scripts": {
+    "build": "exit 0;",
+    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 8008"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@storybook/react": "^5.3.17",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "node-sass": "^4.9.3",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.22.1"
+  },
+  "peerDependencies": {
+    "css-loader": "*",
+    "sass-loader": "*",
+    "style-loader": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
