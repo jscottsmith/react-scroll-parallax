@@ -15,18 +15,18 @@ React hooks and components to create parallax scroll effects for banners, images
 
 If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](https://react-scroll-parallax.damnthat.tv/docs/migration-guides/v2-migration-guide).
 
-## Install (v3 beta)
+## Install
 
 With npm
 
 ```
-npm install react-scroll-parallax@beta
+npm install react-scroll-parallax
 ```
 
 or yarn
 
 ```
-yarn add react-scroll-parallax@beta
+yarn add react-scroll-parallax
 ```
 
 ## Getting Started
