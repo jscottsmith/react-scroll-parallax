@@ -1,4 +1,4 @@
-<a href="https://react-scroll-parallax.v3.damnthat.tv/"><img src="https://react-scroll-parallax.v3.damnthat.tv/img/logo.png" style="width:96px;height:auto;"></a>
+<a href="https://react-scroll-parallax.damnthat.tv/"><img src="https://react-scroll-parallax.damnthat.tv/img/logo.png" style="width:96px;height:auto;"></a>
 
 # React Scroll Parallax
 
@@ -13,7 +13,7 @@
 
 React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes [Parallax Controller](https://parallax-controller.v1.damnthat.tv) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.v1.damnthat.tv/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
 
-If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](https://react-scroll-parallax.v3.damnthat.tv/docs/migration-guides/v2-migration-guide).
+If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](https://react-scroll-parallax.damnthat.tv/docs/migration-guides/v2-migration-guide).
 
 ## Install (v3 beta)
 
@@ -31,10 +31,10 @@ yarn add react-scroll-parallax@beta
 
 ## Getting Started
 
-Read the [documentation](https://react-scroll-parallax.v3.damnthat.tv/) for setup and usage instructions.
+Read the [documentation](https://react-scroll-parallax.damnthat.tv/) for setup and usage instructions.
 
-- [Usage](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/)
-- [How it works](https://react-scroll-parallax.v3.damnthat.tv/docs/examples/how-it-works)
+- [Usage](https://react-scroll-parallax.damnthat.tv/docs/usage/)
+- [How it works](https://react-scroll-parallax.damnthat.tv/docs/examples/how-it-works)
 
 ### Demos
 
@@ -44,11 +44,11 @@ Read the [documentation](https://react-scroll-parallax.v3.damnthat.tv/) for setu
 
 ### Docs: Hooks
 
-- [`useParallax()`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/hooks/use-parallax)
-- [`useParallaxController()`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/hooks/use-parallax-controller)
+- [`useParallax()`](https://react-scroll-parallax.damnthat.tv/docs/usage/hooks/use-parallax)
+- [`useParallaxController()`](https://react-scroll-parallax.damnthat.tv/docs/usage/hooks/use-parallax-controller)
 
 ### Docs: Components
 
-- [`<Parallax>`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/components/parallax-component)
-- [`<ParallaxBanner>`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/components/parallax-banner-component)
-- [`<ParallaxProvider>`](https://react-scroll-parallax.v3.damnthat.tv/docs/usage/components/parallax-provider)
+- [`<Parallax>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-component)
+- [`<ParallaxBanner>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-banner-component)
+- [`<ParallaxProvider>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-provider)
