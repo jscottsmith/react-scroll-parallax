@@ -26,14 +26,6 @@ or yarn
 yarn add react-scroll-parallax
 ```
 
-## Test the Latest Version
-
-A new `beta` version is in the works that offers a simpler setup but more flexibility for advanced scroll effects. You can find more information here or leave feedback: [V3 Issue](https://github.com/jscottsmith/react-scroll-parallax/issues/123).
-
-```
-yarn add react-scroll-parallax@beta
-```
-
 ## Overview
 
 - [Usage](#usage)
@@ -106,16 +98,16 @@ The main component for manipulating a DOM element's position based on it's posit
 
 The following are all props that can be passed to the `<Parallax>` component:
 
-| Name           |              Type               | Default  | Description                                                                                                                          |
-| -------------- | :-----------------------------: | :------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **x**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **y**          | `Array` of `String` or `Number` | `[0, 0]` | Initial and final offsets on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width. |
-| **className**  |            `String`             |          | Optionally pass additional class names to be added to the outermost parallax element.                                                |
-| **disabled**   |            `Boolean`            | `false`  | Disables parallax effects on individual elements when `true`.                                                                        |
-| **styleInner** |            `Object`             |          | Optionally pass a style object to be added to the innermost parallax element.                                                        |
-| **styleOuter** |            `Object`             |          | Optionally pass a style object to be added to the outermost parallax element.                                                        |
-| **tagInner**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                                                 |
-| **tagOuter**   |            `String`             | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                                                 |
+| Name           |           Type           | Default  | Description                                                                                                                           |
+| -------------- | :----------------------: | :------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **x**          | `string[]` or `number[]` | `[0, 0]` | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.  |
+| **y**          | `string[]` or `number[]` | `[0, 0]` | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height. |
+| **className**  |         `string`         |          | Optionally pass additional class names to be added to the outermost parallax element.                                                 |
+| **disabled**   |        `boolean`         | `false`  | Disables parallax effects on individual elements when `true`.                                                                         |
+| **styleInner** |         `object`         |          | Optionally pass a style object to be added to the innermost parallax element.                                                         |
+| **styleOuter** |         `object`         |          | Optionally pass a style object to be added to the outermost parallax element.                                                         |
+| **tagInner**   |         `string`         | `div`    | Optionally pass an element tag name to be applied to the innermost parallax element.                                                  |
+| **tagOuter**   |         `string`         | `div`    | Optionally pass an element tag name to be applied to the outermost parallax element.                                                  |
 
 ## \<ParallaxBanner>
 
@@ -152,22 +144,22 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 
 | Name          |   Type    | Default | Description                                                                                                                                |
 | ------------- | :-------: | :------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **className** | `String`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                               |
-| **disabled**  | `Boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                      |
-| **layers**    |  `Array`  |         | A required `Array` of `Objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg' }]`. [See layers prop below](#banner-layers-prop) |
-| **style**     | `Object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                       |
+| **className** | `string`  |         | Optionally pass additional class names to be added to the outermost parallax banner element.                                               |
+| **disabled**  | `boolean` | `false` | Determines if the internal parallax layers will have offsets applied.                                                                      |
+| **layers**    |  `array`  |         | A required `array` of `objects` with layer properties: `[{ amount: 0.1, image: 'foo.jpg' }]`. [See layers prop below](#banner-layers-prop) |
+| **style**     | `object`  |         | Optionally pass a style object to be added to the outermost parallax banner element.                                                       |
 
 ### Banner Layers Prop
 
 The `layers` prop takes an array of objects that will represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
-| Name         |   Type    | Default | Description                                                                                                                                              |
-| ------------ | :-------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **amount**   | `Number`  |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
-| **children** | `Element` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
-| **expanded** | `Boolean` | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
-| **image**    | `String`  |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
-| **props**    | `Object`  |         | Props to apply to the layer element. Example: `{ props: style: { background: 'red' }}`                                                                   |
+| Name         |      Type      | Default | Description                                                                                                                                              |
+| ------------ | :------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **amount**   |    `number`    |         | A value from `-1` to `1` that represents the vertical offset to be applied to the current layer, `0.1` would equal a `10%` offset on the top and bottom. |
+| **children** | `ReactElement` |         | Custom layer children provided as a React element, for example `<Video />`                                                                               |
+| **expanded** |   `boolean`    | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                            |
+| **image**    |    `string`    |         | Image source that will be applied as a CSS background image on the layer.                                                                                |
+| **props**    |    `object`    |         | Props to apply to the layer element. Example: `{ props: style: { background: 'red' }}`                                                                   |
 
 ## \<ParallaxProvider>
 
@@ -187,10 +179,10 @@ const AppContainer = () => (
 
 The following props configure the `<ParallaxProvider>` component:
 
-| Name                |   Type    | Default    | Description                                                                                                  |
-| ------------------- | :-------: | :--------- | ------------------------------------------------------------------------------------------------------------ |
-| **scrollAxis**      | `String`  | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal` |
-| **scrollContainer** | `Element` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the HTML body |
+| Name                |     Type      | Default    | Description                                                                                                  |
+| ------------------- | :-----------: | :--------- | ------------------------------------------------------------------------------------------------------------ |
+| **scrollAxis**      |   `string`    | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal` |
+| **scrollContainer** | `HTMLElement` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the HTML body |
 
 ### Parallax Controller Context
 
