@@ -24,7 +24,7 @@ const AppContainer = () => (
 
 :::info
 
-You can have multiple providers, however they will all be independent instances of a `ParallaxController`. It's recommended to only use one when possible.
+You can have multiple providers, however they will all be independent instances of a [`ParallaxController`](https://parallax-controller.damnthat.tv/docs/api/parallax-controller/). It's recommended to only use one when possible.
 
 :::
 
@@ -39,9 +39,9 @@ The following props configure the `<ParallaxProvider>` component:
 
 ## Example: Scroll Container
 
-By default the <ParallaxProvider\> uses the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`. Here's how:
+By default the `<ParallaxProvider>` uses the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`. Here's how:
 
-```tsx
+```tsx title="ScrollContainer.tsx"
 import * as React from 'react';
 import { ParallaxProvider } from 'react-scroll-parallax';
 
