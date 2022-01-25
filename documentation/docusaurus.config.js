@@ -24,9 +24,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // TODO: update url after v3 is latest
           editUrl:
-            'https://github.com/jscottsmith/react-scroll-parallax/tree/v3/documentation',
+            'https://github.com/jscottsmith/react-scroll-parallax/tree/master/documentation',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
