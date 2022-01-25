@@ -4,7 +4,7 @@
 
 ### Wrap with a ParallaxProvider
 
-The [`<ParallaxProvider/>`](/docs/usage/components/parallax-provider) must wrap the component tree that contains all `<Parallax>` components. This should be a top level component like `<App>` and will provide necessary access through the React context API to the [Parallax Controller](https://parallax-controller.vercel.app/docs/intro). For example:
+The [`<ParallaxProvider/>`](/docs/usage/components/parallax-provider) must wrap the component root that contains all [components](/docs/usage/components/) or [hooks](/docs/usage/hooks/) that use the parallax context. This should be a top level component like `<App>` and will provide necessary access through the React context API to the [Parallax Controller](https://parallax-controller.vercel.app/docs/intro). For example:
 
 ```jsx
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -28,7 +28,7 @@ After wrapping the app with a provider you can start adding parallax effects.
 
 ### With useParallax()
 
-Then import the `useParallax` hook and use it anywhere within the provider. Here's an example that uses the `speed` prop so simply speed up (or slowdown) the rate of scroll.
+Then import the [`useParallax`](/docs/usage/hooks/use-parallax) hook and use it anywhere within the provider. Here's an example that uses the [`speed`](/docs/usage/parallax-props#configuration-props) prop so simply speed up (or slowdown) the rate of scroll.
 
 ```jsx
 import { useParallax } from 'react-scroll-parallax';
@@ -49,7 +49,7 @@ Any of the [documented effects and configurations](https://parallax-controller.v
 
 ### Or with <Parallax\>
 
-You can also use the `Parallax` component. Here's an example that will transform the element on the `translateY` axis starting at `-20%` and ending at `20%` (`[-20, 20]` \*percent is assumed with no provided unit).
+You can also use the [`<Parallax>`](/docs/usage/components/parallax-component) component. Here's an example that will transform the element on the [`translateY`](/docs/usage/parallax-props#css-effect-props) axis starting at `-20%` and ending at `20%` (`[-20, 20]` \*percent is assumed with no provided unit).
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
@@ -69,7 +69,7 @@ The component will apply the effect styles to a `div` managed by the component a
 
 Any of the [documented effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as props to the component.
 
-This example uses the `translateX` transform starting at `-100px` and ending at `200px`.
+This example uses the [`translateX`](/docs/usage/parallax-props#css-effect-props) transform starting at `-100px` and ending at `200px`.
 
 ```jsx
 import { Parallax } from 'react-scroll-parallax';
