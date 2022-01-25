@@ -24,8 +24,8 @@ All other non-parallax props will be passed through to the `<div>`. Example with
 <Parallax style={{ background: 'blue' }} className="test" />
 ```
 
-```html
-<div style="background:'blue'" className="test"></div>
+```html title="Output HTML"
+<div style="background: blue" className="test"></div>
 ```
 
 ### Children
