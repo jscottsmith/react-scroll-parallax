@@ -6,6 +6,10 @@ sidebar_position: 3
 
 Component that sets up layers of `useParallax` elements to achieve a parallaxing banner. Enables the layering of images, or custom markup, with scroll effects in a container that hides overflow.
 
+```tsx
+import { ParallaxBanner } from 'react-scroll-parallax';
+```
+
 ### Working Demos
 
 See some example [code with demos](/docs/examples/banners).

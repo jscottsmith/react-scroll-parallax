@@ -6,13 +6,15 @@ sidebar_position: 2
 
 The `<ParallaxProvider />` component is meant to wrap a root level component in your application and is necessary to provide access through the React context API to the [Parallax Controller](https://parallax-controller.vercel.app/docs/intro).
 
-## Basic Example
+```tsx
+import { ParallaxProvider } from 'react-scroll-parallax';
+```
+
+## Examples
 
 This component should only be used once in your app, for instance in an `<AppContainer />` component that won't be mounted/unmounted during route changes. Like so:
 
 ```tsx
-import { ParallaxProvider } from 'react-scroll-parallax';
-
 const AppContainer = () => (
   <ParallaxProvider>
     <Router>
@@ -28,7 +30,7 @@ You can have multiple providers, however they will all be independent instances 
 
 :::
 
-## ParallaxProvider Props
+## Props
 
 The following props configure the `<ParallaxProvider>` component:
 
@@ -37,9 +39,29 @@ The following props configure the `<ParallaxProvider>` component:
 | **scrollAxis**      |   `string`    | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal`             |
 | **scrollContainer** | `HTMLElement` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the document scroll body. |
 
-## Example: Scroll Container
+## More Examples
 
-By default the `<ParallaxProvider>` uses the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`. Here's how:
+Using props you can configure the provider for the following conditions.
+
+### Horizontal Scrolling
+
+If your app's overflow is horizontal, you'll need to change the `scrollAxis`:
+
+```tsx
+const AppContainer = () => (
+  <ParallaxProvider scrollAxis="horizontal">
+    <Router>
+      <App />
+    </Router>
+  </ParallaxProvider>
+);
+```
+
+### Scroll Container
+
+By default the `<ParallaxProvider>` uses the document scrolling element. If your app's overflow is a unique element you need to provide the element as the `scrollContainer`.
+
+Here's how you can do that using React hooks to set a `ref` to a DOM element. The `useEffect` will be called once after mounting then update state with the element to be passed to the provider.
 
 ```tsx title="ScrollContainer.tsx"
 import * as React from 'react';
