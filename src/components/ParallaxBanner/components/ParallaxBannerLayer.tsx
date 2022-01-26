@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { useParallax } from '../../..';
+import { useParallax } from '../../../hooks/useParallax';
 import { getIsolatedParallaxProps } from '../../../helpers/getIsolatedParallaxProps';
 import { getExpandedStyle } from '../helpers/getExpandedStyle';
 import { getImageStyle } from '../helpers/getImageStyle';
