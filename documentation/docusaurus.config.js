@@ -9,7 +9,7 @@ const config = {
   title: 'React Scroll Parallax',
   tagline:
     'React components to create parallax scroll effects for banners, images or any other DOM elements.',
-  url: 'https://react-scroll-parallax.v3.damnthat.tv',
+  url: 'https://react-scroll-parallax.damnthat.tv',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
