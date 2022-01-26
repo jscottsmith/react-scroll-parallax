@@ -12,6 +12,8 @@
     "hooks",
     "component"
   ],
+  "homepage": "https://react-scroll-parallax.damnthat.tv",
+  "bugs": "https://github.com/jscottsmith/react-scroll-parallax/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/jscottsmith/react-scroll-parallax"
