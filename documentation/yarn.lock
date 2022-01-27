@@ -5403,9 +5403,9 @@ package-json@^6.3.0:
     semver "^6.2.0"
 
 parallax-controller@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-1.3.0.tgz#13da9f62de778ddba2fe6e96682b6c0815140516"
-  integrity sha512-0rY8r5+bxE2+Gr1nShCKQuMAOHUgEGIXb8ne3TmotplOBA75AnTXjyPnnoTcdKeapcA4yLG8K0xQoRCRlXZluQ==
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-1.3.1.tgz#d59926bcedefc33fe81119a05262abd6edf3ba37"
+  integrity sha512-lM+FjFxbP/WCpgqnmC/o87UomjcmmbtV4U3qTq9riGGZdK3S5jmZ2dq55ZCiOTAMNzGwh2CfQ9X+YgJMllJtEQ==
   dependencies:
     bezier-easing "^2.1.0"
 
