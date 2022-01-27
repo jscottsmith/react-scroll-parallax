@@ -4,6 +4,7 @@ sidebar_position: 2
 
 import { ExampleRotation } from '/src/components/example-rotation';
 import { RotationAxis } from '/src/components/rotation-axis';
+import { ExampleScale } from '/src/components/example-scale';
 
 # Scroll Effects
 
@@ -57,3 +58,38 @@ const Component = () => {
 ```
 
 <RotationAxis />
+
+## Scale
+
+You can [scale](/docs/usage/parallax-props#available-css-effects) an element up or down and along any axis.
+
+```tsx
+const Component = () => {
+  const mage = useParallax<HTMLDivElement>({
+    scale: [0.5, 1, 'easeInQuad'],
+  });
+
+  const frog = useParallax<HTMLDivElement>({
+    scaleX: [1, 0, 'easeInQuad'],
+  });
+
+  const moon = useParallax<HTMLDivElement>({
+    scale: [1.5, 1, 'easeInQuad'],
+  });
+  return (
+    <div className="spinner">
+      <div className="mage" ref={mage.ref}>
+        🧙🏻‍♂️
+      </div>
+      <div className="frog" ref={frog.ref}>
+        🐸
+      </div>
+      <div className="moon" ref={moon.ref}>
+        🌚
+      </div>
+    </div>
+  );
+};
+```
+
+<ExampleScale />
