@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # useParallax
 
 Main hook for applying parallax effects to a DOM element. Any of the documented [effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as params to the hook.
