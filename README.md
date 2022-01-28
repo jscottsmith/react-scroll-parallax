@@ -29,6 +29,31 @@ or yarn
 yarn add react-scroll-parallax
 ```
 
+## Example
+
+[Create effects](https://react-scroll-parallax.damnthat.tv/docs/examples/how-it-works) with a hook:
+
+```jsx
+function Component() {
+  const parallax = useParallax({
+    speed: -10,
+  });
+  return <div ref={parallax.ref} />;
+}
+```
+
+or with a component:
+
+```jsx
+function Component() {
+  return (
+    <Parallax speed={-10}>
+      <div />
+    </Parallax>
+  );
+}
+```
+
 ## Getting Started
 
 Read the [documentation](https://react-scroll-parallax.damnthat.tv/) for setup and usage instructions.
