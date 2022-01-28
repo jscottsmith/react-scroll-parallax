@@ -1,10 +1,17 @@
+import { ScrollAxis } from 'parallax-controller';
 import React from 'react';
+import { PropsWithChildren } from 'react';
 import { ParallaxProvider } from '../src';
 
-export const Container = ({ children, scrollAxis, className }) => (
-  <ParallaxProvider scrollAxis={scrollAxis}>
-    <div className={scrollAxis}>
-      <div className={className}>{children}</div>
+type ContainerProps = PropsWithChildren<{
+  scrollAxis: ScrollAxis;
+  className?: string;
+}>;
+
+export const Container = (props: ContainerProps) => (
+  <ParallaxProvider scrollAxis={props.scrollAxis}>
+    <div className={props.scrollAxis}>
+      <div className={props.className}>{props.children}</div>
     </div>
   </ParallaxProvider>
 );

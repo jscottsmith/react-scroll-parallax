@@ -7,6 +7,7 @@ import styles from './Parallax.module.scss';
 import { useRef } from 'react';
 import { CSSEffect } from 'parallax-controller';
 import { useState } from 'react';
+import { ParallaxProps } from '../../src/components/Parallax/types';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');
@@ -175,31 +176,38 @@ StartAnimationAtInitialPosition.args = {
   endTranslateX: -80,
 };
 
+const propConfigs: ParallaxProps[] = [
+  {
+    translateY: [`100%`, `-100%`, 'easeInOutQuad'],
+    translateX: [`100%`, `-100%`],
+  },
+  { translateY: [`-100%`, `100%`], translateX: [`-100%`, `100%`] },
+  { scale: [0, 1], translateX: [`-100%`, `100%`] },
+  { scale: [1, 0, 'easeInCubic'], translateY: [`-100%`, `100%`] },
+  { rotate: [0, 360], scale: [1, 0, 'easeInOutBack'] },
+  { rotate: [0, -360, 'easeInExpo'], scale: [0, 1] },
+  { translateY: [`-100%`, `100%`], rotateY: [0, 360] },
+  {
+    translateX: [`-100%`, `100%`, 'easeInCubic'],
+    opacity: [0, 1, 'easeInCubic'],
+  },
+];
+
 export const WithAHundredElements = () => {
   const amount = 100;
-  const offset = 50;
   const elements = new Array(amount).fill(null).map((x, i) => i);
 
   return (
     <Container scrollAxis="vertical">
       <div className={styles.elements}>
         {elements.map((_, i) => {
-          const even = i % 2 === 0;
-          const props = {
-            translateX: [
-              even ? `${offset}%` : `${-offset}%`,
-              even ? `${-offset}%` : `${offset}%`,
-            ],
-            translateY: [
-              even ? `${offset}%` : `${-offset}%`,
-              even ? `${-offset}%` : `${offset}%`,
-            ],
-          };
-
+          const props: ParallaxProps = propConfigs[i % propConfigs.length];
           return (
-            <Parallax key={i} className={styles.small} {...props}>
-              <Element name={i + 1} />
-            </Parallax>
+            <div key={i} className={styles.small} style={{ perspective: 800 }}>
+              <Parallax {...props}>
+                <Element name={i + 1} />
+              </Parallax>
+            </div>
           );
         })}
       </div>
