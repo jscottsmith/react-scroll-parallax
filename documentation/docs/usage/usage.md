@@ -45,7 +45,7 @@ The hook will apply the effect styles directly to the element that the `ref` is 
 
 :::
 
-Any of the [documented effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as params to the hook.
+Any of the [documented effects and configurations](/docs/usage/parallax-props) can be passed as params to the hook.
 
 ### Or with <Parallax\>
 
@@ -67,7 +67,7 @@ The component will apply the effect styles to a `div` managed by the component a
 
 :::
 
-Any of the [documented effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as props to the component.
+Any of the [documented effects and configurations](/docs/usage/parallax-props) can be passed as props to the component.
 
 This example uses the [`translateX`](/docs/usage/parallax-props#css-effect-props) transform starting at `-100px` and ending at `200px`.
 

@@ -106,12 +106,12 @@ All other props are defined on the root `div` element.
 
 The `layers` prop takes an array of objects that represent each image (or custom children) of the parallax banner. The following properties describe a layer object:
 
-| Name         |          Type           | Default | Description                                                                                                                                                                                                                                        |
-| ------------ | :---------------------: | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **children** |     `ReactElement`      |         | Custom layer children provided as a React element, for example `<Video />`                                                                                                                                                                         |
-| **expanded** |        `boolean`        | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                                                                                                                      |
-| **image**    |        `string`         |         | Image source that will be applied as a CSS `background-image` on the layer set to `cover`.                                                                                                                                                         |
-| `...rest`    | `ParallaxElementConfig` |         | All known parallax props will be passed to `useParallax`. [See all the parallax props](https://parallax-controller.vercel.app/docs/usage/props) that this hook will accept. All other properties are spread to the `<div>` representing the layer. |
+| Name         |          Type           | Default | Description                                                                                                                                                                                                           |
+| ------------ | :---------------------: | :------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **children** |     `ReactElement`      |         | Custom layer children provided as a React element, for example `<Video />`                                                                                                                                            |
+| **expanded** |        `boolean`        | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                                                                                         |
+| **image**    |        `string`         |         | Image source that will be applied as a CSS `background-image` on the layer set to `cover`.                                                                                                                            |
+| `...rest`    | `ParallaxElementConfig` |         | All known parallax props will be passed to `useParallax`. [See all the parallax props](/docs/usage/parallax-props) that this hook will accept. All other properties are spread to the `<div>` representing the layer. |
 
 ```jsx
 <ParallaxBanner

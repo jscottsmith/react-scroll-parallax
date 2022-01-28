@@ -14,7 +14,7 @@ import { Parallax } from 'react-scroll-parallax';
 
 All props to configure the parallax element, like CSS effects, are documented and managed by the `parallax-controller`.
 
-[See all the parallax props](https://parallax-controller.vercel.app/docs/usage/props) that this component will accept.
+[See all the parallax props](/docs/usage/parallax-props) that this component will accept.
 
 ### Non Parallax Props
 

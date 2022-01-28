@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # useParallax
 
-Main hook for applying parallax effects to a DOM element. Any of the documented [effects and configurations](https://parallax-controller.vercel.app/docs/usage/props) can be passed as params to the hook.
+Main hook for applying parallax effects to a DOM element. Any of the documented [effects and configurations](/docs/usage/parallax-props) can be passed as params to the hook.
 
 ```tsx
 import { useParallax } from 'react-scroll-parallax';
@@ -12,12 +12,11 @@ import { useParallax } from 'react-scroll-parallax';
 
 ## Example
 
-To use the hook assign the `ref` returned to the element that you would like to apply effects to. Then provide the hook with the [prop configuration](https://parallax-controller.vercel.app/docs/usage/props) for the effects you need.
+To use the hook assign the `ref` returned to the element that you would like to apply effects to. Then provide the hook with the [prop configuration](/docs/usage/parallax-props) for the effects you need.
 
 ```tsx
 function Component() {
-  const props = { speed: 10 };
-  const { ref } = useParallax<HTMLDivElement>(props);
+  const { ref } = useParallax<HTMLDivElement>({ speed: 10 });
   return <div ref={ref} />;
 }
 ```
