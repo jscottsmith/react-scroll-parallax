@@ -2,6 +2,7 @@
 sidebar_position: 3
 ---
 
+import { ParallaxBannerSingle } from '/src/components/parallax-banner-single';
 import { ParallaxBannerImages } from '/src/components/parallax-banner-images';
 import { ParallaxBannerWithHeadline } from '/src/components/parallax-banner-with-headline';
 import { ParallaxBannerEmbedHeadline } from '/src/components/parallax-banner-embed-headline';
@@ -9,6 +10,35 @@ import { ParallaxBannerEmbedHeadline } from '/src/components/parallax-banner-emb
 # Parallax Banners
 
 The following demonstrates some common usage of the [`<ParallaxBanner>`](/docs/usage/components/parallax-banner-component) component.
+
+```ts
+import { ParallaxBanner } from 'react-scroll-parallax';
+```
+
+## Example with a Single Image
+
+A single parallaxing image within a banner is achieved by adding a single layer object with an `image` and `speed`:
+
+```tsx
+const Component = () => {
+  return (
+    <ParallaxBanner
+      layers={[{ image: '/static/banner.jpg', speed: -15 }]}
+      className="aspect-[2/1]"
+    />
+  );
+};
+```
+
+<ParallaxBannerSingle />
+
+Be sure to set a style by either a `className` or the `style` prop that will give the banner container a `height`. You could also use an aspect ratio like the example above which uses a class that sets the `aspect-ratio` to `2 / 1`.
+
+:::tip
+
+The parallax effect is more natural when the image moves slower than the page, `speed < 0`.
+
+:::
 
 ## Example with Multiple Layers
 
@@ -20,8 +50,6 @@ The `speed` prop is used to make the layer move at it's own pace.
 The foreground `speed` is defined so that it will move faster than the background:
 
 ```tsx
-import { ParallaxBanner } from 'react-scroll-parallax';
-
 const Component = () => {
   return (
     <ParallaxBanner
@@ -35,9 +63,9 @@ const Component = () => {
 };
 ```
 
-:::info
+:::tip
 
-For the most _natural_ visual effect make the layer `speed` depend on the distance of the image: the closer the items in the image the **faster** they should move; the further away the **slower** they should move.
+For the most natural visual effect with multiple layers make each layer `speed` depend on the distance of the image: the closer the items in the image the **faster** they should move; the further away the **slower** they should move.
 
 :::
 
@@ -48,8 +76,6 @@ For the most _natural_ visual effect make the layer `speed` depend on the distan
 By defining `children` you can add any markup for a headline or any other custom elements. In the following example the headline is positioned absolutely over each banner layer.
 
 ```tsx
-import { ParallaxBanner } from 'react-scroll-parallax';
-
 const Component = () => {
   return (
     <ParallaxBanner
@@ -74,8 +100,6 @@ const Component = () => {
 You can take the effect even further by embedding the headline in the scene. This can be done by defining another layer and assigning the markup to the `children` of that layer.
 
 ```tsx
-import { ParallaxBanner } from 'react-scroll-parallax';
-
 const Component = () => {
   return (
     <ParallaxBanner

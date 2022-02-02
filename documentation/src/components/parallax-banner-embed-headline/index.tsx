@@ -6,8 +6,7 @@ export const ParallaxBannerEmbedHeadline = () => {
     <ParallaxBanner
       layers={[
         {
-          image:
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
+          image: '/img/banner-background.jpg',
           speed: -30,
         },
         {
@@ -21,8 +20,7 @@ export const ParallaxBannerEmbedHeadline = () => {
           ),
         },
         {
-          image:
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png',
+          image: '/img/banner-foreground.png',
           speed: -10,
         },
       ]}
