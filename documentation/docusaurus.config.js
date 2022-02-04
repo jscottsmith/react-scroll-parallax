@@ -41,15 +41,15 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      algolia: {
-        appId: 'GKA17TPGZY',
-        // Public API key: it is safe to commit it
-        apiKey: '5251323a8662d33e1f8a15a3f5d603c2',
-        indexName: 'react-scroll-parallax',
-        contextualSearch: true,
-        externalUrlRegex: 'external\\.com|domain\\.com',
-        searchParameters: {},
-      },
+      // algolia: {
+      //   appId: 'GKA17TPGZY',
+      //   // Public API key: it is safe to commit it
+      //   apiKey: '5251323a8662d33e1f8a15a3f5d603c2',
+      //   indexName: 'react-scroll-parallax',
+      //   contextualSearch: true,
+      //   externalUrlRegex: 'external\\.com|domain\\.com',
+      //   searchParameters: {},
+      // },
       navbar: {
         hideOnScroll: true,
         title: 'React Scroll Parallax',
