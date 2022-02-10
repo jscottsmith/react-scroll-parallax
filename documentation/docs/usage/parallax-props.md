@@ -71,7 +71,7 @@ The **end** of an effect begins when the bottom of the element exits the top of 
 
 :::info
 
-See a demo of [how progress is determined](http://localhost:3000/docs/examples/how-it-works#progress-is-relative-to-the-view).
+See a demo of [how progress is determined](/docs/examples/how-it-works#progress-is-relative-to-the-view).
 
 :::
 
