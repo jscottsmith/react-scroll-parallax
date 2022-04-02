@@ -108,6 +108,7 @@
     "@types/jest": "^27.0.3",
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
+    "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
     "css-loader": "^5.0.0",
     "husky": "^7.0.4",
