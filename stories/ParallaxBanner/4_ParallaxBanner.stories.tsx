@@ -1,5 +1,6 @@
 import React from 'react';
 import { ParallaxBanner, ParallaxProvider } from '../../src';
+import { ParallaxBannerLayer } from '../../src/components/ParallaxBanner/components/ParallaxBannerLayer';
 import styles from './ParallaxBanner.module.scss';
 
 const Log = () => {
@@ -28,7 +29,7 @@ const Log = () => {
 
 const Wrapper = (props) => (
   <ParallaxProvider>
-    <Log />
+    {/* <Log /> */}
     <div style={{ height: '300vh' }} className="vertical">
       <div className={styles.bannerContainer}>{props.children}</div>
     </div>
@@ -107,6 +108,25 @@ export const WithMultipleBackground = () => (
       ]}
       style={{ aspectRatio: '2 / 1' }}
     />
+  </Wrapper>
+);
+
+export const WithMultipleBackgroundsUsingBannerLayerComponents = () => (
+  <Wrapper>
+    <ParallaxBanner
+      className={styles.bannerBg}
+      style={{ aspectRatio: '2 / 1' }}
+    >
+      <ParallaxBannerLayer
+        image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg"
+        speed={-20}
+      />
+      <ParallaxBannerLayer
+        image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png"
+        speed={-10}
+      />
+      <div>nope</div>
+    </ParallaxBanner>
   </Wrapper>
 );
 

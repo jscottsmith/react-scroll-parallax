@@ -14,7 +14,7 @@ const absoluteStyle: CSSProperties = {
 };
 
 export const ParallaxBannerLayer = (
-  props: BannerLayer & { testId: string }
+  props: BannerLayer & { testId?: string }
 ) => {
   const { parallaxProps, rest } = getIsolatedParallaxProps(props);
   const {
