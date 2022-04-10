@@ -218,6 +218,50 @@ describe('given the <Parallax> component', () => {
       expect(controller.updateElementPropsById).toHaveBeenCalledTimes(2);
     });
 
+    it('then it handles disabled prop updates', () => {
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      controller.updateElementPropsById = jest.fn();
+      controller.resetElementStyles = jest.fn();
+
+      function Wrapper(props: PropsWithChildren<{}>) {
+        return (
+          <MockProvider controllerMock={controller}>
+            {props.children}
+          </MockProvider>
+        );
+      }
+
+      const { rerender } = render(
+        <Parallax
+          disabled={false}
+          translateX={[100, -100]}
+          translateY={[-100, 100]}
+        />,
+        {
+          wrapper: Wrapper,
+        }
+      );
+
+      rerender(
+        <Parallax
+          disabled={true}
+          translateX={[100, -100]}
+          translateY={[-100, 100]}
+        />
+      );
+
+      const element = controller.getElements()[0];
+
+      expect(controller.resetElementStyles).toBeCalledWith(element);
+      expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
+        disabled: true,
+        translateX: [100, -100],
+        translateY: [-100, 100],
+      });
+    });
+
     it('then it resets styles on an element if the disabled prop is true', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
