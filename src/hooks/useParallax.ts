@@ -42,6 +42,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     if (element) {
       if (props.disabled) {
         controller?.resetElementStyles(element);
+        controller?.updateElementPropsById(element.id, parallaxProps);
       } else {
         controller?.updateElementPropsById(element.id, parallaxProps);
       }
