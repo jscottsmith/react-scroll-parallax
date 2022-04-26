@@ -80,19 +80,19 @@ See a demo of [how progress is determined](/docs/examples/how-it-works#progress-
 
 These are all the supported CSS effects:
 
-| Name           |           Type           | Description                                                                                                                           |
-| -------------- | :----------------------: | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **translateX** | `string[]` or `number[]` | Start and end translation on x-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements width.  |
-| **translateY** | `string[]` or `number[]` | Start and end translation on y-axis in `%` or `px`. If no unit is passed percent is assumed. Percent is based on the elements height. |
-| **rotate**     | `string[]` or `number[]` | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                   |
-| **rotateX**    | `string[]` or `number[]` | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                   |
-| **rotateY**    | `string[]` or `number[]` | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                   |
-| **rotateZ**    | `string[]` or `number[]` | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                   |
-| **scale**      |        `number[]`        | Start and end scale on x-axis and y-axis.                                                                                             |
-| **scaleX**     |        `number[]`        | Start and end scale on x-axis.                                                                                                        |
-| **scaleY**     |        `number[]`        | Start and end scale on y-axis.                                                                                                        |
-| **scaleZ**     |        `number[]`        | Start and end scale on z-axis.                                                                                                        |
-| **opacity**    |        `number[]`        | Start and end opacity value.                                                                                                          |
+| Name           |           Type           | Description                                                                                                                                       |
+| -------------- | :----------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **translateX** | `string[]` or `number[]` | Start and end translation on x-axis in `%`, `px`, `vw` or `vh`. If no unit is passed percent is assumed. Percent is based on the elements width.  |
+| **translateY** | `string[]` or `number[]` | Start and end translation on y-axis in `%`, `px`, `vw` or `vh`. If no unit is passed percent is assumed. Percent is based on the elements height. |
+| **rotate**     | `string[]` or `number[]` | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                               |
+| **rotateX**    | `string[]` or `number[]` | Start and end rotation on x-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                               |
+| **rotateY**    | `string[]` or `number[]` | Start and end rotation on y-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                               |
+| **rotateZ**    | `string[]` or `number[]` | Start and end rotation on z-axis in `deg`, `rad`, or `turn`. If no unit is passed `deg` is assumed.                                               |
+| **scale**      |        `number[]`        | Start and end scale on x-axis and y-axis.                                                                                                         |
+| **scaleX**     |        `number[]`        | Start and end scale on x-axis.                                                                                                                    |
+| **scaleY**     |        `number[]`        | Start and end scale on y-axis.                                                                                                                    |
+| **scaleZ**     |        `number[]`        | Start and end scale on z-axis.                                                                                                                    |
+| **opacity**    |        `number[]`        | Start and end opacity value.                                                                                                                      |
 
 ## Callback Props
 
