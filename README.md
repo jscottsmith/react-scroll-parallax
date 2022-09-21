@@ -6,6 +6,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/react-scroll-parallax)](https://www.npmjs.com/package/react-scroll-parallax)
 [![Codecov](https://codecov.io/gh/jscottsmith/react-scroll-parallax/branch/v3/graph/badge.svg)](https://codecov.io/gh/jscottsmith/react-scroll-parallax)
 [![Rate on Openbase](https://badges.openbase.com/js/rating/react-scroll-parallax.svg)](https://openbase.com/js/react-scroll-parallax?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/jscottsmith/react-scroll-parallax)
 
 [![Test and Lint](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/main.yml)
 [![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml)
