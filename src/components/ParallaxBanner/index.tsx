@@ -55,7 +55,7 @@ export const ParallaxBanner = (
           PropsWithChildren<{ targetElement: any }>
         >;
         // adds the targetElement prop to any ParallaxBannerLayer components
-        if (item.type === ParallaxBannerLayer) {
+        if (item?.type === ParallaxBannerLayer) {
           const clone = React.cloneElement(item, {
             targetElement,
           });
