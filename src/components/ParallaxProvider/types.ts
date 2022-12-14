@@ -1,6 +1,6 @@
 import { ValidScrollAxis } from 'parallax-controller';
 
-export interface ParallaxProviderProps {
+export type ParallaxProviderProps = {
   /**
    * Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of vertical or
    * horizontal
@@ -11,4 +11,8 @@ export interface ParallaxProviderProps {
    * to the HTML body
    */
   scrollContainer?: HTMLElement;
-}
+  /**
+   * Disables all parallax elements in the ParallaxController.
+   */
+  isParallaxDisabled?: boolean;
+};

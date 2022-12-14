@@ -20,10 +20,27 @@ export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
     });
   }
 
+  componentDidMount() {
+    if (this.props.isParallaxDisabled) {
+      this.controller?.disableAllElements();
+    }
+  }
+
   componentDidUpdate(prevProps: ParallaxProviderProps) {
-    if (prevProps.scrollContainer !== this.props.scrollContainer) {
-      // @ts-ignore
-      this.controller.updateScrollContainer(this.props.scrollContainer);
+    if (
+      prevProps.scrollContainer !== this.props.scrollContainer &&
+      this.props.scrollContainer
+    ) {
+      this.controller?.updateScrollContainer(this.props.scrollContainer);
+    }
+
+    if (prevProps.isParallaxDisabled !== this.props.isParallaxDisabled) {
+      if (this.props.isParallaxDisabled) {
+        this.controller?.disableAllElements();
+      }
+      if (!this.props.isParallaxDisabled) {
+        this.controller?.enableAllElements();
+      }
     }
   }
 

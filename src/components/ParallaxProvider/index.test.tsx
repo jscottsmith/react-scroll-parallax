@@ -48,6 +48,41 @@ describe('A <ParallaxProvider>', () => {
     expect(parallaxController).toBeInstanceOf(ParallaxController);
   });
 
+  it('to disable parallax elements and re-enable', () => {
+    let parallaxController: ParallaxController | null = null;
+
+    const ContextChecker = () => {
+      parallaxController = useParallaxController();
+      if (parallaxController) {
+        parallaxController.disableAllElements = jest.fn();
+        parallaxController.enableAllElements = jest.fn();
+      }
+      return null;
+    };
+
+    const context = render(
+      <ParallaxProvider isParallaxDisabled>
+        <ContextChecker />
+      </ParallaxProvider>
+    );
+
+    expect(
+      // @ts-expect-error
+      parallaxController.disableAllElements
+    ).toBeCalled();
+
+    context.rerender(
+      <ParallaxProvider>
+        <ContextChecker />
+      </ParallaxProvider>
+    );
+
+    expect(
+      // @ts-expect-error
+      parallaxController.enableAllElements
+    ).toBeCalled();
+  });
+
   it('to destroy the controller when unmounting', () => {
     const node = document.createElement('div');
 
