@@ -34,10 +34,11 @@ You can have multiple providers, however they will all be independent instances 
 
 The following props configure the `<ParallaxProvider>` component:
 
-| Name                |     Type      | Default    | Description                                                                                                              |
-| ------------------- | :-----------: | :--------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **scrollAxis**      |   `string`    | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal`             |
-| **scrollContainer** | `HTMLElement` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the document scroll body. |
+| Name                   |     Type      | Default    | Description                                                                                                              |
+| ---------------------- | :-----------: | :--------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **scrollAxis**         |   `string`    | `vertical` | Optionally pass the scroll axis for setting horizontal/vertical scrolling. One of `vertical` or `horizontal`             |
+| **scrollContainer**    | `HTMLElement` | `<body>`   | Optionally set the container that has overflow and will contain parallax elements. Defaults to the document scroll body. |
+| **isParallaxDisabled** |   `boolean`   | `false`    | Disables all parallax elements in the ParallaxController when true.                                                      |
 
 ## More Examples
 
@@ -80,6 +81,24 @@ const ScrollContainer = () => {
         {props.children}
       </ParallaxProvider>
     </div>
+  );
+};
+```
+
+### Disabling All Parallax Elements
+
+With the `isParallaxDisabled` prop you may disable every parallax element in the provider when a condition is met, instead of individually. This can be helpful to disable parallax in certain situations like on mobile devices, or for users who [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion). Elements will be re-enabled when `isParallaxDisabled` is `true`.
+
+```tsx
+const App = () => {
+  const userPrefersReducedMotion = useMediaQuery({
+    query: '(prefers-reduced-motion)',
+  });
+
+  return (
+    <ParallaxProvider isParallaxDisabled={userPrefersReducedMotion}>
+      {props.children}
+    </ParallaxProvider>
   );
 };
 ```
