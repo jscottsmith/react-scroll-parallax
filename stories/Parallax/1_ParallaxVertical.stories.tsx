@@ -215,6 +215,32 @@ export const WithAHundredElements = () => {
   );
 };
 
+export const WithParallaxElementsGloballyDisabled = (args) => {
+  const amount = 100;
+  const elements = new Array(amount).fill(null).map((x, i) => i);
+
+  return (
+    <Container scrollAxis="vertical" isParallaxDisabled={args.isDisabled}>
+      <div className={styles.elements}>
+        {elements.map((_, i) => {
+          const props: ParallaxProps = propConfigs[i % propConfigs.length];
+          return (
+            <div key={i} className={styles.small} style={{ perspective: 800 }}>
+              <Parallax {...props}>
+                <Element name={i + 1} />
+              </Parallax>
+            </div>
+          );
+        })}
+      </div>
+    </Container>
+  );
+};
+
+WithParallaxElementsGloballyDisabled.args = {
+  isDisabled: true,
+};
+
 export const InsideADiv = () => {
   const amount = 2;
   const offA = -50;
