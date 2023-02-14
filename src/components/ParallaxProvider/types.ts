@@ -11,4 +11,6 @@ export interface ParallaxProviderProps {
    * to the HTML body
    */
   scrollContainer?: HTMLElement;
+
+  children?: React.ReactNode;
 }
