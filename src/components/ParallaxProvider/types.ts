@@ -11,4 +11,8 @@ export interface ParallaxProviderProps {
    * to the HTML body
    */
   scrollContainer?: HTMLElement;
+  /**
+   * Disables the ParallaxController and all animations.
+   */
+  isDisabled?: boolean;
 }
