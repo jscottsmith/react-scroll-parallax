@@ -5,7 +5,12 @@ const FALLBACK_RECT = {
   height: 0,
 };
 
-export function getExpandedStyle(layer: BannerLayer) {
+type ExpandedStyle = {
+  top?: string;
+  bottom?: string;
+};
+
+export function getExpandedStyle(layer: BannerLayer): ExpandedStyle {
   if (Array.isArray(layer.translateY)) {
     const translateYStart = parseValueAndUnit(layer.translateY[0]);
     const translateYEnd = parseValueAndUnit(layer.translateY[1]);
@@ -19,7 +24,7 @@ export function getExpandedStyle(layer: BannerLayer) {
 
     if (translateYStart.unit === '%' && translateYEnd.unit === '%') {
       const clientRect =
-        layer.targetElement?.getBoundingClientRect() || FALLBACK_RECT;
+        layer.targetElement?.getBoundingClientRect() ?? FALLBACK_RECT;
       const top = Math.abs(clientRect.height * 0.01 * translateYEnd.value) * -1;
       const bottom =
         Math.abs(clientRect.height * 0.01 * translateYStart.value) * -1;
@@ -29,13 +34,16 @@ export function getExpandedStyle(layer: BannerLayer) {
       };
     }
   }
+
   if (layer.speed) {
     const speed = layer.speed || 0;
+    const absSpeed = Math.abs(speed) * 10 * -1;
 
     return {
-      top: Math.abs(speed) * 10 * -1 + 'px',
-      bottom: Math.abs(speed) * 10 * -1 + 'px',
+      top: `${absSpeed}px`,
+      bottom: `${absSpeed}px`,
     };
   }
+
   return {};
 }
