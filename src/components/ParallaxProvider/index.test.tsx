@@ -68,8 +68,8 @@ describe('A <ParallaxProvider>', () => {
 
     expect(
       // @ts-expect-error
-      parallaxController.disableParallaxController
-    ).toBeCalled();
+      parallaxController.disabled
+    ).toBe(true);
 
     context.rerender(
       <ParallaxProvider>
