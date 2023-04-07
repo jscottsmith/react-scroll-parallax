@@ -15,4 +15,5 @@ export interface ParallaxProviderProps {
    * Disables the ParallaxController and all animations.
    */
   isDisabled?: boolean;
+  children?: React.ReactNode;
 }
