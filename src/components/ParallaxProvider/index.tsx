@@ -17,13 +17,8 @@ export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
     this.controller = createController({
       scrollAxis: props.scrollAxis,
       scrollContainer: props.scrollContainer,
+      disabled: props.isDisabled,
     });
-  }
-
-  componentDidMount() {
-    if (this.props.isDisabled) {
-      this.controller?.disableParallaxController();
-    }
   }
 
   componentDidUpdate(prevProps: ParallaxProviderProps) {
