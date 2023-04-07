@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-parallax",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "React hooks and components to create parallax scroll effects for banners, images or any other DOM elements.",
   "keywords": [
     "react",
@@ -92,7 +92,7 @@
     }
   ],
   "dependencies": {
-    "parallax-controller": "^1.5.0"
+    "parallax-controller": "^1.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
