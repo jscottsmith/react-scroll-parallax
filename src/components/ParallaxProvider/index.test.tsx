@@ -84,59 +84,53 @@ describe('A <ParallaxProvider>', () => {
   });
 
   it('to destroy the controller when unmounting', () => {
-    const node = document.createElement('div');
+    let parallaxController: ParallaxController | null = null;
+    const AddDestroySpy = () => {
+      parallaxController = useParallaxController();
+      if (parallaxController) {
+        jest.spyOn(parallaxController, 'destroy');
+      }
+      return null;
+    };
 
-    let instance;
-    ReactDOM.render(
-      <ParallaxProvider ref={(ref) => (instance = ref)}>
-        <div />
-      </ParallaxProvider>,
-      node
+    const screen = render(
+      <ParallaxProvider>
+        <AddDestroySpy />
+      </ParallaxProvider>
     );
 
-    // @ts-ignore
-    instance.controller.destroy = jest.fn();
-    // @ts-ignore
-    const spy = instance.controller.destroy;
-
-    ReactDOM.unmountComponentAtNode(node);
-
-    expect(spy).toBeCalled();
+    screen.unmount();
+    // @ts-expect-error
+    expect(parallaxController?.destroy).toBeCalled();
   });
 
   it('to update the scroll container when receiving a new container el', () => {
-    const node = document.createElement('div');
-    let instance;
-    let providerInstance;
+    let parallaxController: ParallaxController | null = null;
 
-    class StateChanger extends React.Component {
-      state = { el: undefined };
-      render() {
-        return (
-          <ParallaxProvider
-            scrollContainer={this.state.el}
-            ref={(ref) => (providerInstance = ref)}
-          >
-            <div />
-          </ParallaxProvider>
-        );
+    const AddUpdateSpy = () => {
+      parallaxController = useParallaxController();
+      if (parallaxController) {
+        jest.spyOn(parallaxController, 'updateScrollContainer');
       }
-    }
-
-    ReactDOM.render(<StateChanger ref={(ref) => (instance = ref)} />, node);
+      return null;
+    };
 
     const el = document.createElement('div');
+    const screen = render(
+      <ParallaxProvider>
+        <AddUpdateSpy />
+      </ParallaxProvider>
+    );
 
-    // @ts-ignore
-    providerInstance.controller.updateScrollContainer = jest.fn();
-    // @ts-ignore
-    const spy = providerInstance.controller.updateScrollContainer;
-    // @ts-ignore
-    instance.setState({ el });
+    screen.rerender(
+      <ParallaxProvider scrollContainer={el}>
+        <AddUpdateSpy />
+      </ParallaxProvider>
+    );
 
-    ReactDOM.unmountComponentAtNode(node);
-
-    expect(spy).toBeCalledWith(el);
+    screen.unmount();
+    // @ts-expect-error
+    expect(parallaxController?.updateScrollContainer).toBeCalledWith(el);
   });
 
   // NOTE: I think this test can be removed
@@ -150,10 +144,15 @@ describe('A <ParallaxProvider>', () => {
     const node2 = document.createElement('div');
 
     const render = (node: HTMLDivElement) => {
-      let instance;
+      let instance: ParallaxController | null = null;
+      const GetInstance = () => {
+        instance = useParallaxController();
+        return null;
+      };
       ReactDOM.render(
-        <ParallaxProvider ref={(ref) => (instance = ref)}>
-          <div />
+        // @ts-ignore
+        <ParallaxProvider>
+          <GetInstance />
         </ParallaxProvider>,
         node
       );
@@ -162,19 +161,16 @@ describe('A <ParallaxProvider>', () => {
 
     // first instance mounted
     const instance1 = render(node1);
-    // @ts-ignore
-    expect(instance1.controller).toBeInstanceOf(ParallaxController);
+    expect(instance1).toBeInstanceOf(ParallaxController);
 
     // second instance mounted
     const instance2 = render(node2);
-    // @ts-ignore
-    expect(instance2.controller).toBeInstanceOf(ParallaxController);
+    expect(instance2).toBeInstanceOf(ParallaxController);
 
     // unmount first instance
     ReactDOM.unmountComponentAtNode(node1);
 
     // this must still be defined
-    // @ts-ignore
-    expect(instance2.controller).toBeInstanceOf(ParallaxController);
+    expect(instance2).toBeInstanceOf(ParallaxController);
   });
 });
