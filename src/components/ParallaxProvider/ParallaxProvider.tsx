@@ -1,56 +1,49 @@
-import React, { Component } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 
 import { ParallaxContext } from '../../context/ParallaxContext';
-import { ParallaxController, ScrollAxis } from 'parallax-controller';
+import { ScrollAxis } from 'parallax-controller';
 import { ParallaxProviderProps } from './types';
 import { createController } from './helpers';
 
-export class ParallaxProvider extends Component<ParallaxProviderProps, {}> {
-  static defaultProps = {
-    scrollAxis: ScrollAxis.vertical,
-  };
-
-  controller: ParallaxController | null;
-
-  constructor(props: ParallaxProviderProps) {
-    super(props);
-    this.controller = createController({
-      scrollAxis: props.scrollAxis,
+export function ParallaxProvider(
+  props: PropsWithChildren<ParallaxProviderProps>
+) {
+  const controller = useRef(
+    createController({
+      scrollAxis: props.scrollAxis || ScrollAxis.vertical,
       scrollContainer: props.scrollContainer,
       disabled: props.isDisabled,
-    });
-  }
+    })
+  );
 
-  componentDidUpdate(prevProps: ParallaxProviderProps) {
-    if (
-      prevProps.scrollContainer !== this.props.scrollContainer &&
-      this.props.scrollContainer
-    ) {
-      this.controller?.updateScrollContainer(this.props.scrollContainer);
+  // update scroll container
+  useEffect(() => {
+    if (props.scrollContainer && controller.current) {
+      controller.current.updateScrollContainer(props.scrollContainer);
     }
+  }, [props.scrollContainer, controller.current]);
 
-    if (prevProps.isDisabled !== this.props.isDisabled) {
-      if (this.props.isDisabled) {
-        this.controller?.disableParallaxController();
-      }
-      if (!this.props.isDisabled) {
-        this.controller?.enableParallaxController();
-      }
+  // disable/enable parallax
+  useEffect(() => {
+    if (props.isDisabled && controller.current) {
+      controller.current.disableParallaxController();
     }
-  }
+    if (!props.isDisabled && controller.current) {
+      controller.current.enableParallaxController();
+    }
+  }, [props.isDisabled, controller.current]);
 
-  componentWillUnmount() {
-    // @ts-ignore
-    this.controller = this.controller.destroy();
-  }
+  // remove the controller when unmounting
+  useEffect(() => {
+    return () => {
+      controller?.current && controller?.current.destroy();
+      controller.current = null;
+    };
+  }, []);
 
-  render() {
-    const { children } = this.props;
-    return (
-      // @ts-ignore
-      <ParallaxContext.Provider value={this.controller}>
-        {children}
-      </ParallaxContext.Provider>
-    );
-  }
+  return (
+    <ParallaxContext.Provider value={controller.current}>
+      {props.children}
+    </ParallaxContext.Provider>
+  );
 }
