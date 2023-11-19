@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 import { ParallaxContext } from '../../context/ParallaxContext';
 import { ScrollAxis } from 'parallax-controller';
@@ -8,41 +8,44 @@ import { createController } from './helpers';
 export function ParallaxProvider(
   props: PropsWithChildren<ParallaxProviderProps>
 ) {
-  const controller = useRef(
+  const [controller] = useState(
     createController({
       scrollAxis: props.scrollAxis || ScrollAxis.vertical,
       scrollContainer: props.scrollContainer,
       disabled: props.isDisabled,
     })
   );
-
   // update scroll container
   useEffect(() => {
-    if (props.scrollContainer && controller.current) {
-      controller.current.updateScrollContainer(props.scrollContainer);
+    if (props.scrollContainer && controller) {
+      controller.updateScrollContainer(props.scrollContainer);
     }
-  }, [props.scrollContainer, controller.current]);
+  }, [props.scrollContainer, controller]);
 
   // disable/enable parallax
   useEffect(() => {
-    if (props.isDisabled && controller.current) {
-      controller.current.disableParallaxController();
+    if (props.isDisabled && controller) {
+      controller.disableParallaxController();
     }
-    if (!props.isDisabled && controller.current) {
-      controller.current.enableParallaxController();
+    if (!props.isDisabled && controller) {
+      controller.enableParallaxController();
     }
-  }, [props.isDisabled, controller.current]);
+  }, [props.isDisabled, controller]);
 
-  // remove the controller when unmounting
+  // enable and disable parallax controller on mount/unmount
   useEffect(() => {
+    // Enable it on mount
+    if (!props.isDisabled && controller) {
+      controller && controller?.enableParallaxController();
+    }
     return () => {
-      controller?.current && controller?.current.destroy();
-      controller.current = null;
+      // Disable it on unmount
+      controller && controller?.disableParallaxController();
     };
   }, []);
 
   return (
-    <ParallaxContext.Provider value={controller.current}>
+    <ParallaxContext.Provider value={controller}>
       {props.children}
     </ParallaxContext.Provider>
   );
