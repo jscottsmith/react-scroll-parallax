@@ -1,20 +1,22 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 
 import { ParallaxContext } from '../../context/ParallaxContext';
-import { ScrollAxis } from 'parallax-controller';
+import { ParallaxController, ScrollAxis } from 'parallax-controller';
 import { ParallaxProviderProps } from './types';
 import { createController } from './helpers';
 
 export function ParallaxProvider(
   props: PropsWithChildren<ParallaxProviderProps>
 ) {
-  const controller = useRef(
-    createController({
+  const controller = useRef<null | ParallaxController>(null);
+
+  if (!controller.current) {
+    controller.current = createController({
       scrollAxis: props.scrollAxis || ScrollAxis.vertical,
       scrollContainer: props.scrollContainer,
       disabled: props.isDisabled,
-    })
-  );
+    });
+  }
 
   // update scroll container
   useEffect(() => {
@@ -37,7 +39,6 @@ export function ParallaxProvider(
   useEffect(() => {
     return () => {
       controller?.current && controller?.current.destroy();
-      controller.current = null;
     };
   }, []);
 

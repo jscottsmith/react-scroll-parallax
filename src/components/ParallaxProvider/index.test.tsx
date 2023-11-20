@@ -7,6 +7,7 @@ import { ParallaxController } from 'parallax-controller';
 import { render } from '@testing-library/react';
 import { ParallaxProvider } from '.';
 import { useParallaxController } from '../../hooks/useParallaxController';
+import * as helpers from './helpers';
 
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
@@ -46,6 +47,15 @@ describe('A <ParallaxProvider>', () => {
     );
     // Expected methods and state
     expect(parallaxController).toBeInstanceOf(ParallaxController);
+  });
+
+  it('calls to createController only once', () => {
+    jest.spyOn(helpers, 'createController');
+    const { rerender } = render(<ParallaxProvider />);
+    rerender(<ParallaxProvider />);
+    rerender(<ParallaxProvider />);
+    rerender(<ParallaxProvider />);
+    expect(helpers.createController).toHaveBeenCalledTimes(1);
   });
 
   it('to disable parallax elements and re-enable', () => {
@@ -100,8 +110,10 @@ describe('A <ParallaxProvider>', () => {
     );
 
     screen.unmount();
-    // @ts-expect-error
-    expect(parallaxController?.destroy).toBeCalled();
+
+    expect(
+      (parallaxController as unknown as ParallaxController)?.destroy
+    ).toBeCalled();
   });
 
   it('to update the scroll container when receiving a new container el', () => {
