@@ -47,7 +47,7 @@ The hook will apply the effect styles directly to the element that the `ref` is 
 
 Any of the [documented effects and configurations](/docs/usage/parallax-props) can be passed as params to the hook.
 
-### Or with <Parallax\>
+### Or with `<Parallax />`
 
 You can also use the [`<Parallax>`](/docs/usage/components/parallax-component) component. Here's an example that will transform the element on the [`translateY`](/docs/usage/parallax-props#css-effect-props) axis starting at `-20%` and ending at `20%` (`[-20, 20]` \*percent is assumed with no provided unit).
 

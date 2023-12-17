@@ -6,7 +6,7 @@ sidebar_position: 1
 
 With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.
 
-### Prop changes for <Parallax\>
+### Prop changes for `<Parallax/>`
 
 If you've used any of the following props rename to new ones, or refactor if they are no longer supported.
 
@@ -34,7 +34,7 @@ change it to:
 const parallaxController = useParallaxController();
 ```
 
-### Prop changes for <ParallaxBanner\>
+### Prop changes for `<ParallaxBanner/>`
 
 Layers now accept all [parallax props](/docs/usage/parallax-props) but you will need to update if you used the `layer.amount` prop.
 
