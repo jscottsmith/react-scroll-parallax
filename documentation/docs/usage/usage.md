@@ -1,6 +1,10 @@
 # Usage
 
-## First Step
+:::info
+If you are using Next 13 see this [guide for the NextJS App Router](/docs/usage/next-13)
+:::
+
+## Setting Up
 
 ### Wrap with a ParallaxProvider
 
@@ -22,7 +26,7 @@ function App() {
 
 ParallaxProvider component [documentation](/docs/usage/components/parallax-provider).
 
-## Next: Create effects
+## Creating effects
 
 After wrapping the app with a provider you can start adding parallax effects.
 
