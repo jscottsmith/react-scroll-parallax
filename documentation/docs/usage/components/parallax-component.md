@@ -61,7 +61,7 @@ const SlowAndFast = () => (
 
 :::info
 
-The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See <ParallaxProvider /> Props](/docs/usage/components/parallax-provider#parallaxprovider-props)
+The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See `<ParallaxProvider />` Props](/docs/usage/components/parallax-provider#parallaxprovider-props)
 
 :::
 
