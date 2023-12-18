@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": ">=18.0"
-   },
+  },
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -41,9 +41,9 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.6",
     "@docusaurus/tsconfig": "3.0.1",
     "@types/react": "^18.2.29",
+    "tailwindcss": "^3.3.6",
     "typescript": "5.3.3"
   }
 }
