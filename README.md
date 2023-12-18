@@ -59,6 +59,7 @@ function Component() {
 Read the [documentation](https://react-scroll-parallax.damnthat.tv/) for setup and usage instructions.
 
 - [Usage](https://react-scroll-parallax.damnthat.tv/docs/usage/)
+- [Usage with NextJS 13](https://react-scroll-parallax.damnthat.tv/docs/usage/next-13)
 - [How it works](https://react-scroll-parallax.damnthat.tv/docs/examples/how-it-works)
 
 ### Demos
