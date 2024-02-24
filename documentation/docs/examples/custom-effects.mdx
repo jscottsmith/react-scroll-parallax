@@ -1,0 +1,51 @@
+---
+sidebar_position: 3
+---
+
+import { CustomEffect } from '/src/components/custom-effect';
+
+# Custom Effects
+
+You can create your own custom effects by using the `onProgressChange` event, along with custom CSS variables. This allows the for animating any CSS property based on the scroll position of an element.
+
+## CSS Variable Examples
+
+With the `useParallax` hook, we can pass in a callback to the `onProgressChange` event. This callback will be called every time the scroll position changes. We can then use the `progress` value to update a CSS variable. Then, either in a CSS file or inline styles, we can use the `var(--progress)` to animate any CSS property.
+
+```tsx
+function Example() {
+  const parallax = useParallax({
+    onProgressChange: (progress) => {
+      if (parallax.ref.current) {
+        // set progress to CSS variable
+        parallax.ref.current.style.setProperty(
+          "--progress",
+          progress.toString()
+        );
+      }
+    },
+  });
+
+  return (
+    <h1
+      ref={parallax.ref}
+      className="text-stroke"
+      // use the progress variable to change the width of the stroke as progress updates
+      style={{ textStrokeWidth: `calc(20px * var(--progress))` }}
+    >
+      Hello World
+    </h1>
+  );
+}
+```
+
+:::info
+
+Try it out for yourself in this CodeSandbox example: [Custom Effects Example](https://codesandbox.io/p/sandbox/react-scroll-parallax-text-stroke-klwy4l)
+
+:::
+
+Using this technique, we can animate any CSS property based on the scroll position of an element. Here's another example of animating the letter spacing and text shadow of a text element:
+
+<CustomEffect/>
+
