@@ -1,0 +1,14 @@
+.text-stroke {
+    font-family: sans-serif;
+    font-size: 15vmin;
+    height: 100px;
+
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+
+    /* color:paleturquoise; */
+    @apply text-blue-400;
+    letter-spacing: calc(2vw * var(--progress) - 1vw);
+    white-space: nowrap;
+    text-shadow: 0 calc(4vw * var(--progress) - 2vw) 0 rgba(156, 163, 175, 0.2);
+}
