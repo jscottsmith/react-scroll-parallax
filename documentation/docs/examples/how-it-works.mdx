@@ -39,13 +39,18 @@ All effects are applied based on the original element's progress. Progress begin
 
 <ElementProgress />
 
-:::info
+## Altering Progress
 
 By design and by default, all elements progress relative to the view. However, there are optional ways to change how progress is calculated:
 
 1. Manually setting [`startScroll` and `endScroll`](/docs/usage/parallax-props#configuration-props) props allows complete control over when the progress starts and ends.
-2. Setting a [`rootMargin`](/docs/usage/parallax-props#configuration-props) will add a invisible margin around the element that can be used to change when the element is in view and its progress.
-3. You can also set [`shouldAlwaysCompleteAnimation`](/docs/usage/parallax-props#configuration-props) to true and if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size.
+2. Use a [`targetElement`](/docs/usage/parallax-props#configuration-props) which will track the progress of the target and apply it to the current element.
+3. Setting a [`rootMargin`](/docs/usage/parallax-props#configuration-props) will add a invisible margin around the element that can be used to change when the element is in view and its progress.
+4. You can also set [`shouldAlwaysCompleteAnimation`](/docs/usage/parallax-props#configuration-props) to true and if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size.
+
+:::warning
+
+Because progress is relative to the view, and [Parallax Controller caches](https://parallax-controller.damnthat.tv/docs/performance#optimizations-to-reduce-jank) the elements position, unexpected issues will occur if you use parallax on a sticky positioned element. If you need to use parallax on a sticky element, consider using a `targetElement` that is not sticky, or predefined `startScroll` and `endScroll` values.
 
 :::
 
