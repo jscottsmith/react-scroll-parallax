@@ -39,7 +39,7 @@ next-app
     └── layout.tsx
 ```
 
-Your layout may differ from the one below — it's is simplified for this example.
+Your layout may differ from the one below — it is simplified for this example.
 
 ```tsx
 import { Providers } from './Providers';
