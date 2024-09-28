@@ -1,10 +1,11 @@
-# Usage with NextJS
 
-This will guide you through a way to setup `react-scroll-parallax` using the [Next 13](https://nextjs.org/blog/next-13) App router.
+# Usage with Next.js
+
+This guide will show you how to set up `react-scroll-parallax` using the [Next 13](https://nextjs.org/blog/next-13) App router.
 
 ## Setting Up the ParallaxProvider
 
-[Next 13](https://nextjs.org/blog/next-13) requires client components to be marked with `use-client`, and the `ParallaxProvider` is a client component. In order to use the providers in your app, first create a `providers.tsx` file in the root of the app directory:
+[Next 13](https://nextjs.org/blog/next-13) requires client components to be marked with `use client`, and the `ParallaxProvider` is a client component. To use the providers in your app, first create a `providers.tsx` file in the root of the app directory:
 
 ```
 next-app
@@ -12,7 +13,7 @@ next-app
     └── providers.tsx
 ```
 
-In this file wrap the children in a `<ParallaxProvider>` and mark it as a client component.
+In this file, wrap the children in a `<ParallaxProvider>` and mark it as a client component.
 
 :::info
 You may add any additional providers you need for your app here in the future.
@@ -39,7 +40,7 @@ next-app
     └── layout.tsx
 ```
 
-Your layout may differ from the one below — it is simplified for this example.
+Your layout may differ from the one below — it's simplified for this example.
 
 ```tsx
 import { Providers } from './Providers';
@@ -61,7 +62,7 @@ export default function RootLayout({
 
 ## Create a Parallax Effect
 
-Next we can create a simple parallax effect in another client component. Add a `test.tsx` file and place a parallax effect within it. We must also make this as a client component with `use client`.
+Next, we can create a simple parallax effect in another client component. Add a `test.tsx` file and place a parallax effect within it. We must also make this a client component with `use client`.
 
 ```
 next-app
@@ -88,7 +89,7 @@ export default function Test() {
 
 ### Use the Parallax within a Page
 
-To add parallax effects to a page, create a `page.tsx` at the route you need. In this example we'll use the homepage so the page exists at the root of the app directory.
+To add parallax effects to a page, create a `page.tsx` at the route you need. In this example, we'll use the homepage, so the page exists at the root of the app directory.
 
 ```
 next-app
@@ -112,4 +113,4 @@ export default function Page() {
 }
 ```
 
-That's it. Now that `react-scroll-parallax` is working in your NextJS application you can add your own effects. See more on [how it works](/docs/examples/how-it-works).
+That's it! Now that `react-scroll-parallax` is working in your Next.js application, you can add your own effects. See more on [how it works](/docs/examples/how-it-works).
