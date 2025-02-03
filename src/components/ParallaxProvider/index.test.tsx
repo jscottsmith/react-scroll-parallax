@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ParallaxController } from 'parallax-controller';
 
 import { render } from '@testing-library/react';
@@ -19,11 +19,11 @@ describe('A <ParallaxProvider>', () => {
     };
 
     const render = () => {
-      ReactDOM.render(
+      const root = createRoot(node);
+      root.render(
         <ParallaxProvider>
           <Child />
-        </ParallaxProvider>,
-        node
+        </ParallaxProvider>
       );
     };
 
@@ -161,26 +161,26 @@ describe('A <ParallaxProvider>', () => {
         instance = useParallaxController();
         return null;
       };
-      ReactDOM.render(
-        // @ts-ignore
+
+      const root = createRoot(node);
+      root.render(
         <ParallaxProvider>
           <GetInstance />
-        </ParallaxProvider>,
-        node
+        </ParallaxProvider>
       );
-      return instance;
+      return { instance, root };
     };
 
     // first instance mounted
-    const instance1 = render(node1);
+    const { instance: instance1, root: root1 } = render(node1);
     expect(instance1).toBeInstanceOf(ParallaxController);
 
     // second instance mounted
-    const instance2 = render(node2);
+    const { instance: instance2 } = render(node2);
     expect(instance2).toBeInstanceOf(ParallaxController);
 
     // unmount first instance
-    ReactDOM.unmountComponentAtNode(node1);
+    root1.unmount();
 
     // this must still be defined
     expect(instance2).toBeInstanceOf(ParallaxController);
