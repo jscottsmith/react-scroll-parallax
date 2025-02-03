@@ -1,39 +1,28 @@
 module.exports = {
   stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
-  addons: [
-    {
-      name: '@storybook/addon-postcss',
-      options: {
-        postcssLoaderOptions: {
-          implementation: require('postcss'),
-          postcssOptions: {
-            plugins: {
-              tailwindcss: {},
-              autoprefixer: {},
-            },
-          },
+
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', {
+    name: '@storybook/preset-scss',
+    options: {
+      rule: {
+        test: /\.module\.s[ca]ss$/,
+      },
+      cssLoaderOptions: {
+        modules: {
+          localIdentName: '[name]__[local]--[hash:base64:5]',
         },
       },
     },
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    {
-      name: '@storybook/preset-scss',
-      options: {
-        rule: {
-          test: /\.module\.s[ca]ss$/,
-        },
-        cssLoaderOptions: {
-          modules: {
-            localIdentName: '[name]__[local]--[hash:base64:5]',
-          },
-        },
-      },
-    },
-  ],
+  }, '@storybook/addon-webpack5-compiler-swc'],
+
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   typescript: {
     check: true, // type-check stories during Storybook build
     // reactDocgen: false, // https://github.com/storybookjs/storybook/issues/15336
   },
+
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
+  }
 };

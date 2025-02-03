@@ -1,6 +1,6 @@
 /* eslint-disable */
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 
 export default function expectRenderError(
   element: any,
@@ -32,8 +32,9 @@ export default function expectRenderError(
   const div = document.createElement('div');
   window.addEventListener('error', handleTopLevelError);
   try {
+    const root = createRoot(div);
     // @ts-ignore
-    ReactDOM.render(<TestBoundary>{element}</TestBoundary>, div);
+    root.render(<TestBoundary>{element}</TestBoundary>, div);
   } finally {
     window.removeEventListener('error', handleTopLevelError);
   }
