@@ -16,10 +16,26 @@ export default [
         },
       },
       globals: {
-        browser: true,
-        es6: true,
-        node: true,
-        jest: true,
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        HTMLElement: 'readonly',
+        HTMLDivElement: 'readonly',
+        DOMRect: 'readonly',
+        console: 'readonly',
+        global: 'readonly',
+        // Jest globals
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
+        // React
+        React: 'readonly',
       },
     },
     plugins: {
@@ -27,6 +43,14 @@ export default [
     },
     rules: {
       ...typescript.configs.recommended.rules,
+      // Relax some strict rules
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      'no-undef': 'off', // TypeScript handles this
+      'no-empty': 'warn',
+      'no-redeclare': 'off', // Jest globals conflict with built-ins
     },
   },
   {
