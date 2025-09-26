@@ -1,4 +1,4 @@
-export { EasingPreset, EffectNumber, EffectString } from 'parallax-controller';
+export { EasingPreset } from 'parallax-controller';
 
 export * from './components/Parallax';
 export * from './components/ParallaxBanner';

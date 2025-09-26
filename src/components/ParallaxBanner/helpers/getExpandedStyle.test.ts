@@ -30,7 +30,7 @@ describe('given getExpandedStyle', () => {
   ])('when props %s are given', (props, expected) => {
     test('then it returns expected', () => {
       const div = document.createElement('div');
-      div.getBoundingClientRect = jest.fn(() => ({ height: 500 } as DOMRect));
+      div.getBoundingClientRect = vi.fn(() => ({ height: 500 } as DOMRect));
       const targetElement = div;
       expect(getExpandedStyle({ targetElement, ...props })).toEqual(expected);
     });

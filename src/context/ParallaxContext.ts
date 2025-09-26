@@ -1,6 +1,5 @@
 import React from 'react';
 import { ParallaxController } from 'parallax-controller';
 
-export const ParallaxContext = React.createContext<ParallaxController | null>(
-  null
-);
+export const ParallaxContext =
+  React.createContext<ParallaxController | null>(null);

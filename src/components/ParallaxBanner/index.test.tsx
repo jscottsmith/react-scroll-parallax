@@ -32,7 +32,7 @@ describe('given a <ParallaxBanner> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
           <MockProvider controllerMock={controller}>
@@ -47,7 +47,7 @@ describe('given a <ParallaxBanner> component', () => {
         }
       );
       expect(asFragment()).toMatchSnapshot();
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props: {
           ...props,
@@ -63,7 +63,7 @@ describe('given a <ParallaxBanner> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
           <MockProvider controllerMock={controller}>
@@ -74,7 +74,7 @@ describe('given a <ParallaxBanner> component', () => {
       render(<ParallaxBanner layers={[{ children: <div /> }]} />, {
         wrapper: Wrapper,
       });
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props: {
           shouldDisableScalingTranslations: true,

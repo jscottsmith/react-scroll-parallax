@@ -12,7 +12,7 @@ import * as helpers from './helpers';
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
     const node = document.createElement('div');
-    const child = jest.fn();
+    const child = vi.fn();
     const Child = () => {
       child();
       return <div />;
@@ -29,7 +29,7 @@ describe('A <ParallaxProvider>', () => {
 
     render();
 
-    expect(child).toBeCalled();
+    expect(child).toHaveBeenCalled();
   });
 
   it('to pass the controller context', () => {
@@ -50,7 +50,7 @@ describe('A <ParallaxProvider>', () => {
   });
 
   it('calls to createController only once', () => {
-    jest.spyOn(helpers, 'createController');
+    vi.spyOn(helpers, 'createController');
     const { rerender } = render(<ParallaxProvider />);
     rerender(<ParallaxProvider />);
     rerender(<ParallaxProvider />);
@@ -64,8 +64,8 @@ describe('A <ParallaxProvider>', () => {
     const ContextChecker = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        parallaxController.disableParallaxController = jest.fn();
-        parallaxController.enableParallaxController = jest.fn();
+        parallaxController.disableParallaxController = vi.fn();
+        parallaxController.enableParallaxController = vi.fn();
       }
       return null;
     };
@@ -90,7 +90,7 @@ describe('A <ParallaxProvider>', () => {
     expect(
       // @ts-expect-error
       parallaxController.enableParallaxController
-    ).toBeCalled();
+    ).toHaveBeenCalled();
   });
 
   it('to destroy the controller when unmounting', () => {
@@ -98,7 +98,7 @@ describe('A <ParallaxProvider>', () => {
     const AddDestroySpy = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        jest.spyOn(parallaxController, 'destroy');
+        vi.spyOn(parallaxController, 'destroy');
       }
       return null;
     };
@@ -113,7 +113,7 @@ describe('A <ParallaxProvider>', () => {
 
     expect(
       (parallaxController as unknown as ParallaxController)?.destroy
-    ).toBeCalled();
+    ).toHaveBeenCalled();
   });
 
   it('to update the scroll container when receiving a new container el', () => {
@@ -122,7 +122,7 @@ describe('A <ParallaxProvider>', () => {
     const AddUpdateSpy = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        jest.spyOn(parallaxController, 'updateScrollContainer');
+        vi.spyOn(parallaxController, 'updateScrollContainer');
       }
       return null;
     };
@@ -142,7 +142,7 @@ describe('A <ParallaxProvider>', () => {
 
     screen.unmount();
     // @ts-expect-error
-    expect(parallaxController?.updateScrollContainer).toBeCalledWith(el);
+    expect(parallaxController?.updateScrollContainer).toHaveBeenCalledWith(el);
   });
 
   // NOTE: I think this test can be removed

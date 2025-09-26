@@ -7,21 +7,21 @@ Scripts and procedures for developing locally.
 Install node modules
 
 ```
-yarn install
+pnpm install
 ```
 
 Start storybook
 
 ```
-yarn start
+pnpm start
 ```
 
 ## Testing
 
-Run Jest tests
+Run Vitest tests
 
 ```
-yarn test
+pnpm test
 ```
 
 ## Prettier
@@ -29,7 +29,7 @@ yarn test
 Run prettier on source files
 
 ```
-yarn prettier
+pnpm prettier
 ```
 
 ## Publishing New Version to NPM

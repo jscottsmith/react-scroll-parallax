@@ -11,16 +11,15 @@ const Wrapper = (props: PropsWithChildren<{}>) => (
 );
 
 describe('given useParallaxController hook', () => {
-  const { window } = global;
+  const { window } = (global as any);
   afterEach(() => {
-    global.window = window;
+    (global as any).window = window;
   });
   describe.skip('when the window is undefined', () => {
     test('then it should return null', () => {
       try {
         const { result } = renderHook(() => {
-          // @ts-expect-error
-          delete global.window;
+          delete (global as any).window;
           return useParallaxController();
         });
         expect(result.current).toBe(null);

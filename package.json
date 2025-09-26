@@ -23,44 +23,25 @@
     "src"
   ],
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
+    "start": "tsdown --watch",
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
     "prettier": "prettier ./ --write",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "lint": "eslint src --ext .ts,.tsx",
+    "prepare": "tsdown",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "release": "np"
-  },
-  "jest": {
-    "modulePaths": [
-      "<rootDir>/src/"
-    ],
-    "testMatch": [
-      "**/?(*.)+(spec|test).[jt]s?(x)"
-    ],
-    "coverageDirectory": "./coverage/",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "package.json",
-      "/stories/"
-    ],
-    "collectCoverage": true,
-    "testURL": "http://localhost",
-    "setupFiles": [
-      "<rootDir>/src/setupTests.ts"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest-setup.ts"
-    ]
   },
   "peerDependencies": {
     "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0",
@@ -70,7 +51,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "eslint src --ext .ts,.tsx"
     }
   },
   "prettier": {
@@ -78,16 +59,16 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "arrowParens": "always"
   },
-  "module": "dist/react-scroll-parallax.esm.js",
   "size-limit": [
     {
-      "path": "dist/react-scroll-parallax.cjs.production.min.js",
+      "path": "dist/index.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/react-scroll-parallax.esm.js",
+      "path": "dist/index.mjs",
       "limit": "10 KB"
     }
   ],
@@ -96,6 +77,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@eslint/js": "^9.36.0",
     "@size-limit/preset-small-lib": "^6.0.4",
     "@storybook/addon-essentials": "^6.4.20",
     "@storybook/addon-links": "^6.4.20",
@@ -105,13 +87,18 @@
     "@storybook/react": "^6.4.20",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
-    "@types/jest": "^27.0.3",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
-    "babel-jest": "^27.5.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
     "babel-loader": "^8.2.4",
     "css-loader": "^5.0.0",
+    "eslint": "^9.36.0",
     "husky": "^7.0.4",
+    "jsdom": "^27.0.0",
     "np": "^7.7.0",
     "postcss": "^8",
     "react": "^17.0.2",
@@ -124,8 +111,9 @@
     "size-limit": "^6.0.4",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.2.19",
-    "tsdx": "^0.14.1",
+    "tsdown": "^0.15.4",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

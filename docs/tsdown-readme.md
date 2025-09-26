@@ -1,19 +1,19 @@
-# TSDX React w/ Storybook User Guide
+# tsdown React w/ Storybook User Guide
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+Congrats! You just saved yourself hours of work by bootstrapping this project with tsdown. Let's get you oriented with what's here and how to use it.
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+> This tsdown setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you're looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
 
 > If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
 
 ## Commands
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
+tsdown scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
 
-The recommended workflow is to run TSDX in one terminal:
+The recommended workflow is to run tsdown in one terminal:
 
 ```bash
-npm start # or yarn start
+npm start # or pnpm start
 ```
 
 This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
@@ -25,7 +25,7 @@ Then run either Storybook or the example playground:
 Run inside another terminal:
 
 ```bash
-yarn storybook
+pnpm storybook
 ```
 
 This loads the stories from `./stories`.
@@ -38,23 +38,23 @@ Then run the example inside another:
 
 ```bash
 cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
+npm i # or pnpm install to install dependencies
+npm start # or pnpm start
 ```
 
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
+The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure tsdown is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
 
-To do a one-off build, use `npm run build` or `yarn build`.
+To do a one-off build, use `npm run build` or `pnpm build`.
 
-To run tests, use `npm test` or `yarn test`.
+To run tests, use `npm test` or `pnpm test`.
 
 ## Configuration
 
 Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
 
-### Jest
+### Vitest
 
-Jest tests are set up to run with `npm test` or `yarn test`.
+Vitest tests are set up to run with `npm test` or `pnpm test`.
 
 ### Bundle analysis
 
@@ -89,9 +89,9 @@ tsconfig.json
 
 We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
 
-### Rollup
+### tsdown
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+tsdown uses [esbuild](https://esbuild.github.io/) as a bundler and generates multiple output formats for various module formats and build settings. See [Optimizations](#optimizations) for details.
 
 ### TypeScript
 
@@ -108,25 +108,42 @@ Two actions are added by default:
 
 ## Optimizations
 
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+tsdown provides fast builds using esbuild and includes several optimization features:
+
+- **Tree shaking**: Automatically removes unused code
+- **Minification**: Optional minification for production builds
+- **Source maps**: Generated for debugging
+- **Multiple formats**: ESM and CommonJS output
+- **TypeScript declarations**: Automatic `.d.ts` generation
+
+You can configure these options in your `tsdown.config.js` file:
 
 ```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
+export default {
+  entry: 'src/index.ts',
+  outDir: 'dist',
+  format: ['esm', 'cjs'],
+  dts: true,
+  external: ['react', 'react-dom'],
+  clean: true,
+  sourcemap: true,
+  minify: false,
+  splitting: false,
+  treeshake: true,
+};
 ```
-
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
 
 ## Module Formats
 
-CJS, ESModules, and UMD module formats are supported.
+ESM and CommonJS module formats are supported by default.
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+The appropriate paths are configured in `package.json`:
+
+- `main`: `dist/index.js` (CommonJS)
+- `module`: `dist/index.mjs` (ESM)
+- `types`: `dist/index.d.ts` (TypeScript declarations)
+
+Please report if any issues are found.
 
 ## Deploying the Example Playground
 
@@ -142,7 +159,7 @@ Alternatively, if you already have a git repo connected, you can set up continuo
 
 ```bash
 netlify init
-# build command: yarn build && cd example && yarn && yarn build
+# build command: pnpm build && cd example && pnpm install && pnpm build
 # directory to deploy: example/dist
 # pick yes for netlify.toml
 ```
@@ -163,19 +180,19 @@ We recommend using [np](https://github.com/sindresorhus/np).
 
 ## Usage with Lerna
 
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
+When creating a new package with tsdown within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
 
 The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
 
 Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
 
 ```diff
-   "alias": {
+  "alias": {
 -    "react": "../node_modules/react",
 -    "react-dom": "../node_modules/react-dom"
 +    "react": "../../../node_modules/react",
 +    "react-dom": "../../../node_modules/react-dom"
-   },
+  },
 ```
 
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead.

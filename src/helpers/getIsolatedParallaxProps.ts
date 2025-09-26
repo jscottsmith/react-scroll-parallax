@@ -1,7 +1,9 @@
 import { ParallaxElementConfig } from 'parallax-controller';
 import { removeUndefinedObjectKeys } from '../utils/removeUndefinedObjectKeys';
 
-export function getIsolatedParallaxProps(props: any): {
+export function getIsolatedParallaxProps(
+  props: any
+): {
   parallaxProps: ParallaxElementConfig;
   rest: Record<string, any>;
 } {
