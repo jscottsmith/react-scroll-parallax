@@ -1,5 +1,5 @@
 import { CreateElementOptions, Element } from 'parallax-controller';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useVerifyController } from '../components/Parallax/hooks';
 import { ParallaxProps } from '../components/Parallax/types';
 import { getIsolatedParallaxProps } from '../helpers/getIsolatedParallaxProps';

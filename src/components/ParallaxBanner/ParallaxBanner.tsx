@@ -18,9 +18,8 @@ const containerStyle: CSSProperties = {
 export const ParallaxBanner = (
   props: PropsWithChildren<ParallaxBannerProps>
 ) => {
-  const [targetElement, setTargetElement] = useState<HTMLDivElement | null>(
-    null
-  );
+  const [targetElement, setTargetElement] =
+    useState<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     setTargetElement(containerRef.current);

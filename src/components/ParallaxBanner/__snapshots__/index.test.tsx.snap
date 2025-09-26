@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`given a <ParallaxBanner> component when the prop { disabled: true } is given then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
