@@ -108,7 +108,7 @@ describe('given the <Parallax> component', () => {
         wrapper: Wrapper,
       });
       expect(asFragment()).toMatchSnapshot();
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props,
       });
@@ -126,7 +126,7 @@ describe('given the <Parallax> component', () => {
           <Parallax translateY={[-100, 100]} />
         </MockProvider>
       );
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props: { translateY: [-100, 100] },
       });
@@ -147,7 +147,7 @@ describe('given the <Parallax> component', () => {
       );
       const element = controller.getElements()[0];
       unmount();
-      expect(controller.removeElementById).toBeCalledWith(element.id);
+      expect(controller.removeElementById).toHaveBeenCalledWith(element.id);
     });
 
     it('then it updates an element in the controller when receiving relevant new props', () => {
@@ -178,11 +178,14 @@ describe('given the <Parallax> component', () => {
 
       const element = controller.getElements()[0];
 
-      expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
-        disabled: false,
-        translateX: [100, -100],
-        translateY: [-100, 100],
-      });
+      expect(controller.updateElementPropsById).toHaveBeenCalledWith(
+        element.id,
+        {
+          disabled: false,
+          translateX: [100, -100],
+          translateY: [-100, 100],
+        }
+      );
 
       const newProps = {
         disabled: false,
@@ -198,11 +201,14 @@ describe('given the <Parallax> component', () => {
         />
       );
 
-      expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
-        disabled: false,
-        translateX: [-40, -60],
-        translateY: [10, 80],
-      });
+      expect(controller.updateElementPropsById).toHaveBeenCalledWith(
+        element.id,
+        {
+          disabled: false,
+          translateX: [-40, -60],
+          translateY: [10, 80],
+        }
+      );
 
       // only update with valid props
       rerender(
@@ -254,12 +260,15 @@ describe('given the <Parallax> component', () => {
 
       const element = controller.getElements()[0];
 
-      expect(controller.resetElementStyles).toBeCalledWith(element);
-      expect(controller.updateElementPropsById).toBeCalledWith(element.id, {
-        disabled: true,
-        translateX: [100, -100],
-        translateY: [-100, 100],
-      });
+      expect(controller.resetElementStyles).toHaveBeenCalledWith(element);
+      expect(controller.updateElementPropsById).toHaveBeenCalledWith(
+        element.id,
+        {
+          disabled: true,
+          translateX: [100, -100],
+          translateY: [-100, 100],
+        }
+      );
     });
 
     it('then it resets styles on an element if the disabled prop is true', () => {
@@ -290,7 +299,7 @@ describe('given the <Parallax> component', () => {
         <Parallax disabled={true} translateX={offX} translateY={offY} />
       );
 
-      expect(controller.resetElementStyles).toBeCalled();
+      expect(controller.resetElementStyles).toHaveBeenCalled();
     });
   });
 });

@@ -29,7 +29,7 @@ describe('A <ParallaxProvider>', () => {
 
     render();
 
-    expect(child).toBeCalled();
+    expect(child).toHaveBeenCalled();
   });
 
   it('to pass the controller context', () => {
@@ -90,7 +90,7 @@ describe('A <ParallaxProvider>', () => {
     expect(
       // @ts-expect-error
       parallaxController.enableParallaxController
-    ).toBeCalled();
+    ).toHaveBeenCalled();
   });
 
   it('to destroy the controller when unmounting', () => {
@@ -112,8 +112,8 @@ describe('A <ParallaxProvider>', () => {
     screen.unmount();
 
     expect(
-      ((parallaxController as unknown) as ParallaxController)?.destroy
-    ).toBeCalled();
+      (parallaxController as unknown as ParallaxController)?.destroy
+    ).toHaveBeenCalled();
   });
 
   it('to update the scroll container when receiving a new container el', () => {
@@ -142,7 +142,7 @@ describe('A <ParallaxProvider>', () => {
 
     screen.unmount();
     // @ts-expect-error
-    expect(parallaxController?.updateScrollContainer).toBeCalledWith(el);
+    expect(parallaxController?.updateScrollContainer).toHaveBeenCalledWith(el);
   });
 
   // NOTE: I think this test can be removed

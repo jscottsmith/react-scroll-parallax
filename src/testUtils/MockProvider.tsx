@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PropsWithChildren } from 'react';
 import { ParallaxContext } from '../../src/context/ParallaxContext';
 import { ParallaxController } from 'parallax-controller';
 
-export class MockProvider extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    controllerMock: PropTypes.object.isRequired,
-  };
+interface MockProviderProps {
+  controllerMock: ParallaxController;
+}
+
+export class MockProvider extends Component<
+  PropsWithChildren<MockProviderProps>
+> {
   controller: ParallaxController;
 
-  constructor(props: { controllerMock: ParallaxController }) {
+  constructor(props: PropsWithChildren<MockProviderProps>) {
     super(props);
     this.controller = props.controllerMock;
   }

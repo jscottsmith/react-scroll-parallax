@@ -47,7 +47,7 @@ describe('given a <ParallaxBanner> component', () => {
         }
       );
       expect(asFragment()).toMatchSnapshot();
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props: {
           ...props,
@@ -74,7 +74,7 @@ describe('given a <ParallaxBanner> component', () => {
       render(<ParallaxBanner layers={[{ children: <div /> }]} />, {
         wrapper: Wrapper,
       });
-      expect(controller.createElement).toBeCalledWith({
+      expect(controller.createElement).toHaveBeenCalledWith({
         el: expect.any(HTMLElement),
         props: {
           shouldDisableScalingTranslations: true,

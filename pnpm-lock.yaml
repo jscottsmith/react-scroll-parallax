@@ -45,6 +45,9 @@ importers:
       '@testing-library/react':
         specifier: ^12.1.2
         version: 12.1.5(@types/react@17.0.88)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@testing-library/react-hooks':
+        specifier: ^8.0.1
+        version: 8.0.1(@types/react@17.0.88)(react-dom@17.0.2(react@17.0.2))(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)
       '@types/jest':
         specifier: ^27.0.3
         version: 27.5.2
@@ -1957,6 +1960,22 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
       react-test-renderer: '>=16.8.0'
+
+  '@testing-library/react-hooks@8.0.1':
+    resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0
+      react: ^16.9.0 || ^17.0.0
+      react-dom: ^16.9.0 || ^17.0.0
+      react-test-renderer: ^16.9.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
 
   '@testing-library/react@12.1.5':
     resolution: {integrity: sha512-OfTXCJUFgjd/digLUuPxa0+/3ZxsQmE7ub9kcbW/wi96Bh3o/p5vrETcBGfP17NWPGqeYYl5LTRpwyGoMC4ysg==}
@@ -6820,6 +6839,12 @@ packages:
       react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1
       react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1
 
+  react-error-boundary@3.1.4:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+
   react-hooks-testing-library@0.6.0:
     resolution: {integrity: sha512-VzOF4ZYMWR2B0RQgRXmxolmSMy7uvUPgmVm/CqSeyTRiITMQXiTywK65sjoIHzsQ6tW1R8hbljSYU02PgGdvCA==}
     peerDependencies:
@@ -11197,6 +11222,16 @@ snapshots:
       '@types/react': 16.14.66
       '@types/react-test-renderer': 16.9.12
       react: 17.0.2
+      react-test-renderer: 17.0.2(react@17.0.2)
+
+  '@testing-library/react-hooks@8.0.1(@types/react@17.0.88)(react-dom@17.0.2(react@17.0.2))(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      react: 17.0.2
+      react-error-boundary: 3.1.4(react@17.0.2)
+    optionalDependencies:
+      '@types/react': 17.0.88
+      react-dom: 17.0.2(react@17.0.2)
       react-test-renderer: 17.0.2(react@17.0.2)
 
   '@testing-library/react@12.1.5(@types/react@17.0.88)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)':
@@ -17082,6 +17117,11 @@ snapshots:
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
       react-is: 17.0.2
+
+  react-error-boundary@3.1.4(react@17.0.2):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      react: 17.0.2
 
   react-hooks-testing-library@0.6.0(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2):
     dependencies:
