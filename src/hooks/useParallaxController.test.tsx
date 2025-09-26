@@ -11,7 +11,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => (
 );
 
 describe('given useParallaxController hook', () => {
-  const { window } = global as any;
+  const { window } = (global as any);
   afterEach(() => {
     (global as any).window = window;
   });
