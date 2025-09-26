@@ -23,7 +23,7 @@ export function ParallaxProvider(
     if (props.scrollContainer && controller.current) {
       controller.current.updateScrollContainer(props.scrollContainer);
     }
-  }, [props.scrollContainer, controller.current]);
+  }, [props.scrollContainer]);
 
   // disable/enable parallax
   useEffect(() => {
@@ -33,12 +33,12 @@ export function ParallaxProvider(
     if (!props.isDisabled && controller.current) {
       controller.current.enableParallaxController();
     }
-  }, [props.isDisabled, controller.current]);
+  }, [props.isDisabled]);
 
   // remove the controller when unmounting
   useEffect(() => {
     return () => {
-      controller?.current && controller?.current.destroy();
+      controller?.current?.destroy();
     };
   }, []);
 

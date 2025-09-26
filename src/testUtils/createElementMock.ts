@@ -1,6 +1,6 @@
 export function createElementMock(properties = {}, methods = {}) {
   const element = document.createElement('div');
-  Object.keys(properties).map((key) => {
+  Object.keys(properties).forEach((key) => {
     Object.defineProperty(element, key, {
       // @ts-ignore
       value: properties[key],
@@ -8,7 +8,7 @@ export function createElementMock(properties = {}, methods = {}) {
     });
   });
 
-  Object.keys(methods).map((key) => {
+  Object.keys(methods).forEach((key) => {
     // @ts-ignore
     element[key] = methods[key];
   });

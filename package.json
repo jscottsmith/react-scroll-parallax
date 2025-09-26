@@ -93,7 +93,8 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "arrowParens": "always"
   },
   "module": "dist/react-scroll-parallax.esm.js",
   "size-limit": [

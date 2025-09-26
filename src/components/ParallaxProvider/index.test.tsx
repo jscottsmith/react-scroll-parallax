@@ -112,7 +112,7 @@ describe('A <ParallaxProvider>', () => {
     screen.unmount();
 
     expect(
-      (parallaxController as unknown as ParallaxController)?.destroy
+      ((parallaxController as unknown) as ParallaxController)?.destroy
     ).toBeCalled();
   });
 
