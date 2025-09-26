@@ -23,10 +23,10 @@ With npm
 npm install react-scroll-parallax
 ```
 
-or yarn
+or pnpm
 
 ```
-yarn add react-scroll-parallax
+pnpm add react-scroll-parallax
 ```
 
 ## Example
