@@ -34,6 +34,6 @@ module.exports = {
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   typescript: {
     check: true, // type-check stories during Storybook build
-    // reactDocgen: false, // https://github.com/storybookjs/storybook/issues/15336
+    reactDocgen: false, // Disable to fix TypeScript 5.9.2 compatibility issue
   },
 };
