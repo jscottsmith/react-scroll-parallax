@@ -31,6 +31,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
+    "test:coverage": "tsdx test --passWithNoTests --coverage",
     "prettier": "prettier ./ --write",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -53,7 +54,6 @@
       "package.json",
       "/stories/"
     ],
-    "collectCoverage": true,
     "testURL": "http://localhost",
     "setupFiles": [
       "<rootDir>/src/setupTests.ts"
