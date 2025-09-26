@@ -46,4 +46,3 @@ jobs:
 
       - name: Build
         run: pnpm build
-https://github.com/jscottsmith/react-scroll-parallax/actions/runs/18050399519/job/51371003107?pr=279#step:9:1
