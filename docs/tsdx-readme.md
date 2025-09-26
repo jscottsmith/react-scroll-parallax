@@ -52,9 +52,9 @@ To run tests, use `npm test` or `pnpm test`.
 
 Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
 
-### Jest
+### Vitest
 
-Jest tests are set up to run with `npm test` or `pnpm test`.
+Vitest tests are set up to run with `npm test` or `pnpm test`.
 
 ### Bundle analysis
 

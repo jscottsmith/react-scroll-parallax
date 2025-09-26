@@ -32,7 +32,7 @@ describe('given a <ParallaxBanner> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
           <MockProvider controllerMock={controller}>
@@ -63,7 +63,7 @@ describe('given a <ParallaxBanner> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
           <MockProvider controllerMock={controller}>

@@ -96,7 +96,7 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
           <MockProvider controllerMock={controller}>
@@ -120,7 +120,7 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       render(
         <MockProvider controllerMock={controller}>
           <Parallax translateY={[-100, 100]} />
@@ -136,7 +136,7 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.removeElementById = jest.fn();
+      controller.removeElementById = vi.fn();
 
       const { unmount } = render(
         <MockProvider controllerMock={controller}>
@@ -154,7 +154,7 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.updateElementPropsById = jest.fn();
+      controller.updateElementPropsById = vi.fn();
 
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
@@ -228,8 +228,8 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.updateElementPropsById = jest.fn();
-      controller.resetElementStyles = jest.fn();
+      controller.updateElementPropsById = vi.fn();
+      controller.resetElementStyles = vi.fn();
 
       function Wrapper(props: PropsWithChildren<{}>) {
         return (
@@ -275,7 +275,7 @@ describe('given the <Parallax> component', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.resetElementStyles = jest.fn();
+      controller.resetElementStyles = vi.fn();
 
       function Wrapper(props: PropsWithChildren<{}>) {
         return (

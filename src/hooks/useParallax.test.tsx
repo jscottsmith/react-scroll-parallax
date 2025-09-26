@@ -4,10 +4,11 @@ import { ParallaxController, ScrollAxis, Element } from 'parallax-controller';
 import { MockProvider } from '../testUtils/MockProvider';
 import { useParallax } from './useParallax';
 
-jest.mock('react', () => {
+vi.mock('react', async () => {
+  const actual = await vi.importActual<typeof React>('react');
   return {
-    ...jest.requireActual<typeof React>('react'),
-    useRef: jest.fn(() => ({
+    ...actual,
+    useRef: vi.fn(() => ({
       current: document.createElement('div'),
     })),
   };
@@ -16,21 +17,21 @@ jest.mock('react', () => {
 describe('given useParallax hook', () => {
   beforeAll(() => {
     // NOTE: stop console warning of expected error
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // @ts-expect-error
     useRef.mockImplementation(
-      jest.fn(() => ({
+      vi.fn(() => ({
         current: document.createElement('div'),
       }))
     );
   });
 
   afterAll(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe('when not wrapped by the ParallaxProvider', () => {
@@ -59,7 +60,7 @@ describe('given useParallax hook', () => {
         // NOTE: must override the useRef mock that returns an element
         // @ts-expect-error
         useRef.mockImplementation(
-          jest.fn(() => ({
+          vi.fn(() => ({
             current: null,
           }))
         );
@@ -68,7 +69,7 @@ describe('given useParallax hook', () => {
           const controller = ParallaxController.init({
             scrollAxis: ScrollAxis.vertical,
           });
-          controller.createElement = jest.fn(controller.createElement);
+          controller.createElement = vi.fn(controller.createElement);
           const Wrapper = (props: PropsWithChildren<{}>) => (
             <MockProvider controllerMock={controller}>
               {props.children}
@@ -95,7 +96,7 @@ describe('given useParallax hook', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       const Wrapper = (props: PropsWithChildren<{}>) => (
         <MockProvider controllerMock={controller}>
           {props.children}
@@ -117,7 +118,7 @@ describe('given useParallax hook', () => {
       const controller = ParallaxController.init({
         scrollAxis: ScrollAxis.vertical,
       });
-      controller.createElement = jest.fn(controller.createElement);
+      controller.createElement = vi.fn(controller.createElement);
       const Wrapper = (props: PropsWithChildren<{}>) => (
         <MockProvider controllerMock={controller}>
           {props.children}

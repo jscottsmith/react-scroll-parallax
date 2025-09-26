@@ -12,7 +12,7 @@ import * as helpers from './helpers';
 describe('A <ParallaxProvider>', () => {
   it('to render children', () => {
     const node = document.createElement('div');
-    const child = jest.fn();
+    const child = vi.fn();
     const Child = () => {
       child();
       return <div />;
@@ -50,7 +50,7 @@ describe('A <ParallaxProvider>', () => {
   });
 
   it('calls to createController only once', () => {
-    jest.spyOn(helpers, 'createController');
+    vi.spyOn(helpers, 'createController');
     const { rerender } = render(<ParallaxProvider />);
     rerender(<ParallaxProvider />);
     rerender(<ParallaxProvider />);
@@ -64,8 +64,8 @@ describe('A <ParallaxProvider>', () => {
     const ContextChecker = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        parallaxController.disableParallaxController = jest.fn();
-        parallaxController.enableParallaxController = jest.fn();
+        parallaxController.disableParallaxController = vi.fn();
+        parallaxController.enableParallaxController = vi.fn();
       }
       return null;
     };
@@ -98,7 +98,7 @@ describe('A <ParallaxProvider>', () => {
     const AddDestroySpy = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        jest.spyOn(parallaxController, 'destroy');
+        vi.spyOn(parallaxController, 'destroy');
       }
       return null;
     };
@@ -122,7 +122,7 @@ describe('A <ParallaxProvider>', () => {
     const AddUpdateSpy = () => {
       parallaxController = useParallaxController();
       if (parallaxController) {
-        jest.spyOn(parallaxController, 'updateScrollContainer');
+        vi.spyOn(parallaxController, 'updateScrollContainer');
       }
       return null;
     };

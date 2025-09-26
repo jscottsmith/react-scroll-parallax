@@ -24,7 +24,7 @@ export default [
         DOMRect: 'readonly',
         console: 'readonly',
         global: 'readonly',
-        // Jest globals
+        // Vitest globals
         describe: 'readonly',
         it: 'readonly',
         test: 'readonly',
@@ -33,7 +33,7 @@ export default [
         afterEach: 'readonly',
         beforeAll: 'readonly',
         afterAll: 'readonly',
-        jest: 'readonly',
+        vi: 'readonly',
         // React
         React: 'readonly',
       },
@@ -50,7 +50,7 @@ export default [
       '@typescript-eslint/ban-ts-comment': 'warn',
       'no-undef': 'off', // TypeScript handles this
       'no-empty': 'warn',
-      'no-redeclare': 'off', // Jest globals conflict with built-ins
+      'no-redeclare': 'off', // Vitest globals conflict with built-ins
     },
   },
   {

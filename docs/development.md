@@ -18,7 +18,7 @@ pnpm start
 
 ## Testing
 
-Run Jest tests
+Run Vitest tests
 
 ```
 pnpm test
