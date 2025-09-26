@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [22.x]
 
     steps:
       - name: Checkout repository
@@ -22,11 +22,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install PNPM
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Build Storybook
-        run: yarn build-storybook
+        run: pnpm build-storybook
 
       - name: Install Surge
         run: npm install --global surge

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from '@docusaurus/router';
 import { useParallaxController } from 'react-scroll-parallax';
 
 function useUpdateControllerOnRouteChange() {
