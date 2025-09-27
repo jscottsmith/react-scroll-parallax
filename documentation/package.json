@@ -17,9 +17,9 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "3.0.1",
-    "@docusaurus/plugin-google-analytics": "3.0.1",
-    "@docusaurus/preset-classic": "3.0.1",
+    "@docusaurus/core": "3.9.1",
+    "@docusaurus/plugin-google-analytics": "3.9.1",
+    "@docusaurus/preset-classic": "3.9.1",
     "@mdx-js/react": "^3.0.0",
     "classnames": "^2.3.2",
     "clsx": "2.0.0",
@@ -41,7 +41,7 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/tsconfig": "3.0.1",
+    "@docusaurus/tsconfig": "3.9.1",
     "@types/react": "^18.2.29",
     "tailwindcss": "^3.3.6",
     "typescript": "5.3.3"
