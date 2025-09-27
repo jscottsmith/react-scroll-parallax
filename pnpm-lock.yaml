@@ -87,6 +87,9 @@ importers:
       postcss:
         specifier: ^8
         version: 8.5.6
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       react:
         specifier: ^17.0.2
         version: 17.0.2
@@ -6481,6 +6484,11 @@ packages:
   prettier@2.3.0:
     resolution: {integrity: sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-error@2.1.2:
@@ -16153,6 +16161,8 @@ snapshots:
   prepend-http@2.0.0: {}
 
   prettier@2.3.0: {}
+
+  prettier@3.6.2: {}
 
   pretty-error@2.1.2:
     dependencies:
