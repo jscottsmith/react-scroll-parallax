@@ -150,16 +150,12 @@ const config = {
             title: 'Who',
             items: [
               {
-                label: 'J',
+                label: 'Author',
                 href: 'https://github.com/jscottsmith',
               },
               {
                 label: 'Damnthat.tv',
                 href: 'https://damnthat.tv/',
-              },
-              {
-                label: '@damntelevision',
-                href: 'https://twitter.com/damntelevision',
               },
             ],
           },
