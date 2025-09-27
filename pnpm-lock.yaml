@@ -96,9 +96,6 @@ importers:
       react-dom:
         specifier: ^17.0.2
         version: 17.0.2(react@17.0.2)
-      react-hooks-testing-library:
-        specifier: ^0.6.0
-        version: 0.6.0(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)
       react-is:
         specifier: ^17.0.2
         version: 17.0.2
@@ -2095,12 +2092,6 @@ packages:
     resolution: {integrity: sha512-ynmNeT7asXyH3aSVv4vvX4Rb+0qjOhdNHnO/3vuZNqPmhDpV/+rCSGwQ7bLcmU2cJ4dvoheIO85LQj0IbJHEtg==}
     engines: {node: '>=8', npm: '>=6', yarn: '>=1'}
 
-  '@testing-library/react-hooks@1.0.4':
-    resolution: {integrity: sha512-yFulIcOY7oTtkUHRzmWb0nPWpt0mA/WMm6BWCzoZopLptlSk6LrGC3P53bdN7UTcYqyExszSwMz3o8PYYQeeEA==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-test-renderer: '>=16.8.0'
-
   '@testing-library/react-hooks@8.0.1':
     resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
     engines: {node: '>=12'}
@@ -2254,12 +2245,6 @@ packages:
     resolution: {integrity: sha512-Z+2VcYXJwOqQ79HreLU/1fyQ88eXSSFh6I3JdrEHQIfYSI0kCQpTGvOrbE6jFGGYXKsHuwY9tBa/w5Uo6KzrEg==}
     peerDependencies:
       '@types/react': ^17.0.0
-
-  '@types/react-test-renderer@16.9.12':
-    resolution: {integrity: sha512-RJ4jeg32v2h1izOZ3gES/zQhQOwi6BEnZW890pmAuf3yVSfDm0wOR42YiWFiuSJJRyRykNaXEzis74+y3Ac9HQ==}
-
-  '@types/react@16.14.66':
-    resolution: {integrity: sha512-KPilYP4+25N2ki7vrB4adSR2ucAj95xJcGfKC09bsxcHT+QtB//K7i1FenPnbkLA0Xt9pRi1/RXC1wxFvL9Wtw==}
 
   '@types/react@17.0.88':
     resolution: {integrity: sha512-HEOvpzcFWkEcHq4EsTChnpimRc3Lz1/qzYRDFtobFp4obVa6QVjCDMjWmkgxgaTYttNvyjnldY8MUflGp5YiUw==}
@@ -6649,12 +6634,6 @@ packages:
     peerDependencies:
       react: '>=16.13.1'
 
-  react-hooks-testing-library@0.6.0:
-    resolution: {integrity: sha512-VzOF4ZYMWR2B0RQgRXmxolmSMy7uvUPgmVm/CqSeyTRiITMQXiTywK65sjoIHzsQ6tW1R8hbljSYU02PgGdvCA==}
-    peerDependencies:
-      react: ^16.8.0
-      react-test-renderer: ^16.8.0
-
   react-inspector@5.1.1:
     resolution: {integrity: sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==}
     peerDependencies:
@@ -10961,14 +10940,6 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/react-hooks@1.0.4(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)':
-    dependencies:
-      '@babel/runtime': 7.28.4
-      '@types/react': 16.14.66
-      '@types/react-test-renderer': 16.9.12
-      react: 17.0.2
-      react-test-renderer: 17.0.2(react@17.0.2)
-
   '@testing-library/react-hooks@8.0.1(@types/react@17.0.88)(react-dom@17.0.2(react@17.0.2))(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -11121,16 +11092,6 @@ snapshots:
   '@types/react-dom@17.0.26(@types/react@17.0.88)':
     dependencies:
       '@types/react': 17.0.88
-
-  '@types/react-test-renderer@16.9.12':
-    dependencies:
-      '@types/react': 16.14.66
-
-  '@types/react@16.14.66':
-    dependencies:
-      '@types/prop-types': 15.7.15
-      '@types/scheduler': 0.16.8
-      csstype: 3.1.3
 
   '@types/react@17.0.88':
     dependencies:
@@ -16353,12 +16314,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.4
       react: 17.0.2
-
-  react-hooks-testing-library@0.6.0(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2):
-    dependencies:
-      '@testing-library/react-hooks': 1.0.4(react-test-renderer@17.0.2(react@17.0.2))(react@17.0.2)
-      react: 17.0.2
-      react-test-renderer: 17.0.2(react@17.0.2)
 
   react-inspector@5.1.1(react@17.0.2):
     dependencies:
