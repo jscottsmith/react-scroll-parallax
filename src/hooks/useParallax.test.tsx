@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useRef } from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react';
 import { ParallaxController, ScrollAxis, Element } from 'parallax-controller';
 import { MockProvider } from '../testUtils/MockProvider';
 import { useParallax } from './useParallax';

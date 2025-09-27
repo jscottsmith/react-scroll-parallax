@@ -2,7 +2,7 @@ import React from 'react';
 import { Parallax } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
-import styles from './Parallax.module.scss';
+import styles from './Parallax.module.css';
 
 const Template = (args) => {
   const props = args;

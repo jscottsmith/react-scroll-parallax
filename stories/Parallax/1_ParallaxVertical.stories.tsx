@@ -3,7 +3,7 @@ import { Parallax, ParallaxProvider } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
-import styles from './Parallax.module.scss';
+import styles from './Parallax.module.css';
 import { useRef } from 'react';
 import { CSSEffect } from 'parallax-controller';
 import { useState } from 'react';
