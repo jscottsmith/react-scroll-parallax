@@ -2,7 +2,7 @@ import React from 'react';
 import { useParallax } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
-import styles from '../Parallax/Parallax.module.scss';
+import styles from '../Parallax/Parallax.module.css';
 
 const Template = (args) => {
   const props = Object.entries(args).reduce((acc: any, entry: any) => {

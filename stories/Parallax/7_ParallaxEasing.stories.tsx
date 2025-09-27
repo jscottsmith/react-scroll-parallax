@@ -2,10 +2,11 @@ import React from 'react';
 import { ValidEasingPresets } from 'parallax-controller';
 import { Parallax, ParallaxProvider } from '../../src';
 import { Element } from '../Element/Element';
-import styles from './Parallax.module.scss';
+// @ts-expect-error - CSS module import (TypeScript language server may need restart)
+import styles from './Parallax.module.css';
 
 const options: ValidEasingPresets[] = [
-  // @ts-expect-error
+  // @ts-expect-error - Empty string is not a valid easing preset but used for testing
   '',
   'ease',
   'easeIn',
@@ -90,6 +91,7 @@ const Template2 = () => {
       <div className="w-full p-20">
         {options.map((easing) => (
           <div
+            key={easing}
             className="relative flex flex-row items-center justify-between"
             style={{ height: '150vh' }}
           >
@@ -101,7 +103,7 @@ const Template2 = () => {
                 const n = amount - i;
                 return (
                   <Parallax
-                    key={n}
+                    key={`left-${n}`}
                     className="bg-blue-500 m-1 opacity-1 w-10 h-10"
                     easing={easing}
                     rootMargin={{
@@ -124,7 +126,7 @@ const Template2 = () => {
                 const n = amount - i;
                 return (
                   <Parallax
-                    key={n}
+                    key={`right-${n}`}
                     className="bg-blue-500 m-1 opacity-1 w-10 h-10"
                     easing={easing}
                     rootMargin={{

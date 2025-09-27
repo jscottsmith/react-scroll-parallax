@@ -3,7 +3,7 @@ import { Parallax, ParallaxProvider } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
-import styles from './Parallax.module.scss';
+import styles from './Parallax.module.css';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');

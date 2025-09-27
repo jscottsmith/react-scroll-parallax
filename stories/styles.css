@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700');
 
 html {
   height: 100%;
 }
 body,
-#root {
+#storybook-root {
   display: flex !important;
   min-width: 100%;
   min-height: 100%;
