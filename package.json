@@ -44,8 +44,8 @@
     "release": "np"
   },
   "peerDependencies": {
-    "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0",
-    "react-dom": "^16.8.0-0 || >=17.0.1 || ^18.0.0"
+    "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0"
   },
   "author": "J Scott Smith",
   "license": "MIT",
@@ -86,8 +86,8 @@
     "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.1",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "@vitest/coverage-v8": "^3.2.4",
@@ -100,10 +100,10 @@
     "np": "^10.2.0",
     "postcss": "^8",
     "prettier": "^3.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "react-test-renderer": "^18.2.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-is": "^19.1.1",
+    "react-test-renderer": "^19.1.1",
     "sass": "^1.49.11",
     "sass-loader": "^10.1.0",
     "size-limit": "^6.0.4",
