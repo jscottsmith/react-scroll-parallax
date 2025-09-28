@@ -193,7 +193,9 @@ describe('A <ParallaxProvider>', () => {
     expect(instance2).toBeInstanceOf(ParallaxController);
 
     // unmount first instance
-    root1.unmount();
+    act(() => {
+      root1.unmount();
+    });
 
     // this must still be defined
     expect(instance2).toBeInstanceOf(ParallaxController);
