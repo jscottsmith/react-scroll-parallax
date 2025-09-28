@@ -24,6 +24,9 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
       };
       newElement = controller?.createElement(options);
       setElement(newElement);
+    } else if (ref.current === null) {
+      // if the ref is null, do nothing
+      return;
     } else {
       throw new Error(
         'You must assign the ref returned by the useParallax() hook to an HTML Element.'
@@ -35,7 +38,7 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
         controller?.removeElementById(newElement.id);
       }
     };
-  }, []);
+  }, [ref.current]);
 
   // update element
   useEffect(() => {
