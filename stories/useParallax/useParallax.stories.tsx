@@ -1,15 +1,10 @@
 import React from 'react';
-import { useParallax } from '../../src';
+import { ParallaxProps, useParallax } from '../../src';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from '../Parallax/Parallax.module.css';
 
-const Template = (args) => {
-  const props = Object.entries(args).reduce((acc: any, entry: any) => {
-    acc[entry[0]] = entry[1].split(',');
-    return acc;
-  }, {} as any);
-
+function ElementWithHook(props: ParallaxProps) {
   const { ref } = useParallax<HTMLDivElement>(props);
 
   return (
@@ -17,6 +12,14 @@ const Template = (args) => {
       <Element name="A" />
     </div>
   );
+}
+
+const Template = (args) => {
+  const props = Object.entries(args).reduce((acc: any, entry: any) => {
+    acc[entry[0]] = entry[1].split(',');
+    return acc;
+  }, {} as any);
+  return <ElementWithHook {...props} />;
 };
 
 export const WithRotation = Template.bind({});
