@@ -1,7 +1,7 @@
 /* global describe, it */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { act } from 'react';
+import { createRoot } from 'react-dom/client';
 import { ParallaxController } from 'parallax-controller';
 
 import { render } from '@testing-library/react';
@@ -18,16 +18,15 @@ describe('A <ParallaxProvider>', () => {
       return <div />;
     };
 
-    const render = () => {
-      ReactDOM.render(
+    const root = createRoot(node);
+
+    act(() => {
+      root.render(
         <ParallaxProvider>
           <Child />
-        </ParallaxProvider>,
-        node
+        </ParallaxProvider>
       );
-    };
-
-    render();
+    });
 
     expect(child).toHaveBeenCalled();
   });
@@ -155,32 +154,46 @@ describe('A <ParallaxProvider>', () => {
     const node1 = document.createElement('div');
     const node2 = document.createElement('div');
 
-    const render = (node: HTMLDivElement) => {
-      let instance: ParallaxController | null = null;
-      const GetInstance = () => {
-        instance = useParallaxController();
-        return null;
-      };
-      ReactDOM.render(
-        // @ts-ignore
-        <ParallaxProvider>
-          <GetInstance />
-        </ParallaxProvider>,
-        node
-      );
-      return instance;
+    // Use a different approach - capture instances after rendering
+    let instance1: ParallaxController | null = null;
+    let instance2: ParallaxController | null = null;
+
+    const GetInstance1 = () => {
+      instance1 = useParallaxController();
+      return null;
+    };
+
+    const GetInstance2 = () => {
+      instance2 = useParallaxController();
+      return null;
     };
 
     // first instance mounted
-    const instance1 = render(node1);
+    const root1 = createRoot(node1);
+    act(() => {
+      root1.render(
+        // @ts-ignore
+        <ParallaxProvider>
+          <GetInstance1 />
+        </ParallaxProvider>
+      );
+    });
     expect(instance1).toBeInstanceOf(ParallaxController);
 
     // second instance mounted
-    const instance2 = render(node2);
+    const root2 = createRoot(node2);
+    act(() => {
+      root2.render(
+        // @ts-ignore
+        <ParallaxProvider>
+          <GetInstance2 />
+        </ParallaxProvider>
+      );
+    });
     expect(instance2).toBeInstanceOf(ParallaxController);
 
     // unmount first instance
-    ReactDOM.unmountComponentAtNode(node1);
+    root1.unmount();
 
     // this must still be defined
     expect(instance2).toBeInstanceOf(ParallaxController);
