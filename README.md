@@ -53,6 +53,96 @@ function Component() {
 }
 ```
 
+## Controlling When Parallax Effects Run
+
+You can control when parallax effects start and end using `startScroll`, `endScroll`, and `targetElement` props.
+
+### Using startScroll and endScroll
+
+The `startScroll` and `endScroll` props define the scroll position range (in pixels) during which the parallax effect is active:
+
+```jsx
+function Component() {
+  return (
+    <Parallax
+      translateX={[0, 100]}
+      startScroll={0}
+      endScroll={1000}
+    >
+      <div />
+    </Parallax>
+  );
+}
+```
+
+In this example:
+- The parallax effect starts when the user has scrolled 0 pixels (top of page)
+- The effect ends when the user has scrolled 1000 pixels
+- Between these points, the element will translate from 0 to 100 on the X axis
+
+### Using targetElement
+
+The `targetElement` prop allows you to use a specific DOM element's position to determine when the parallax effect should run. This is useful when you want the effect to be tied to a particular element's position in the viewport:
+
+```jsx
+function Component() {
+  const targetRef = useRef(null);
+  const [targetElement, setTargetElement] = useState(null);
+
+  useEffect(() => {
+    setTargetElement(targetRef.current);
+  }, []);
+
+  return (
+    <>
+      <Parallax
+        translateX={[0, 200]}
+        targetElement={targetElement}
+      >
+        <div>Parallax Element</div>
+      </Parallax>
+      <div ref={targetRef} style={{ height: '100vh' }}>
+        Target Element
+      </div>
+    </>
+  );
+}
+```
+
+When `targetElement` is provided, the parallax effect will be calculated based on that element's position in the viewport rather than the default scroll position.
+
+### Combining All Three
+
+You can combine all three props for fine-grained control:
+
+```jsx
+function Component() {
+  const targetRef = useRef(null);
+  const [targetElement, setTargetElement] = useState(null);
+
+  useEffect(() => {
+    setTargetElement(targetRef.current);
+  }, []);
+
+  return (
+    <>
+      <Parallax
+        translateX={[0, 100]}
+        translateY={[0, 50]}
+        startScroll={0}
+        endScroll={500}
+        targetElement={targetElement}
+      >
+        <div>Controlled Parallax</div>
+      </Parallax>
+      <div ref={targetRef} id="target">
+        Scroll Target
+      </div>
+    </>
+  );
+}
+```
+
 ## Getting Started
 
 Read the [documentation](https://react-scroll-parallax.damnthat.tv/) for setup and usage instructions.
