@@ -1,0 +1,7 @@
+packages:
+  - '.'
+
+# Allow install-time build scripts for native/tooling deps (pnpm strictDepBuilds).
+allowBuilds:
+  esbuild: true
+  '@parcel/watcher': true
