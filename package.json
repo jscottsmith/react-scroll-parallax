@@ -22,9 +22,21 @@
     "dist",
     "src"
   ],
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "engines": {
     "node": ">=10"
   },
@@ -41,7 +53,7 @@
     "analyze": "size-limit --why",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "release": "np"
+    "release": "npx np@^11.2.1"
   },
   "peerDependencies": {
     "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0",
@@ -64,7 +76,7 @@
   },
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/index.cjs",
       "limit": "10 KB"
     },
     {
@@ -76,29 +88,28 @@
     "parallax-controller": "^1.7.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
-    "@size-limit/preset-small-lib": "^6.0.4",
-    "@storybook/addon-docs": "9.1.8",
-    "@storybook/addon-links": "^9.1.8",
+    "@eslint/js": "^9.39.4",
+    "@size-limit/preset-small-lib": "^12.1.0",
+    "@storybook/addon-docs": "^9.1.20",
+    "@storybook/addon-links": "^9.1.20",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^9.1.8",
-    "@storybook/react-vite": "^9.1.8",
+    "@storybook/react": "^9.1.20",
+    "@storybook/react-vite": "^9.1.20",
     "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.1",
-    "@typescript-eslint/eslint-plugin": "^8.44.1",
-    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.36.0",
-    "eslint-plugin-storybook": "9.1.8",
+    "eslint": "^9.39.4",
+    "eslint-plugin-storybook": "^9.1.20",
     "husky": "^7.0.4",
     "jsdom": "^27.0.0",
-    "np": "^10.2.0",
-    "postcss": "^8",
+    "postcss": "^8.5.14",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -106,12 +117,13 @@
     "react-test-renderer": "^19.1.1",
     "sass": "^1.49.11",
     "sass-loader": "^10.1.0",
-    "size-limit": "^6.0.4",
-    "storybook": "^9.1.8",
+    "size-limit": "^12.1.0",
+    "storybook": "^9.1.20",
     "tailwindcss": "^2.2.19",
-    "tsdown": "^0.15.4",
+    "tsdown": "^0.22.0",
     "tslib": "^2.3.1",
     "typescript": "^5.9.2",
+    "unrun": "^0.3.0",
     "vitest": "^3.2.4"
   }
 }
