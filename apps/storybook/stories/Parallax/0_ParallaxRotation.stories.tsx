@@ -1,17 +1,21 @@
 import React from 'react';
+import type { StoryFn } from '@storybook/react';
 import { Parallax } from 'react-scroll-parallax';
+import type { ParallaxProps } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from './Parallax.module.css';
 
-const Template = (args) => {
-  const props = Object.entries(args).reduce((acc: any, entry: any) => {
-    acc[entry[0]] = entry[1].split(',');
-    return acc;
-  }, {} as any);
+const Template: StoryFn<Record<string, string>> = (args) => {
+  const parallaxProps = Object.fromEntries(
+    Object.entries(args).map(([key, value]) => [
+      key,
+      value.split(',') as [string, string],
+    ])
+  ) as Partial<ParallaxProps>;
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax {...props} className={styles.parallax}>
+      <Parallax {...parallaxProps} className={styles.parallax}>
         <Element name="A" />
       </Parallax>
     </Container>

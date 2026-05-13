@@ -1,12 +1,11 @@
 import React from 'react';
+import type { StoryFn } from '@storybook/react';
 import { ValidEasingPresets } from 'scroll-parallax';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
-// @ts-expect-error - CSS module import (TypeScript language server may need restart)
 import styles from './Parallax.module.css';
 
-const options: ValidEasingPresets[] = [
-  // @ts-expect-error - Empty string is not a valid easing preset but used for testing
+const options: (ValidEasingPresets | '')[] = [
   '',
   'ease',
   'easeIn',
@@ -38,7 +37,7 @@ const options: ValidEasingPresets[] = [
   'easeInOutBack',
 ];
 
-const Template = (args) => {
+const Template: StoryFn<{ easing?: ValidEasingPresets | '' }> = (args) => {
   const amount = 5;
   const offA = -50;
   const offB = 50;
@@ -79,7 +78,7 @@ WithEasing.args = {
   easing: options[0],
 };
 
-const Template2 = () => {
+const Template2: StoryFn = () => {
   const amount = 16;
   const offA = 0;
   const offB = 500;

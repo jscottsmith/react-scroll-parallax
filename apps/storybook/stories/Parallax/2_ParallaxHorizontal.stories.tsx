@@ -1,11 +1,12 @@
 import React from 'react';
+import type { StoryFn } from '@storybook/react';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
 import styles from './Parallax.module.css';
 
-export const WithYOffsets = (args) => {
+export const WithYOffsets: StoryFn<any> = (args) => {
   const a = args.y1.split(',');
   const b = args.y2.split(',');
   return (
@@ -25,7 +26,7 @@ WithYOffsets.args = {
   y2: '50%,-50%',
 };
 
-export const WithXOffsets = (args) => {
+export const WithXOffsets: StoryFn<any> = (args) => {
   const a = args.x1.split(',');
   const b = args.x2.split(',');
   return (
@@ -45,7 +46,7 @@ WithXOffsets.args = {
   x2: '50%,-50%',
 };
 
-export const WithXAndYOffsets = (args) => {
+export const WithXAndYOffsets: StoryFn<any> = (args) => {
   const xa = args.x1.split(',');
   const xb = args.x2.split(',');
   const ya = args.y1.split(',');
@@ -69,7 +70,7 @@ WithXAndYOffsets.args = {
   y2: '50%,-50%',
 };
 
-export const WithVaryingYOffsets = (args) => {
+export const WithVaryingYOffsets: StoryFn<any> = (args) => {
   const amount = 5;
   const offA = args.MinOffset;
   const offB = args.MaxOffset;
@@ -105,7 +106,7 @@ WithVaryingYOffsets.args = {
   MinOffset: -50,
 };
 
-export const WithVaryingXOffsets = (args) => {
+export const WithVaryingXOffsets: StoryFn<any> = (args) => {
   const amount = 5;
   const offA = args.MinOffset;
   const offB = args.MaxOffset;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type PropsWithChildren } from 'react';
 import {
   ParallaxBanner,
   ParallaxBannerLayer,
@@ -30,7 +30,7 @@ const Log = () => {
   return null;
 };
 
-const Wrapper = (props) => (
+const Wrapper = (props: PropsWithChildren) => (
   <ParallaxProvider>
     {/* <Log /> */}
     <div style={{ height: '300vh' }} className="vertical">

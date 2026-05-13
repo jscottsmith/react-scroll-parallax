@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { type PropsWithChildren } from 'react';
 import styles from './Element.module.scss';
 
-export function Element(props) {
+export function Element(props: PropsWithChildren<{ name: string | number }>) {
   return (
     <div className={styles.ratio}>
       <div className={styles.inner}>

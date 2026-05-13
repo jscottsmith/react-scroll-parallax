@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import type { StoryFn } from '@storybook/react';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
@@ -9,7 +10,7 @@ import { CSSEffect } from 'scroll-parallax';
 import { useState } from 'react';
 import type { ParallaxProps } from 'react-scroll-parallax';
 
-export const WithYOffsets = (args) => {
+export const WithYOffsets: StoryFn<any> = (args) => {
   const a = args.y1.split(',');
   const b = args.y2.split(',');
   return (
@@ -29,7 +30,7 @@ WithYOffsets.args = {
   y2: '50%,-50%',
 };
 
-export const WithXOffsets = (args) => {
+export const WithXOffsets: StoryFn<any> = (args) => {
   const a = args.x1.split(',');
   const b = args.x2.split(',');
   return (
@@ -49,7 +50,7 @@ WithXOffsets.args = {
   x2: '50%,-50%',
 };
 
-export const WithXAndYOffsets = (args) => {
+export const WithXAndYOffsets: StoryFn<any> = (args) => {
   const xa = args.x1.split(',');
   const xb = args.x2.split(',');
   const ya = args.y1.split(',');
@@ -73,7 +74,7 @@ WithXAndYOffsets.args = {
   y2: '50%,-50%',
 };
 
-export const WithVaryingYOffsets = (args) => {
+export const WithVaryingYOffsets: StoryFn<any> = (args) => {
   const amount = 5;
   const offA = args.MinOffset;
   const offB = args.MaxOffset;
@@ -107,7 +108,7 @@ WithVaryingYOffsets.args = {
   MinOffset: -50,
 };
 
-export const WithVaryingXOffsets = (args) => {
+export const WithVaryingXOffsets: StoryFn<any> = (args) => {
   const amount = 5;
   const offA = args.MinOffset;
   const offB = args.MaxOffset;
@@ -141,7 +142,7 @@ WithVaryingXOffsets.args = {
   MinOffset: -50,
 };
 
-export const StartAnimationAtInitialPosition = (args) => {
+export const StartAnimationAtInitialPosition: StoryFn<any> = (args) => {
   const amount = 10;
   const unit = 'px';
   const elements = new Array(amount).fill(null).map((x, i) => i);
@@ -215,7 +216,7 @@ export const WithAHundredElements = () => {
   );
 };
 
-export const WithParallaxElementsGloballyDisabled = (args) => {
+export const WithParallaxElementsGloballyDisabled: StoryFn<any> = (args) => {
   const amount = 100;
   const elements = new Array(amount).fill(null).map((x, i) => i);
 
@@ -269,9 +270,9 @@ export const InsideADiv = () => {
   );
 };
 
-export const WithDefinedStartEndScroll = (args) => {
-  const a = [0, window.innerWidth / 2];
-  const b = [0, -window.innerWidth / 2];
+export const WithDefinedStartEndScroll: StoryFn<any> = (args) => {
+  const a: CSSEffect = [0, window.innerWidth / 2];
+  const b: CSSEffect = [0, -window.innerWidth / 2];
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
       <Parallax
@@ -302,11 +303,13 @@ WithDefinedStartEndScroll.args = {
 export const WithDefinedTargetElement = () => {
   const a: CSSEffect = [0, 200];
   const b: CSSEffect = [0, -200];
-  const targetRef = useRef();
+  const targetRef = useRef<HTMLDivElement>(null);
 
-  const [targetElement, setElement] = useState();
+  const [targetElement, setElement] = useState<HTMLElement | undefined>(
+    undefined
+  );
   useEffect(() => {
-    setElement(targetRef.current);
+    setElement(targetRef.current ?? undefined);
   }, []);
 
   return (

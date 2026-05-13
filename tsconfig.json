@@ -3,5 +3,11 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["**/dist", "**/node_modules", "**/build", "**/storybook-static"]
+  "exclude": [
+    "**/dist",
+    "**/node_modules",
+    "**/build",
+    "**/storybook-static",
+    "apps/storybook"
+  ]
 }

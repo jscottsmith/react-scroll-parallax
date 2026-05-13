@@ -7,11 +7,13 @@ export const ScrollContainer = (
     scrollAxis?: ValidScrollAxis;
   }>
 ) => {
-  const [scrollEl, setScrollElement] = React.useState(null);
-  const ref = React.useRef();
+  const [scrollEl, setScrollElement] = React.useState<
+    HTMLElement | undefined
+  >(undefined);
+  const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    setScrollElement(ref.current);
+    setScrollElement(ref.current ?? undefined);
   });
 
   return (

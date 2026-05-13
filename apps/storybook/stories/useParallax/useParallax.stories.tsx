@@ -1,5 +1,7 @@
 import React from 'react';
-import { ParallaxProps, useParallax } from 'react-scroll-parallax';
+import type { StoryFn } from '@storybook/react';
+import type { ParallaxProps } from 'react-scroll-parallax';
+import { useParallax } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from '../Parallax/Parallax.module.css';
@@ -14,12 +16,14 @@ function ElementWithHook(props: ParallaxProps) {
   );
 }
 
-const Template = (args) => {
-  const props = Object.entries(args).reduce((acc: any, entry: any) => {
-    acc[entry[0]] = entry[1].split(',');
-    return acc;
-  }, {} as any);
-  return <ElementWithHook {...props} />;
+const Template: StoryFn<Record<string, string>> = (args) => {
+  const hookProps = Object.fromEntries(
+    Object.entries(args).map(([key, value]) => [
+      key,
+      value.split(',') as [string, string],
+    ])
+  ) as ParallaxProps;
+  return <ElementWithHook {...hookProps} />;
 };
 
 export const WithRotation = Template.bind({});
@@ -77,7 +81,7 @@ export default {
   title: 'Components / useParallax / Rotate Props',
   component: WithRotation,
   decorators: [
-    (Story) => (
+    (Story: React.ComponentType) => (
       <Container scrollAxis="vertical" className={styles.elements}>
         <Story />
       </Container>

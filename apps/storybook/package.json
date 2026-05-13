@@ -13,6 +13,8 @@
     "scroll-parallax": "workspace:*"
   },
   "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "@storybook/addon-docs": "^9.1.20",
     "@storybook/addon-links": "^9.1.20",
     "@storybook/preset-scss": "^1.0.3",
