@@ -1,0 +1,102 @@
+{
+  "name": "react-scroll-parallax",
+  "version": "4.0.0",
+  "description": "React hooks and components to create parallax scroll effects for banners, images or any other DOM elements.",
+  "keywords": [
+    "react",
+    "scroll",
+    "effects",
+    "parallax",
+    "banner",
+    "animation",
+    "hooks",
+    "component"
+  ],
+  "homepage": "https://react-scroll-parallax.damnthat.tv",
+  "bugs": "https://github.com/jscottsmith/react-scroll-parallax/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jscottsmith/react-scroll-parallax"
+  },
+  "files": ["dist", "src"],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsdown --watch",
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "prettier": "prettier ./src ./types --write",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "release": "npx np@^11.2.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0"
+  },
+  "author": "J Scott Smith",
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "arrowParens": "always"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.cjs",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/index.mjs",
+      "limit": "10 KB"
+    }
+  ],
+  "dependencies": {
+    "scroll-parallax": "workspace:^"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^12.1.0",
+    "@testing-library/dom": "^10.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "jsdom": "^27.0.0",
+    "prettier": "^3.6.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-is": "^19.1.1",
+    "react-test-renderer": "^19.1.1",
+    "size-limit": "^12.1.0",
+    "tsdown": "^0.22.0",
+    "tslib": "^2.3.1",
+    "typescript": "^5.9.2",
+    "unrun": "^0.3.0",
+    "vitest": "^3.2.4"
+  }
+}

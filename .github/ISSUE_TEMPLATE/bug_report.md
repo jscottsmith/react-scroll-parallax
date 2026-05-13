@@ -17,5 +17,5 @@ If you discover a bug or an issue please consider the following before posting s
 - Share related code blocks of your setup
 - If there are warnings or errors copy them into the post
 
-If you are having issues with performance on mobile read this: https://parallax-controller.damnthat.tv/docs/performance
+If you are having issues with performance on mobile read this: https://react-scroll-parallax.damnthat.tv/docs/scroll-parallax/performance
 

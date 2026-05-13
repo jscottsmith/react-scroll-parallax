@@ -1,3 +1,8 @@
+pnpm-lock.yaml
 package.json
 node_modules
 dist
+build
+storybook-static
+.docusaurus
+coverage

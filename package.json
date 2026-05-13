@@ -1,70 +1,27 @@
 {
-  "name": "react-scroll-parallax",
-  "version": "3.5.0",
-  "description": "React hooks and components to create parallax scroll effects for banners, images or any other DOM elements.",
-  "keywords": [
-    "react",
-    "scroll",
-    "effects",
-    "parallax",
-    "banner",
-    "animation",
-    "hooks",
-    "component"
-  ],
-  "homepage": "https://react-scroll-parallax.damnthat.tv",
-  "bugs": "https://github.com/jscottsmith/react-scroll-parallax/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jscottsmith/react-scroll-parallax"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.mts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
-  "engines": {
-    "node": ">=10"
-  },
+  "name": "react-scroll-parallax-monorepo",
+  "private": true,
   "scripts": {
-    "start": "tsdown --watch",
-    "build": "tsdown",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui",
-    "prettier": "prettier ./ --write",
-    "lint": "eslint src --ext .ts,.tsx",
-    "prepare": "tsdown",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "release": "npx np@^11.2.1"
+    "build": "turbo run build --concurrency=1",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json,js,cjs,mjs}\"",
+    "typecheck": "turbo run typecheck",
+    "size": "pnpm --filter react-scroll-parallax exec size-limit",
+    "storybook": "turbo run dev --filter=@react-scroll-parallax/storybook",
+    "build-storybook": "turbo run build --filter=@react-scroll-parallax/storybook",
+    "docs": "turbo run dev --filter=@react-scroll-parallax/documentation",
+    "docs:build": "turbo run build --filter=@react-scroll-parallax/documentation"
   },
-  "peerDependencies": {
-    "react": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0",
-    "react-dom": "^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0"
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.9.12",
+    "typescript": "^5.9.2"
   },
-  "author": "J Scott Smith",
-  "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint src --ext .ts,.tsx"
-    }
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20"
   },
   "prettier": {
     "printWidth": 80,
@@ -74,56 +31,9 @@
     "trailingComma": "es5",
     "arrowParens": "always"
   },
-  "size-limit": [
-    {
-      "path": "dist/index.cjs",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/index.mjs",
-      "limit": "10 KB"
+  "pnpm": {
+    "overrides": {
+      "webpack": "5.93.0"
     }
-  ],
-  "dependencies": {
-    "parallax-controller": "^1.7.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@size-limit/preset-small-lib": "^12.1.0",
-    "@storybook/addon-docs": "^9.1.20",
-    "@storybook/addon-links": "^9.1.20",
-    "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^9.1.20",
-    "@storybook/react-vite": "^9.1.20",
-    "@testing-library/dom": "^10.0.0",
-    "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^16.0.0",
-    "@types/react": "^19.1.1",
-    "@types/react-dom": "^19.1.1",
-    "@typescript-eslint/eslint-plugin": "^8.59.0",
-    "@typescript-eslint/parser": "^8.59.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "@vitest/ui": "^3.2.4",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.39.4",
-    "eslint-plugin-storybook": "^9.1.20",
-    "husky": "^7.0.4",
-    "jsdom": "^27.0.0",
-    "postcss": "^8.5.14",
-    "prettier": "^3.6.2",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-is": "^19.1.1",
-    "react-test-renderer": "^19.1.1",
-    "sass": "^1.49.11",
-    "sass-loader": "^10.1.0",
-    "size-limit": "^12.1.0",
-    "storybook": "^9.1.20",
-    "tailwindcss": "^2.2.19",
-    "tsdown": "^0.22.0",
-    "tslib": "^2.3.1",
-    "typescript": "^5.9.2",
-    "unrun": "^0.3.0",
-    "vitest": "^3.2.4"
   }
 }

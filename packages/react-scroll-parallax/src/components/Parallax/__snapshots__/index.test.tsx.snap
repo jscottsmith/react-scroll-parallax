@@ -1,0 +1,206 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`given the <Parallax> component > when normal configurations are given > then it renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="class-foo"
+    style="border: 2px solid red; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(block -100% -100%); --parallax-translate-start-y: -100%; --parallax-translate-end-y: 100%; --parallax-translate-start-x: -100%; --parallax-translate-end-x: 100%;"
+  >
+    <div
+      class="foo"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { disabled: true } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { easing: 'easeInQuad' } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { easing: [ 0.2, -0.6, 1, -0.6 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { onChange: [Function onChange] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { onEnter: [Function onEnter] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { onExit: [Function onExit] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { onProgressChange: [Function onProgressChange] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { opacity: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { rootMargin: { top: +0, right: +0, bottom: +0, left: +0 } } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { rotate: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-rotate-start: 0turn; --parallax-rotate-end: 1turn;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { rotateX: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { rotateY: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { rotateZ: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { scale: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { scaleX: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { scaleY: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { scaleZ: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { shouldAlwaysCompleteAnimation: true } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range-start: entry 100%; animation-range-end: exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { shouldDisableScalingTranslations: true } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { speed: 10 } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(block 0px 0px); --parallax-translate-start-y: 100px; --parallax-translate-end-y: -100px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { startScroll: +0, endScroll: 1000 } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: 0px 1000px; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: scroll();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { targetElement: <div></div> } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { translateX: [ -100, 100 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-translate-start-x: -100%; --parallax-translate-end-x: 100%;"
+  />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { translateY: [ -100, 100 ] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(block -100% -100%); --parallax-translate-start-y: -100%; --parallax-translate-end-y: 100%;"
+  />
+</DocumentFragment>
+`;

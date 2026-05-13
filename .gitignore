@@ -8,4 +8,12 @@ npm-debug.log
 .DS_Store
 node_modules
 .cache
+.turbo
 dist
+
+# Monorepo app outputs
+apps/docs/build
+apps/docs/.docusaurus
+apps/storybook/storybook-static
+packages/*/dist
+packages/*/coverage

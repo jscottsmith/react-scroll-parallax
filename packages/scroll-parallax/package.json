@@ -1,0 +1,71 @@
+{
+  "name": "scroll-parallax",
+  "version": "1.0.0",
+  "description": "Scroll-driven parallax controller: elements, limits, and transform effects for the DOM.",
+  "keywords": [
+    "scroll",
+    "effects",
+    "parallax",
+    "animation",
+    "transform",
+    "translate",
+    "rotate",
+    "scale",
+    "opacity"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jscottsmith/react-scroll-parallax"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsdown && cp src/styles.css dist/styles.css",
+    "dev": "tsdown --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "jsdom": "^27.0.0",
+    "prettier": "^3.6.2",
+    "tsdown": "^0.22.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
