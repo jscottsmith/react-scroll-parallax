@@ -28,8 +28,7 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
-    },
-    "./styles.css": "./dist/styles.css"
+    }
   },
   "files": ["dist"],
   "publishConfig": {
@@ -43,7 +42,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsdown && cp src/styles.css dist/styles.css",
+    "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "test:watch": "vitest",

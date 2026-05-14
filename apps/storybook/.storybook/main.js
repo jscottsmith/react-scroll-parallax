@@ -29,20 +29,12 @@ module.exports = {
   },
   viteFinal: async (config) => {
     const dirname = __dirname;
-    // Use /^scroll-parallax$/ so `scroll-parallax/styles.css` is not rewritten to index.ts/styles.css.
     const storyAliases = [
       {
         find: /^scroll-parallax$/,
         replacement: path.resolve(
           dirname,
           '../../../packages/scroll-parallax/src/index.ts'
-        ),
-      },
-      {
-        find: 'scroll-parallax/styles.css',
-        replacement: path.resolve(
-          dirname,
-          '../../../packages/scroll-parallax/src/styles.css'
         ),
       },
       {

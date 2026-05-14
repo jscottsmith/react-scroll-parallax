@@ -1,4 +1,3 @@
-import 'scroll-parallax/styles.css';
 import '../stories/styles.css';
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters

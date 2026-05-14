@@ -13,9 +13,7 @@ import { Rect } from './Rect';
 import { Limits } from './Limits';
 import { ScrollAxis } from '../types';
 import type { ParallaxElementConfig } from '../types';
-import { CSSVariables } from '../constants';
 
-// Mock the helper modules
 vi.mock('../helpers/parseElementTransitionEffects', () => ({
   parseTranslationProps: vi.fn(() => ({
     translateY: {
@@ -41,7 +39,6 @@ vi.mock('../helpers/scaleTranslateEffectsForSlowerScroll', () => ({
   scaleTranslateEffectsForSlowerScroll: vi.fn(() => ({
     translateY: { start: 0, end: 100, unit: 'px' },
     translateX: { start: 0, end: 50, unit: 'px' },
-    rotate: { start: 0, end: 360, unit: 'deg' },
   })),
 }));
 
@@ -49,11 +46,52 @@ vi.mock('../utils/createId', () => ({
   createId: vi.fn(() => 1),
 }));
 
+function mockAnimation(): Animation {
+  return {
+    cancel: vi.fn(),
+    ready: Promise.resolve(),
+    playState: 'running',
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  } as unknown as Animation;
+}
+
 describe('Element', () => {
   let element: HTMLElement;
   let view: View;
   let props: ParallaxElementConfig;
   let elementInstance: Element;
+  let animateSpy: ReturnType<typeof vi.spyOn> | undefined;
+
+  beforeAll(() => {
+    if (typeof HTMLElement.prototype.animate !== 'function') {
+      Object.defineProperty(HTMLElement.prototype, 'animate', {
+        configurable: true,
+        writable: true,
+        value: vi.fn(() => mockAnimation()),
+      });
+    }
+
+    vi.stubGlobal(
+      'ViewTimeline',
+      vi.fn().mockImplementation(() => ({}))
+    );
+    vi.stubGlobal(
+      'ScrollTimeline',
+      vi.fn().mockImplementation(() => ({}))
+    );
+    const g = globalThis as unknown as {
+      CSS?: { px?: (n: number) => object; percent?: (n: number) => object };
+    };
+    if (!g.CSS?.px) {
+      vi.stubGlobal('CSS', {
+        px: (n: number) => ({ unit: 'px', value: n }),
+        percent: (n: number) => ({ unit: 'percent', value: n }),
+      });
+    } else if (!g.CSS.percent) {
+      g.CSS.percent = (n: number) => ({ unit: 'percent', value: n });
+    }
+  });
 
   beforeEach(() => {
     element = document.createElement('div');
@@ -69,6 +107,10 @@ describe('Element', () => {
       rotate: [0, 360],
     };
 
+    animateSpy = vi
+      .spyOn(HTMLElement.prototype, 'animate')
+      .mockImplementation(() => mockAnimation());
+
     elementInstance = new Element({
       el: element,
       props,
@@ -79,6 +121,7 @@ describe('Element', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+    animateSpy?.mockRestore();
   });
 
   describe('constructor', () => {
@@ -96,28 +139,25 @@ describe('Element', () => {
       expect(elementInstance.scaledEffects).toBeDefined();
     });
 
-    it('should set disabled property when disabledParallaxController is true', () => {
-      const disabledElement = new Element({
-        el: element,
+    it('should not install scroll-driven animation when disabledParallaxController is true', () => {
+      animateSpy.mockClear();
+      new Element({
+        el: document.createElement('div'),
         props,
         scrollAxis: ScrollAxis.vertical,
         view,
         disabledParallaxController: true,
       });
-
-      expect(disabledElement.disabled).toBe(true);
+      expect(animateSpy).not.toHaveBeenCalled();
     });
 
     it('should call helper functions during construction', async () => {
-      const { parseTranslationProps } = await import(
-        '../helpers/parseElementTransitionEffects'
-      );
-      const { createLimitsWithTranslationsForRelativeElements } = await import(
-        '../helpers/createLimitsWithTranslationsForRelativeElements'
-      );
-      const { scaleTranslateEffectsForSlowerScroll } = await import(
-        '../helpers/scaleTranslateEffectsForSlowerScroll'
-      );
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
+      const { createLimitsWithTranslationsForRelativeElements } =
+        await import('../helpers/createLimitsWithTranslationsForRelativeElements');
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
 
       expect(parseTranslationProps).toHaveBeenCalledWith(
         props,
@@ -130,9 +170,6 @@ describe('Element', () => {
     });
 
     it('should set shouldScaleTranslateEffects property correctly', () => {
-      // With the current props (translateY and translateX arrays) and vertical scroll axis,
-      // shouldScaleTranslateEffects should be true because there's a translateY effect
-      // and the scroll axis is vertical
       expect(elementInstance.shouldScaleTranslateEffects).toBe(true);
     });
 
@@ -176,204 +213,190 @@ describe('Element', () => {
     });
   });
 
-  describe('style setting', () => {
-    it('should set animation name and properties', () => {
-      expect(element.style.animationName.toLowerCase()).toBe('parallaxeffects');
-      expect(element.style.animationTimingFunction).toBe('linear');
-      expect(element.style.animationFillMode).toBe('both');
+  describe('scroll-driven animation', () => {
+    it('should call animate with translate and rotate keyframes', () => {
+      expect(animateSpy).toHaveBeenCalled();
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[], object];
+      expect(keyframes[0]).toMatchObject({
+        transform: expect.stringContaining('translate(0px, 0px)'),
+      });
+      expect(keyframes[0]?.transform).toContain('rotate(0deg)');
+      expect(keyframes[1]).toMatchObject({
+        transform: expect.stringContaining('translate(50px, 100px)'),
+      });
+      expect(keyframes[1]?.transform).toContain('rotate(360deg)');
     });
 
-    it('should set animation range correctly', () => {
-      expect(element.style.getPropertyValue('animation-range')).toBe(
-        'entry 0% exit 100%'
+    it('should use ViewTimeline with entry/exit range by default', () => {
+      const ViewTimeline = vi.mocked(
+        (
+          globalThis as unknown as {
+            ViewTimeline: ReturnType<typeof vi.fn>;
+          }
+        ).ViewTimeline
       );
+      expect(ViewTimeline).toHaveBeenCalled();
+      const opts = ViewTimeline.mock.calls.at(-1)?.[0] as {
+        subject: Element;
+        axis: string;
+        inset?: unknown;
+      };
+      expect(opts.subject).toBe(element);
+      expect(opts.axis).toBe('block');
+      expect(opts.inset?.[0]).toMatchObject({ unit: 'px', value: -100 });
+      expect(opts.inset?.[1]).toMatchObject({ unit: 'px', value: 0 });
+
+      const animOpts = animateSpy.mock.calls[0]?.[1] as {
+        rangeStart?: string;
+        rangeEnd?: string;
+      };
+      expect(animOpts.rangeStart).toBe('entry 0%');
+      expect(animOpts.rangeEnd).toBe('exit 100%');
     });
 
-    it('should set animation range with shouldAlwaysCompleteAnimation', () => {
-      // Mock the rect to simulate element positioning
+    it('should omit view inset when scaling translations is disabled', () => {
+      const ViewTimeline = (
+        globalThis as unknown as { ViewTimeline: ReturnType<typeof vi.fn> }
+      ).ViewTimeline;
+      ViewTimeline.mockClear();
+
+      new Element({
+        el: document.createElement('div'),
+        props: { ...props, shouldDisableScalingTranslations: true },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      const opts = ViewTimeline.mock.calls.at(-1)?.[0] as {
+        inset?: unknown;
+      };
+      expect(opts.inset).toBeUndefined();
+    });
+
+    it('should use ScrollTimeline when startScroll and endScroll are set', () => {
+      const ScrollTimeline = (
+        globalThis as unknown as { ScrollTimeline: ReturnType<typeof vi.fn> }
+      ).ScrollTimeline;
+      ScrollTimeline.mockClear();
+      animateSpy.mockClear();
+
+      new Element({
+        el: document.createElement('div'),
+        props: {
+          ...props,
+          startScroll: 100,
+          endScroll: 500,
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      expect(ScrollTimeline).toHaveBeenCalled();
+      const scrollOpts = ScrollTimeline.mock.calls.at(-1)?.[0] as {
+        source: Element;
+        axis: string;
+      };
+      expect(scrollOpts.source).toBe(document.documentElement);
+      expect(scrollOpts.axis).toBe('block');
+      expect(animateSpy).toHaveBeenCalled();
+    });
+
+    it('should set range when shouldAlwaysCompleteAnimation is true', () => {
+      animateSpy.mockClear();
       const mockRect = {
-        offsetTop: 400, // Element starts in view
-        offsetBottom: 1200, // Element ends in view
+        offsetTop: 400,
+        offsetBottom: 1200,
       };
 
-      vi.spyOn(elementInstance.rect, 'offsetTop', 'get').mockReturnValue(
-        mockRect.offsetTop
-      );
-      vi.spyOn(elementInstance.rect, 'offsetBottom', 'get').mockReturnValue(
-        mockRect.offsetBottom
-      );
-
-      const elementWithAlwaysComplete = new Element({
-        el: document.createElement('div'),
+      const el = document.createElement('div');
+      const inst = new Element({
+        el,
         props: { ...props, shouldAlwaysCompleteAnimation: true },
         scrollAxis: ScrollAxis.vertical,
         view,
       });
 
-      // The exact values depend on the rect calculations, but the property should be set
-      expect(
-        elementWithAlwaysComplete.el.style.getPropertyValue(
-          'animation-range-start'
-        )
-      ).toBeDefined();
-      expect(
-        elementWithAlwaysComplete.el.style.getPropertyValue(
-          'animation-range-end'
-        )
-      ).toBeDefined();
+      vi.spyOn(inst.rect, 'offsetTop', 'get').mockReturnValue(
+        mockRect.offsetTop
+      );
+      vi.spyOn(inst.rect, 'offsetBottom', 'get').mockReturnValue(
+        mockRect.offsetBottom
+      );
+
+      inst.updateElement(view);
+
+      const animOpts = animateSpy.mock.calls.at(-1)?.[1] as {
+        rangeStart?: string;
+        rangeEnd?: string;
+      };
+      expect(animOpts.rangeStart).toMatch(/^entry [\d.]+%$/);
+      expect(animOpts.rangeEnd).toBe('exit 100%');
     });
 
-    it('should set animation timeline', () => {
-      // Since shouldScaleTranslateEffects is true by default (translateY effect with vertical scroll),
-      // the timeline should contain view(block with the scaled values
-      expect(element.style.getPropertyValue('animation-timeline')).toContain(
-        'view(block'
-      );
-    });
-
-    it('should set animation timeline with scaled translate effects', () => {
-      // Create an element that should have scaling enabled (no rootMargin, targetElement, or shouldDisableScalingTranslations)
-      const elementWithScaling = new Element({
-        el: document.createElement('div'),
-        props: { ...props, shouldDisableScalingTranslations: false },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      // Since shouldScaleTranslateEffects should be true, the timeline should contain view(block
-      expect(
-        elementWithScaling.el.style.getPropertyValue('animation-timeline')
-      ).toContain('view(block');
-    });
-
-    it('should set CSS custom properties for translate effects', () => {
-      // The implementation uses scaledEffects for translateY and effects for translateX
-      // The scaledEffects are modified by scaleTranslateEffectsForSlowerScroll
-      // Based on the mock in scaleTranslateEffectsForSlowerScroll, the values should be:
-      expect(element.style.getPropertyValue(CSSVariables.translateStartY)).toBe(
-        '0px'
-      );
-      expect(element.style.getPropertyValue(CSSVariables.translateEndY)).toBe(
-        '100px'
-      );
-      expect(element.style.getPropertyValue(CSSVariables.translateStartX)).toBe(
-        '0px'
-      );
-      expect(element.style.getPropertyValue(CSSVariables.translateEndX)).toBe(
-        '50px'
-      );
-    });
-
-    it('should set CSS custom properties for rotate effects', () => {
-      expect(element.style.getPropertyValue(CSSVariables.rotateStart)).toBe(
-        '0'
-      );
-      expect(element.style.getPropertyValue(CSSVariables.rotateEnd)).toBe(
-        '360'
-      );
-    });
-
-    it('should set easing when provided', () => {
-      const elementWithEasing = new Element({
+    it('should pass easing to animate options when provided', () => {
+      animateSpy.mockClear();
+      new Element({
         el: document.createElement('div'),
         props: { ...props, easing: 'ease-in-out' },
         scrollAxis: ScrollAxis.vertical,
         view,
       });
-
-      expect(elementWithEasing.el.style.animationTimingFunction).toBe(
-        'ease-in-out'
-      );
+      const animOpts = animateSpy.mock.calls[0]?.[1] as { easing?: string };
+      expect(animOpts.easing).toBe('ease-in-out');
     });
   });
 
-  describe('event listeners', () => {
-    it('should add animation event listeners when callbacks are provided', () => {
+  describe('callbacks', () => {
+    it('should call onEnter when the animation becomes ready', async () => {
       const onEnter = vi.fn();
-      const onExit = vi.fn();
-      const elementEl = document.createElement('div');
-
-      const addEventListenerSpy = vi.spyOn(elementEl, 'addEventListener');
-
-      const elementWithCallbacks = new Element({
-        el: elementEl,
-        props: { ...props, onEnter, onExit },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      // The event listeners are added in the constructor
-      expect(addEventListenerSpy).toHaveBeenCalledWith(
-        'animationstart',
-        expect.any(Function)
-      );
-      expect(addEventListenerSpy).toHaveBeenCalledWith(
-        'animationend',
-        expect.any(Function)
-      );
-    });
-
-    it('should call onEnter callback when animation starts', () => {
-      const onEnter = vi.fn();
-      const elementWithCallbacks = new Element({
+      new Element({
         el: document.createElement('div'),
         props: { ...props, onEnter },
         scrollAxis: ScrollAxis.vertical,
         view,
       });
-
-      // Simulate animation start event
-      const animationStartEvent = new Event('animationstart');
-      elementWithCallbacks.el.dispatchEvent(animationStartEvent);
-
-      expect(onEnter).toHaveBeenCalledWith(elementWithCallbacks);
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(onEnter).toHaveBeenCalled();
     });
 
-    it('should call onExit callback when animation ends', () => {
+    it('should call onExit when resetStyles runs', () => {
       const onExit = vi.fn();
-      const elementWithCallbacks = new Element({
+      const inst = new Element({
         el: document.createElement('div'),
         props: { ...props, onExit },
         scrollAxis: ScrollAxis.vertical,
         view,
       });
-
-      // Simulate animation end event
-      const animationEndEvent = new Event('animationend');
-      elementWithCallbacks.el.dispatchEvent(animationEndEvent);
-
-      expect(onExit).toHaveBeenCalledWith(elementWithCallbacks);
+      inst.resetStyles();
+      expect(onExit).toHaveBeenCalledWith(inst);
     });
   });
 
   describe('updateProps', () => {
     it('should update props and re-parse effects', async () => {
       const newProps = { translateY: [50, 150] as [number, number] };
-      const { parseTranslationProps } = await import(
-        '../helpers/parseElementTransitionEffects'
-      );
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
 
       const result = elementInstance.updateProps(newProps);
 
       expect(result).toBe(elementInstance);
       expect(elementInstance.props).toEqual({ ...props, ...newProps });
-      // The function is called with the new props, not the merged props
       expect(parseTranslationProps).toHaveBeenCalledWith(
         newProps,
         ScrollAxis.vertical
       );
     });
 
-    it('should update element styles when props change', async () => {
+    it('should update translations when props change', async () => {
       const newProps = {
         translateY: [50, 150] as [number, number],
         rotate: [90, 270] as [number, number],
       };
 
-      // Mock parseTranslationProps to return new effects
-      const { parseTranslationProps } = await import(
-        '../helpers/parseElementTransitionEffects'
-      );
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
       vi.mocked(parseTranslationProps).mockReturnValue({
         translateY: { start: 50, end: 150, unit: 'px' as const },
         translateX: { start: 0, end: 50, unit: 'px' as const },
@@ -381,8 +404,6 @@ describe('Element', () => {
 
       elementInstance.updateProps(newProps);
 
-      // Note: The current implementation doesn't call setElementStyles after updateProps
-      // This test documents the current behavior, but it might be a bug
       expect(elementInstance.translations.translateY?.start).toBe(50);
       expect(elementInstance.translations.translateY?.end).toBe(150);
     });
@@ -397,12 +418,10 @@ describe('Element', () => {
         scrollHeight: 3500,
       });
 
-      const { createLimitsWithTranslationsForRelativeElements } = await import(
-        '../helpers/createLimitsWithTranslationsForRelativeElements'
-      );
-      const { scaleTranslateEffectsForSlowerScroll } = await import(
-        '../helpers/scaleTranslateEffectsForSlowerScroll'
-      );
+      const { createLimitsWithTranslationsForRelativeElements } =
+        await import('../helpers/createLimitsWithTranslationsForRelativeElements');
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
 
       const result = elementInstance.updateElement(newView);
 
@@ -416,23 +435,26 @@ describe('Element', () => {
   });
 
   describe('disable and enable', () => {
-    it('should disable the element and remove animation', () => {
-      elementInstance.disable();
-
-      expect(elementInstance.disabled).toBe(true);
-      expect(element.style.animationName).toBe('');
-      expect(element.style.animationTimingFunction).toBe('');
-      expect(element.style.animationFillMode).toBe('');
+    it('should cancel the animation when disabled', () => {
+      const anim = mockAnimation();
+      animateSpy.mockReturnValue(anim);
+      const inst = new Element({
+        el: document.createElement('div'),
+        props,
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      inst.disable();
+      expect(inst.disabled).toBe(true);
+      expect(anim.cancel).toHaveBeenCalled();
     });
 
-    it('should enable the element and restore animation', () => {
+    it('should recreate animation when enabled after disable', () => {
       elementInstance.disable();
+      const callsAfterDisable = animateSpy.mock.calls.length;
       elementInstance.enable();
-
       expect(elementInstance.disabled).toBe(false);
-      expect(element.style.animationName.toLowerCase()).toBe('parallaxeffects');
-      expect(element.style.animationTimingFunction).toBe('linear');
-      expect(element.style.animationFillMode).toBe('both');
+      expect(animateSpy.mock.calls.length).toBeGreaterThan(callsAfterDisable);
     });
   });
 
@@ -441,26 +463,36 @@ describe('Element', () => {
       expect(typeof elementInstance.destroy).toBe('function');
     });
 
-    it('should unset element styles when destroyed', () => {
-      const removePropertySpy = vi.spyOn(element.style, 'removeProperty');
-
-      elementInstance.destroy();
-
-      expect(removePropertySpy).toHaveBeenCalledWith(CSSVariables.rotateStart);
-      expect(removePropertySpy).toHaveBeenCalledWith(CSSVariables.rotateEnd);
+    it('should cancel animation when destroyed', () => {
+      const anim = mockAnimation();
+      animateSpy.mockReturnValue(anim);
+      const inst = new Element({
+        el: document.createElement('div'),
+        props,
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      inst.destroy();
+      expect(anim.cancel).toHaveBeenCalled();
     });
   });
 
   describe('with different scroll axes', () => {
-    it('should work with horizontal scroll axis', () => {
-      const horizontalElement = new Element({
+    it('should use inline axis for horizontal scroll', () => {
+      const ViewTimeline = (
+        globalThis as unknown as { ViewTimeline: ReturnType<typeof vi.fn> }
+      ).ViewTimeline;
+      ViewTimeline.mockClear();
+
+      new Element({
         el: document.createElement('div'),
         props,
         scrollAxis: ScrollAxis.horizontal,
         view,
       });
 
-      expect(horizontalElement.scrollAxis).toBe(ScrollAxis.horizontal);
+      const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { axis: string };
+      expect(opts.axis).toBe('inline');
     });
   });
 
@@ -474,8 +506,23 @@ describe('Element', () => {
         view,
       });
 
-      // The rect should be created with the target element
       expect(elementWithTarget.props.targetElement).toBe(targetElement);
+    });
+
+    it('should use target element as ViewTimeline subject', () => {
+      const ViewTimeline = (
+        globalThis as unknown as { ViewTimeline: ReturnType<typeof vi.fn> }
+      ).ViewTimeline;
+      ViewTimeline.mockClear();
+      const targetElement = document.createElement('span');
+      new Element({
+        el: document.createElement('div'),
+        props: { ...props, targetElement },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { subject: Element };
+      expect(opts.subject).toBe(targetElement);
     });
   });
 
@@ -510,7 +557,7 @@ describe('Element', () => {
       expect(elementWithScrollRange.props.endScroll).toBe(500);
     });
 
-    it('should set animation timeline to scroll() when startScroll and endScroll are provided', () => {
+    it('should set shouldScaleTranslateEffects when startScroll and endScroll are provided', () => {
       const elementWithScrollRange = new Element({
         el: document.createElement('div'),
         props: {
@@ -522,43 +569,6 @@ describe('Element', () => {
         view,
       });
 
-      expect(
-        elementWithScrollRange.el.style.getPropertyValue('animation-timeline')
-      ).toBe('scroll()');
-    });
-
-    it('should set animation range to pixel values when startScroll and endScroll are provided', () => {
-      const elementWithScrollRange = new Element({
-        el: document.createElement('div'),
-        props: {
-          ...props,
-          startScroll: 100,
-          endScroll: 500,
-        },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      expect(
-        elementWithScrollRange.el.style.getPropertyValue('animation-range')
-      ).toBe('100px 500px');
-    });
-
-    it('should set shouldScaleTranslateEffects to true when startScroll and endScroll are provided', () => {
-      const elementWithScrollRange = new Element({
-        el: document.createElement('div'),
-        props: {
-          ...props,
-          startScroll: 100,
-          endScroll: 500,
-        },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      // Currently startScroll and endScroll don't affect shouldScaleTranslateEffects
-      // The getShouldScaleTranslateEffects function doesn't check for these properties
-      // This might be a TODO item for future implementation
       expect(elementWithScrollRange.shouldScaleTranslateEffects).toBe(true);
     });
   });
@@ -582,25 +592,20 @@ describe('Element', () => {
   });
 
   describe('edge cases', () => {
-    it('should handle element without rotate effects', () => {
+    it('should omit rotate in keyframes when rotate is not provided', () => {
+      animateSpy.mockClear();
       const propsWithoutRotate = {
         translateY: [0, 100] as [number, number],
         translateX: [0, 50] as [number, number],
       };
-
-      const elementWithoutRotate = new Element({
+      new Element({
         el: document.createElement('div'),
         props: propsWithoutRotate,
         scrollAxis: ScrollAxis.vertical,
         view,
       });
-
-      expect(
-        elementWithoutRotate.el.style.getPropertyValue(CSSVariables.rotateStart)
-      ).toBe('');
-      expect(
-        elementWithoutRotate.el.style.getPropertyValue(CSSVariables.rotateEnd)
-      ).toBe('');
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
+      expect(keyframes[0]?.transform).toContain('rotate(0deg)');
     });
 
     it('should handle element without translate effects', async () => {
@@ -608,113 +613,53 @@ describe('Element', () => {
         rotate: [0, 360] as [number, number],
       };
 
-      // Mock parseTranslationProps to return no translate effects
-      const { parseTranslationProps } = await import(
-        '../helpers/parseElementTransitionEffects'
-      );
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
       vi.mocked(parseTranslationProps).mockReturnValue({});
 
-      // Mock scaleTranslateEffectsForSlowerScroll to return no translate effects
-      const { scaleTranslateEffectsForSlowerScroll } = await import(
-        '../helpers/scaleTranslateEffectsForSlowerScroll'
-      );
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
       vi.mocked(scaleTranslateEffectsForSlowerScroll).mockReturnValue({});
 
-      const elementWithoutTranslate = new Element({
+      animateSpy.mockClear();
+      new Element({
         el: document.createElement('div'),
         props: propsWithoutTranslate,
         scrollAxis: ScrollAxis.vertical,
         view,
       });
 
-      expect(
-        elementWithoutTranslate.el.style.getPropertyValue(
-          CSSVariables.translateStartY
-        )
-      ).toBe('');
-      expect(
-        elementWithoutTranslate.el.style.getPropertyValue(
-          CSSVariables.translateEndY
-        )
-      ).toBe('');
-      expect(
-        elementWithoutTranslate.el.style.getPropertyValue(
-          CSSVariables.translateStartX
-        )
-      ).toBe('');
-      expect(
-        elementWithoutTranslate.el.style.getPropertyValue(
-          CSSVariables.translateEndX
-        )
-      ).toBe('');
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
+      expect(keyframes[0]?.transform).toContain('translate(0px, 0px)');
     });
 
-    it('should handle startScroll and endScroll timeline logic', () => {
-      const elementWithScrollRange = new Element({
-        el: document.createElement('div'),
-        props: {
-          ...props,
-          startScroll: 100,
-          endScroll: 500,
-        },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      // When startScroll and endScroll are provided, the timeline should be set to scroll()
-      expect(
-        elementWithScrollRange.el.style.getPropertyValue('animation-timeline')
-      ).toBe('scroll()');
-    });
-
-    it('should handle element with only one translate effect', async () => {
+    it('should handle element with only translateY', async () => {
       const propsWithOnlyTranslateY = {
         translateY: [0, 100] as [number, number],
       };
 
-      // Mock parseTranslationProps to return only translateY
-      const { parseTranslationProps } = await import(
-        '../helpers/parseElementTransitionEffects'
-      );
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
       vi.mocked(parseTranslationProps).mockReturnValue({
         translateY: { start: 0, end: 100, unit: 'px' as const },
       });
 
-      // Mock scaleTranslateEffectsForSlowerScroll to return only translateY
-      const { scaleTranslateEffectsForSlowerScroll } = await import(
-        '../helpers/scaleTranslateEffectsForSlowerScroll'
-      );
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
       vi.mocked(scaleTranslateEffectsForSlowerScroll).mockReturnValue({
         translateY: { start: 0, end: 100, unit: 'px' as const },
       });
 
-      const elementWithOnlyTranslateY = new Element({
+      animateSpy.mockClear();
+      new Element({
         el: document.createElement('div'),
         props: propsWithOnlyTranslateY,
         scrollAxis: ScrollAxis.vertical,
         view,
       });
 
-      expect(
-        elementWithOnlyTranslateY.el.style.getPropertyValue(
-          CSSVariables.translateStartY
-        )
-      ).toBe('0px');
-      expect(
-        elementWithOnlyTranslateY.el.style.getPropertyValue(
-          CSSVariables.translateEndY
-        )
-      ).toBe('100px');
-      expect(
-        elementWithOnlyTranslateY.el.style.getPropertyValue(
-          CSSVariables.translateStartX
-        )
-      ).toBe('');
-      expect(
-        elementWithOnlyTranslateY.el.style.getPropertyValue(
-          CSSVariables.translateEndX
-        )
-      ).toBe('');
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
+      expect(keyframes[1]?.transform).toContain('translate(0px, 100px)');
     });
   });
 });

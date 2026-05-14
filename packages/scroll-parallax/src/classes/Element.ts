@@ -1,9 +1,12 @@
 import type {
   CreateElementOptions,
+  CSSEffect,
   ParallaxElementConfig,
   ParallaxStartEndEffects,
   ValidScrollAxis,
+  ValidTranslationUnits,
 } from '../types';
+import { ScrollAxis } from '../types';
 import { createId } from '../utils/createId';
 import { Rect } from './Rect';
 import { View } from './View';
@@ -12,7 +15,6 @@ import { parseTranslationProps } from '../helpers/parseElementTransitionEffects'
 import { createLimitsWithTranslationsForRelativeElements } from '../helpers/createLimitsWithTranslationsForRelativeElements';
 import { scaleTranslateEffectsForSlowerScroll } from '../helpers/scaleTranslateEffectsForSlowerScroll';
 import { getShouldScaleTranslateEffects } from '../helpers/getShouldScaleTranslateEffects';
-import { CSSVariables } from '../constants';
 
 type ParallaxControllerConstructorOptions = {
   scrollAxis: ValidScrollAxis;
@@ -23,6 +25,104 @@ type ElementConstructorOptions = CreateElementOptions &
     view: View;
   };
 
+/** Browser constructor for `ScrollTimeline` (scroll offset progress). */
+type ScrollTimelineCtor = new (
+  options?: ScrollTimelineOptions
+) => AnimationTimeline;
+/** Browser constructor for `ViewTimeline` (subject visibility in scrollport). */
+type ViewTimelineCtor = new (options: ViewTimelineOptions) => AnimationTimeline;
+
+type ScrollTimelineOptions = {
+  source?: globalThis.Element | Document | null;
+  axis?: string;
+  scrollOffsets?: unknown[];
+};
+
+type ViewTimelineOptions = {
+  subject: globalThis.Element;
+  axis?: string;
+  inset?: readonly CSSNumericValue[];
+};
+
+type ParallaxAnimateOptions = {
+  /** Scroll- or view-linked timeline passed to `element.animate(..., { timeline })`. */
+  timeline: AnimationTimeline;
+  /**
+   * WAAPI-only `rangeStart` / `rangeEnd` (not `ViewTimeline` ctor args). Omitted for
+   * `ScrollTimeline`; set for `ViewTimeline` so progress matches entry/exit intent.
+   */
+  rangeStart?: string;
+  rangeEnd?: string;
+  fill: 'both';
+  easing: string;
+};
+
+/** Resolve `ScrollTimeline` without assuming it exists on `globalThis` (SSR / old browsers). */
+function getScrollTimelineCtor(): ScrollTimelineCtor | undefined {
+  return (globalThis as unknown as { ScrollTimeline?: ScrollTimelineCtor })
+    .ScrollTimeline;
+}
+
+function getViewTimelineCtor(): ViewTimelineCtor | undefined {
+  return (globalThis as unknown as { ViewTimeline?: ViewTimelineCtor })
+    .ViewTimeline;
+}
+
+/** True when the browser can run scroll-linked WAAPI (`ViewTimeline` + `ScrollTimeline` + `animate`). */
+function supportsScrollDrivenAnimations(): boolean {
+  return (
+    typeof getScrollTimelineCtor() === 'function' &&
+    typeof getViewTimelineCtor() === 'function' &&
+    typeof HTMLElement.prototype.animate === 'function'
+  );
+}
+
+/** `rotate()` keyframe value: numbers get `deg`; strings keep explicit units if present. */
+function toRotateCss(value: number | string): string {
+  if (typeof value === 'number') {
+    return `${value}deg`;
+  }
+  const s = String(value);
+  if (/deg|rad|turn|grad$/i.test(s.trim())) {
+    return s;
+  }
+  return `${s}deg`;
+}
+
+/** WAAPI timeline `axis`: vertical scroll uses `block`, horizontal uses `inline`. */
+function timelineAxis(scrollAxis: ValidScrollAxis): string {
+  return scrollAxis === ScrollAxis.horizontal ? 'inline' : 'block';
+}
+
+/**
+ * `ViewTimeline` inset must be `CSSNumericValue`, not strings (browser requirement).
+ */
+function lengthToCssNumeric(
+  value: number,
+  unit: ValidTranslationUnits
+): CSSNumericValue {
+  const css = globalThis.CSS;
+  switch (unit) {
+    case 'px':
+      return css.px(value);
+    case '%':
+      return css.percent(value);
+    case 'vw':
+    case 'vh':
+      return new CSSUnitValue(value, unit);
+  }
+}
+
+/** Inset pair that expands the view timeline along Y when translate distance is scaled. */
+function insetPairForScaledView(
+  yStart: number,
+  yEnd: number,
+  yUnit: ValidTranslationUnits
+): [CSSNumericValue, CSSNumericValue] {
+  return [lengthToCssNumeric(yStart, yUnit), lengthToCssNumeric(yEnd, yUnit)];
+}
+
+/** One parallax DOM node: Rect/Limits + WAAPI scroll-driven animation on `el`. */
 export class Element {
   el: HTMLElement;
   props: ParallaxElementConfig;
@@ -30,14 +130,15 @@ export class Element {
   disabled: boolean;
   id: number;
   translations: ParallaxStartEndEffects;
-  // isInView: boolean | null;
-  // progress: number;
   view: View;
-  /* Optionally set if translate effect must be scaled */
   rect!: Rect;
   limits!: Limits;
   scaledEffects!: ParallaxStartEndEffects;
   shouldScaleTranslateEffects!: boolean;
+  /** Active `el.animate(...)` instance; `cancel()` before replacing or disabling. */
+  private animation: Animation | null = null;
+  /** Gates `onEnter` so it runs once per “enabled” lifecycle (reset when `enable()` runs). */
+  private hasFiredOnEnter = false;
 
   constructor(options: ElementConstructorOptions) {
     this.el = options.el;
@@ -47,13 +148,11 @@ export class Element {
     this.disabled = options.disabledParallaxController || false;
     this.id = createId();
     this.translations = parseTranslationProps(this.props, this.scrollAxis);
-    // this.isInView = null;
-    // this.progress = 0;
     this.setupTranslateEffects();
-    this.setElementStyles();
-    this.addAnimationEventListeners();
+    this.installAnimation();
   }
 
+  /** Recompute rect, limits, scaled translations, and whether Y scaling applies. */
   private setupTranslateEffects() {
     this.rect = new Rect({
       el: this.props.targetElement || this.el,
@@ -81,162 +180,195 @@ export class Element {
     );
   }
 
-  private addAnimationEventListeners() {
-    if (this.props.onEnter) {
-      this.el.addEventListener('animationstart', () => {
-        this.props.onEnter?.(this);
-      });
+  /** Fire `onEnter` once the animation is ready to sample (first time only until `enable()`). */
+  private rebindAnimationCallbacks() {
+    if (!this.animation || !this.props.onEnter) {
+      return;
     }
-
-    if (this.props.onExit) {
-      this.el.addEventListener('animationend', () => {
-        this.props.onExit?.(this);
-      });
-    }
-    if (this.props.onChange) {
-      // todo: how to track progress of a CSS animation?
-    }
-  }
-
-  private setAnimationName() {
-    this.el.style.animationName = 'parallaxEffects';
-    this.el.style.animationTimingFunction = 'linear';
-    this.el.style.animationFillMode = 'both';
-  }
-
-  private unsetAnimationName() {
-    this.el.style.animationName = '';
-    this.el.style.animationTimingFunction = '';
-    this.el.style.animationFillMode = '';
-  }
-
-  private setAnimationRange() {
-    if (
-      typeof this.props.startScroll === 'number' &&
-      typeof this.props.endScroll === 'number'
-    ) {
-      // uses the scroll() timeline view but sets the range in pixels
-      this.el.style.setProperty(
-        'animation-range',
-        `${this.props.startScroll}px ${this.props.endScroll}px`
-      );
-    } else if (this.props.shouldAlwaysCompleteAnimation) {
-      const topBeginsInView = this.rect.offsetTop < this.view.height;
-      // const leftBeginsInView = this.rect.offsetLeft < this.view.width;
-      const bottomEndsInView =
-        this.rect.offsetBottom > this.view.scrollHeight - this.view.height;
-      // const rightEndsInView =
-      //   this.rect.right > this.view.scrollWidth - this.view.height;
-
-      const top =
-        ((this.view.height - this.rect.offsetTop) / this.view.height) * 100;
-      const bottom =
-        ((this.view.scrollHeight - this.rect.offsetBottom) / this.view.height) *
-        100;
-
-      if (topBeginsInView) {
-        this.el.style.setProperty('animation-range-start', `entry ${top}%`);
-        this.el.style.setProperty('animation-range-end', `exit 100%`);
-      } else if (bottomEndsInView) {
-        this.el.style.setProperty('animation-range-start', `entry 0%`);
-        this.el.style.setProperty('animation-range-end', `exit ${bottom}%`);
+    void this.animation.ready.then(() => {
+      if (this.hasFiredOnEnter) {
+        return;
       }
-    } else {
-      this.el.style.setProperty('animation-range', 'entry 0% exit 100%');
-    }
-
-    // set range based on shouldAlwaysCompleteAnimation
-    // element.style.setProperty('animation-range', 'entry 0% exit 100%');
+      this.hasFiredOnEnter = true;
+      this.props.onEnter?.(this);
+    });
   }
 
-  private setAnimationTimeline() {
+  /** Start/end keyframes: only `transform` today (translate + rotate). */
+  private buildKeyframes(): Keyframe[] {
+    const tx = this.translations.translateX;
+    const ty = this.scaledEffects.translateY;
+    const rot = this.props.rotate as CSSEffect | undefined;
+
+    const x0 = tx ? `${tx.start}${tx.unit}` : '0px';
+    const x1 = tx ? `${tx.end}${tx.unit}` : '0px';
+    const y0 = ty ? `${ty.start}${ty.unit}` : '0px';
+    const y1 = ty ? `${ty.end}${ty.unit}` : '0px';
+
+    const r0 =
+      rot?.length === 2 ? toRotateCss(rot[0] as number | string) : '0deg';
+    const r1 =
+      rot?.length === 2 ? toRotateCss(rot[1] as number | string) : '0deg';
+
+    return [
+      { transform: `translate(${x0}, ${y0}) rotate(${r0})` },
+      { transform: `translate(${x1}, ${y1}) rotate(${r1})` },
+    ];
+  }
+
+  /** Element whose scroll offsets drive a `ScrollTimeline` (window root or custom container). */
+  private getScrollSource(): globalThis.Element {
+    return this.view.scrollContainer ?? document.documentElement;
+  }
+
+  /** `ScrollTimeline` over `[startScroll, endScroll]` in px on {@link getScrollSource}. */
+  private createScrollTimeline(
+    startScroll: number,
+    endScroll: number
+  ): AnimationTimeline | null {
+    const ScrollTimeline = getScrollTimelineCtor();
+    if (!ScrollTimeline) {
+      return null;
+    }
+    const axis = timelineAxis(this.scrollAxis);
+    return new ScrollTimeline({
+      source: this.getScrollSource(),
+      axis,
+      scrollOffsets: [CSS.px(startScroll), CSS.px(endScroll)],
+    });
+  }
+
+  /**
+   * `ViewTimeline` for the parallax subject (`targetElement ?? el`). Inset is only applied
+   * when Y translation is scaled so the visibility phase matches the motion distance.
+   */
+  private createViewTimeline(): AnimationTimeline | null {
+    const ViewTimeline = getViewTimelineCtor();
+    if (!ViewTimeline) {
+      return null;
+    }
+    const subject = this.props.targetElement ?? this.el;
+    const axis = timelineAxis(this.scrollAxis);
+
+    if (this.shouldScaleTranslateEffects && this.scaledEffects.translateY) {
+      const yStart = Math.max(this.scaledEffects.translateY.end || 0, 0) * -1;
+      const yEnd = Math.min(this.scaledEffects.translateY.start || 0, 0);
+      const yUnit = this.scaledEffects.translateY.unit;
+      const [insetStart, insetEnd] = insetPairForScaledView(
+        yStart,
+        yEnd,
+        yUnit
+      );
+      return new ViewTimeline({
+        subject,
+        axis,
+        inset: [insetStart, insetEnd],
+      });
+    }
+
+    return new ViewTimeline({ subject, axis });
+  }
+
+  /**
+   * `element.animate(..., { rangeStart, rangeEnd })` for view-linked progress only.
+   * Independent of {@link createViewTimeline}; keeps timeline ctor options obvious.
+   */
+  private getAnimationRange(): {
+    rangeStart: string;
+    rangeEnd: string;
+  } {
+    if (!this.props.shouldAlwaysCompleteAnimation) {
+      return { rangeStart: 'entry 0%', rangeEnd: 'exit 100%' };
+    }
+
+    const topBeginsInView = this.rect.offsetTop < this.view.height;
+    const bottomEndsInView =
+      this.rect.offsetBottom > this.view.scrollHeight - this.view.height;
+
+    const top =
+      ((this.view.height - this.rect.offsetTop) / this.view.height) * 100;
+    const bottom =
+      ((this.view.scrollHeight - this.rect.offsetBottom) / this.view.height) *
+      100;
+
+    if (topBeginsInView) {
+      return { rangeStart: `entry ${top}%`, rangeEnd: 'exit 100%' };
+    }
+    if (bottomEndsInView) {
+      return { rangeStart: 'entry 0%', rangeEnd: `exit ${bottom}%` };
+    }
+    return { rangeStart: 'entry 0%', rangeEnd: 'exit 100%' };
+  }
+
+  /**
+   * Options for `el.animate(keyframes, { timeline, rangeStart?, rangeEnd?, fill, easing })`.
+   * Scroll path: timeline only. View path: timeline from {@link createViewTimeline},
+   * ranges from {@link getAnimationRange}.
+   */
+  private getAnimationOptions(): ParallaxAnimateOptions | null {
+    const fill: 'both' = 'both';
+    const easing = this.props.easing ?? 'linear';
+
     if (
       typeof this.props.startScroll === 'number' &&
       typeof this.props.endScroll === 'number'
     ) {
-      this.el.style.setProperty('animation-timeline', `scroll()`);
-    } else if (this.shouldScaleTranslateEffects && this.rect) {
-      const yStart = Math.max(this.scaledEffects?.translateY?.end || 0, 0) * -1;
-      const yEnd = Math.min(this.scaledEffects?.translateY?.start || 0, 0);
-      const yUnit = this.scaledEffects?.translateY?.unit;
-
-      this.el.style.setProperty(
-        'animation-timeline',
-        `view(block ${yStart}${yUnit} ${yEnd}${yUnit})`
+      const timeline = this.createScrollTimeline(
+        this.props.startScroll,
+        this.props.endScroll
       );
-    } else {
-      this.el.style.setProperty('animation-timeline', 'view()');
+      return timeline ? { timeline, fill, easing } : null;
     }
-  }
 
-  private setTranslateY() {
-    if (this.scaledEffects.translateY) {
-      this.el.style.setProperty(
-        CSSVariables.translateStartY,
-        `${this.scaledEffects.translateY.start}${this.scaledEffects.translateY.unit}`
-      );
-      this.el.style.setProperty(
-        CSSVariables.translateEndY,
-        `${this.scaledEffects.translateY.end}${this.scaledEffects.translateY.unit}`
-      );
+    const timeline = this.createViewTimeline();
+    if (!timeline) {
+      return null;
     }
+    const { rangeStart, rangeEnd } = this.getAnimationRange();
+    return { timeline, rangeStart, rangeEnd, fill, easing };
   }
 
-  private setTranslateX() {
-    if (this.translations.translateX) {
-      this.el.style.setProperty(
-        CSSVariables.translateStartX,
-        `${this.translations.translateX.start}${this.translations.translateX.unit}`
-      );
-      this.el.style.setProperty(
-        CSSVariables.translateEndX,
-        `${this.translations.translateX.end}${this.translations.translateX.unit}`
-      );
+  /** Replace any existing parallax animation with a new one from current props/geometry. */
+  private installAnimation() {
+    this.cancelParallaxAnimation();
+
+    if (this.disabled || !supportsScrollDrivenAnimations()) {
+      return;
     }
-  }
 
-  private setRotate() {
-    if (this.props.rotate?.length === 2) {
-      this.el.style.setProperty(
-        CSSVariables.rotateStart,
-        `${this.props.rotate[0]}`
-      );
-      this.el.style.setProperty(
-        CSSVariables.rotateEnd,
-        `${this.props.rotate[1]}`
-      );
+    const spec = this.getAnimationOptions();
+    if (!spec) {
+      return;
     }
-  }
 
-  private unsetRotate() {
-    this.el.style.removeProperty(CSSVariables.rotateStart);
-    this.el.style.removeProperty(CSSVariables.rotateEnd);
-  }
-
-  private setEasing() {
-    if (this.props.easing) {
-      this.el.style.setProperty('animation-timing-function', this.props.easing);
+    const keyframes = this.buildKeyframes();
+    const animateOpts: ParallaxAnimateOptions & Record<string, unknown> = {
+      timeline: spec.timeline,
+      fill: spec.fill,
+      easing: spec.easing,
+    };
+    if (spec.rangeStart != null) {
+      animateOpts.rangeStart = spec.rangeStart;
     }
+    if (spec.rangeEnd != null) {
+      animateOpts.rangeEnd = spec.rangeEnd;
+    }
+
+    this.animation = this.el.animate(
+      keyframes,
+      animateOpts as KeyframeAnimationOptions
+    );
+
+    this.rebindAnimationCallbacks();
   }
 
-  private setElementStyles() {
-    this.setAnimationRange();
-    this.setAnimationName();
-    this.setAnimationTimeline();
-    this.setTranslateY();
-    this.setTranslateX();
-    this.setRotate();
-    this.setEasing();
+  /** Stop WAAPI and drop the handle; does not clear inline `transform` (see `resetStyles`). */
+  private cancelParallaxAnimation() {
+    this.animation?.cancel();
+    this.animation = null;
   }
 
-  private unsetElementStyles() {
-    // this.unsetAnimationRange();
-    this.unsetAnimationName();
-    // this.unsetTranslateY();
-    // this.unsetTranslateX();
-    this.unsetRotate();
-  }
-
+  /** Merge config and re-parse translations; caller should run controller `update()` to refresh animation. */
   updateProps(nextProps: ParallaxElementConfig) {
     this.props = { ...this.props, ...nextProps };
     this.translations = parseTranslationProps(nextProps, this.scrollAxis);
@@ -244,41 +376,44 @@ export class Element {
     return this;
   }
 
-  // update view?
+  /** New cached view dimensions → recompute effects and rebuild scroll-linked animation. */
   updateElement(view: View): Element {
-    // NOTE: Must reset styles before getting the rect, as it might impact the natural position
-    // resetStyles(this);
     this.view = view;
 
     this.setupTranslateEffects();
-    this.setElementStyles();
+    this.installAnimation();
 
     return this;
   }
 
+  /** Turn parallax off: cancel animation (element may still show last sampled transform until reset). */
   disable = () => {
     this.disabled = true;
-    this.unsetAnimationName();
+    this.cancelParallaxAnimation();
   };
 
+  /** Turn parallax back on: allow `onEnter` again and attach a new animation. */
   enable = () => {
     this.disabled = false;
-    this.setAnimationName();
+    this.hasFiredOnEnter = false;
+    this.installAnimation();
   };
 
-  /** Clears parallax-driven inline styles on the element (used when disabling via React). */
+  /**
+   * Teardown for React / controller: `onExit`, cancel animation, then clear `transform`.
+   * Only `transform` is cleared here because keyframes only set `transform`; `cancel()` can
+   * still leave a sampled inline transform on the element until this runs.
+   */
   resetStyles() {
-    this.unsetElementStyles();
-    this.el.style.removeProperty('animation-range');
-    this.el.style.removeProperty('animation-timeline');
-    Object.values(CSSVariables).forEach((key) => {
-      this.el.style.removeProperty(key);
-    });
-    this.el.style.removeProperty('animation-timing-function');
+    this.props.onExit?.(this);
+    this.cancelParallaxAnimation();
+    this.el.style.removeProperty('transform');
   }
 
+  /** Controller lifecycle / unmount: same cleanup as {@link Element.resetStyles}. */
   destroy() {
-    this.unsetElementStyles();
-    // TODO: Implement element destruction
+    this.props.onExit?.(this);
+    this.cancelParallaxAnimation();
+    this.el.style.removeProperty('transform');
   }
 }
