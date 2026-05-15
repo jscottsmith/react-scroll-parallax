@@ -29,11 +29,38 @@ vi.mock('../helpers/parseElementTransitionEffects', () => ({
   })),
 }));
 
-vi.mock('../helpers/createLimitsWithTranslationsForRelativeElements', () => ({
-  createLimitsWithTranslationsForRelativeElements: vi.fn(
-    () => new Limits({ startX: 0, startY: 0, endX: 100, endY: 100 })
-  ),
-}));
+vi.mock('../helpers/createLimitsWithTranslationsForRelativeElements', async () => {
+  const { Limits } = await import('../classes/Limits');
+  const mult = {
+    startMultiplierX: 1,
+    endMultiplierX: 1,
+    startMultiplierY: 1,
+    endMultiplierY: 1,
+  };
+  const mk = (sy: number, ey: number) =>
+    new Limits({
+      startX: 0,
+      startY: sy,
+      endX: 100,
+      endY: ey,
+      ...mult,
+    });
+  return {
+    createLimitsWithTranslationsForRelativeElements: vi.fn(
+      (_r, _v, _e, _axis, flag?: boolean) =>
+        flag ? mk(0, 200) : mk(0, 100)
+    ),
+    getLimitsBaselineAndWithAlwaysComplete: vi.fn(
+      (_r, _v, _e, _axis, always: boolean) => {
+        if (!always) {
+          const l = mk(0, 100);
+          return { baseline: l, limits: l };
+        }
+        return { baseline: mk(40, 140), limits: mk(0, 200) };
+      }
+    ),
+  };
+});
 
 vi.mock('../helpers/scaleTranslateEffectsForSlowerScroll', () => ({
   scaleTranslateEffectsForSlowerScroll: vi.fn(() => ({
@@ -154,7 +181,7 @@ describe('Element', () => {
     it('should call helper functions during construction', async () => {
       const { parseTranslationProps } =
         await import('../helpers/parseElementTransitionEffects');
-      const { createLimitsWithTranslationsForRelativeElements } =
+      const { getLimitsBaselineAndWithAlwaysComplete } =
         await import('../helpers/createLimitsWithTranslationsForRelativeElements');
       const { scaleTranslateEffectsForSlowerScroll } =
         await import('../helpers/scaleTranslateEffectsForSlowerScroll');
@@ -163,9 +190,7 @@ describe('Element', () => {
         props,
         ScrollAxis.vertical
       );
-      expect(
-        createLimitsWithTranslationsForRelativeElements
-      ).toHaveBeenCalled();
+      expect(getLimitsBaselineAndWithAlwaysComplete).toHaveBeenCalled();
       expect(scaleTranslateEffectsForSlowerScroll).toHaveBeenCalled();
     });
 
@@ -243,15 +268,14 @@ describe('Element', () => {
       };
       expect(opts.subject).toBe(element);
       expect(opts.axis).toBe('block');
-      expect(opts.inset?.[0]).toMatchObject({ unit: 'px', value: -100 });
-      expect(opts.inset?.[1]).toMatchObject({ unit: 'px', value: 0 });
+      expect(opts.inset).toBeUndefined();
 
       const animOpts = animateSpy.mock.calls[0]?.[1] as {
         rangeStart?: string;
         rangeEnd?: string;
       };
-      expect(animOpts.rangeStart).toBe('entry 0%');
-      expect(animOpts.rangeEnd).toBe('exit 100%');
+      expect(animOpts.rangeStart).toBe('cover calc(0% - 100px)');
+      expect(animOpts.rangeEnd).toBe('cover 100%');
     });
 
     it('should omit view inset when scaling translations is disabled', () => {
@@ -301,8 +325,21 @@ describe('Element', () => {
       expect(animateSpy).toHaveBeenCalled();
     });
 
-    it('should set range when shouldAlwaysCompleteAnimation is true', () => {
+    it('should widen view cover range when shouldAlwaysCompleteAnimation is true', () => {
       animateSpy.mockClear();
+      const ScrollTimeline = (
+        globalThis as unknown as { ScrollTimeline: ReturnType<typeof vi.fn> }
+      ).ScrollTimeline;
+      ScrollTimeline.mockClear();
+      const ViewTimeline = vi.mocked(
+        (
+          globalThis as unknown as {
+            ViewTimeline: ReturnType<typeof vi.fn>;
+          }
+        ).ViewTimeline
+      );
+      ViewTimeline.mockClear();
+
       const mockRect = {
         offsetTop: 400,
         offsetBottom: 1200,
@@ -325,12 +362,15 @@ describe('Element', () => {
 
       inst.updateElement(view);
 
+      expect(ViewTimeline).toHaveBeenCalled();
+      expect(ScrollTimeline).not.toHaveBeenCalled();
+
       const animOpts = animateSpy.mock.calls.at(-1)?.[1] as {
         rangeStart?: string;
         rangeEnd?: string;
       };
-      expect(animOpts.rangeStart).toMatch(/^entry [\d.]+%$/);
-      expect(animOpts.rangeEnd).toBe('exit 100%');
+      expect(animOpts.rangeStart).toBe('cover calc(0% - 140px)');
+      expect(animOpts.rangeEnd).toBe('cover calc(100% + 60px)');
     });
 
     it('should pass easing to animate options when provided', () => {
@@ -418,7 +458,7 @@ describe('Element', () => {
         scrollHeight: 3500,
       });
 
-      const { createLimitsWithTranslationsForRelativeElements } =
+      const { getLimitsBaselineAndWithAlwaysComplete } =
         await import('../helpers/createLimitsWithTranslationsForRelativeElements');
       const { scaleTranslateEffectsForSlowerScroll } =
         await import('../helpers/scaleTranslateEffectsForSlowerScroll');
@@ -428,7 +468,7 @@ describe('Element', () => {
       expect(result).toBe(elementInstance);
       expect(elementInstance.view).toBe(newView);
       expect(
-        createLimitsWithTranslationsForRelativeElements
+        getLimitsBaselineAndWithAlwaysComplete
       ).toHaveBeenCalled();
       expect(scaleTranslateEffectsForSlowerScroll).toHaveBeenCalled();
     });

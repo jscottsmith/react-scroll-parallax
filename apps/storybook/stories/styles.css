@@ -56,7 +56,9 @@ body {
 .vertical {
   width: 100%;
   min-height: 300vh;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  overflow: clip;
 }
 .vertical:before {
   content: '↑ Scroll ↓';
@@ -78,7 +80,9 @@ body {
 .horizontal {
   height: 100%;
   min-width: 300vw;
-  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  overflow: clip;
 }
 .horizontal:before {
   content: '← Scroll →';
