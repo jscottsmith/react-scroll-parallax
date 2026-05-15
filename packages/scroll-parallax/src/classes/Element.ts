@@ -1,6 +1,5 @@
 import type {
   CreateElementOptions,
-  CSSEffect,
   ParallaxElementConfig,
   ParallaxStartEndEffects,
   ValidScrollAxis,
@@ -21,7 +20,10 @@ import {
   buildParallaxAnimateOptions,
   type ParallaxAnimateOptions,
 } from '../waapi/parallaxAnimateOptions';
-import { buildParallaxTransformKeyframes } from '../waapi/parallaxKeyframes';
+import {
+  buildParallaxKeyframes,
+  getParallaxAnimatedPropertyNames,
+} from '../waapi/parallaxKeyframes';
 import {
   PROGRESS_SAMPLE_EPSILON,
   readAnimationSampleProgress,
@@ -144,11 +146,21 @@ export class Element {
       return;
     }
 
-    const keyframes = buildParallaxTransformKeyframes({
+    const keyframes = buildParallaxKeyframes({
       scrollAxis: this.scrollAxis,
       translations: this.translations,
       scaledEffects: this.scaledEffects,
-      rotate: this.props.rotate as CSSEffect | undefined,
+      effects: {
+        rotate: this.props.rotate,
+        rotateX: this.props.rotateX,
+        rotateY: this.props.rotateY,
+        rotateZ: this.props.rotateZ,
+        scale: this.props.scale,
+        scaleX: this.props.scaleX,
+        scaleY: this.props.scaleY,
+        scaleZ: this.props.scaleZ,
+        opacity: this.props.opacity,
+      },
     });
 
     const animateOpts: ParallaxAnimateOptions & Record<string, unknown> = {
@@ -253,21 +265,27 @@ export class Element {
     this.installAnimation();
   };
 
+  /** Clear inline styles left by scroll-driven keyframes after `cancel()`. */
+  private clearAnimatedStyles() {
+    for (const name of getParallaxAnimatedPropertyNames(this.props)) {
+      this.el.style.removeProperty(name);
+    }
+  }
+
   /**
-   * Teardown for React / controller: `onExit`, cancel animation, then clear `transform`.
-   * Only `transform` is cleared here because keyframes only set `transform`; `cancel()` can
-   * still leave a sampled inline transform on the element until this runs.
+   * Teardown for React / controller: `onExit`, cancel animation, then clear animated
+   * properties (`transform`, and `opacity` when used).
    */
   resetStyles() {
     this.props.onExit?.(this);
     this.cancelParallaxAnimation();
-    this.el.style.removeProperty('transform');
+    this.clearAnimatedStyles();
   }
 
   /** Controller lifecycle / unmount: same cleanup as {@link Element.resetStyles}. */
   destroy() {
     this.props.onExit?.(this);
     this.cancelParallaxAnimation();
-    this.el.style.removeProperty('transform');
+    this.clearAnimatedStyles();
   }
 }

@@ -235,11 +235,11 @@ describe('Element', () => {
       expect(keyframes[0]).toMatchObject({
         transform: expect.stringContaining('translate(0px, 0px)'),
       });
-      expect(keyframes[0]?.transform).toContain('rotate(0deg)');
+      expect(keyframes[0]?.transform).toContain('rotateZ(0deg)');
       expect(keyframes[1]).toMatchObject({
         transform: expect.stringContaining('translate(50px, 100px)'),
       });
-      expect(keyframes[1]?.transform).toContain('rotate(360deg)');
+      expect(keyframes[1]?.transform).toContain('rotateZ(360deg)');
     });
 
     it('should use ViewTimeline with entry/exit range by default', () => {
@@ -679,7 +679,26 @@ describe('Element', () => {
         view,
       });
       const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
-      expect(keyframes[0]?.transform).toContain('rotate(0deg)');
+      expect(keyframes[0]?.transform).not.toMatch(/rotate/);
+    });
+
+    it('should call animate with scale and opacity keyframes', () => {
+      animateSpy.mockClear();
+      new Element({
+        el: document.createElement('div'),
+        props: {
+          translateY: [0, 100],
+          scale: [0.5, 1],
+          opacity: [0, 1],
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
+      expect(keyframes[0]?.transform).toContain('scale(0.5, 0.5)');
+      expect(keyframes[1]?.transform).toContain('scale(1, 1)');
+      expect(keyframes[0]?.opacity).toBe(0);
+      expect(keyframes[1]?.opacity).toBe(1);
     });
 
     it('should handle element without translate effects', async () => {
