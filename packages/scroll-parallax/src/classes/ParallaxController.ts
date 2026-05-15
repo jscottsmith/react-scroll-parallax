@@ -27,6 +27,10 @@ export class ParallaxController {
   view: View;
   _hasScrollContainer: boolean;
   _resizeObserver?: ResizeObserver;
+  /** rAF id for coalesced `onChange` / `onProgressChange` sampling on scroll. */
+  private _progressSampleRafId: number | null = null;
+  /** Target currently listening for scroll (window or scroll container). */
+  private _progressScrollTarget: Window | HTMLElement | null = null;
 
   /**
    * Static method to instantiate the ParallaxController.
@@ -71,6 +75,72 @@ export class ParallaxController {
     this._setViewSize();
   }
 
+  /** Passive scroll → one rAF batch; also used after layout `update()` for immediate sample. */
+  private _onScrollForProgressSampling = () => {
+    this._scheduleProgressCallbackFlush();
+  };
+
+  private _scheduleProgressCallbackFlush = () => {
+    if (this._progressSampleRafId != null) {
+      return;
+    }
+    this._progressSampleRafId = requestAnimationFrame(() => {
+      this._progressSampleRafId = null;
+      this._flushProgressCallbacks();
+    });
+  };
+
+  private _flushProgressCallbacks = () => {
+    if (this.disabled || !this.elements?.length) {
+      return;
+    }
+    for (const el of this.elements) {
+      el.sampleProgressCallbacks();
+    }
+  };
+
+  private _detachProgressScrollSampling = () => {
+    if (this._progressSampleRafId != null) {
+      cancelAnimationFrame(this._progressSampleRafId);
+      this._progressSampleRafId = null;
+    }
+    if (this._progressScrollTarget) {
+      this._progressScrollTarget.removeEventListener(
+        'scroll',
+        this._onScrollForProgressSampling
+      );
+      this._progressScrollTarget = null;
+    }
+  };
+
+  private _syncProgressScrollSampling = () => {
+    const shouldNeed =
+      !this.disabled &&
+      !!this.elements?.length &&
+      this.elements.some((e) => e.wantsProgressSampling());
+    const desiredTarget: Window | HTMLElement | null =
+      !shouldNeed
+        ? null
+        : this._hasScrollContainer && this.viewEl instanceof HTMLElement
+          ? this.viewEl
+          : window;
+
+    if (this._progressScrollTarget === desiredTarget) {
+      return;
+    }
+
+    this._detachProgressScrollSampling();
+
+    if (!desiredTarget) {
+      return;
+    }
+
+    desiredTarget.addEventListener('scroll', this._onScrollForProgressSampling, {
+      passive: true,
+    });
+    this._progressScrollTarget = desiredTarget;
+  };
+
   _addListeners = () => {
     window.addEventListener('resize', this.update, false);
     window.addEventListener('blur', this.update, false);
@@ -84,6 +154,7 @@ export class ParallaxController {
     window.removeEventListener('focus', this.update, false);
     window.removeEventListener('load', this.update, false);
     this._resizeObserver?.disconnect();
+    this._detachProgressScrollSampling();
   };
 
   _addResizeObserver() {
@@ -188,6 +259,8 @@ export class ParallaxController {
 
     if (this._checkIfViewHasChanged()) {
       this.update();
+    } else {
+      this._syncProgressScrollSampling();
     }
     return newElement;
   };
@@ -198,6 +271,7 @@ export class ParallaxController {
   removeElementById = (id: number) => {
     if (!this.elements) return;
     this.elements = this.elements.filter((el) => el.id !== id);
+    this._syncProgressScrollSampling();
   };
 
   /**
@@ -222,12 +296,15 @@ export class ParallaxController {
   update = () => {
     this._setViewSize();
     this._updateAllElements();
+    this._syncProgressScrollSampling();
+    this._flushProgressCallbacks();
   };
 
   /**
    * Updates the scroll container of the parallax controller
    */
   updateScrollContainer = (el: HTMLElement) => {
+    this._detachProgressScrollSampling();
     this._removeListeners();
 
     this.viewEl = el;
@@ -242,6 +319,8 @@ export class ParallaxController {
     this._setViewSize();
     this._addListeners();
     this._updateAllElements();
+    this._syncProgressScrollSampling();
+    this._flushProgressCallbacks();
   };
 
   disable() {
@@ -263,6 +342,8 @@ export class ParallaxController {
     this._addListeners();
     this._addResizeObserver();
     this._setViewSize();
+    this._syncProgressScrollSampling();
+    this._flushProgressCallbacks();
   }
 
   /** Alias for {@link disable} — matches historical `parallax-controller` API. */

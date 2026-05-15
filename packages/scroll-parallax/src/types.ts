@@ -70,7 +70,13 @@ export type ParallaxElementConfig = {
 
   onEnter?: (element: any) => any;
   onExit?: (element: any) => any;
+  /** Fired after {@link onProgressChange} when sampled progress moves more than ~1e-4 (scroll/resize + rAF). Not emitted without an active scroll-driven animation. */
   onChange?: (element: any) => any;
+  /**
+   * Normalized visual progress in `[0, 1]` from {@link https://developer.mozilla.org/en-US/docs/Web/API/Animation/overallProgress Animation.overallProgress}
+   * when the browser supports it; no scroll-derived fallback. Coalesced with scroll (passive) + one rAF;
+   * also sampled on controller `update()`. Callbacks are skipped on samples where `overallProgress` is unavailable.
+   */
   onProgressChange?: (progress: number) => any;
 };
 

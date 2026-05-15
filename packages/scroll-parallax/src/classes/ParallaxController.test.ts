@@ -283,4 +283,104 @@ describe('Expect the ParallaxController', () => {
     controller.destroy();
     expect(controller._resizeObserver?.disconnect).toBeCalledTimes(1);
   });
+
+  describe('progress callback sampling', () => {
+    const savedAnimate = HTMLElement.prototype.animate;
+
+    beforeEach(() => {
+      vi.stubGlobal(
+        'ScrollTimeline',
+        vi.fn().mockImplementation(() => ({}))
+      );
+      vi.stubGlobal(
+        'ViewTimeline',
+        vi.fn().mockImplementation(() => ({}))
+      );
+      const g = globalThis as unknown as {
+        CSS?: { px?: (n: number) => object; percent?: (n: number) => object };
+      };
+      if (!g.CSS?.px) {
+        vi.stubGlobal('CSS', {
+          px: (n: number) => ({ unit: 'px', value: n }),
+          percent: (n: number) => ({ unit: 'percent', value: n }),
+        });
+      } else if (!g.CSS.percent) {
+        g.CSS.percent = (n: number) => ({ unit: 'percent', value: n });
+      }
+
+      Object.defineProperty(HTMLElement.prototype, 'animate', {
+        configurable: true,
+        writable: true,
+        value: vi.fn(() => ({
+          cancel: vi.fn(),
+          ready: Promise.resolve(),
+          effect: null,
+          overallProgress: 0.25,
+        })),
+      });
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      Object.defineProperty(HTMLElement.prototype, 'animate', {
+        configurable: true,
+        writable: true,
+        value: savedAnimate,
+      });
+    });
+
+    it('to flush onProgressChange after window scroll via rAF', () => {
+      const rafSpy = vi
+        .spyOn(window, 'requestAnimationFrame')
+        .mockImplementation((cb: FrameRequestCallback) => {
+          cb(0);
+          return 0;
+        });
+
+      const onProgressChange = vi.fn();
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      const el = document.createElement('div');
+      controller.createElement({
+        el,
+        props: {
+          ...OPTIONS.props,
+          onProgressChange,
+        },
+      });
+
+      window.dispatchEvent(new Event('scroll'));
+      expect(onProgressChange).toHaveBeenCalled();
+
+      rafSpy.mockRestore();
+      controller.destroy();
+    });
+
+    it('to register passive scroll listeners when callbacks are present', () => {
+      const addSpy = vi.spyOn(window, 'addEventListener');
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      const el = document.createElement('div');
+      controller.createElement({
+        el,
+        props: {
+          ...OPTIONS.props,
+          onProgressChange: vi.fn(),
+        },
+      });
+
+      const passiveScroll = addSpy.mock.calls.filter(
+        (c) =>
+          c[0] === 'scroll' &&
+          typeof c[1] === 'function' &&
+          (c[2] as { passive?: boolean })?.passive === true
+      );
+      expect(passiveScroll.length).toBeGreaterThanOrEqual(1);
+
+      addSpy.mockRestore();
+      controller.destroy();
+    });
+  });
 });

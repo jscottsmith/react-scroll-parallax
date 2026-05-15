@@ -22,6 +22,10 @@ import {
   type ParallaxAnimateOptions,
 } from '../waapi/parallaxAnimateOptions';
 import { buildParallaxTransformKeyframes } from '../waapi/parallaxKeyframes';
+import {
+  PROGRESS_SAMPLE_EPSILON,
+  readAnimationSampleProgress,
+} from '../helpers/readAnimationSampleProgress';
 
 type ParallaxControllerConstructorOptions = {
   scrollAxis: ValidScrollAxis;
@@ -54,6 +58,8 @@ export class Element {
   private animation: Animation | null = null;
   /** Gates `onEnter` so it runs once per “enabled” lifecycle (reset when `enable()` runs). */
   private hasFiredOnEnter = false;
+  /** Last progress passed to `onProgressChange` / `onChange` from scroll sampling (undefined until first sample after (re)install). */
+  private lastSampledProgress: number | undefined;
 
   constructor(options: ElementConstructorOptions) {
     this.el = options.el;
@@ -120,6 +126,7 @@ export class Element {
   /** Replace any existing parallax animation with a new one from current props/geometry. */
   private installAnimation() {
     this.cancelParallaxAnimation();
+    this.lastSampledProgress = undefined;
 
     if (this.disabled || !supportsScrollDrivenAnimations()) {
       return;
@@ -166,6 +173,51 @@ export class Element {
     );
 
     this.rebindAnimationCallbacks();
+  }
+
+  /**
+   * Whether this element should participate in controller-driven scroll sampling for
+   * `onChange` / `onProgressChange` (WAAPI present, callbacks set, not disabled).
+   */
+  wantsProgressSampling(): boolean {
+    if (!this.props.onChange && !this.props.onProgressChange) {
+      return false;
+    }
+    if (this.disabled) {
+      return false;
+    }
+    if (!supportsScrollDrivenAnimations() || !this.animation) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Sample {@link https://developer.mozilla.org/en-US/docs/Web/API/Animation/overallProgress Animation.overallProgress}
+   * and invoke callbacks when it moves beyond {@link PROGRESS_SAMPLE_EPSILON}. Skips the
+   * frame when `overallProgress` is not exposed (no fallback).
+   */
+  sampleProgressCallbacks(): void {
+    if (!this.wantsProgressSampling()) {
+      return;
+    }
+
+    const progress = readAnimationSampleProgress(this.animation);
+    if (progress == null) {
+      return;
+    }
+
+    const prev = this.lastSampledProgress;
+    if (
+      prev !== undefined &&
+      Math.abs(progress - prev) < PROGRESS_SAMPLE_EPSILON
+    ) {
+      return;
+    }
+    this.lastSampledProgress = progress;
+
+    this.props.onProgressChange?.(progress);
+    this.props.onChange?.(this);
   }
 
   /** Stop WAAPI and drop the handle; does not clear inline `transform` (see `resetStyles`). */

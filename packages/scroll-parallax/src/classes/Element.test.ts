@@ -27,9 +27,13 @@ vi.mock('../helpers/parseElementTransitionEffects', () => ({
   })),
 }));
 
-vi.mock('../helpers/parallaxLayoutAdjustments', () => {
+vi.mock('../helpers/parallaxLayoutAdjustments', async (importOriginal) => {
+  const actual = await importOriginal<
+    typeof import('../helpers/parallaxLayoutAdjustments')
+  >();
   const unit = { start: 1, end: 1 };
   return {
+    ...actual,
     computeParallaxLayoutAdjustments: vi.fn(
       (_rect, _view, _effects, _axis, alwaysComplete: boolean) => {
         if (!alwaysComplete) {
@@ -58,11 +62,12 @@ vi.mock('../utils/createId', () => ({
   createId: vi.fn(() => 1),
 }));
 
-function mockAnimation(): Animation {
+function mockAnimation(overallProgress = 0): Animation {
   return {
     cancel: vi.fn(),
     ready: Promise.resolve(),
     playState: 'running',
+    overallProgress,
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
   } as unknown as Animation;
@@ -409,6 +414,65 @@ describe('Element', () => {
       });
       inst.resetStyles();
       expect(onExit).toHaveBeenCalledWith(inst);
+    });
+
+    it('should invoke onProgressChange and onChange when sampled progress moves', () => {
+      let overallProgress = 0;
+      const anim = {
+        cancel: vi.fn(),
+        ready: Promise.resolve(),
+        playState: 'running',
+        get overallProgress() {
+          return overallProgress;
+        },
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      } as unknown as Animation;
+      animateSpy.mockReturnValue(anim);
+
+      const onProgress = vi.fn();
+      const onChange = vi.fn();
+      const inst = new Element({
+        el: document.createElement('div'),
+        props: {
+          ...props,
+          onProgressChange: onProgress,
+          onChange,
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      inst.sampleProgressCallbacks();
+      expect(onProgress).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onProgress.mock.calls[0]?.[0]).toBe(0);
+
+      inst.sampleProgressCallbacks();
+      expect(onProgress).toHaveBeenCalledTimes(1);
+
+      overallProgress = 0.5;
+      inst.sampleProgressCallbacks();
+      expect(onProgress).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onProgress.mock.calls[1]?.[0]).toBe(0.5);
+    });
+
+    it('should read Animation.overallProgress for sampling', () => {
+      const onProgress = vi.fn();
+      const anim = mockAnimation(0.77);
+      animateSpy.mockReturnValue(anim);
+
+      const inst = new Element({
+        el: document.createElement('div'),
+        props: {
+          ...props,
+          onProgressChange: onProgress,
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      inst.sampleProgressCallbacks();
+      expect(onProgress).toHaveBeenCalledWith(0.77);
     });
   });
 
