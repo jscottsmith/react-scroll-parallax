@@ -1,265 +1,196 @@
-import { describe, test, expect } from 'vitest';
-import { createLimitsWithTranslationsForRelativeElements } from './createLimitsWithTranslationsForRelativeElements';
+import { describe, expect, it } from 'vitest';
+import type { RectSnapshot } from './measureRect';
+import { View } from '../classes/View';
+import { ScrollAxis } from '../types';
+import type { ParallaxStartEndEffects } from '../types';
+import {
+  createLimitsWithTranslationsForRelativeElements,
+  getLimitsBaselineAndWithAlwaysComplete,
+} from './createLimitsWithTranslationsForRelativeElements';
+import { getTranslateScalar } from './getTranslateScalar';
 
-describe.skip.each([
-  [
-    {
-      top: 500,
-      left: 200,
-      bottom: 700,
-      right: 900,
+function makeRect(args: {
+  offsetTop: number;
+  offsetBottom: number;
+  offsetLeft: number;
+  offsetRight: number;
+  width: number;
+  height: number;
+}): RectSnapshot {
+  return {
+    width: args.width,
+    height: args.height,
+    left: args.offsetLeft,
+    right: args.offsetRight,
+    top: args.offsetTop,
+    bottom: args.offsetBottom,
+    offsetTop: args.offsetTop,
+    offsetBottom: args.offsetBottom,
+    offsetLeft: args.offsetLeft,
+    offsetRight: args.offsetRight,
+  };
+}
+
+describe('getLimitsBaselineAndWithAlwaysComplete', () => {
+  const view = new View({
+    width: 1000,
+    height: 800,
+    scrollWidth: 2000,
+    scrollHeight: 3000,
+  });
+
+  it('returns the same Limits instance for baseline and limits when always-complete is off', () => {
+    const rect = makeRect({
+      offsetTop: 500,
+      offsetBottom: 700,
+      offsetLeft: 200,
+      offsetRight: 900,
       width: 700,
       height: 200,
-      originTotalDistY: 300,
-      originTotalDistX: 1700,
-    },
-    { width: 1000, height: 100 },
-    {
-      translateY: { start: 0, end: 0, unit: 'px', easing: undefined },
-      translateX: { start: 0, end: 0, unit: 'px', easing: undefined },
-    },
-    {
-      //   totalX: 1700,
-      //   totalY: 300,
-      startY: 500,
-      startX: 200,
-      endY: 700,
-      endX: 900,
-    },
-  ],
-  [
-    {
-      top: 0,
-      left: 0,
-      bottom: 200,
-      right: 200,
-      width: 200,
-      height: 200,
-      originTotalDistY: 700,
-      originTotalDistX: 700,
-    },
-    { width: 500, height: 500 },
-    {
-      translateY: { start: -10, end: 10, unit: '%', easing: undefined },
-      translateX: { start: 10, end: -10, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 740,
-      //   totalY: 740,
-      startY: -21.21212121212121,
-      startX: 0,
-      endY: 221.21212121212122,
-      endX: 200,
-    },
-  ],
-  [
-    {
-      height: 200,
-      width: 200,
-      left: 503.75,
-      right: 703.75,
-      top: 912.5,
-      bottom: 1112.5,
-      originTotalDistY: 875,
-      originTotalDistX: 1005,
-    },
-    { width: 805, height: 675 },
-    {
-      translateY: { start: 50, end: -50, unit: '%', easing: undefined },
-      translateX: { start: 0, end: 0, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1005,
-      //   totalY: 1075,
-      startY: 912.5,
-      startX: 503.75,
-      endY: 1112.5,
-      endX: 703.75,
-    },
-  ],
-  [
-    {
-      height: 200,
-      width: 200,
-      left: 668,
-      right: 868,
-      top: 912.5,
-      bottom: 1112.5,
-      originTotalDistY: 875,
-      originTotalDistX: 1224,
-    },
-    { width: 1024, height: 675 },
-    {
-      translateY: { start: 50, end: -50, unit: '%', easing: undefined },
-      translateX: { start: 0, end: 0, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1224,
-      //   totalY: 1075,
-      startY: 912.5,
-      startX: 668,
-      endY: 1112.5,
-      endX: 868,
-    },
-  ],
-  [
-    {
-      height: 200,
-      width: 200,
-      left: 156,
-      right: 356,
-      top: 912.5,
-      bottom: 1112.5,
-      originTotalDistY: 875,
-      originTotalDistX: 1224,
-    },
-    { width: 1024, height: 675 },
-    {
-      translateY: { start: 0, end: 0, unit: '%', easing: undefined },
-      translateX: { start: -50, end: 50, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1424,
-      //   totalY: 875,
-      startY: 912.5,
-      startX: 36.46875,
-      endY: 1112.5,
-      endX: 475.53125,
-    },
-  ],
-  [
-    {
-      height: 102,
-      width: 103,
-      left: 802.125,
-      right: 904.515625,
-      top: 9516.5,
-      bottom: 9618.890625,
-      originTotalDistY: 915,
-      originTotalDistX: 1127,
-    },
-    { width: 1024, height: 813 },
-    {
-      translateY: { start: 50, end: -50, unit: '%', easing: undefined },
-      translateX: { start: 50, end: -50, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1230,
-      //   totalY: 1017,
-      startY: 9516.5,
-      startX: 802.125,
-      endY: 9618.890625,
-      endX: 904.515625,
-    },
-  ],
-  [
-    {
-      height: 102,
-      width: 102,
-      left: 460.796875,
-      right: 563.1875,
-      top: 9810.890625,
-      bottom: 9913.28125,
-      originTotalDistY: 915,
-      originTotalDistX: 1126,
-    },
-    { width: 1024, height: 813 },
-    {
-      translateY: { start: -50, end: 50, unit: '%', easing: undefined },
-      translateX: { start: -50, end: 50, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1228,
-      //   totalY: 1017,
-      startY: 9753.492101014761,
-      startX: 404.716796875,
-      endY: 9970.679773985239,
-      endX: 619.267578125,
-    },
-  ],
-  [
-    {
-      height: 102,
-      width: 103,
-      left: 802.125,
-      right: 904.515625,
-      top: 9516.5,
-      bottom: 9618.890625,
-      originTotalDistY: 915,
-      originTotalDistX: 1127,
-    },
-    { width: 1024, height: 813 },
-    {
-      translateY: { start: 50, end: -50, unit: '%', easing: undefined },
-      translateX: { start: 50, end: -50, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1230,
-      //   totalY: 1017,
-      startY: 9516.5,
-      startX: 802.125,
-      endY: 9618.890625,
-      endX: 904.515625,
-    },
-  ],
-  [
-    {
-      height: 200,
-      width: 200,
-      left: 634.25,
-      right: 834.25,
-      top: 864.5,
-      bottom: 1064.5,
-      originTotalDistY: 843,
-      originTotalDistX: 1179,
-    },
-    { width: 979, height: 643 },
-    {
-      translateY: { start: 85, end: -85, unit: 'px', easing: undefined },
-      translateX: { start: 0, end: 0, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 1179,
-      //   totalY: 1013,
-      startY: 864.5,
-      startX: 634.25,
-      endY: 1064.5,
-      endX: 834.25,
-    },
-  ],
-  [
-    {
-      height: 75,
-      width: 75,
-      left: 813.1875,
-      right: 887.8125,
-      top: 927.1875,
-      bottom: 1001.8125,
-      originTotalDistY: 718,
-      originTotalDistX: 966,
-    },
-    { width: 891, height: 643 },
-    {
-      translateY: { start: -200, end: 125, unit: 'px', easing: undefined },
-      translateX: { start: 0, end: 0, unit: '%', easing: undefined },
-    },
-    {
-      //   totalX: 966,
-      //   totalY: 1043,
-      startY: 561.7930979643766,
-      startX: 813.1875,
-      endY: 1230.1840012722646,
-      endX: 887.8125,
-    },
-  ],
-])(
-  'createLimitsWithTranslationsForRelativeElements()',
-  (rect: any, view: any, translate: any, expected) => {
-    test(`returns expected bounds based on rect, offsets, and view`, () => {
-      expect(
-        // @ts-expect-error
-        createLimitsWithTranslationsForRelativeElements(rect, view, translate)
-      ).toEqual(expect.objectContaining(expected));
     });
-  }
-);
+    const effects: ParallaxStartEndEffects = {};
+
+    const { baseline, limits } = getLimitsBaselineAndWithAlwaysComplete(
+      rect,
+      view,
+      effects,
+      ScrollAxis.vertical,
+      false
+    );
+
+    expect(baseline).toBe(limits);
+    expect(limits.startY).toBe(rect.offsetTop - view.height);
+    expect(limits.endY).toBe(rect.offsetBottom);
+    expect(limits.startX).toBe(rect.offsetLeft - view.width);
+    expect(limits.endX).toBe(rect.offsetRight);
+  });
+
+  it('extends the vertical scroll window when top is in view and bottom does not pass max scroll (always-complete)', () => {
+    const rect = makeRect({
+      offsetTop: 100,
+      offsetBottom: 600,
+      offsetLeft: 0,
+      offsetRight: 200,
+      width: 200,
+      height: 500,
+    });
+    const effects: ParallaxStartEndEffects = {};
+
+    const { baseline, limits } = getLimitsBaselineAndWithAlwaysComplete(
+      rect,
+      view,
+      effects,
+      ScrollAxis.vertical,
+      true
+    );
+
+    expect(baseline).not.toBe(limits);
+    expect(baseline.startY).toBe(rect.offsetTop - view.height);
+    expect(baseline.endY).toBe(rect.offsetBottom);
+    expect(limits.startY).toBe(0);
+    expect(limits.endY).toBe(rect.offsetBottom);
+  });
+
+  it('applies negative translateY padding with multiplier 1 when horizontal is the active axis', () => {
+    const rect = makeRect({
+      offsetTop: 500,
+      offsetBottom: 700,
+      offsetLeft: 200,
+      offsetRight: 900,
+      width: 700,
+      height: 200,
+    });
+    const effects: ParallaxStartEndEffects = {
+      translateY: { start: -50, end: 0, unit: 'px' },
+    };
+
+    const { baseline, limits } = getLimitsBaselineAndWithAlwaysComplete(
+      rect,
+      view,
+      effects,
+      ScrollAxis.horizontal,
+      false
+    );
+
+    expect(baseline).toBe(limits);
+    // Vertical translate scalars are not applied on horizontal scroll axis; padding uses 1×.
+    expect(limits.startY).toBe(rect.offsetTop - view.height - 50);
+    expect(limits.endY).toBe(rect.offsetBottom);
+  });
+
+  it('applies negative translateY padding with slower-scroll scalar on the vertical active axis', () => {
+    const rect = makeRect({
+      offsetTop: 500,
+      offsetBottom: 700,
+      offsetLeft: 200,
+      offsetRight: 900,
+      width: 700,
+      height: 200,
+    });
+    const effects: ParallaxStartEndEffects = {
+      translateY: { start: -50, end: 0, unit: 'px' },
+    };
+
+    const { baseline, limits } = getLimitsBaselineAndWithAlwaysComplete(
+      rect,
+      view,
+      effects,
+      ScrollAxis.vertical,
+      false
+    );
+
+    expect(baseline).toBe(limits);
+    const m = getTranslateScalar(-50, 0, view.height + rect.height);
+    expect(limits.startY).toBe(
+      rect.offsetTop - view.height + -50 * m
+    );
+    expect(limits.endY).toBe(rect.offsetBottom);
+  });
+});
+
+describe('createLimitsWithTranslationsForRelativeElements', () => {
+  it('matches getLimitsBaselineAndWithAlwaysComplete(...).limits', () => {
+    const view = new View({
+      width: 500,
+      height: 500,
+      scrollWidth: 700,
+      scrollHeight: 700,
+    });
+    const rect = makeRect({
+      offsetTop: 0,
+      offsetBottom: 200,
+      offsetLeft: 0,
+      offsetRight: 200,
+      width: 200,
+      height: 200,
+    });
+    const effects: ParallaxStartEndEffects = {
+      translateY: { start: 0, end: 0, unit: 'px' },
+      translateX: { start: 0, end: 0, unit: 'px' },
+    };
+
+    const direct = createLimitsWithTranslationsForRelativeElements(
+      rect,
+      view,
+      effects,
+      ScrollAxis.vertical,
+      false
+    );
+    const { limits } = getLimitsBaselineAndWithAlwaysComplete(
+      rect,
+      view,
+      effects,
+      ScrollAxis.vertical,
+      false
+    );
+
+    expect(direct.startX).toBe(limits.startX);
+    expect(direct.startY).toBe(limits.startY);
+    expect(direct.endX).toBe(limits.endX);
+    expect(direct.endY).toBe(limits.endY);
+    expect(direct.startMultiplierX).toBe(limits.startMultiplierX);
+    expect(direct.endMultiplierX).toBe(limits.endMultiplierX);
+    expect(direct.startMultiplierY).toBe(limits.startMultiplierY);
+    expect(direct.endMultiplierY).toBe(limits.endMultiplierY);
+  });
+});
