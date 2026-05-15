@@ -4,7 +4,7 @@
  * **What `Limits` represents**
  * Each limit pair (`startY`/`endY` for vertical scroll, `startX`/`endX` for horizontal) is
  * the scroll offset interval over which the effect should run from keyframe 0 → 1. Values
- * come from layout (`Rect` / `offset*`) and `View` (viewport + scroll extent), not from
+ * come from layout (`RectSnapshot` / `offset*`) and `View` (viewport + scroll extent), not from
  * live `getBoundingClientRect` during scroll — same information the old engine cached to
  * avoid layout thrash; it matches the idea of “where the element is relative to the
  * scrollport” that `ViewTimeline` encodes, expressed as scroll positions.
@@ -21,7 +21,7 @@
  * `shouldAlwaysCompleteAnimation` branches; extracting named strategies per case would
  * make tests and docs easier without changing outputs.
  */
-import { Rect } from '../classes/Rect';
+import type { RectSnapshot } from './measureRect';
 import { View } from '../classes/View';
 import { Limits } from '../classes/Limits';
 
@@ -46,7 +46,7 @@ const DEFAULT_VALUE: ParsedValueEffect = {
  * and per-axis multipliers. See module doc above for semantics.
  */
 function buildLimits(
-  rect: Rect,
+  rect: RectSnapshot,
   view: View,
   effects: ParallaxStartEndEffects,
   scrollAxis: ValidScrollAxis,
@@ -229,7 +229,7 @@ function buildLimits(
  * WAAPI timing comments).
  */
 export function getLimitsBaselineAndWithAlwaysComplete(
-  rect: Rect,
+  rect: RectSnapshot,
   view: View,
   effects: ParallaxStartEndEffects,
   scrollAxis: ValidScrollAxis,
@@ -247,7 +247,7 @@ export function getLimitsBaselineAndWithAlwaysComplete(
 
 /** Public API: same as {@link getLimitsBaselineAndWithAlwaysComplete}(..., !!flag).limits. */
 export function createLimitsWithTranslationsForRelativeElements(
-  rect: Rect,
+  rect: RectSnapshot,
   view: View,
   effects: ParallaxStartEndEffects,
   // scroll: Scroll,

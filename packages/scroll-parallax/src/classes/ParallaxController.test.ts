@@ -18,7 +18,6 @@ Object.defineProperty(global, 'ResizeObserver', {
 import { vi, afterEach, describe, it, expect } from 'vitest';
 import { ParallaxController } from './ParallaxController';
 import { Element } from './Element';
-import { Rect } from './Rect';
 import { Limits } from './Limits';
 import type { CSSEffect } from '../types';
 import { ScrollAxis } from '../types';
@@ -153,7 +152,18 @@ describe('Expect the ParallaxController', () => {
 
     expect(element).toBeInstanceOf(Element);
     expect(element.limits).toBeInstanceOf(Limits);
-    expect(element.rect).toBeInstanceOf(Rect);
+    expect(element.rect).toMatchObject({
+      width: expect.any(Number),
+      height: expect.any(Number),
+      left: expect.any(Number),
+      right: expect.any(Number),
+      top: expect.any(Number),
+      bottom: expect.any(Number),
+      offsetTop: expect.any(Number),
+      offsetLeft: expect.any(Number),
+      offsetBottom: expect.any(Number),
+      offsetRight: expect.any(Number),
+    });
 
     controller.destroy();
   });

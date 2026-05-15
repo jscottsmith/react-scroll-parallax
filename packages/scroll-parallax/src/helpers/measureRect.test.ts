@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
-import { Rect } from './Rect';
+import { measureRect } from './measureRect';
 import { createElementMock } from '../testUtils/createElementMock';
-import { View } from './View';
+import { View } from '../classes/View';
 
 const DEFAULT_VIEW = new View({
   width: 1000,
@@ -10,11 +10,10 @@ const DEFAULT_VIEW = new View({
   scrollWidth: 1000,
 });
 
-describe('Rect', () => {
+describe('measureRect', () => {
   test(`sets bounds based on root margin when provided`, () => {
-    const rect = new Rect({
-      view: DEFAULT_VIEW,
-      el: createElementMock(
+    const rect = measureRect(
+      createElementMock(
         { offsetWidth: 100, offsetHeight: 100 },
         {
           getBoundingClientRect: () => ({
@@ -25,13 +24,14 @@ describe('Rect', () => {
           }),
         }
       ),
-      rootMargin: {
+      DEFAULT_VIEW,
+      {
         top: 10,
         left: 20,
         right: 30,
         bottom: 40,
-      },
-    });
+      }
+    );
 
     expect(rect.top).toBe(490);
     expect(rect.left).toBe(180);
@@ -40,9 +40,8 @@ describe('Rect', () => {
   });
 
   test(`caches the bounding rect`, () => {
-    const rect = new Rect({
-      view: DEFAULT_VIEW,
-      el: createElementMock(
+    const rect = measureRect(
+      createElementMock(
         { offsetWidth: 200, offsetHeight: 100 },
         {
           getBoundingClientRect: () => ({
@@ -53,7 +52,8 @@ describe('Rect', () => {
           }),
         }
       ),
-    });
+      DEFAULT_VIEW
+    );
 
     expect(rect.width).toBe(200);
     expect(rect.height).toBe(100);
@@ -64,8 +64,19 @@ describe('Rect', () => {
   });
 
   test(`caches the bounding rect with scrollContainer`, () => {
-    const rect = new Rect({
-      view: new View({
+    const rect = measureRect(
+      createElementMock(
+        { offsetWidth: 100, offsetHeight: 100 },
+        {
+          getBoundingClientRect: () => ({
+            top: 500,
+            left: 200,
+            bottom: 600,
+            right: 300,
+          }),
+        }
+      ),
+      new View({
         width: 2000,
         height: 1000,
         scrollWidth: 2000,
@@ -81,19 +92,8 @@ describe('Rect', () => {
             }),
           }
         ),
-      }),
-      el: createElementMock(
-        { offsetWidth: 100, offsetHeight: 100 },
-        {
-          getBoundingClientRect: () => ({
-            top: 500,
-            left: 200,
-            bottom: 600,
-            right: 300,
-          }),
-        }
-      ),
-    });
+      })
+    );
 
     expect(rect.height).toBe(100);
     expect(rect.width).toBe(100);

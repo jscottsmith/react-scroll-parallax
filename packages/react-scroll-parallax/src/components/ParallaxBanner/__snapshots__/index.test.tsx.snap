@@ -7,7 +7,7 @@ exports[`given a <ParallaxBanner> component > when the prop { disabled: true } i
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -20,7 +20,7 @@ exports[`given a <ParallaxBanner> component > when the prop { easing: 'easeInQua
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -33,7 +33,7 @@ exports[`given a <ParallaxBanner> component > when the prop { easing: [ 0.2, -0.
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -46,7 +46,7 @@ exports[`given a <ParallaxBanner> component > when the prop { onChange: [Functio
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -59,7 +59,7 @@ exports[`given a <ParallaxBanner> component > when the prop { onEnter: [Function
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -72,7 +72,7 @@ exports[`given a <ParallaxBanner> component > when the prop { onExit: [Function 
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -85,7 +85,7 @@ exports[`given a <ParallaxBanner> component > when the prop { onProgressChange: 
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -98,7 +98,7 @@ exports[`given a <ParallaxBanner> component > when the prop { opacity: [ +0, 1 ]
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -111,7 +111,7 @@ exports[`given a <ParallaxBanner> component > when the prop { rootMargin: { top:
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -124,7 +124,7 @@ exports[`given a <ParallaxBanner> component > when the prop { rotate: [ '0turn',
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-rotate-start: 0turn; --parallax-rotate-end: 1turn;"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -137,7 +137,7 @@ exports[`given a <ParallaxBanner> component > when the prop { rotateX: [ '0turn'
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -150,7 +150,7 @@ exports[`given a <ParallaxBanner> component > when the prop { rotateY: [ '0turn'
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -163,7 +163,7 @@ exports[`given a <ParallaxBanner> component > when the prop { rotateZ: [ '0turn'
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -176,7 +176,7 @@ exports[`given a <ParallaxBanner> component > when the prop { scale: [ +0, 1 ] }
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -189,7 +189,7 @@ exports[`given a <ParallaxBanner> component > when the prop { scaleX: [ +0, 1 ] 
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -202,7 +202,7 @@ exports[`given a <ParallaxBanner> component > when the prop { scaleY: [ +0, 1 ] 
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -215,7 +215,7 @@ exports[`given a <ParallaxBanner> component > when the prop { scaleZ: [ +0, 1 ] 
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -228,7 +228,7 @@ exports[`given a <ParallaxBanner> component > when the prop { shouldAlwaysComple
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range-start: entry 100%; animation-range-end: exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -241,7 +241,7 @@ exports[`given a <ParallaxBanner> component > when the prop { shouldDisableScali
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -254,7 +254,7 @@ exports[`given a <ParallaxBanner> component > when the prop { speed: 10 } is giv
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: -100px; left: 0px; right: 0px; bottom: -100px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-translate-start-y: 100px; --parallax-translate-end-y: -100px;"
+      style="position: absolute; top: -100px; left: 0px; right: 0px; bottom: -100px;"
     />
   </div>
 </DocumentFragment>
@@ -267,7 +267,7 @@ exports[`given a <ParallaxBanner> component > when the prop { startScroll: +0, e
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: 0px 1000px; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: scroll();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -280,7 +280,7 @@ exports[`given a <ParallaxBanner> component > when the prop { targetElement: <di
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view();"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -293,7 +293,7 @@ exports[`given a <ParallaxBanner> component > when the prop { translateX: [ -100
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-translate-start-x: -100%; --parallax-translate-end-x: 100%;"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -306,7 +306,7 @@ exports[`given a <ParallaxBanner> component > when the prop { translateY: [ -100
   >
     <div
       data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-translate-start-y: -100%; --parallax-translate-end-y: 100%;"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
     />
   </div>
 </DocumentFragment>
@@ -320,7 +320,7 @@ exports[`given a <ParallaxBanner> component > with all props > then it will rend
   >
     <div
       data-testid="layer-0"
-      style="background-image: url("https://foo.com/bar.jpg"); background-position: center center; background-size: cover; position: absolute; top: -20px; left: 0px; right: 0px; bottom: -20px; animation-range: entry 0% exit 100%; animation-name: parallaxeffects; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); --parallax-translate-start-y: 20px; --parallax-translate-end-y: -20px;"
+      style="background-image: url("https://foo.com/bar.jpg"); background-position: center center; background-size: cover; position: absolute; top: -20px; left: 0px; right: 0px; bottom: -20px;"
     />
     <div>
       <h1>

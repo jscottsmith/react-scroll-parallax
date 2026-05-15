@@ -6,7 +6,7 @@ import type {
   ValidScrollAxis,
 } from '../types';
 import { createId } from '../utils/createId';
-import { Rect } from './Rect';
+import { measureRect, type RectSnapshot } from '../helpers/measureRect';
 import { View } from './View';
 import { Limits } from './Limits';
 import { parseTranslationProps } from '../helpers/parseElementTransitionEffects';
@@ -29,7 +29,7 @@ type ElementConstructorOptions = CreateElementOptions &
     view: View;
   };
 
-/** One parallax DOM node: Rect/Limits + WAAPI scroll-driven animation on `el`. */
+/** One parallax DOM node: measured rect + Limits + WAAPI scroll-driven animation on `el`. */
 export class Element {
   el: HTMLElement;
   props: ParallaxElementConfig;
@@ -38,7 +38,7 @@ export class Element {
   id: number;
   translations: ParallaxStartEndEffects;
   view: View;
-  rect!: Rect;
+  rect!: RectSnapshot;
   limits!: Limits;
   scaledEffects!: ParallaxStartEndEffects;
   shouldScaleTranslateEffects!: boolean;
@@ -68,11 +68,11 @@ export class Element {
 
   /** Recompute rect, limits, scaled translations, and whether translate scaling applies. */
   private setupTranslateEffects() {
-    this.rect = new Rect({
-      el: this.props.targetElement || this.el,
-      rootMargin: this.props.rootMargin,
-      view: this.view,
-    });
+    this.rect = measureRect(
+      this.props.targetElement || this.el,
+      this.view,
+      this.props.rootMargin
+    );
 
     // Limits drive (1) scaled translate magnitudes and (2) optional WAAPI range correction.
     // When always-complete is on, we need the same limits computed *without* that flag so
