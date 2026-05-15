@@ -3,7 +3,7 @@ import type {
   ParallaxStartEndEffects,
   ValidScrollAxis,
 } from '../types';
-import type { Limits } from '../classes/Limits';
+import type { ViewTimelineCoverOffsetPx } from '../helpers/parallaxLayoutAdjustments';
 import {
   getScrollTimelineCtor,
   getViewTimelineCtor,
@@ -18,9 +18,9 @@ export type ParallaxAnimateOptions = {
   /**
    * WAAPI-only `rangeStart` / `rangeEnd` (not `ViewTimeline` ctor args). Omitted for
    * `ScrollTimeline`. For `ViewTimeline`: default `entry 0%` / `exit 100%`, or expanded
-   * `cover` when translate distance is scaled and/or when
-   * {@link ParallaxElementConfig.shouldAlwaysCompleteAnimation} widens the effective
-   * scroll-window (see {@link getViewTimelineAnimationRange}).
+   * `cover` in `animation-range` when translate distance is scaled and/or when
+   * {@link ParallaxElementConfig.shouldAlwaysCompleteAnimation} adds `cover` offsets from
+   * layout (see {@link getViewTimelineAnimationRange}).
    */
   rangeStart?: string;
   rangeEnd?: string;
@@ -46,8 +46,7 @@ export function buildParallaxAnimateOptions(args: {
   rectWidth: number;
   rectHeight: number;
   shouldAlwaysCompleteAnimation: boolean;
-  limitsBaseline: Limits | null;
-  limits: Limits;
+  alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
 }): ParallaxAnimateOptions | null {
   const fill: 'both' = 'both';
   const easing = args.props.easing ?? 'linear';
@@ -81,8 +80,7 @@ export function buildParallaxAnimateOptions(args: {
     rectWidth: args.rectWidth,
     rectHeight: args.rectHeight,
     shouldAlwaysCompleteAnimation: args.shouldAlwaysCompleteAnimation,
-    limitsBaseline: args.limitsBaseline,
-    limits: args.limits,
+    alwaysCompleteViewCoverOffsetPx: args.alwaysCompleteViewCoverOffsetPx,
   });
 
   return { timeline, rangeStart, rangeEnd, fill, easing };

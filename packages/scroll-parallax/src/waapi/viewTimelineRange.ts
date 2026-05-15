@@ -1,4 +1,4 @@
-import type { Limits } from '../classes/Limits';
+import type { ViewTimelineCoverOffsetPx } from '../helpers/parallaxLayoutAdjustments';
 import type { ParallaxStartEndEffects, ValidScrollAxis, ValidTranslationUnits } from '../types';
 import { ScrollAxis } from '../types';
 import { getStartEndValueInPx } from '../helpers/getStartEndValueInPx';
@@ -23,20 +23,13 @@ import { getStartEndValueInPx } from '../helpers/getStartEndValueInPx';
  *    `calc(100% + Mpx)`. The N/M values are derived from the scaled translate “outsets”
  *    (positive end = extend before cover starts; negative start = extend after cover ends).
  *
- * 2. **Always-complete** (`getShouldAlwaysCompleteCoverOffsetAdjustPx`)
- *    Legacy limits without the flag vs with the flag differ only in the scroll-window
- *    endpoints on the active axis. That difference (baseline.start − final.start) and
- *    (final.end − baseline.end) is how many extra pixels of scroll the effect should span
- *    at the beginning/end — same intent as widening the window in the old scroll handler,
- *    expressed here as extra `cover` length instead of switching to `ScrollTimeline`.
+ * 2. **Always-complete** (`alwaysCompleteViewCoverOffsetPx` from layout adjustments)
+ *    Signed px added to the `cover` portion of `animation-range` when the prop retunes
+ *    effective scroll-window endpoints on the active axis.
  *
  * **Merge**
  *    `getViewTimelineAnimationRange` sums the two offset pairs and builds one `cover …` range. If
  *    both sums are zero, we keep the spec default `entry 0%` / `exit 100%`.
- *
- * **Refactor targets**
- *    - Collapse outset math + limit diffs into a single “range offset model” type.
- *    - Unit-test the merge and signed `cover` strings independently of mocks.
  * ---------------------------------------------------------------------------
  */
 
@@ -80,7 +73,7 @@ export function getTranslateScalingCoverOffsetsPx(args: {
   scaledEffects: ParallaxStartEndEffects;
   rectWidth: number;
   rectHeight: number;
-}): { start: number; end: number } {
+}): ViewTimelineCoverOffsetPx {
   const {
     scrollAxis,
     shouldScaleTranslateEffects,
@@ -137,36 +130,6 @@ export function getTranslateScalingCoverOffsetsPx(args: {
   return { start: 0, end: 0 };
 }
 
-export function getShouldAlwaysCompleteCoverOffsetAdjustPx(args: {
-  scrollAxis: ValidScrollAxis;
-  shouldAlwaysCompleteAnimation: boolean;
-  limitsBaseline: Limits | null;
-  limits: Limits;
-}): { start: number; end: number } {
-  const {
-    scrollAxis,
-    shouldAlwaysCompleteAnimation,
-    limitsBaseline,
-    limits,
-  } = args;
-
-  if (!shouldAlwaysCompleteAnimation || !limitsBaseline) {
-    return { start: 0, end: 0 };
-  }
-
-  if (scrollAxis === ScrollAxis.vertical) {
-    return {
-      start: limitsBaseline.startY - limits.startY,
-      end: limits.endY - limitsBaseline.endY,
-    };
-  }
-
-  return {
-    start: limitsBaseline.startX - limits.startX,
-    end: limits.endX - limitsBaseline.endX,
-  };
-}
-
 /**
  * Converts signed pixel offsets into `cover` range strings for the view timeline.
  */
@@ -200,18 +163,14 @@ export function getViewTimelineAnimationRange(args: {
   rectWidth: number;
   rectHeight: number;
   shouldAlwaysCompleteAnimation: boolean;
-  limitsBaseline: Limits | null;
-  limits: Limits;
+  alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
 }): { rangeStart: string; rangeEnd: string } {
   const trans = getTranslateScalingCoverOffsetsPx(args);
-  const always = getShouldAlwaysCompleteCoverOffsetAdjustPx({
-    scrollAxis: args.scrollAxis,
-    shouldAlwaysCompleteAnimation: args.shouldAlwaysCompleteAnimation,
-    limitsBaseline: args.limitsBaseline,
-    limits: args.limits,
-  });
-  const startPx = trans.start + always.start;
-  const endPx = trans.end + always.end;
+  const alwaysComplete = args.shouldAlwaysCompleteAnimation
+    ? args.alwaysCompleteViewCoverOffsetPx
+    : { start: 0, end: 0 };
+  const startPx = trans.start + alwaysComplete.start;
+  const endPx = trans.end + alwaysComplete.end;
   if (startPx === 0 && endPx === 0) {
     return { rangeStart: 'entry 0%', rangeEnd: 'exit 100%' };
   }

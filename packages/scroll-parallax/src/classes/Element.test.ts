@@ -9,7 +9,6 @@ import {
 } from 'vitest';
 import { Element } from './Element';
 import { View } from './View';
-import { Limits } from './Limits';
 import { ScrollAxis } from '../types';
 import type { ParallaxElementConfig } from '../types';
 
@@ -28,34 +27,21 @@ vi.mock('../helpers/parseElementTransitionEffects', () => ({
   })),
 }));
 
-vi.mock('../helpers/createLimitsWithTranslationsForRelativeElements', async () => {
-  const { Limits } = await import('../classes/Limits');
-  const mult = {
-    startMultiplierX: 1,
-    endMultiplierX: 1,
-    startMultiplierY: 1,
-    endMultiplierY: 1,
-  };
-  const mk = (sy: number, ey: number) =>
-    new Limits({
-      startX: 0,
-      startY: sy,
-      endX: 100,
-      endY: ey,
-      ...mult,
-    });
+vi.mock('../helpers/parallaxLayoutAdjustments', () => {
+  const unit = { start: 1, end: 1 };
   return {
-    createLimitsWithTranslationsForRelativeElements: vi.fn(
-      (_r, _v, _e, _axis, flag?: boolean) =>
-        flag ? mk(0, 200) : mk(0, 100)
-    ),
-    getLimitsBaselineAndWithAlwaysComplete: vi.fn(
-      (_r, _v, _e, _axis, always: boolean) => {
-        if (!always) {
-          const l = mk(0, 100);
-          return { baseline: l, limits: l };
+    computeParallaxLayoutAdjustments: vi.fn(
+      (_rect, _view, _effects, _axis, alwaysComplete: boolean) => {
+        if (!alwaysComplete) {
+          return {
+            translateSpanScale: { x: { ...unit }, y: { ...unit } },
+            alwaysCompleteViewCoverOffsetPx: { start: 0, end: 0 },
+          };
         }
-        return { baseline: mk(40, 140), limits: mk(0, 200) };
+        return {
+          translateSpanScale: { x: { ...unit }, y: { ...unit } },
+          alwaysCompleteViewCoverOffsetPx: { start: 40, end: 60 },
+        };
       }
     ),
   };
@@ -171,7 +157,10 @@ describe('Element', () => {
         offsetBottom: expect.any(Number),
         offsetRight: expect.any(Number),
       });
-      expect(elementInstance.limits).toBeInstanceOf(Limits);
+      expect(elementInstance.translateSpanScale).toEqual({
+        x: { start: 1, end: 1 },
+        y: { start: 1, end: 1 },
+      });
       expect(elementInstance.translations).toBeDefined();
       expect(elementInstance.scaledEffects).toBeDefined();
     });
@@ -191,8 +180,8 @@ describe('Element', () => {
     it('should call helper functions during construction', async () => {
       const { parseTranslationProps } =
         await import('../helpers/parseElementTransitionEffects');
-      const { getLimitsBaselineAndWithAlwaysComplete } =
-        await import('../helpers/createLimitsWithTranslationsForRelativeElements');
+      const { computeParallaxLayoutAdjustments } =
+        await import('../helpers/parallaxLayoutAdjustments');
       const { scaleTranslateEffectsForSlowerScroll } =
         await import('../helpers/scaleTranslateEffectsForSlowerScroll');
 
@@ -200,7 +189,7 @@ describe('Element', () => {
         props,
         ScrollAxis.vertical
       );
-      expect(getLimitsBaselineAndWithAlwaysComplete).toHaveBeenCalled();
+      expect(computeParallaxLayoutAdjustments).toHaveBeenCalled();
       expect(scaleTranslateEffectsForSlowerScroll).toHaveBeenCalled();
     });
 
@@ -468,8 +457,8 @@ describe('Element', () => {
         scrollHeight: 3500,
       });
 
-      const { getLimitsBaselineAndWithAlwaysComplete } =
-        await import('../helpers/createLimitsWithTranslationsForRelativeElements');
+      const { computeParallaxLayoutAdjustments } =
+        await import('../helpers/parallaxLayoutAdjustments');
       const { scaleTranslateEffectsForSlowerScroll } =
         await import('../helpers/scaleTranslateEffectsForSlowerScroll');
 
@@ -477,9 +466,7 @@ describe('Element', () => {
 
       expect(result).toBe(elementInstance);
       expect(elementInstance.view).toBe(newView);
-      expect(
-        getLimitsBaselineAndWithAlwaysComplete
-      ).toHaveBeenCalled();
+      expect(computeParallaxLayoutAdjustments).toHaveBeenCalled();
       expect(scaleTranslateEffectsForSlowerScroll).toHaveBeenCalled();
     });
   });

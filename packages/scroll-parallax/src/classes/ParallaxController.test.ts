@@ -18,7 +18,6 @@ Object.defineProperty(global, 'ResizeObserver', {
 import { vi, afterEach, describe, it, expect } from 'vitest';
 import { ParallaxController } from './ParallaxController';
 import { Element } from './Element';
-import { Limits } from './Limits';
 import type { CSSEffect } from '../types';
 import { ScrollAxis } from '../types';
 
@@ -151,7 +150,8 @@ describe('Expect the ParallaxController', () => {
     const element = controller.createElement(OPTIONS);
 
     expect(element).toBeInstanceOf(Element);
-    expect(element.limits).toBeInstanceOf(Limits);
+    expect(element.translateSpanScale.x.start).toBeGreaterThan(0);
+    expect(element.translateSpanScale.y.start).toBeGreaterThan(0);
     expect(element.rect).toMatchObject({
       width: expect.any(Number),
       height: expect.any(Number),

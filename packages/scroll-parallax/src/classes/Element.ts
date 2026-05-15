@@ -8,9 +8,12 @@ import type {
 import { createId } from '../utils/createId';
 import { measureRect, type RectSnapshot } from '../helpers/measureRect';
 import { View } from './View';
-import { Limits } from './Limits';
 import { parseTranslationProps } from '../helpers/parseElementTransitionEffects';
-import { getLimitsBaselineAndWithAlwaysComplete } from '../helpers/createLimitsWithTranslationsForRelativeElements';
+import {
+  computeParallaxLayoutAdjustments,
+  type TranslateSpanScale,
+  type ViewTimelineCoverOffsetPx,
+} from '../helpers/parallaxLayoutAdjustments';
 import { scaleTranslateEffectsForSlowerScroll } from '../helpers/scaleTranslateEffectsForSlowerScroll';
 import { getShouldScaleTranslateEffects } from '../helpers/getShouldScaleTranslateEffects';
 import { supportsScrollDrivenAnimations } from '../waapi/support';
@@ -29,7 +32,7 @@ type ElementConstructorOptions = CreateElementOptions &
     view: View;
   };
 
-/** One parallax DOM node: measured rect + Limits + WAAPI scroll-driven animation on `el`. */
+/** One parallax DOM node: measured rect, layout-derived WAAPI adjustments, scroll-driven animation on `el`. */
 export class Element {
   el: HTMLElement;
   props: ParallaxElementConfig;
@@ -39,16 +42,14 @@ export class Element {
   translations: ParallaxStartEndEffects;
   view: View;
   rect!: RectSnapshot;
-  limits!: Limits;
+  /** Per-axis factors applied to translate start/end before keyframes (slower-scroll compensation). */
+  translateSpanScale!: TranslateSpanScale;
   scaledEffects!: ParallaxStartEndEffects;
   shouldScaleTranslateEffects!: boolean;
-  /**
-   * When `shouldAlwaysCompleteAnimation` is true, this is `buildLimits(..., false)` from the
-   * same geometry as {@link limits}: the scroll window *without* always-complete overrides.
-   * Used only to compute how much wider/narrower the view-timeline `cover` range must be vs
-   * the default case. Null when the prop is false (no diff — do not read).
-   */
-  private limitsBaseline: Limits | null = null;
+  private alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx = {
+    start: 0,
+    end: 0,
+  };
   /** Active `el.animate(...)` instance; `cancel()` before replacing or disabling. */
   private animation: Animation | null = null;
   /** Gates `onEnter` so it runs once per “enabled” lifecycle (reset when `enable()` runs). */
@@ -66,7 +67,7 @@ export class Element {
     this.installAnimation();
   }
 
-  /** Recompute rect, limits, scaled translations, and whether translate scaling applies. */
+  /** Recompute rect, translate span scale, scaled translations, and view-range adjustment. */
   private setupTranslateEffects() {
     this.rect = measureRect(
       this.props.targetElement || this.el,
@@ -74,24 +75,20 @@ export class Element {
       this.props.rootMargin
     );
 
-    // Limits drive (1) scaled translate magnitudes and (2) optional WAAPI range correction.
-    // When always-complete is on, we need the same limits computed *without* that flag so
-    // we can diff scroll-window endpoints on the active axis → px offsets on `cover` range.
-    const { baseline, limits } = getLimitsBaselineAndWithAlwaysComplete(
+    const adjustments = computeParallaxLayoutAdjustments(
       this.rect,
       this.view,
       this.translations,
       this.scrollAxis,
       !!this.props.shouldAlwaysCompleteAnimation
     );
-    this.limitsBaseline = this.props.shouldAlwaysCompleteAnimation
-      ? baseline
-      : null;
-    this.limits = limits;
+    this.translateSpanScale = adjustments.translateSpanScale;
+    this.alwaysCompleteViewCoverOffsetPx =
+      adjustments.alwaysCompleteViewCoverOffsetPx;
 
     this.scaledEffects = scaleTranslateEffectsForSlowerScroll(
       this.translations,
-      this.limits
+      this.translateSpanScale
     );
 
     this.shouldScaleTranslateEffects = getShouldScaleTranslateEffects(
@@ -138,8 +135,7 @@ export class Element {
       rectWidth: this.rect.width,
       rectHeight: this.rect.height,
       shouldAlwaysCompleteAnimation: !!this.props.shouldAlwaysCompleteAnimation,
-      limitsBaseline: this.limitsBaseline,
-      limits: this.limits,
+      alwaysCompleteViewCoverOffsetPx: this.alwaysCompleteViewCoverOffsetPx,
     });
     if (!spec) {
       return;

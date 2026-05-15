@@ -1,32 +1,23 @@
 /**
- * Scroll-window limits for parallax timing (legacy mental model, still used for WAAPI).
+ * Layout-derived **adjustments** for scroll-driven parallax (WAAPI), not abstract “timing”.
  *
- * **What `Limits` represents**
- * Each limit pair (`startY`/`endY` for vertical scroll, `startX`/`endX` for horizontal) is
- * the scroll offset interval over which the effect should run from keyframe 0 → 1. Values
- * come from layout (`RectSnapshot` / `offset*`) and `View` (viewport + scroll extent), not from
- * live `getBoundingClientRect` during scroll — same information the old engine cached to
- * avoid layout thrash; it matches the idea of “where the element is relative to the
- * scrollport” that `ViewTimeline` encodes, expressed as scroll positions.
+ * Two consumers:
  *
- * **Two roles today**
- * 1. **Multipliers** — `scaleTranslateEffectsForSlowerScroll` scales translate magnitudes so
- *    motion stays visually consistent when the scroll span is shorter/longer than the
- *    default `view.height + rect.height` window.
- * 2. **Baseline vs adjusted** — `getLimitsBaselineAndWithAlwaysComplete` runs the same
- *    math twice so `Element` can diff baseline vs final limits and map that delta into
- *    `animation-range` on a `ViewTimeline` (see `Element.getShouldAlwaysCompleteCoverOffsetAdjustPx`).
+ * 1. **Translate span scale** — per-axis factors applied to parsed translate values before
+ *    keyframes (`scaleTranslateEffectsForSlowerScroll`). This keeps perceived motion in
+ *    family with the scroll distance implied by layout when the path is shorter than the
+ *    nominal window.
  *
- * **Structure:** `buildLimits` delegates to small helpers — default window, active-axis
- * translate scalars, translate-edge padding, then optional always-complete overrides per axis.
+ * 2. **View timeline `cover` range** — `ViewTimeline` progress is tied to visibility phases;
+ *    we retune `animation-range` on the `cover` phase using signed **pixel** offsets (see
+ *    `viewTimelineRange.ts`). `alwaysCompleteViewCoverOffsetPx` is the slice of that coming
+ *    from `shouldAlwaysCompleteAnimation` (baseline vs final scroll-window endpoints on the
+ *    active axis). Translate-based range widening is computed separately from scaled effects.
  */
 import type { RectSnapshot } from './measureRect';
 import { View } from '../classes/View';
-import { Limits } from '../classes/Limits';
-
 import { getTranslateScalar } from './getTranslateScalar';
 import { getStartEndValueInPx } from './getStartEndValueInPx';
-
 import {
   ScrollAxis,
   type ParsedValueEffect,
@@ -40,8 +31,29 @@ const DEFAULT_VALUE: ParsedValueEffect = {
   unit: 'px',
 };
 
-/** Mutable scroll-window + per-end translate multipliers while building {@link Limits}. */
-type BuildLimitsState = {
+/** Scale factors for translate X / Y start and end (≥ 1 from `getTranslateScalar` paths). */
+export type AxisSpanScale = { start: number; end: number };
+
+export type TranslateSpanScale = {
+  x: AxisSpanScale;
+  y: AxisSpanScale;
+};
+
+/**
+ * Signed pixel offsets applied along the view timeline’s `cover` range (`animation-range`).
+ * Same shape for translate-scaling range widening and always-complete range widening; they
+ * are summed in `getViewTimelineAnimationRange` (`viewTimelineRange.ts`).
+ */
+export type ViewTimelineCoverOffsetPx = { start: number; end: number };
+
+/** Everything `Element` needs from layout to wire keyframes + view-timeline range. */
+export type ParallaxLayoutAdjustments = {
+  translateSpanScale: TranslateSpanScale;
+  /** Extra `cover` length from `shouldAlwaysCompleteAnimation`; zeros when the prop is off. */
+  alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
+};
+
+type TimingBuildState = {
   startY: number;
   startX: number;
   endY: number;
@@ -52,13 +64,14 @@ type BuildLimitsState = {
   endMultiplierX: number;
 };
 
-/**
- * Default scroll window (no `shouldAlwaysCompleteAnimation`).
- * Vertical: progress 0 when the element’s leading edge meets the trailing edge of the
- * scrollport (top at viewport bottom when scrolling down), progress 1 when the trailing
- * edge meets the leading edge (bottom at viewport top). Same pattern on X for horizontal.
- */
-function defaultScrollWindow(rect: RectSnapshot, view: View): BuildLimitsState {
+function timingStateToTranslateSpanScale(s: TimingBuildState): TranslateSpanScale {
+  return {
+    x: { start: s.startMultiplierX, end: s.endMultiplierX },
+    y: { start: s.startMultiplierY, end: s.endMultiplierY },
+  };
+}
+
+function defaultScrollWindow(rect: RectSnapshot, view: View): TimingBuildState {
   return {
     startY: rect.offsetTop - view.height,
     startX: rect.offsetLeft - view.width,
@@ -71,14 +84,8 @@ function defaultScrollWindow(rect: RectSnapshot, view: View): BuildLimitsState {
   };
 }
 
-/**
- * Slower-scroll scaling on the active axis only.
- * `getTranslateScalar` returns ≥ 1; multipliers shrink effective translate distance when
- * the scroll path is “too short” for the requested translate, so the user-visible speed
- * stays in family with the default window length (view major size + element major size).
- */
 function applyTranslateScalarsForActiveAxis(
-  s: BuildLimitsState,
+  s: TimingBuildState,
   rect: RectSnapshot,
   view: View,
   scrollAxis: ValidScrollAxis,
@@ -105,13 +112,8 @@ function applyTranslateScalarsForActiveAxis(
   }
 }
 
-/**
- * Nudge start/end scroll positions when translate extends the motion before/after the
- * nominal enter/exit (negative start translate pulls the window earlier, positive end
- * translate pushes it later).
- */
 function applyTranslateEdgePadding(
-  s: BuildLimitsState,
+  s: TimingBuildState,
   startTranslateXPx: number,
   endTranslateXPx: number,
   startTranslateYPx: number,
@@ -131,15 +133,8 @@ function applyTranslateEdgePadding(
   }
 }
 
-/**
- * `shouldAlwaysCompleteAnimation` vertical scroll-window overrides.
- * Goal: if the element is already in the scrollport at min scroll, or still in view at
- * max scroll, the effect should still run from full start → full end translate over the
- * *available* scroll range (page / container), not get stuck with part of the range
- * “outside” reachable scroll. Mirrors the old cached-rect + scrollTop model.
- */
 function applyAlwaysCompleteVertical(
-  s: BuildLimitsState,
+  s: TimingBuildState,
   rect: RectSnapshot,
   view: View,
   startTranslateYPx: number,
@@ -149,7 +144,6 @@ function applyAlwaysCompleteVertical(
   const bottomEndsInView =
     rect.offsetBottom > view.scrollHeight - view.height;
 
-  // Element spans the full scroll extent: run the effect over the entire scrollable range.
   if (topBeginsInView && bottomEndsInView) {
     s.startMultiplierY = 1;
     s.endMultiplierY = 1;
@@ -157,8 +151,6 @@ function applyAlwaysCompleteVertical(
     s.endY = view.scrollHeight - view.height;
   }
 
-  // Bottom is past max scroll but top was not in view at min scroll: pin end to max scroll,
-  // rescale start-side translate only.
   if (!topBeginsInView && bottomEndsInView) {
     s.startY = rect.offsetTop - view.height;
     s.endY = view.scrollHeight - view.height;
@@ -174,7 +166,6 @@ function applyAlwaysCompleteVertical(
     }
   }
 
-  // Top in view at min scroll but bottom not past max: start at scroll 0, rescale end-side.
   if (topBeginsInView && !bottomEndsInView) {
     s.startY = 0;
     s.endY = rect.offsetBottom;
@@ -191,11 +182,8 @@ function applyAlwaysCompleteVertical(
   }
 }
 
-/**
- * Horizontal analogue of {@link applyAlwaysCompleteVertical}.
- */
 function applyAlwaysCompleteHorizontal(
-  s: BuildLimitsState,
+  s: TimingBuildState,
   rect: RectSnapshot,
   view: View,
   startTranslateXPx: number,
@@ -242,18 +230,13 @@ function applyAlwaysCompleteHorizontal(
   }
 }
 
-/**
- * Single pass: default scroll window, translate padding, optional always-complete overrides,
- * and per-axis multipliers. See module doc above for semantics.
- */
-function buildLimits(
+function buildTimingState(
   rect: RectSnapshot,
   view: View,
   effects: ParallaxStartEndEffects,
   scrollAxis: ValidScrollAxis,
   shouldAlwaysCompleteAnimation: boolean
-): Limits {
-  // --- Translate magnitudes in px (handles % / vw / vh via element size where needed) ---
+): TimingBuildState {
   const translateX: ParsedValueEffect = effects.translateX || DEFAULT_VALUE;
   const translateY: ParsedValueEffect = effects.translateY || DEFAULT_VALUE;
 
@@ -298,61 +281,53 @@ function buildLimits(
     );
   }
 
-  return new Limits({
-    startX: s.startX,
-    startY: s.startY,
-    endX: s.endX,
-    endY: s.endY,
-    startMultiplierX: s.startMultiplierX,
-    endMultiplierX: s.endMultiplierX,
-    startMultiplierY: s.startMultiplierY,
-    endMultiplierY: s.endMultiplierY,
-  });
+  return { ...s };
+}
+
+function computeAlwaysCompleteViewCoverOffsetPx(
+  baseline: TimingBuildState,
+  final: TimingBuildState,
+  scrollAxis: ValidScrollAxis
+): ViewTimelineCoverOffsetPx {
+  if (scrollAxis === ScrollAxis.vertical) {
+    return {
+      start: baseline.startY - final.startY,
+      end: final.endY - baseline.endY,
+    };
+  }
+  return {
+    start: baseline.startX - final.startX,
+    end: final.endX - baseline.endX,
+  };
 }
 
 /**
- * Returns `{ baseline, limits }` from one snapshot of `rect` / `view` / `effects`.
- *
- * - **baseline** — `buildLimits(..., false)`; the scroll window *without* the always-
- *   complete branches (but still including translate padding and axis scaling above).
- * - **limits** — if `shouldAlwaysCompleteAnimation` is false, same object as baseline
- *   (caller should not diff). If true, `buildLimits(..., true)` with the override rules.
- *
- * `Element` keeps `baseline` only when the prop is true and subtracts it from `limits` on
- * the active axis to get pixel deltas for `animation-range` (see scroll-parallax `Element`
- * WAAPI timing comments).
+ * From one layout snapshot: scale factors for translate keyframes, and (when enabled)
+ * pixel offsets to widen/narrow the view timeline’s `cover` range for always-complete.
  */
-export function getLimitsBaselineAndWithAlwaysComplete(
+export function computeParallaxLayoutAdjustments(
   rect: RectSnapshot,
   view: View,
   effects: ParallaxStartEndEffects,
   scrollAxis: ValidScrollAxis,
   shouldAlwaysCompleteAnimation: boolean
-): { baseline: Limits; limits: Limits } {
-  const baseline = buildLimits(rect, view, effects, scrollAxis, false);
-  if (!shouldAlwaysCompleteAnimation) {
-    return { baseline, limits: baseline };
-  }
-  return {
-    baseline,
-    limits: buildLimits(rect, view, effects, scrollAxis, true),
-  };
-}
+): ParallaxLayoutAdjustments {
+  const baseline = buildTimingState(rect, view, effects, scrollAxis, false);
 
-/** Public API: same as {@link getLimitsBaselineAndWithAlwaysComplete}(..., !!flag).limits. */
-export function createLimitsWithTranslationsForRelativeElements(
-  rect: RectSnapshot,
-  view: View,
-  effects: ParallaxStartEndEffects,
-  // scroll: Scroll,
-  scrollAxis: ValidScrollAxis,
-  shouldAlwaysCompleteAnimation?: boolean
-): Limits {
-  return getLimitsBaselineAndWithAlwaysComplete(
-    rect,
-    view,
-    effects,
-    scrollAxis,
-    !!shouldAlwaysCompleteAnimation
-  ).limits;
+  if (!shouldAlwaysCompleteAnimation) {
+    return {
+      translateSpanScale: timingStateToTranslateSpanScale(baseline),
+      alwaysCompleteViewCoverOffsetPx: { start: 0, end: 0 },
+    };
+  }
+
+  const final = buildTimingState(rect, view, effects, scrollAxis, true);
+  return {
+    translateSpanScale: timingStateToTranslateSpanScale(final),
+    alwaysCompleteViewCoverOffsetPx: computeAlwaysCompleteViewCoverOffsetPx(
+      baseline,
+      final,
+      scrollAxis
+    ),
+  };
 }

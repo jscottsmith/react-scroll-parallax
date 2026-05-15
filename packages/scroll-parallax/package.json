@@ -1,7 +1,7 @@
 {
   "name": "scroll-parallax",
   "version": "1.0.0",
-  "description": "Scroll-driven parallax controller: elements, limits, and transform effects for the DOM.",
+  "description": "Scroll-driven parallax controller: elements, layout-derived timing, and transform effects for the DOM.",
   "keywords": [
     "scroll",
     "effects",

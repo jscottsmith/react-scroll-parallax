@@ -9,7 +9,7 @@ export * from './easing';
 /**
  * Named exports are limited to symbols consumed by the `react-scroll-parallax` workspace
  * package (the integration surface). Types and enums still come from `./types` and
- * `./easing` via `export *`. Internal modules import classes such as `View` / `Limits`
+ * `./easing` via `export *`. Internal modules import classes such as `View`
  * via relative paths, not from this entry.
  */
 export { Element, ParallaxController, parseValueAndUnit };
