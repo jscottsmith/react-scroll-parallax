@@ -11,34 +11,6 @@ const DEFAULT_VIEW = new View({
 });
 
 describe('measureRect', () => {
-  test(`sets bounds based on root margin when provided`, () => {
-    const rect = measureRect(
-      createElementMock(
-        { offsetWidth: 100, offsetHeight: 100 },
-        {
-          getBoundingClientRect: () => ({
-            top: 500,
-            left: 200,
-            bottom: 600,
-            right: 300,
-          }),
-        }
-      ),
-      DEFAULT_VIEW,
-      {
-        top: 10,
-        left: 20,
-        right: 30,
-        bottom: 40,
-      }
-    );
-
-    expect(rect.top).toBe(490);
-    expect(rect.left).toBe(180);
-    expect(rect.right).toBe(330);
-    expect(rect.bottom).toBe(640);
-  });
-
   test(`caches the bounding rect`, () => {
     const rect = measureRect(
       createElementMock(

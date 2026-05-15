@@ -75,11 +75,7 @@ export class Element {
 
   /** Recompute rect, translate span scale, scaled translations, and view-range adjustment. */
   private setupTranslateEffects() {
-    this.rect = measureRect(
-      this.props.targetElement || this.el,
-      this.view,
-      this.props.rootMargin
-    );
+    this.rect = measureRect(this.props.targetElement || this.el, this.view);
 
     const adjustments = computeParallaxLayoutAdjustments(
       this.rect,

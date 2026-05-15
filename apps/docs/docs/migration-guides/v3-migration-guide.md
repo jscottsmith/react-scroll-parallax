@@ -4,8 +4,7 @@ sidebar_position: 2
 
 # V3 Migration Guide
 
-V3 makes the easing API align with what WAAPI expects at runtime (`KeyframeAnimationOptions.easing`).
-If you used the legacy preset strings (like `easeInQuad`) or the per-effect 3rd tuple entry, you need to update your code.
+V3 aligns the public API with scroll-driven WAAPI behavior. If you used legacy easing presets, per-effect tuple easing, or `rootMargin`, update your code as described below.
 
 ## Breaking change: `easing` must be a WAAPI/CSS timing value
 
@@ -71,6 +70,28 @@ rotate: [from, to]
 ### If you need different easing
 
 Create multiple parallax instances and set the top-level `easing` prop on each one.
+
+## Breaking change: `rootMargin` is removed
+
+### What changed
+
+The `rootMargin` prop is no longer supported. It previously adjusted measured element bounds to change when scroll progress was calculated.
+
+### What to use instead
+
+- Use [`startScroll` and `endScroll`](/docs/usage/parallax-props#configuration-props) for explicit scroll-range control.
+- Use [`targetElement`](/docs/usage/parallax-props#configuration-props) to drive progress from another element’s visibility.
+- Use [`shouldAlwaysCompleteAnimation`](/docs/usage/parallax-props#configuration-props) when the element should complete its effect range even when it starts or ends inside the viewport.
+
+```ts
+// before
+{ rootMargin: { top: 100, right: 100, bottom: 100, left: 100 } }
+
+// after — pick the approach that matches your layout
+{ startScroll: 0, endScroll: 1200 }
+// or
+{ targetElement: document.getElementById('scroll-target') }
+```
 
 ## Legacy preset → cubic-bezier reference (from the old mapping)
 

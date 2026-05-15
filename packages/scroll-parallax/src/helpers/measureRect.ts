@@ -1,5 +1,4 @@
 import type { View } from '../classes/View';
-import type { RootMarginShape } from '../types';
 
 export type RectSnapshot = {
   height: number;
@@ -14,33 +13,11 @@ export type RectSnapshot = {
   offsetRight: number;
 };
 
-function applyRootMarginToBounds(
-  bounds: { top: number; right: number; bottom: number; left: number },
-  height: number,
-  width: number,
-  rootMargin: RootMarginShape
-): Pick<RectSnapshot, 'top' | 'right' | 'bottom' | 'left' | 'height' | 'width'> {
-  const totalRootY = rootMargin.top + rootMargin.bottom;
-  const totalRootX = rootMargin.left + rootMargin.right;
-  return {
-    top: bounds.top - rootMargin.top,
-    right: bounds.right + rootMargin.right,
-    bottom: bounds.bottom + rootMargin.bottom,
-    left: bounds.left - rootMargin.left,
-    height: height + totalRootY,
-    width: width + totalRootX,
-  };
-}
-
 /**
  * Pure DOM measurement: viewport-relative bounds adjusted for a scroll container,
- * plus offset metrics from layout, with optional root margin applied to bounds.
+ * plus offset metrics from layout.
  */
-export function measureRect(
-  el: HTMLElement,
-  view: View,
-  rootMargin?: RootMarginShape
-): RectSnapshot {
+export function measureRect(el: HTMLElement, view: View): RectSnapshot {
   let rect = el.getBoundingClientRect();
 
   if (view.scrollContainer) {
@@ -61,30 +38,13 @@ export function measureRect(
   const offsetBottom = offsetHeight + offsetTop;
   const offsetRight = offsetWidth + offsetLeft;
 
-  let height = offsetHeight;
-  let width = offsetWidth;
-  let left = rect.left;
-  let right = rect.right;
-  let top = rect.top;
-  let bottom = rect.bottom;
-
-  if (rootMargin) {
-    const adjusted = applyRootMarginToBounds(
-      { top, right, bottom, left },
-      height,
-      width,
-      rootMargin
-    );
-    ({ top, right, bottom, left, height, width } = adjusted);
-  }
-
   return {
-    height,
-    width,
-    left,
-    right,
-    top,
-    bottom,
+    height: offsetHeight,
+    width: offsetWidth,
+    left: rect.left,
+    right: rect.right,
+    top: rect.top,
+    bottom: rect.bottom,
     offsetTop,
     offsetLeft,
     offsetBottom,

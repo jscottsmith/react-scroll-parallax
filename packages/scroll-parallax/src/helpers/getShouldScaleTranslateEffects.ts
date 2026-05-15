@@ -9,11 +9,7 @@ export function getShouldScaleTranslateEffects(
   effects: ParallaxStartEndEffects,
   scrollAxis: ValidScrollAxis
 ): boolean {
-  if (
-    props.rootMargin ||
-    props.targetElement ||
-    props.shouldDisableScalingTranslations
-  ) {
+  if (props.targetElement || props.shouldDisableScalingTranslations) {
     return false;
   }
 

@@ -96,7 +96,6 @@ const Template: StoryFn<{ easing?: EasingOption }> = (args) => {
                 key={n}
                 className={styles.smallLinear}
                 easing={waapiEasingFromOption(args.easing ?? '')}
-                rootMargin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
               >
                 <Element name={n * -1} />
@@ -149,12 +148,6 @@ const Template2: StoryFn = () => {
                       key={`left-${n}`}
                       className="bg-blue-500 m-1 opacity-1 w-10 h-10"
                       easing={waapiEasing}
-                      rootMargin={{
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        left: 0,
-                      }}
                       rotate={[0, 90]}
                       translateX={[`${offA}${unit}`, `${offB}${unit}`]}
                     >
@@ -171,12 +164,6 @@ const Template2: StoryFn = () => {
                       key={`right-${n}`}
                       className="bg-blue-500 m-1 opacity-1 w-10 h-10"
                       easing={waapiEasing}
-                      rootMargin={{
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        left: 0,
-                      }}
                       rotate={[0, 90]}
                       translateX={[
                         `${-1 * offA}${unit}`,

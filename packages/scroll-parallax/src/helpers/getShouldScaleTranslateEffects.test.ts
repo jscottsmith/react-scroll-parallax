@@ -3,18 +3,6 @@ import { ScrollAxis } from '../types';
 import { getShouldScaleTranslateEffects } from './getShouldScaleTranslateEffects';
 
 describe('given getShouldScaleTranslateEffects()', () => {
-  describe('when a root margin is provided', () => {
-    test(`then it returns false`, () => {
-      expect(
-        getShouldScaleTranslateEffects(
-          { rootMargin: { top: 10, bottom: 10, left: 10, right: 10 } },
-          {},
-          ScrollAxis.vertical
-        )
-      ).toEqual(false);
-    });
-  });
-
   describe('when shouldDisableScalingTranslations is true', () => {
     test(`then it returns false`, () => {
       expect(

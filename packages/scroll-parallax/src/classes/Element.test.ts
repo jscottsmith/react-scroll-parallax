@@ -215,20 +215,6 @@ describe('Element', () => {
       );
     });
 
-    it('should set shouldScaleTranslateEffects to false when rootMargin is provided', () => {
-      const elementWithRootMargin = new Element({
-        el: document.createElement('div'),
-        props: {
-          ...props,
-          rootMargin: { top: 10, bottom: 10, left: 10, right: 10 },
-        },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      expect(elementWithRootMargin.shouldScaleTranslateEffects).toBe(false);
-    });
-
     it('should set shouldScaleTranslateEffects to false when targetElement is provided', () => {
       const targetElement = document.createElement('div');
       const elementWithTarget = new Element({
@@ -625,20 +611,6 @@ describe('Element', () => {
       });
       const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { subject: Element };
       expect(opts.subject).toBe(targetElement);
-    });
-  });
-
-  describe('with root margin', () => {
-    it('should pass root margin to rect creation', () => {
-      const rootMargin = { top: 10, bottom: 10, left: 10, right: 10 };
-      const elementWithRootMargin = new Element({
-        el: document.createElement('div'),
-        props: { ...props, rootMargin },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-
-      expect(elementWithRootMargin.props.rootMargin).toBe(rootMargin);
     });
   });
 

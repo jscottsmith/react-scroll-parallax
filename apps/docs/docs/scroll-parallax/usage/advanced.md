@@ -31,16 +31,3 @@ controller.createElement({
   props,
 });
 ```
-
-## Increase Scroll Bounds
-
-You can add a `rootMargin` that will adjust the bounds that determine when an element is in view.
-
-```ts
-const props = { rootMargin: { top: 100, right: 100, bottom: 100, left: 100 } };
-
-controller.createElement({
-  el: document.querySelector('.your-element'),
-  props,
-});
-```

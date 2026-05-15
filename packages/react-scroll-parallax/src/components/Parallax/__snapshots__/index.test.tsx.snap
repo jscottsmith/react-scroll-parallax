@@ -31,18 +31,6 @@ exports[`given the <Parallax> component > when the prop { easing: 'cubic-bezier(
 </DocumentFragment>
 `;
 
-exports[`given the <Parallax> component > when the prop { easing: 'easeInQuad' } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
-exports[`given the <Parallax> component > when the prop { easing: [ 0.2, -0.6, 1, -0.6 ] } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
 exports[`given the <Parallax> component > when the prop { onChange: [Function onChange] } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div />
@@ -68,12 +56,6 @@ exports[`given the <Parallax> component > when the prop { onProgressChange: [Fun
 `;
 
 exports[`given the <Parallax> component > when the prop { opacity: [ +0, 1 ] } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
-exports[`given the <Parallax> component > when the prop { rootMargin: { top: +0, right: +0, bottom: +0, left: +0 } } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div />
 </DocumentFragment>
