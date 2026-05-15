@@ -1,9 +1,4 @@
-import {
-  CSSEffect,
-  EasingParams,
-  EasingPreset,
-  ScaleOpacityEffect,
-} from 'scroll-parallax';
+import { CSSEffect, ScaleOpacityEffect } from 'scroll-parallax';
 
 export const ALL_PARALLAX_PROPS = [
   { speed: 10 },
@@ -21,8 +16,8 @@ export const ALL_PARALLAX_PROPS = [
   { disabled: true },
   { shouldAlwaysCompleteAnimation: true },
   { shouldDisableScalingTranslations: true },
-  { easing: 'easeInQuad' as EasingPreset },
-  { easing: [0.2, -0.6, 1, -0.6] as EasingParams },
+  { easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)' },
+  { easing: 'cubic-bezier(0.2, -0.6, 1, -0.6)' },
   { startScroll: 0, endScroll: 1000 },
   { onEnter: () => {} },
   { onExit: () => {} },

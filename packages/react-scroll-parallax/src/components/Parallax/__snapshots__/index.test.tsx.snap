@@ -19,6 +19,18 @@ exports[`given the <Parallax> component > when the prop { disabled: true } is gi
 </DocumentFragment>
 `;
 
+exports[`given the <Parallax> component > when the prop { easing: 'cubic-bezier(0.2, -0.6, 1, -0.6)' } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`given the <Parallax> component > when the prop { easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)' } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
 exports[`given the <Parallax> component > when the prop { easing: 'easeInQuad' } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div />

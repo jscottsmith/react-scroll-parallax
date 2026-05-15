@@ -71,7 +71,6 @@ export function parseTranslationProps(
           start: startParsed.value,
           end: endParsed.value,
           unit: startParsed.unit,
-          easing: value?.[2],
         };
 
         if (startParsed.unit !== endParsed.unit) {

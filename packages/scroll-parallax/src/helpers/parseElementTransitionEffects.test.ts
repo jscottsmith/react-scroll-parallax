@@ -17,13 +17,11 @@ describe('parseTranslationProps', () => {
         start: 0,
         end: 0,
         unit: '%',
-        easing: undefined,
       },
       translateX: {
         start: 0,
         end: 0,
         unit: '%',
-        easing: undefined,
       },
     });
   });
@@ -41,13 +39,11 @@ describe('parseTranslationProps', () => {
         start: 100,
         end: -50,
         unit: 'px',
-        easing: undefined,
       },
       translateX: {
         start: 100,
         end: 300,
         unit: '%',
-        easing: undefined,
       },
     });
   });
@@ -66,13 +62,11 @@ describe('parseTranslationProps', () => {
         start: 100,
         end: -50,
         unit: 'px',
-        easing: undefined,
       },
       translateX: {
         start: 100,
         end: 300,
         unit: '%',
-        easing: undefined,
       },
     });
   });

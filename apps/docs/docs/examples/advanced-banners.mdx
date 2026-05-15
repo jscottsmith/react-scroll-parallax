@@ -20,7 +20,7 @@ The following is a breakdown of some of the more advanced configuration for the 
 
 1. You are not limited to using only `speed` to control movement. In this example `translateY` is defined with custom start and end values. This is helpful when the banner starts at the top of the page.
 2. Setting `shouldAlwaysCompleteAnimation` ensures that the animation begins at the initial position in the view, and since this banner is placed at the top of the page this option is enabled.
-3. Additional `scale` effects are used to further enhance the scenes depth and are also provided individual `easing` values.
+3. Additional `scale` effects are used to further enhance the scenes depth, each with an `easing` timing function on the layer.
 4. Certain layers set `expanded` to `false`. This is because they don't move or have no edge that would appear visible so there is no need to expand them.
 5. Lastly, a gradient overlay is added to dim the scene with an `opacity` transition.
 
@@ -37,13 +37,15 @@ const Component = () => {
       'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
     translateY: [0, 50],
     opacity: [1, 0.3],
-    scale: [1.05, 1, 'easeOutCubic'],
+    scale: [1.05, 1],
+    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)', // easeOutCubic
     shouldAlwaysCompleteAnimation: true,
   };
 
   const headline: BannerLayer = {
     translateY: [0, 30],
-    scale: [1, 1.05, 'easeOutCubic'],
+    scale: [1, 1.05],
+    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)', // easeOutCubic
     shouldAlwaysCompleteAnimation: true,
     expanded: false,
     children: (
@@ -59,7 +61,8 @@ const Component = () => {
     image:
       'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-foreground.png',
     translateY: [0, 15],
-    scale: [1, 1.1, 'easeOutCubic'],
+    scale: [1, 1.1],
+    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)', // easeOutCubic
     shouldAlwaysCompleteAnimation: true,
   };
 

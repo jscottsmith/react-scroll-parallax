@@ -49,7 +49,7 @@ export function buildParallaxAnimateOptions(args: {
   alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
 }): ParallaxAnimateOptions | null {
   const fill: 'both' = 'both';
-  const easing = args.props.easing ?? 'linear';
+  const easing = args.props.easing || 'linear';
   const axis = timelineAxis(args.scrollAxis);
 
   if (

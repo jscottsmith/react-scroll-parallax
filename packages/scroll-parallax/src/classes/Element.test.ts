@@ -388,6 +388,7 @@ describe('Element', () => {
       const animOpts = animateSpy.mock.calls[0]?.[1] as { easing?: string };
       expect(animOpts.easing).toBe('ease-in-out');
     });
+
   });
 
   describe('callbacks', () => {

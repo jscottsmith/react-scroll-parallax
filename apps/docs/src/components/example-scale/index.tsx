@@ -8,17 +8,20 @@ const shared =
 
 export const ExampleScale = () => {
   const parallaxUp = useParallax<HTMLDivElement>({
-    scale: [0.5, 1, 'easeInQuad'],
+    scale: [0.5, 1],
+    easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)', // easeInQuad
     shouldAlwaysCompleteAnimation: true,
   });
 
   const parallaxAxisX = useParallax<HTMLDivElement>({
-    scaleX: [1, 0, 'easeInQuad'],
+    scaleX: [1, 0],
+    easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)', // easeInQuad
     shouldAlwaysCompleteAnimation: true,
   });
 
   const parallaxDown = useParallax<HTMLDivElement>({
-    scale: [1.5, 1, 'easeInQuad'],
+    scale: [1.5, 1],
+    easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)', // easeInQuad
     shouldAlwaysCompleteAnimation: true,
   });
   return (
