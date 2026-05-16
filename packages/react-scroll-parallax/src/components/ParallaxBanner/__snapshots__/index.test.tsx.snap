@@ -52,6 +52,32 @@ exports[`given a <ParallaxBanner> component > when the prop { onChange: [Functio
 </DocumentFragment>
 `;
 
+exports[`given a <ParallaxBanner> component > when the prop { onEnter: [Function onEnter] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`given a <ParallaxBanner> component > when the prop { onExit: [Function onExit] } is given > then it renders without issue and calls create element with props 1`] = `
+<DocumentFragment>
+  <div
+    style="position: relative; overflow: hidden; width: 100%;"
+  >
+    <div
+      data-testid="layer-0"
+      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
 exports[`given a <ParallaxBanner> component > when the prop { onProgressChange: [Function onProgressChange] } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div

@@ -19,6 +19,8 @@ export const ALL_PARALLAX_PROPS = [
   { easing: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)' },
   { easing: 'cubic-bezier(0.2, -0.6, 1, -0.6)' },
   { startScroll: 0, endScroll: 1000 },
+  { onEnter: () => {} },
+  { onExit: () => {} },
   { onChange: () => {} },
   { onProgressChange: () => {} },
   { targetElement: document.createElement('div') },

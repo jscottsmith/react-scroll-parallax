@@ -448,6 +448,86 @@ describe('Element', () => {
   });
 
   describe('callbacks', () => {
+    let intersectionCallback: IntersectionObserverCallback | undefined;
+
+    beforeEach(() => {
+      intersectionCallback = undefined;
+      class MockIntersectionObserver {
+        readonly observe = vi.fn();
+        readonly disconnect = vi.fn();
+        readonly unobserve = vi.fn();
+
+        constructor(callback: IntersectionObserverCallback) {
+          intersectionCallback = callback;
+        }
+      }
+      vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+    });
+
+    const fireIntersection = (isIntersecting: boolean, target: Element) => {
+      intersectionCallback?.(
+        [{ isIntersecting, target } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+    };
+
+    it('should call onEnter when the progress target intersects', () => {
+      const onEnter = vi.fn();
+      const el = document.createElement('div');
+      const inst = new Element({
+        el,
+        props: { ...props, onEnter },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      fireIntersection(true, el);
+      expect(onEnter).toHaveBeenCalledWith(inst);
+    });
+
+    it('should call onExit when the progress target leaves the view', () => {
+      const onExit = vi.fn();
+      const el = document.createElement('div');
+      const inst = new Element({
+        el,
+        props: { ...props, onExit },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      fireIntersection(true, el);
+      fireIntersection(false, el);
+      expect(onExit).toHaveBeenCalledWith(inst);
+    });
+
+    it('should call onExit when resetStyles runs', () => {
+      const onExit = vi.fn();
+      const inst = new Element({
+        el: document.createElement('div'),
+        props: { ...props, onExit },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      inst.resetStyles();
+      expect(onExit).toHaveBeenCalledWith(inst);
+    });
+
+    it('should not reset intersection state when updateElement only changes callbacks', () => {
+      const onEnter = vi.fn();
+      const el = document.createElement('div');
+      const inst = new Element({
+        el,
+        props: { ...props, onEnter },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+      fireIntersection(true, el);
+      expect(onEnter).toHaveBeenCalledTimes(1);
+
+      inst.updateProps({ onEnter: vi.fn() });
+      inst.updateElement(view);
+      fireIntersection(false, el);
+      expect(onEnter).toHaveBeenCalledTimes(1);
+    });
+
     it('should invoke onProgressChange and onChange when sampled progress moves', () => {
       let overallProgress = 0;
       const anim = {

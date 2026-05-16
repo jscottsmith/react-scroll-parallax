@@ -43,6 +43,16 @@ describe('readAnimationSampleProgress', () => {
     ).toBe(0.42);
   });
 
+  it('falls back to effect.getComputedTiming().progress', () => {
+    expect(
+      readAnimationSampleProgress({
+        effect: {
+          getComputedTiming: () => ({ progress: 0.33 }),
+        },
+      } as unknown as Animation)
+    ).toBe(0.33);
+  });
+
   it('exports a sane epsilon for sampling', () => {
     expect(PROGRESS_SAMPLE_EPSILON).toBeGreaterThan(0);
     expect(PROGRESS_SAMPLE_EPSILON).toBeLessThan(0.01);

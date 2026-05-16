@@ -52,6 +52,8 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     props.easing,
     props.endScroll,
     props.onChange,
+    props.onEnter,
+    props.onExit,
     props.onProgressChange,
     props.opacity,
     props.rotate,

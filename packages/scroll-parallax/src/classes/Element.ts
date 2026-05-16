@@ -56,6 +56,11 @@ export class Element {
   };
   /** Active `el.animate(...)` instance; `cancel()` before replacing or disabling. */
   private animation: Animation | null = null;
+  /** Observes {@link getProgressTarget} for {@link ParallaxElementConfig.onEnter} / {@link ParallaxElementConfig.onExit}. */
+  private intersectionObserver: IntersectionObserver | null = null;
+  private observedIntersectionTarget: HTMLElement | null = null;
+  private observedIntersectionRoot: HTMLElement | null = null;
+  private isIntersecting = false;
   /** Last progress passed to `onProgressChange` / `onChange` from scroll sampling (undefined until first sample after (re)install). */
   private lastSampledProgress: number | undefined;
 
@@ -69,6 +74,7 @@ export class Element {
     this.translations = parseTranslationProps(this.props, this.scrollAxis);
     this.setupTranslateEffects();
     this.installAnimation();
+    this.syncIntersectionObserver();
   }
 
   /**
@@ -110,6 +116,73 @@ export class Element {
   /** Scroll container for explicit `startScroll` / `endScroll` `ScrollTimeline` (window or custom). */
   private getScrollSource(): globalThis.Element {
     return this.view.scrollContainer ?? document.documentElement;
+  }
+
+  private wantsIntersectionCallbacks(): boolean {
+    return !!(this.props.onEnter || this.props.onExit);
+  }
+
+  private handleIntersection(entries: IntersectionObserverEntry[]) {
+    const entry = entries[0];
+    if (!entry) {
+      return;
+    }
+    const intersecting = entry.isIntersecting;
+    if (intersecting && !this.isIntersecting) {
+      this.props.onEnter?.(this);
+    } else if (!intersecting && this.isIntersecting) {
+      this.props.onExit?.(this);
+    }
+    this.isIntersecting = intersecting;
+  }
+
+  private getIntersectionRoot(): HTMLElement | null {
+    return this.view.scrollContainer ?? null;
+  }
+
+  private disconnectIntersectionObserver() {
+    this.intersectionObserver?.disconnect();
+    this.intersectionObserver = null;
+    this.observedIntersectionTarget = null;
+    this.observedIntersectionRoot = null;
+    this.isIntersecting = false;
+  }
+
+  /**
+   * Attach intersection callbacks when needed. Skips reconnect when only
+   * callback references change so React inline handlers do not reset state.
+   */
+  private syncIntersectionObserver() {
+    const wants = this.wantsIntersectionCallbacks();
+    const target = wants ? this.getProgressTarget() : null;
+    const root = this.getIntersectionRoot();
+
+    if (
+      this.disabled ||
+      !wants ||
+      typeof IntersectionObserver === 'undefined'
+    ) {
+      this.disconnectIntersectionObserver();
+      return;
+    }
+
+    if (
+      this.intersectionObserver &&
+      this.observedIntersectionTarget === target &&
+      this.observedIntersectionRoot === root
+    ) {
+      return;
+    }
+
+    this.disconnectIntersectionObserver();
+
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => this.handleIntersection(entries),
+      { root }
+    );
+    this.observedIntersectionTarget = target;
+    this.observedIntersectionRoot = root;
+    this.intersectionObserver.observe(target);
   }
 
   /** Replace any existing parallax animation with a new one from current props/geometry. */
@@ -178,9 +251,8 @@ export class Element {
   }
 
   /**
-   * Sample {@link https://developer.mozilla.org/en-US/docs/Web/API/Animation/overallProgress Animation.overallProgress}
-   * and invoke callbacks when it moves beyond {@link PROGRESS_SAMPLE_EPSILON}. Skips the
-   * frame when `overallProgress` is not exposed (no fallback).
+   * Sample scroll-driven animation progress and invoke callbacks when it moves beyond
+   * {@link PROGRESS_SAMPLE_EPSILON}. Skips the frame when progress cannot be read.
    */
   sampleProgressCallbacks(): void {
     if (!this.wantsProgressSampling()) {
@@ -225,6 +297,7 @@ export class Element {
 
     this.setupTranslateEffects();
     this.installAnimation();
+    this.syncIntersectionObserver();
 
     return this;
   }
@@ -233,12 +306,14 @@ export class Element {
   disable = () => {
     this.disabled = true;
     this.cancelParallaxAnimation();
+    this.disconnectIntersectionObserver();
   };
 
   /** Turn parallax back on: attach a new scroll-driven animation. */
   enable = () => {
     this.disabled = false;
     this.installAnimation();
+    this.syncIntersectionObserver();
   };
 
   /** Clear inline styles left by scroll-driven keyframes after `cancel()`. */
@@ -248,17 +323,24 @@ export class Element {
     }
   }
 
+  private teardownIntersectionCallbacks() {
+    this.props.onExit?.(this);
+    this.disconnectIntersectionObserver();
+  }
+
   /**
-   * Teardown for React / controller: cancel animation, then clear animated
-   * properties (`transform`, and `opacity` when used).
+   * Teardown for React / controller: `onExit` when intersecting, cancel animation,
+   * then clear animated properties (`transform`, and `opacity` when used).
    */
   resetStyles() {
+    this.teardownIntersectionCallbacks();
     this.cancelParallaxAnimation();
     this.clearAnimatedStyles();
   }
 
   /** Controller lifecycle / unmount: same cleanup as {@link Element.resetStyles}. */
   destroy() {
+    this.teardownIntersectionCallbacks();
     this.cancelParallaxAnimation();
     this.clearAnimatedStyles();
   }
