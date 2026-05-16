@@ -130,8 +130,9 @@ export class Element {
       viewSubject: this.getProgressTarget(),
       shouldScaleTranslateEffects: this.shouldScaleTranslateEffects,
       scaledEffects: this.scaledEffects,
-      rectWidth: this.rect.width,
-      rectHeight: this.rect.height,
+      translations: this.translations,
+      rect: this.rect,
+      view: this.view,
       shouldAlwaysCompleteAnimation: !!this.props.shouldAlwaysCompleteAnimation,
       alwaysCompleteViewCoverOffsetPx: this.alwaysCompleteViewCoverOffsetPx,
     });

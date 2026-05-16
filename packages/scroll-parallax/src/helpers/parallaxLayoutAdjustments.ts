@@ -303,6 +303,30 @@ function computeAlwaysCompleteViewCoverOffsetPx(
 }
 
 /**
+ * Scroll offsets for `ScrollTimeline` when translate scaling is off — same window as
+ * legacy view-relative progress (top enters bottom of view → bottom leaves top of view).
+ */
+export function getParallaxScrollOffsets(
+  rect: RectSnapshot,
+  view: View,
+  effects: ParallaxStartEndEffects,
+  scrollAxis: ValidScrollAxis,
+  shouldAlwaysCompleteAnimation: boolean
+): { startScroll: number; endScroll: number } {
+  const state = buildTimingState(
+    rect,
+    view,
+    effects,
+    scrollAxis,
+    shouldAlwaysCompleteAnimation
+  );
+  if (scrollAxis === ScrollAxis.horizontal) {
+    return { startScroll: state.startX, endScroll: state.endX };
+  }
+  return { startScroll: state.startY, endScroll: state.endY };
+}
+
+/**
  * From one layout snapshot: scale factors for translate keyframes, and (when enabled)
  * pixel offsets to widen/narrow the view timeline’s `cover` range for always-complete.
  */

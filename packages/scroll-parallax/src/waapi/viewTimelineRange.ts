@@ -1,3 +1,4 @@
+import type { RectSnapshot } from '../helpers/measureRect';
 import type { ViewTimelineCoverOffsetPx } from '../helpers/parallaxLayoutAdjustments';
 import type { ParallaxStartEndEffects, ValidScrollAxis, ValidTranslationUnits } from '../types';
 import { ScrollAxis } from '../types';
@@ -29,7 +30,8 @@ import { getStartEndValueInPx } from '../helpers/getStartEndValueInPx';
  *
  * **Merge**
  *    `getViewTimelineAnimationRange` sums the two offset pairs and builds one `cover …` range. If
- *    both sums are zero, we keep the spec default `entry 0%` / `exit 100%`.
+ *    both sums are zero, we keep the spec default `entry 0%` / `exit 100%` (translate-scaling path
+ *    only; rotate/scale/opacity without translate scaling use layout `ScrollTimeline` instead).
  * ---------------------------------------------------------------------------
  */
 
@@ -51,11 +53,10 @@ export function translateOutsetToRangeOffsetPx(
   magnitude: number,
   unit: ValidTranslationUnits,
   scrollAxis: ValidScrollAxis,
-  rectWidth: number,
-  rectHeight: number
+  rect: RectSnapshot
 ): number {
   const elementAxisSize =
-    scrollAxis === ScrollAxis.horizontal ? rectWidth : rectHeight;
+    scrollAxis === ScrollAxis.horizontal ? rect.width : rect.height;
   const { start } = getStartEndValueInPx(
     { start: magnitude, end: 0, unit },
     elementAxisSize
@@ -71,29 +72,17 @@ export function getTranslateScalingCoverOffsetsPx(args: {
   scrollAxis: ValidScrollAxis;
   shouldScaleTranslateEffects: boolean;
   scaledEffects: ParallaxStartEndEffects;
-  rectWidth: number;
-  rectHeight: number;
+  rect: RectSnapshot;
 }): ViewTimelineCoverOffsetPx {
-  const {
-    scrollAxis,
-    shouldScaleTranslateEffects,
-    scaledEffects,
-    rectWidth,
-    rectHeight,
-  } = args;
+  const { scrollAxis, shouldScaleTranslateEffects, scaledEffects, rect } =
+    args;
 
   if (!shouldScaleTranslateEffects) {
     return { start: 0, end: 0 };
   }
 
   const toPx = (magnitude: number, unit: ValidTranslationUnits) =>
-    translateOutsetToRangeOffsetPx(
-      magnitude,
-      unit,
-      scrollAxis,
-      rectWidth,
-      rectHeight
-    );
+    translateOutsetToRangeOffsetPx(magnitude, unit, scrollAxis, rect);
 
   if (
     scrollAxis === ScrollAxis.vertical &&
@@ -160,8 +149,7 @@ export function getViewTimelineAnimationRange(args: {
   scrollAxis: ValidScrollAxis;
   shouldScaleTranslateEffects: boolean;
   scaledEffects: ParallaxStartEndEffects;
-  rectWidth: number;
-  rectHeight: number;
+  rect: RectSnapshot;
   shouldAlwaysCompleteAnimation: boolean;
   alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
 }): { rangeStart: string; rangeEnd: string } {
