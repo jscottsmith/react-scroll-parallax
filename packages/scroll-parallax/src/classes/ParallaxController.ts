@@ -264,6 +264,7 @@ export class ParallaxController {
       this.update();
     } else {
       this._syncProgressScrollSampling();
+      this._flushProgressCallbacks();
     }
     return newElement;
   };

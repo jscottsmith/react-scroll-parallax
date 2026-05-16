@@ -231,6 +231,39 @@ export class Element {
     });
 
     this.animation = createParallaxAnimation(this.el, layers, spec);
+    this.scheduleProgressSampleAfterInstall();
+  }
+
+  /**
+   * Sample progress once the scroll-driven animation exists (rAF + `ready`) so
+   * `onProgressChange` fires before the first scroll event.
+   */
+  private scheduleProgressSampleAfterInstall() {
+    if (!this.wantsProgressSampling()) {
+      return;
+    }
+
+    const animation = this.animation;
+    if (!animation) {
+      return;
+    }
+
+    const sampleIfCurrent = () => {
+      if (this.animation !== animation) {
+        return;
+      }
+      this.sampleProgressCallbacks();
+    };
+
+    requestAnimationFrame(sampleIfCurrent);
+    void animation.ready.then(
+      () => {
+        requestAnimationFrame(sampleIfCurrent);
+      },
+      () => {
+        // Animation cancelled/replaced before ready (e.g. React Strict Mode).
+      }
+    );
   }
 
   /**

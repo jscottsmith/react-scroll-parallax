@@ -528,6 +528,64 @@ describe('Element', () => {
       expect(onEnter).toHaveBeenCalledTimes(1);
     });
 
+    it('should not throw when animation.ready rejects after cancel', async () => {
+      const abortError = new DOMException(
+        'The user aborted a request.',
+        'AbortError'
+      );
+      animateSpy
+        .mockReturnValueOnce({
+          cancel: vi.fn(),
+          ready: Promise.reject(abortError),
+          overallProgress: 0,
+        } as unknown as Animation)
+        .mockReturnValue(mockAnimation(0.3));
+
+      const onProgress = vi.fn();
+      const inst = new Element({
+        el: document.createElement('div'),
+        props: { ...props, onProgressChange: onProgress },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      inst.updateElement(view);
+
+      await expect(
+        Promise.resolve().then(async () => {
+          await Promise.resolve();
+          await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => resolve());
+          });
+        })
+      ).resolves.toBeUndefined();
+
+      expect(onProgress).toHaveBeenCalled();
+    });
+
+    it('should invoke onProgressChange after install without waiting for scroll', async () => {
+      const onProgress = vi.fn();
+      const anim = mockAnimation(0.25);
+      animateSpy.mockReturnValue(anim);
+
+      new Element({
+        el: document.createElement('div'),
+        props: {
+          ...props,
+          onProgressChange: onProgress,
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      await Promise.resolve();
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
+
+      expect(onProgress).toHaveBeenCalledWith(0.25);
+    });
+
     it('should invoke onProgressChange and onChange when sampled progress moves', () => {
       let overallProgress = 0;
       const anim = {

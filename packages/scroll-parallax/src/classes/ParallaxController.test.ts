@@ -329,6 +329,28 @@ describe('Expect the ParallaxController', () => {
       });
     });
 
+    it('to flush onProgressChange when an element is created', async () => {
+      const onProgressChange = vi.fn();
+      const controller = ParallaxController.init({
+        scrollAxis: ScrollAxis.vertical,
+      });
+      controller.createElement({
+        el: document.createElement('div'),
+        props: {
+          ...OPTIONS.props,
+          onProgressChange,
+        },
+      });
+
+      await Promise.resolve();
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
+
+      expect(onProgressChange).toHaveBeenCalled();
+      controller.destroy();
+    });
+
     it('to flush onProgressChange after window scroll via rAF', () => {
       const rafSpy = vi
         .spyOn(window, 'requestAnimationFrame')
