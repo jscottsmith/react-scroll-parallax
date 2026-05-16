@@ -8,6 +8,7 @@ import {
   type ValidScrollAxis,
 } from '../types';
 import { parseValueAndUnit } from '../utils/parseValueAndUnit';
+import { parseTupleEasing } from '../utils/parseTupleEasing';
 
 // Only translation effects need parsing
 export const TRANSLATION_EFFECTS = ['translateX', 'translateY'] as const;
@@ -67,10 +68,13 @@ export function parseTranslationProps(
         const startParsed = parseValueAndUnit(value?.[0], defaultValue);
         const endParsed = parseValueAndUnit(value?.[1], defaultValue);
 
+        const easing = parseTupleEasing(value, `translate${key === 'translateX' ? 'X' : 'Y'}`);
+
         parsedTranslations[key] = {
           start: startParsed.value,
           end: endParsed.value,
           unit: startParsed.unit,
+          ...(easing ? { easing } : {}),
         };
 
         if (startParsed.unit !== endParsed.unit) {

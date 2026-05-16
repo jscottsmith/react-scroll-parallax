@@ -6,11 +6,11 @@ import { EasingDemo } from '/src/components/easing-demo';
 
 # Easing Animation
 
-You can provide CSS/WAAPI [`animation-timing-function`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function) values directly to the `easing` prop (for example `'ease-out'` or `'cubic-bezier(1, -0.75, 0.5, 1.34)'`).
+Parallax easing uses CSS/WAAPI [`animation-timing-function`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function) values: timing keywords or `cubic-bezier(...)`.
 
-## Example using a keyword
+## Global easing
 
-This `translateX` effect will be eased using the `ease-out` keyword.
+Set `easing` on the hook/component to apply the same curve to every effect that does not define its own tuple easing:
 
 ```tsx
 function Component() {
@@ -24,15 +24,34 @@ function Component() {
 
 :::important
 
-When defining an `easing` prop like above, ALL provided CSS effects will be eased.
+When `easing` is set at the top level, it applies to all effects unless a given effect overrides it with a 3rd tuple value (see below).
 
 :::
 
 <EasingDemo eased={{ easing: 'ease-out' }} />
 
-## Custom cubic-bezier
+## Per-effect easing (3rd tuple value)
 
-Define a custom cubic-bezier curve as a timing-function string.
+Pass easing as the optional third entry on any effect tuple. Each effect can use its own curve:
+
+```tsx
+function Component() {
+  const parallax = useParallax<HTMLDivElement>({
+    translateY: [-100, 100, 'ease-in'],
+    scale: [0, 1, 'cubic-bezier(0.2, -0.67, 1, -0.62)'],
+  });
+  return <div ref={parallax.ref} />;
+}
+```
+
+Supported values for tuple easing (and for the top-level `easing` prop):
+
+- Timing keywords: `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`, `step-start`, `step-end`
+- `cubic-bezier(x1, y1, x2, y2)`
+
+Legacy preset names such as `easeInOut` or `easeOutBack` are not accepted; use the keyword or cubic-bezier equivalent (see the [V3 migration guide](/docs/migration-guides/v3-migration-guide#legacy-preset--cubic-bezier-reference-from-the-old-mapping)).
+
+## Custom cubic-bezier
 
 ```tsx
 function Component() {

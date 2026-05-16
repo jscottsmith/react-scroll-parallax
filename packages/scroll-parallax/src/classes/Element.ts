@@ -16,12 +16,10 @@ import {
 import { scaleTranslateEffectsForSlowerScroll } from '../helpers/scaleTranslateEffectsForSlowerScroll';
 import { getShouldScaleTranslateEffects } from '../helpers/getShouldScaleTranslateEffects';
 import { supportsScrollDrivenAnimations } from '../waapi/support';
+import { buildParallaxAnimateOptions } from '../waapi/parallaxAnimateOptions';
+import { createParallaxAnimation } from '../waapi/createParallaxAnimation';
 import {
-  buildParallaxAnimateOptions,
-  type ParallaxAnimateOptions,
-} from '../waapi/parallaxAnimateOptions';
-import {
-  buildParallaxKeyframes,
+  buildParallaxKeyframeLayers,
   getParallaxAnimatedPropertyNames,
 } from '../waapi/parallaxKeyframes';
 import {
@@ -138,11 +136,14 @@ export class Element {
       return;
     }
 
-    const keyframes = buildParallaxKeyframes({
+    const layers = buildParallaxKeyframeLayers({
       scrollAxis: this.scrollAxis,
       translations: this.translations,
       scaledEffects: this.scaledEffects,
       shouldScaleTranslateEffects: this.shouldScaleTranslateEffects,
+      translateX: this.props.translateX,
+      translateY: this.props.translateY,
+      globalEasing: this.props.easing,
       effects: {
         rotate: this.props.rotate,
         rotateX: this.props.rotateX,
@@ -156,22 +157,7 @@ export class Element {
       },
     });
 
-    const animateOpts: ParallaxAnimateOptions & Record<string, unknown> = {
-      timeline: spec.timeline,
-      fill: spec.fill,
-      easing: spec.easing,
-    };
-    if (spec.rangeStart != null) {
-      animateOpts.rangeStart = spec.rangeStart;
-    }
-    if (spec.rangeEnd != null) {
-      animateOpts.rangeEnd = spec.rangeEnd;
-    }
-
-    this.animation = this.el.animate(
-      keyframes,
-      animateOpts as KeyframeAnimationOptions
-    );
+    this.animation = createParallaxAnimation(this.el, layers, spec);
   }
 
   /**

@@ -55,11 +55,12 @@ The following properties can be provided to configure the scroll animation:
 
 ## CSS Effect Props
 
-All props for creating CSS effects are defined by a **start** and **end** value represented by an `array`.
+All props for creating CSS effects are defined by a **start** and **end** value represented by an `array`. An optional **third** value sets easing for that effect only (CSS keyword or `cubic-bezier(...)`).
 
 ```ts
 useParallax({
-  translateY: [-100, 100],
+  translateY: [-100, 100, 'ease-in'],
+  scale: [0, 1, 'cubic-bezier(0.2, -0.67, 1, -0.62)'],
 });
 ```
 
@@ -110,19 +111,18 @@ All available callbacks:
 | **onProgressChange** | `function` | Callback for when the progress of an element in the viewport changes.                                        |
 | **onChange**         | `function` | Callback for when the progress of an element in the viewport changes and includes the Element as a parameter |
 
-## Easing Presets
+## Easing
 
-`easing` is passed directly to WAAPI as `KeyframeAnimationOptions.easing` (same syntax as CSS `animation-timing-function`).
-
-Example:
+`easing` sets the default timing function for all effects. Override per effect with the optional 3rd tuple value.
 
 ```ts
 useParallax({
   easing: 'ease-in-out',
+  translateY: [-100, 100, 'ease-in'], // translateY uses ease-in
+  scale: [0, 1], // scale uses ease-in-out
 });
 ```
 
-Supported values:
+Supported values (global `easing` and 3rd tuple entry):
 - Timing keywords: `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`, `step-start`, `step-end`
 - `cubic-bezier(x1, y1, x2, y2)`
-- `steps(n, start|end)`

@@ -91,24 +91,21 @@ All available callbacks:
 | **onProgressChange** | `function` | Callback for when the progress of an element in the viewport changes.                                        |
 | **onChange**         | `function` | Callback for when the progress of an element in the viewport changes and includes the Element as a parameter |
 
-## Easing Presets
+## Easing
 
-Example of setting easing:
+Default timing for all effects, overridable per effect via the optional 3rd tuple value:
 
 ```ts
-const easing = 'ease-in-out';
-
 parallaxController.createElement({
   el: document.querySelector('.your-element'),
   props: {
-    easing,
+    easing: 'ease-in-out',
+    translateY: [-100, 100, 'ease-in'],
+    scale: [0, 1, 'cubic-bezier(0.2, -0.67, 1, -0.62)'],
   },
 });
 ```
 
-`easing` is passed directly to WAAPI as `KeyframeAnimationOptions.easing` (same syntax as CSS `animation-timing-function`).
-
 Supported values:
 - Timing keywords: `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`, `step-start`, `step-end`
 - `cubic-bezier(x1, y1, x2, y2)`
-- `steps(n, start|end)`

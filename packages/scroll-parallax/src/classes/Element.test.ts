@@ -11,6 +11,7 @@ import { Element } from './Element';
 import { View } from './View';
 import { ScrollAxis } from '../types';
 import type { ParallaxElementConfig } from '../types';
+import { parseTranslationProps } from '../helpers/parseElementTransitionEffects';
 
 vi.mock('../helpers/measureRect', () => ({
   measureRect: vi.fn(() => ({
@@ -398,6 +399,51 @@ describe('Element', () => {
       });
       const animOpts = animateSpy.mock.calls[0]?.[1] as { easing?: string };
       expect(animOpts.easing).toBe('ease-in-out');
+    });
+
+    it('should compose per-effect easing with GroupEffect when easings differ', () => {
+      vi.mocked(parseTranslationProps).mockReturnValueOnce({
+        translateY: {
+          start: 0,
+          end: 100,
+          unit: 'px',
+          easing: 'ease-in',
+        },
+      });
+
+      const GroupEffect = vi.fn(function GroupEffect(this: unknown, children: unknown) {
+        return { children };
+      });
+      const KeyframeEffect = vi.fn(function KeyframeEffect(
+        this: unknown,
+        _target: unknown,
+        keyframes: unknown,
+        options: { easing?: string }
+      ) {
+        return { keyframes, easing: options?.easing };
+      });
+      const Animation = vi.fn(function Animation() {
+        return mockAnimation();
+      });
+      vi.stubGlobal('GroupEffect', GroupEffect);
+      vi.stubGlobal('KeyframeEffect', KeyframeEffect);
+      vi.stubGlobal('Animation', Animation);
+      animateSpy.mockClear();
+
+      new Element({
+        el: document.createElement('div'),
+        props: {
+          translateY: [0, 100, 'ease-in'],
+          scale: [0, 1, 'cubic-bezier(0.2, -0.67, 1, -0.62)'],
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      expect(GroupEffect).toHaveBeenCalled();
+      expect(KeyframeEffect).toHaveBeenCalledTimes(2);
+      expect(Animation).toHaveBeenCalled();
+      expect(animateSpy).not.toHaveBeenCalled();
     });
   });
 
@@ -795,7 +841,8 @@ describe('Element', () => {
       });
 
       const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
-      expect(keyframes[0]?.transform).toContain('translate(0px, 0px)');
+      expect(keyframes[0]?.transform).toContain('rotateZ(0deg)');
+      expect(keyframes[0]?.transform).not.toMatch(/translate\(/);
       expect(ViewTimeline).toHaveBeenCalled();
       expect(ScrollTimeline).not.toHaveBeenCalled();
       const animOpts = animateSpy.mock.calls[0]?.[1] as {

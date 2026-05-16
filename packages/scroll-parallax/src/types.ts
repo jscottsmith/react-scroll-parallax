@@ -27,6 +27,8 @@ export type ParsedValueEffect = {
   start: number;
   end: number;
   unit: ValidTranslationUnits;
+  /** CSS easing from the 3rd tuple entry when provided. */
+  easing?: string;
 };
 
 export type ViewElement = HTMLElement | Window;
@@ -36,8 +38,11 @@ export type ParallaxControllerOptions = {
   disabled?: boolean;
 };
 
-export type EffectNumber = [number, number];
-export type EffectString = [string, string];
+/** CSS easing keyword or `cubic-bezier(...)` for the 3rd tuple entry. */
+export type EasingParam = string;
+
+export type EffectNumber = [number, number, EasingParam?];
+export type EffectString = [string, string, EasingParam?];
 export type CSSEffect = EffectNumber | EffectString;
 export type ScaleOpacityEffect = EffectNumber;
 
@@ -55,8 +60,11 @@ export type ParallaxElementConfig = {
   scaleY?: ScaleOpacityEffect;
   scaleZ?: ScaleOpacityEffect;
   opacity?: ScaleOpacityEffect;
-  /** CSS/WAAPI `animation-timing-function` passed to `KeyframeAnimationOptions.easing`. */
-  easing?: string;
+  /**
+   * Default CSS/WAAPI `animation-timing-function` for effects without a 3rd tuple easing.
+   * Must be a CSS keyword or `cubic-bezier(...)`.
+   */
+  easing?: EasingParam;
   /* Always start and end animations at the given effect values - if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size */
   shouldAlwaysCompleteAnimation?: boolean;
   /* Disable scaling translations - translate effects that cause the element to appear in the view longer must be scaled up so that animation doesn't end early */

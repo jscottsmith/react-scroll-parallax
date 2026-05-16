@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ScrollAxis } from '../types';
 import {
+  buildParallaxKeyframeLayers,
   buildParallaxKeyframes,
   getParallaxAnimatedPropertyNames,
 } from './parallaxKeyframes';
@@ -113,5 +114,51 @@ describe('getParallaxAnimatedPropertyNames', () => {
     expect(getParallaxAnimatedPropertyNames({ scale: [0, 1] })).toEqual([
       'transform',
     ]);
+  });
+});
+
+describe('buildParallaxKeyframeLayers', () => {
+  const translations = {
+    translateY: { start: -100, end: 100, unit: 'px' as const, easing: 'ease-in' },
+  };
+  const scaledEffects = {
+    translateY: { start: -100, end: 100, unit: 'px' as const, easing: 'ease-in' },
+  };
+
+  it('returns separate layers when translate and scale use different easing', () => {
+    const layers = buildParallaxKeyframeLayers({
+      scrollAxis: ScrollAxis.vertical,
+      translations,
+      scaledEffects,
+      translateY: [-100, 100, 'ease-in'],
+      effects: {
+        scale: [0, 1, 'cubic-bezier(0.2, -0.67, 1, -0.62)'],
+      },
+    });
+
+    expect(layers).toHaveLength(2);
+    expect(layers[0]?.easing).toBe('ease-in');
+    expect(layers[1]?.easing).toBe('cubic-bezier(0.2, -0.67, 1, -0.62)');
+    expect(layers[0]?.keyframes[0]?.transform).toContain('translate');
+    expect(layers[1]?.keyframes[0]?.transform).toContain('scale');
+  });
+
+  it('merges into one layer when all effects share the same easing', () => {
+    const layers = buildParallaxKeyframeLayers({
+      scrollAxis: ScrollAxis.vertical,
+      translations: {
+        translateY: { start: 0, end: 100, unit: 'px' as const },
+      },
+      scaledEffects: {
+        translateY: { start: 0, end: 100, unit: 'px' as const },
+      },
+      globalEasing: 'ease-out',
+      effects: { scale: [0.5, 1] },
+    });
+
+    expect(layers).toHaveLength(1);
+    expect(layers[0]?.easing).toBe('ease-out');
+    expect(layers[0]?.keyframes[0]?.transform).toContain('translate');
+    expect(layers[0]?.keyframes[0]?.transform).toContain('scale');
   });
 });

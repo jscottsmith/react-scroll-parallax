@@ -48,28 +48,26 @@ easing: 'easeInOutCubic'
 easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)'
 ```
 
-## Breaking change: per-effect tuple easing (the 3rd entry) is removed
+## Per-effect tuple easing (3rd entry)
 
 ### What changed
 
-Previously you could pass an easing as the 3rd element of translation/transform tuples:
+You can again pass easing as the optional 3rd element of effect tuples. Values must be valid CSS/WAAPI timing functions (keywords or `cubic-bezier(...)`), not legacy preset names.
 
 ```ts
+// before (legacy preset — not valid CSS)
 translateY: [from, to, 'easeInOut']
+
+// after
+translateY: [from, to, 'ease-in-out']
+// or per effect
+translateY: [from, to, 'ease-in']
+scale: [from, to, 'cubic-bezier(0.2, -0.67, 1, -0.62)']
 ```
 
-That 3rd entry is **not applied** by the current scroll-driven WAAPI keyframe implementation.
-In V3 the tuple form is removed—your effect arrays must now be 2 items only:
+Legacy preset strings in the 3rd tuple position are rejected. Use a timing keyword or the cubic-bezier equivalent from the table below.
 
-```ts
-translateY: [from, to]
-scale: [from, to]
-rotate: [from, to]
-```
-
-### If you need different easing
-
-Create multiple parallax instances and set the top-level `easing` prop on each one.
+The top-level `easing` prop still applies to any effect that does not set tuple easing.
 
 ## Breaking change: `rootMargin` is removed
 
