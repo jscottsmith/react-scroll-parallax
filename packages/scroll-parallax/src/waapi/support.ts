@@ -42,7 +42,7 @@ export function supportsScrollDrivenAnimations(): boolean {
   );
 }
 
-/** WAAPI timeline `axis`: vertical scroll uses `block`, horizontal uses `inline`. */
+/** WAAPI timeline `axis`: vertical scroll uses `y`, horizontal uses `x` (physical axes, not writing-mode-relative). */
 export function timelineAxis(scrollAxis: ValidScrollAxis): string {
-  return scrollAxis === ScrollAxis.horizontal ? 'inline' : 'block';
+  return scrollAxis === ScrollAxis.horizontal ? 'x' : 'y';
 }

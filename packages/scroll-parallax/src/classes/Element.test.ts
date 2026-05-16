@@ -273,7 +273,7 @@ describe('Element', () => {
         inset?: unknown;
       };
       expect(opts.subject).toBe(element);
-      expect(opts.axis).toBe('block');
+      expect(opts.axis).toBe('y');
       expect(opts.inset).toBeUndefined();
 
       const animOpts = animateSpy.mock.calls[0]?.[1] as {
@@ -329,7 +329,7 @@ describe('Element', () => {
         axis: string;
       };
       expect(scrollOpts.source).toBe(document.documentElement);
-      expect(scrollOpts.axis).toBe('block');
+      expect(scrollOpts.axis).toBe('y');
       expect(animateSpy).toHaveBeenCalled();
     });
 
@@ -558,7 +558,7 @@ describe('Element', () => {
   });
 
   describe('with different scroll axes', () => {
-    it('should use inline axis for horizontal scroll', () => {
+    it('should use x axis for horizontal scroll', () => {
       const ViewTimeline = (
         globalThis as unknown as { ViewTimeline: ReturnType<typeof vi.fn> }
       ).ViewTimeline;
@@ -572,7 +572,7 @@ describe('Element', () => {
       });
 
       const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { axis: string };
-      expect(opts.axis).toBe('inline');
+      expect(opts.axis).toBe('x');
     });
   });
 
