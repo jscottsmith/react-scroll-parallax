@@ -109,7 +109,7 @@ export class Element {
       : { ...this.translations };
   }
 
-  /** Element whose scroll offsets drive a `ScrollTimeline` (window root or custom container). */
+  /** Scroll container for explicit `startScroll` / `endScroll` `ScrollTimeline` (window or custom). */
   private getScrollSource(): globalThis.Element {
     return this.view.scrollContainer ?? document.documentElement;
   }
@@ -130,9 +130,7 @@ export class Element {
       viewSubject: this.getProgressTarget(),
       shouldScaleTranslateEffects: this.shouldScaleTranslateEffects,
       scaledEffects: this.scaledEffects,
-      translations: this.translations,
       rect: this.rect,
-      view: this.view,
       shouldAlwaysCompleteAnimation: !!this.props.shouldAlwaysCompleteAnimation,
       alwaysCompleteViewCoverOffsetPx: this.alwaysCompleteViewCoverOffsetPx,
     });

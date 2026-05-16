@@ -303,8 +303,8 @@ function computeAlwaysCompleteViewCoverOffsetPx(
 }
 
 /**
- * Scroll offsets for `ScrollTimeline` when translate scaling is off — same window as
- * legacy view-relative progress (top enters bottom of view → bottom leaves top of view).
+ * Layout-derived scroll offsets (top enters bottom of view → bottom leaves top of view).
+ * Used by tests and legacy callers; WAAPI uses {@link getViewTimelineAnimationRange} instead.
  */
 export function getParallaxScrollOffsets(
   rect: RectSnapshot,

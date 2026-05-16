@@ -284,7 +284,7 @@ describe('Element', () => {
       expect(animOpts.rangeEnd).toBe('cover 100%');
     });
 
-    it('should use ScrollTimeline when scaling translations is disabled', () => {
+    it('should use ViewTimeline with entry/exit range when scaling translations is disabled', () => {
       const ScrollTimeline = (
         globalThis as unknown as { ScrollTimeline: ReturnType<typeof vi.fn> }
       ).ScrollTimeline;
@@ -293,6 +293,7 @@ describe('Element', () => {
         globalThis as unknown as { ViewTimeline: ReturnType<typeof vi.fn> }
       ).ViewTimeline;
       ViewTimeline.mockClear();
+      animateSpy.mockClear();
 
       new Element({
         el: document.createElement('div'),
@@ -301,8 +302,14 @@ describe('Element', () => {
         view,
       });
 
-      expect(ScrollTimeline).toHaveBeenCalled();
-      expect(ViewTimeline).not.toHaveBeenCalled();
+      expect(ViewTimeline).toHaveBeenCalled();
+      expect(ScrollTimeline).not.toHaveBeenCalled();
+      const animOpts = animateSpy.mock.calls[0]?.[1] as {
+        rangeStart?: string;
+        rangeEnd?: string;
+      };
+      expect(animOpts.rangeStart).toBe('entry 0%');
+      expect(animOpts.rangeEnd).toBe('exit 100%');
     });
 
     it('should use ScrollTimeline when startScroll and endScroll are set', () => {
@@ -590,7 +597,7 @@ describe('Element', () => {
       expect(measureRect).toHaveBeenCalledWith(targetElement, view);
     });
 
-    it('should use ScrollTimeline with target layout when targetElement is provided', () => {
+    it('should use ViewTimeline on targetElement when targetElement is provided', () => {
       const ScrollTimeline = (
         globalThis as unknown as { ScrollTimeline: ReturnType<typeof vi.fn> }
       ).ScrollTimeline;
@@ -606,8 +613,10 @@ describe('Element', () => {
         scrollAxis: ScrollAxis.vertical,
         view,
       });
-      expect(ScrollTimeline).toHaveBeenCalled();
-      expect(ViewTimeline).not.toHaveBeenCalled();
+      expect(ViewTimeline).toHaveBeenCalled();
+      expect(ScrollTimeline).not.toHaveBeenCalled();
+      const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { subject: Element };
+      expect(opts.subject).toBe(targetElement);
     });
 
     it('should not apply span scaling when targetElement is provided', async () => {
@@ -787,12 +796,14 @@ describe('Element', () => {
 
       const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
       expect(keyframes[0]?.transform).toContain('translate(0px, 0px)');
-      expect(ScrollTimeline).toHaveBeenCalled();
-      expect(ViewTimeline).not.toHaveBeenCalled();
-      const scrollOpts = ScrollTimeline.mock.calls.at(-1)?.[0] as {
-        scrollOffsets: unknown[];
+      expect(ViewTimeline).toHaveBeenCalled();
+      expect(ScrollTimeline).not.toHaveBeenCalled();
+      const animOpts = animateSpy.mock.calls[0]?.[1] as {
+        rangeStart?: string;
+        rangeEnd?: string;
       };
-      expect(scrollOpts.scrollOffsets).toHaveLength(2);
+      expect(animOpts.rangeStart).toBe('entry 0%');
+      expect(animOpts.rangeEnd).toBe('exit 100%');
     });
 
     it('should handle element with only translateY', async () => {

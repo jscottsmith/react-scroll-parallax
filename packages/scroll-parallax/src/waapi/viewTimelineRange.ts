@@ -30,8 +30,7 @@ import { getStartEndValueInPx } from '../helpers/getStartEndValueInPx';
  *
  * **Merge**
  *    `getViewTimelineAnimationRange` sums the two offset pairs and builds one `cover …` range. If
- *    both sums are zero, we keep the spec default `entry 0%` / `exit 100%` (translate-scaling path
- *    only; rotate/scale/opacity without translate scaling use layout `ScrollTimeline` instead).
+ *    both sums are zero, we keep the spec default `entry 0%` / `exit 100%`.
  * ---------------------------------------------------------------------------
  */
 

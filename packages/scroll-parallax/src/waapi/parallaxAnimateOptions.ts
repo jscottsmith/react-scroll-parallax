@@ -5,8 +5,6 @@ import type {
 } from '../types';
 import type { RectSnapshot } from '../helpers/measureRect';
 import type { ViewTimelineCoverOffsetPx } from '../helpers/parallaxLayoutAdjustments';
-import { getParallaxScrollOffsets } from '../helpers/parallaxLayoutAdjustments';
-import type { View } from '../classes/View';
 import {
   getScrollTimelineCtor,
   getViewTimelineCtor,
@@ -20,7 +18,7 @@ export type ParallaxAnimateOptions = {
   timeline: AnimationTimeline;
   /**
    * WAAPI-only `rangeStart` / `rangeEnd` (not `ViewTimeline` ctor args). Omitted for
-   * `ScrollTimeline`. For `ViewTimeline` (translate scaling): default `entry 0%` / `exit 100%`, or
+   * `ScrollTimeline`. For `ViewTimeline`: default `entry 0%` / `exit 100%`, or
    * expanded `cover` in `animation-range` when translate distance is scaled and/or when
    * {@link ParallaxElementConfig.shouldAlwaysCompleteAnimation} adds `cover` offsets from
    * layout (see {@link getViewTimelineAnimationRange}).
@@ -33,9 +31,8 @@ export type ParallaxAnimateOptions = {
 
 /**
  * Options for `el.animate(keyframes, { timeline, rangeStart?, rangeEnd?, fill, easing })`.
- * Explicit `startScroll` / `endScroll` → `ScrollTimeline` (no range). Without translate
- * scaling, layout-derived scroll offsets → `ScrollTimeline`. Otherwise `ViewTimeline` +
- * view range (translate scaling ± always-complete).
+ * Explicit `startScroll` / `endScroll` → `ScrollTimeline` (no range). Otherwise `ViewTimeline`
+ * with `entry`/`exit` or expanded `cover` when translate scaling and/or always-complete apply.
  */
 export function buildParallaxAnimateOptions(args: {
   props: Pick<
@@ -47,9 +44,7 @@ export function buildParallaxAnimateOptions(args: {
   viewSubject: globalThis.Element;
   shouldScaleTranslateEffects: boolean;
   scaledEffects: ParallaxStartEndEffects;
-  translations: ParallaxStartEndEffects;
   rect: RectSnapshot;
-  view: View;
   shouldAlwaysCompleteAnimation: boolean;
   alwaysCompleteViewCoverOffsetPx: ViewTimelineCoverOffsetPx;
 }): ParallaxAnimateOptions | null {
@@ -68,23 +63,6 @@ export function buildParallaxAnimateOptions(args: {
       axis,
       startScroll: explicitStartScroll,
       endScroll: explicitEndScroll,
-    });
-    return timeline ? { timeline, fill, easing } : null;
-  }
-
-  if (!args.shouldScaleTranslateEffects) {
-    const { startScroll, endScroll } = getParallaxScrollOffsets(
-      args.rect,
-      args.view,
-      args.translations,
-      args.scrollAxis,
-      args.shouldAlwaysCompleteAnimation
-    );
-    const timeline = buildScrollTimeline(getScrollTimelineCtor(), {
-      source: args.scrollSource,
-      axis,
-      startScroll,
-      endScroll,
     });
     return timeline ? { timeline, fill, easing } : null;
   }
