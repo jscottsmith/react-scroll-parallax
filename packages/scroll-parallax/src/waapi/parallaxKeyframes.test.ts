@@ -86,6 +86,19 @@ describe('buildParallaxKeyframes', () => {
     });
     expect(keyframes[0]?.transform).not.toMatch(/rotate/);
   });
+
+  it('uses unscaled translations on the active axis when scaling is disabled', () => {
+    const keyframes = buildParallaxKeyframes({
+      scrollAxis: ScrollAxis.vertical,
+      translations,
+      scaledEffects: {
+        translateY: { start: 0, end: 40, unit: 'px' },
+      },
+      shouldScaleTranslateEffects: false,
+      effects: {},
+    });
+    expect(keyframes[1]?.transform).toContain('translate(0px, 100px)');
+  });
 });
 
 describe('getParallaxAnimatedPropertyNames', () => {

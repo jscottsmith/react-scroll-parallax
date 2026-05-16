@@ -12,6 +12,21 @@ import { View } from './View';
 import { ScrollAxis } from '../types';
 import type { ParallaxElementConfig } from '../types';
 
+vi.mock('../helpers/measureRect', () => ({
+  measureRect: vi.fn(() => ({
+    height: 100,
+    width: 200,
+    left: 0,
+    right: 200,
+    top: 0,
+    bottom: 100,
+    offsetTop: 0,
+    offsetLeft: 0,
+    offsetBottom: 100,
+    offsetRight: 200,
+  })),
+}));
+
 vi.mock('../helpers/parseElementTransitionEffects', () => ({
   parseTranslationProps: vi.fn(() => ({
     translateY: {
@@ -449,7 +464,7 @@ describe('Element', () => {
       expect(result).toBe(elementInstance);
       expect(elementInstance.props).toEqual({ ...props, ...newProps });
       expect(parseTranslationProps).toHaveBeenCalledWith(
-        newProps,
+        { ...props, ...newProps },
         ScrollAxis.vertical
       );
     });
@@ -560,16 +575,17 @@ describe('Element', () => {
   });
 
   describe('with target element', () => {
-    it('should use target element for rect calculations', () => {
-      const targetElement = document.createElement('div');
-      const elementWithTarget = new Element({
-        el: document.createElement('div'),
+    it('should use target element for rect calculations', async () => {
+      const { measureRect } = await import('../helpers/measureRect');
+      const targetElement = document.createElement('motionTarget');
+      new Element({
+        el: document.createElement('motionLayer'),
         props: { ...props, targetElement },
         scrollAxis: ScrollAxis.vertical,
         view,
       });
 
-      expect(elementWithTarget.props.targetElement).toBe(targetElement);
+      expect(measureRect).toHaveBeenCalledWith(targetElement, view);
     });
 
     it('should use target element as ViewTimeline subject', () => {
@@ -586,6 +602,24 @@ describe('Element', () => {
       });
       const opts = ViewTimeline.mock.calls.at(-1)?.[0] as { subject: Element };
       expect(opts.subject).toBe(targetElement);
+    });
+
+    it('should not apply span scaling when targetElement is provided', async () => {
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
+      vi.mocked(scaleTranslateEffectsForSlowerScroll).mockClear();
+
+      new Element({
+        el: document.createElement('div'),
+        props: {
+          ...props,
+          targetElement: document.createElement('div'),
+        },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      expect(scaleTranslateEffectsForSlowerScroll).not.toHaveBeenCalled();
     });
   });
 
@@ -637,6 +671,42 @@ describe('Element', () => {
       expect(
         elementWithScalingDisabled.props.shouldDisableScalingTranslations
       ).toBe(true);
+    });
+
+    it('should not apply span scaling to effects when scaling is disabled', async () => {
+      const { scaleTranslateEffectsForSlowerScroll } =
+        await import('../helpers/scaleTranslateEffectsForSlowerScroll');
+      vi.mocked(scaleTranslateEffectsForSlowerScroll).mockClear();
+
+      new Element({
+        el: document.createElement('div'),
+        props: { ...props, shouldDisableScalingTranslations: true },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      expect(scaleTranslateEffectsForSlowerScroll).not.toHaveBeenCalled();
+    });
+
+    it('should use unscaled translate values in keyframes when scaling is disabled', async () => {
+      const { parseTranslationProps } =
+        await import('../helpers/parseElementTransitionEffects');
+      vi.mocked(parseTranslationProps).mockReturnValue({
+        translateY: { start: 0, end: 100, unit: 'px' },
+        translateX: { start: 0, end: 50, unit: 'px' },
+      });
+
+      animateSpy.mockClear();
+      new Element({
+        el: document.createElement('div'),
+        props: { ...props, shouldDisableScalingTranslations: true },
+        scrollAxis: ScrollAxis.vertical,
+        view,
+      });
+
+      const [keyframes] = animateSpy.mock.calls[0] as [Keyframe[]];
+      expect(keyframes[1]?.transform).toContain('translate(50px, 100px)');
+      expect(keyframes[1]?.transform).not.toContain('40px');
     });
   });
 

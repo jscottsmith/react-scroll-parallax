@@ -73,9 +73,22 @@ export class Element {
     this.installAnimation();
   }
 
+  /**
+   * Element whose layout drives scroll progress (`targetElement`) or the animated node (`el`).
+   */
+  private getProgressTarget(): HTMLElement {
+    return this.props.targetElement ?? this.el;
+  }
+
   /** Recompute rect, translate span scale, scaled translations, and view-range adjustment. */
   private setupTranslateEffects() {
-    this.rect = measureRect(this.props.targetElement || this.el, this.view);
+    this.rect = measureRect(this.getProgressTarget(), this.view);
+
+    this.shouldScaleTranslateEffects = getShouldScaleTranslateEffects(
+      this.props,
+      this.translations,
+      this.scrollAxis
+    );
 
     const adjustments = computeParallaxLayoutAdjustments(
       this.rect,
@@ -88,16 +101,12 @@ export class Element {
     this.alwaysCompleteViewCoverOffsetPx =
       adjustments.alwaysCompleteViewCoverOffsetPx;
 
-    this.scaledEffects = scaleTranslateEffectsForSlowerScroll(
-      this.translations,
-      this.translateSpanScale
-    );
-
-    this.shouldScaleTranslateEffects = getShouldScaleTranslateEffects(
-      this.props,
-      this.translations,
-      this.scrollAxis
-    );
+    this.scaledEffects = this.shouldScaleTranslateEffects
+      ? scaleTranslateEffectsForSlowerScroll(
+          this.translations,
+          this.translateSpanScale
+        )
+      : { ...this.translations };
   }
 
   /** Element whose scroll offsets drive a `ScrollTimeline` (window root or custom container). */
@@ -118,7 +127,7 @@ export class Element {
       props: this.props,
       scrollAxis: this.scrollAxis,
       scrollSource: this.getScrollSource(),
-      viewSubject: this.props.targetElement ?? this.el,
+      viewSubject: this.getProgressTarget(),
       shouldScaleTranslateEffects: this.shouldScaleTranslateEffects,
       scaledEffects: this.scaledEffects,
       rectWidth: this.rect.width,
@@ -134,6 +143,7 @@ export class Element {
       scrollAxis: this.scrollAxis,
       translations: this.translations,
       scaledEffects: this.scaledEffects,
+      shouldScaleTranslateEffects: this.shouldScaleTranslateEffects,
       effects: {
         rotate: this.props.rotate,
         rotateX: this.props.rotateX,
@@ -219,7 +229,7 @@ export class Element {
   /** Merge config and re-parse translations; caller should run controller `update()` to refresh animation. */
   updateProps(nextProps: ParallaxElementConfig) {
     this.props = { ...this.props, ...nextProps };
-    this.translations = parseTranslationProps(nextProps, this.scrollAxis);
+    this.translations = parseTranslationProps(this.props, this.scrollAxis);
 
     return this;
   }

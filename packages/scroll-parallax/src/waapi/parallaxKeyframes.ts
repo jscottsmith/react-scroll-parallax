@@ -103,17 +103,25 @@ function buildTransformCss(args: {
   scrollAxis: ValidScrollAxis;
   translations: ParallaxStartEndEffects;
   scaledEffects: ParallaxStartEndEffects;
+  shouldScaleTranslateEffects: boolean;
   effects: ParallaxEffectProps;
   which: 'start' | 'end';
 }): string {
-  const { scrollAxis, translations, scaledEffects, effects, which } = args;
+  const {
+    scrollAxis,
+    translations,
+    scaledEffects,
+    shouldScaleTranslateEffects,
+    effects,
+    which,
+  } = args;
 
   const tx =
-    scrollAxis === ScrollAxis.horizontal
+    scrollAxis === ScrollAxis.horizontal && shouldScaleTranslateEffects
       ? scaledEffects.translateX
       : translations.translateX;
   const ty =
-    scrollAxis === ScrollAxis.vertical
+    scrollAxis === ScrollAxis.vertical && shouldScaleTranslateEffects
       ? scaledEffects.translateY
       : translations.translateY;
 
@@ -178,13 +186,23 @@ export function buildParallaxKeyframes(args: {
   scrollAxis: ValidScrollAxis;
   translations: ParallaxStartEndEffects;
   scaledEffects: ParallaxStartEndEffects;
+  shouldScaleTranslateEffects?: boolean;
   effects: ParallaxEffectProps;
 }): Keyframe[] {
+  const shouldScaleTranslateEffects = args.shouldScaleTranslateEffects ?? true;
   const start: Keyframe = {
-    transform: buildTransformCss({ ...args, which: 'start' }),
+    transform: buildTransformCss({
+      ...args,
+      shouldScaleTranslateEffects,
+      which: 'start',
+    }),
   };
   const end: Keyframe = {
-    transform: buildTransformCss({ ...args, which: 'end' }),
+    transform: buildTransformCss({
+      ...args,
+      shouldScaleTranslateEffects,
+      which: 'end',
+    }),
   };
 
   const opacity = parseNumericEffect(args.effects.opacity);
