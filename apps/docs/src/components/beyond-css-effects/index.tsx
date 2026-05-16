@@ -9,7 +9,7 @@ export const BeyondCSSEffects = () => {
         translateX={['-400px', '0px']}
         scale={[0.75, 1]}
         rotate={[-180, 0]}
-        easing="easeInQuad"
+        easing="cubic-bezier(0.55, 0.085, 0.68, 0.53)"
         className="rounded-lg bg-gray-600 bg-opacity-50"
         shouldAlwaysCompleteAnimation
       >
