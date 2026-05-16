@@ -28,9 +28,10 @@ vi.mock('../helpers/parseElementTransitionEffects', () => ({
 }));
 
 vi.mock('../helpers/parallaxLayoutAdjustments', async (importOriginal) => {
-  const actual = await importOriginal<
-    typeof import('../helpers/parallaxLayoutAdjustments')
-  >();
+  const actual =
+    await importOriginal<
+      typeof import('../helpers/parallaxLayoutAdjustments')
+    >();
   const unit = { start: 1, end: 1 };
   return {
     ...actual,
@@ -374,35 +375,9 @@ describe('Element', () => {
       const animOpts = animateSpy.mock.calls[0]?.[1] as { easing?: string };
       expect(animOpts.easing).toBe('ease-in-out');
     });
-
   });
 
   describe('callbacks', () => {
-    it('should call onEnter when the animation becomes ready', async () => {
-      const onEnter = vi.fn();
-      new Element({
-        el: document.createElement('div'),
-        props: { ...props, onEnter },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-      await Promise.resolve();
-      await Promise.resolve();
-      expect(onEnter).toHaveBeenCalled();
-    });
-
-    it('should call onExit when resetStyles runs', () => {
-      const onExit = vi.fn();
-      const inst = new Element({
-        el: document.createElement('div'),
-        props: { ...props, onExit },
-        scrollAxis: ScrollAxis.vertical,
-        view,
-      });
-      inst.resetStyles();
-      expect(onExit).toHaveBeenCalledWith(inst);
-    });
-
     it('should invoke onProgressChange and onChange when sampled progress moves', () => {
       let overallProgress = 0;
       const anim = {

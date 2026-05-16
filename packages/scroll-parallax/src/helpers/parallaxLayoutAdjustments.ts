@@ -64,7 +64,9 @@ type TimingBuildState = {
   endMultiplierX: number;
 };
 
-function timingStateToTranslateSpanScale(s: TimingBuildState): TranslateSpanScale {
+function timingStateToTranslateSpanScale(
+  s: TimingBuildState
+): TranslateSpanScale {
   return {
     x: { start: s.startMultiplierX, end: s.endMultiplierX },
     y: { start: s.startMultiplierY, end: s.endMultiplierY },
@@ -141,8 +143,7 @@ function applyAlwaysCompleteVertical(
   endTranslateYPx: number
 ): void {
   const topBeginsInView = rect.offsetTop < view.height;
-  const bottomEndsInView =
-    rect.offsetBottom > view.scrollHeight - view.height;
+  const bottomEndsInView = rect.offsetBottom > view.scrollHeight - view.height;
 
   if (topBeginsInView && bottomEndsInView) {
     s.startMultiplierY = 1;

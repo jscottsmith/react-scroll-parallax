@@ -109,8 +109,6 @@ All available callbacks:
 | -------------------- | :--------: | ------------------------------------------------------------------------------------------------------------ |
 | **onProgressChange** | `function` | Callback for when the progress of an element in the viewport changes.                                        |
 | **onChange**         | `function` | Callback for when the progress of an element in the viewport changes and includes the Element as a parameter |
-| **onEnter**          | `function` | Callback for when an element enters the viewport.                                                            |
-| **onExit**           | `function` | Callback for when an element exits the viewport.                                                             |
 
 ## Easing Presets
 

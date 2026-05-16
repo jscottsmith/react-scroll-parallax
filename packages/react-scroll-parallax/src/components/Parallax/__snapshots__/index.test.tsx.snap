@@ -37,18 +37,6 @@ exports[`given the <Parallax> component > when the prop { onChange: [Function on
 </DocumentFragment>
 `;
 
-exports[`given the <Parallax> component > when the prop { onEnter: [Function onEnter] } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
-exports[`given the <Parallax> component > when the prop { onExit: [Function onExit] } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
 exports[`given the <Parallax> component > when the prop { onProgressChange: [Function onProgressChange] } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div />

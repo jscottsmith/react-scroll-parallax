@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { BgContainer } from '../bg-container';
 
+const EPS = 1e-4;
+
 export const ElementProgress = () => {
   const [progress, setProgress] = useState(0);
-  const [entered, setEntered] = useState(false);
-  const exited = !entered;
+  const started = progress > EPS;
+  const ended = progress >= 1 - EPS;
   return (
     <BgContainer>
       <Parallax
-        onProgressChange={(progress) => setProgress(progress)}
-        onEnter={() => setEntered(true)}
-        onExit={() => setEntered(false)}
+        onProgressChange={(p) => setProgress(p)}
         className="relative rounded-lg bg-gray-600 bg-opacity-50"
       >
         <div className="absolute inset-0 z-10 flex items-center justify-center border-2 border-gray-400 border-solid bg-gray-600 rounded-lg">
@@ -22,17 +22,17 @@ export const ElementProgress = () => {
         <div className="relative flex items-center justify-center h-48 w-48">
           <div
             className={cx('absolute -top-48 text-sm p-sm rounded-md', {
-              'bg-green-300': entered,
-              'bg-gray-500': !entered,
+              'bg-green-300': started,
+              'bg-gray-500': !started,
             })}
           >
-            <div>Top entered:</div>
+            <div>Progress &gt; 0:</div>
             <div
               className={cx('font-medium text-xl text-center', {
-                'text-white': !entered,
+                'text-white': !started,
               })}
             >
-              {entered.toString()}
+              {started.toString()}
             </div>
             <div className="absolute left-1/2 top-full border-dotted border-gray-400 border-r-2 h-48" />
           </div>
@@ -59,17 +59,17 @@ export const ElementProgress = () => {
 
           <div
             className={cx('absolute -bottom-48 text-sm p-sm rounded-md', {
-              'bg-red-300': exited,
-              'bg-gray-500': !exited,
+              'bg-red-300': ended,
+              'bg-gray-500': !ended,
             })}
           >
-            <div>Bottom exited:</div>
+            <div>Progress ≈ 1:</div>
             <div
               className={cx('font-medium text-xl text-center', {
-                'text-white': !exited,
+                'text-white': !ended,
               })}
             >
-              {exited.toString()}
+              {ended.toString()}
             </div>
             <div className="absolute left-1/2 bottom-full border-dotted border-gray-400 border-r-2 h-48" />
           </div>

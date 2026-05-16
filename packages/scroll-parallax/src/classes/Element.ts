@@ -58,8 +58,6 @@ export class Element {
   };
   /** Active `el.animate(...)` instance; `cancel()` before replacing or disabling. */
   private animation: Animation | null = null;
-  /** Gates `onEnter` so it runs once per “enabled” lifecycle (reset when `enable()` runs). */
-  private hasFiredOnEnter = false;
   /** Last progress passed to `onProgressChange` / `onChange` from scroll sampling (undefined until first sample after (re)install). */
   private lastSampledProgress: number | undefined;
 
@@ -100,20 +98,6 @@ export class Element {
       this.translations,
       this.scrollAxis
     );
-  }
-
-  /** Fire `onEnter` once the animation is ready to sample (first time only until `enable()`). */
-  private rebindAnimationCallbacks() {
-    if (!this.animation || !this.props.onEnter) {
-      return;
-    }
-    void this.animation.ready.then(() => {
-      if (this.hasFiredOnEnter) {
-        return;
-      }
-      this.hasFiredOnEnter = true;
-      this.props.onEnter?.(this);
-    });
   }
 
   /** Element whose scroll offsets drive a `ScrollTimeline` (window root or custom container). */
@@ -179,8 +163,6 @@ export class Element {
       keyframes,
       animateOpts as KeyframeAnimationOptions
     );
-
-    this.rebindAnimationCallbacks();
   }
 
   /**
@@ -258,10 +240,9 @@ export class Element {
     this.cancelParallaxAnimation();
   };
 
-  /** Turn parallax back on: allow `onEnter` again and attach a new animation. */
+  /** Turn parallax back on: attach a new scroll-driven animation. */
   enable = () => {
     this.disabled = false;
-    this.hasFiredOnEnter = false;
     this.installAnimation();
   };
 
@@ -273,18 +254,16 @@ export class Element {
   }
 
   /**
-   * Teardown for React / controller: `onExit`, cancel animation, then clear animated
+   * Teardown for React / controller: cancel animation, then clear animated
    * properties (`transform`, and `opacity` when used).
    */
   resetStyles() {
-    this.props.onExit?.(this);
     this.cancelParallaxAnimation();
     this.clearAnimatedStyles();
   }
 
   /** Controller lifecycle / unmount: same cleanup as {@link Element.resetStyles}. */
   destroy() {
-    this.props.onExit?.(this);
     this.cancelParallaxAnimation();
     this.clearAnimatedStyles();
   }

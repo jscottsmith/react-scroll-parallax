@@ -118,12 +118,11 @@ export class ParallaxController {
       !this.disabled &&
       !!this.elements?.length &&
       this.elements.some((e) => e.wantsProgressSampling());
-    const desiredTarget: Window | HTMLElement | null =
-      !shouldNeed
-        ? null
-        : this._hasScrollContainer && this.viewEl instanceof HTMLElement
-          ? this.viewEl
-          : window;
+    const desiredTarget: Window | HTMLElement | null = !shouldNeed
+      ? null
+      : this._hasScrollContainer && this.viewEl instanceof HTMLElement
+        ? this.viewEl
+        : window;
 
     if (this._progressScrollTarget === desiredTarget) {
       return;
@@ -135,9 +134,13 @@ export class ParallaxController {
       return;
     }
 
-    desiredTarget.addEventListener('scroll', this._onScrollForProgressSampling, {
-      passive: true,
-    });
+    desiredTarget.addEventListener(
+      'scroll',
+      this._onScrollForProgressSampling,
+      {
+        passive: true,
+      }
+    );
     this._progressScrollTarget = desiredTarget;
   };
 

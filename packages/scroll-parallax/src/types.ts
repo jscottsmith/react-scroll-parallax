@@ -66,8 +66,6 @@ export type ParallaxElementConfig = {
   endScroll?: number;
   targetElement?: HTMLElement;
 
-  onEnter?: (element: any) => any;
-  onExit?: (element: any) => any;
   /** Fired after {@link onProgressChange} when sampled progress moves more than ~1e-4 (scroll/resize + rAF). Not emitted without an active scroll-driven animation. */
   onChange?: (element: any) => any;
   /**

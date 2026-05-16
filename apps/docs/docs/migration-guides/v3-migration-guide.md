@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # V3 Migration Guide
 
-V3 aligns the public API with scroll-driven WAAPI behavior. If you used legacy easing presets, per-effect tuple easing, or `rootMargin`, update your code as described below.
+V3 aligns the public API with scroll-driven WAAPI behavior. If you used legacy easing presets, per-effect tuple easing, `rootMargin`, or `onEnter` / `onExit`, update your code as described below.
 
 ## Breaking change: `easing` must be a WAAPI/CSS timing value
 
@@ -91,6 +91,31 @@ The `rootMargin` prop is no longer supported. It previously adjusted measured el
 { startScroll: 0, endScroll: 1200 }
 // or
 { targetElement: document.getElementById('scroll-target') }
+```
+
+## Breaking change: `onEnter` and `onExit` are removed
+
+### What changed
+
+The `onEnter` and `onExit` props are no longer supported. They were not tied to viewport intersection in a reliable way for scroll-driven animations.
+
+### What to use instead
+
+- Use [`onProgressChange`](/docs/usage/parallax-props#callback-props) (or [`onChange`](/docs/usage/parallax-props#callback-props)) and compare normalized progress to thresholds—for example treat progress crossing above `0` as “started” and progress near `1` as “finished” for that element’s parallax range.
+- For true viewport enter/leave, use the browser’s [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) on the same DOM node (or a wrapper) in your own code.
+
+```ts
+// before
+<Parallax onEnter={() => {}} onExit={() => {}} />
+
+// after — example: threshold on parallax progress
+<Parallax
+  onProgressChange={(p) => {
+    if (p > 0 && p < 1) {
+      /* in range */
+    }
+  }}
+/>
 ```
 
 ## Legacy preset → cubic-bezier reference (from the old mapping)
