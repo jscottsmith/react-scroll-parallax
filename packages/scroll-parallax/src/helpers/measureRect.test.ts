@@ -33,6 +33,10 @@ describe('measureRect', () => {
     expect(rect.left).toBe(200);
     expect(rect.bottom).toBe(600);
     expect(rect.right).toBe(300);
+    expect(rect.contentTop).toBe(500);
+    expect(rect.contentLeft).toBe(200);
+    expect(rect.contentBottom).toBe(600);
+    expect(rect.contentRight).toBe(300);
   });
 
   test(`caches the bounding rect with scrollContainer`, () => {
@@ -73,5 +77,48 @@ describe('measureRect', () => {
     expect(rect.right).toBe(200);
     expect(rect.top).toBe(400);
     expect(rect.bottom).toBe(500);
+    expect(rect.contentTop).toBe(400);
+    expect(rect.contentBottom).toBe(500);
+  });
+
+  test('uses scroll offset for scroll-content bounds', () => {
+    const scrollContainer = createElementMock(
+      { offsetWidth: 500, offsetHeight: 500 },
+      {
+        scrollTop: 300,
+        scrollLeft: 50,
+        getBoundingClientRect: () => ({
+          top: 0,
+          left: 0,
+          bottom: 500,
+          right: 500,
+        }),
+      }
+    );
+    const rect = measureRect(
+      createElementMock(
+        { offsetWidth: 100, offsetHeight: 100 },
+        {
+          getBoundingClientRect: () => ({
+            top: 100,
+            left: 20,
+            bottom: 200,
+            right: 120,
+          }),
+        }
+      ),
+      new View({
+        width: 500,
+        height: 500,
+        scrollWidth: 500,
+        scrollHeight: 2000,
+        scrollContainer,
+      })
+    );
+
+    expect(rect.contentTop).toBe(400);
+    expect(rect.contentLeft).toBe(70);
+    expect(rect.contentBottom).toBe(500);
+    expect(rect.contentRight).toBe(170);
   });
 });

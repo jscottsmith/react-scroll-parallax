@@ -75,10 +75,10 @@ function timingStateToTranslateSpanScale(
 
 function defaultScrollWindow(rect: RectSnapshot, view: View): TimingBuildState {
   return {
-    startY: rect.offsetTop - view.height,
-    startX: rect.offsetLeft - view.width,
-    endY: rect.offsetBottom,
-    endX: rect.offsetRight,
+    startY: rect.contentTop - view.height,
+    startX: rect.contentLeft - view.width,
+    endY: rect.contentBottom,
+    endX: rect.contentRight,
     startMultiplierY: 1,
     endMultiplierY: 1,
     startMultiplierX: 1,
@@ -142,8 +142,9 @@ function applyAlwaysCompleteVertical(
   startTranslateYPx: number,
   endTranslateYPx: number
 ): void {
-  const topBeginsInView = rect.offsetTop < view.height;
-  const bottomEndsInView = rect.offsetBottom > view.scrollHeight - view.height;
+  const topBeginsInView = rect.contentTop < view.height;
+  const bottomEndsInView =
+    rect.contentBottom > view.scrollHeight - view.height;
 
   if (topBeginsInView && bottomEndsInView) {
     s.startMultiplierY = 1;
@@ -153,7 +154,7 @@ function applyAlwaysCompleteVertical(
   }
 
   if (!topBeginsInView && bottomEndsInView) {
-    s.startY = rect.offsetTop - view.height;
+    s.startY = rect.contentTop - view.height;
     s.endY = view.scrollHeight - view.height;
     const totalDist = s.endY - s.startY;
     s.startMultiplierY = getTranslateScalar(
@@ -169,7 +170,7 @@ function applyAlwaysCompleteVertical(
 
   if (topBeginsInView && !bottomEndsInView) {
     s.startY = 0;
-    s.endY = rect.offsetBottom;
+    s.endY = rect.contentBottom;
     const totalDist = s.endY - s.startY;
     s.startMultiplierY = 1;
     s.endMultiplierY = getTranslateScalar(
@@ -190,8 +191,8 @@ function applyAlwaysCompleteHorizontal(
   startTranslateXPx: number,
   endTranslateXPx: number
 ): void {
-  const leftBeginsInView = rect.offsetLeft < view.width;
-  const rightEndsInView = rect.offsetRight > view.scrollWidth - view.width;
+  const leftBeginsInView = rect.contentLeft < view.width;
+  const rightEndsInView = rect.contentRight > view.scrollWidth - view.width;
 
   if (leftBeginsInView && rightEndsInView) {
     s.startMultiplierX = 1;
@@ -201,7 +202,7 @@ function applyAlwaysCompleteHorizontal(
   }
 
   if (!leftBeginsInView && rightEndsInView) {
-    s.startX = rect.offsetLeft - view.width;
+    s.startX = rect.contentLeft - view.width;
     s.endX = view.scrollWidth - view.width;
     const totalDist = s.endX - s.startX;
     s.startMultiplierX = getTranslateScalar(
@@ -217,7 +218,7 @@ function applyAlwaysCompleteHorizontal(
 
   if (leftBeginsInView && !rightEndsInView) {
     s.startX = 0;
-    s.endX = rect.offsetRight;
+    s.endX = rect.contentRight;
     const totalDist = s.endX - s.startX;
     s.startMultiplierX = 1;
     s.endMultiplierX = getTranslateScalar(

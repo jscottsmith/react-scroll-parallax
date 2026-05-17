@@ -25,6 +25,10 @@ vi.mock('../helpers/measureRect', () => ({
     offsetLeft: 0,
     offsetBottom: 100,
     offsetRight: 200,
+    contentTop: 0,
+    contentLeft: 0,
+    contentBottom: 100,
+    contentRight: 200,
   })),
 }));
 

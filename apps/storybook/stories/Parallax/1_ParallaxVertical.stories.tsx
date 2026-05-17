@@ -177,6 +177,43 @@ StartAnimationAtInitialPosition.args = {
   endTranslateX: -80,
 };
 
+/** Elements sit at the bottom of the page so they remain in view at max scroll. */
+export const EndAnimationAtFinalPosition: StoryFn<any> = (args) => {
+  const amount = 10;
+  const unit = 'px';
+  const elements = new Array(amount).fill(null).map((x, i) => i);
+
+  return (
+    <ParallaxProvider>
+      <div className="w-full flex items-end" style={{ height: '300vh' }}>
+        <div style={{ flex: 1 }} aria-hidden />
+        <div className="w-full flex flex-col items-center pb-8">
+          {elements.map((_, i) => {
+            return (
+              <Parallax
+                key={i}
+                className={styles.smallLinear}
+                translateX={[
+                  `${args.startTranslateX}${unit}`,
+                  `${args.endTranslateX}${unit}`,
+                ]}
+                shouldAlwaysCompleteAnimation
+              >
+                <Element name={i} />
+              </Parallax>
+            );
+          })}
+        </div>
+      </div>
+    </ParallaxProvider>
+  );
+};
+
+EndAnimationAtFinalPosition.args = {
+  startTranslateX: 80,
+  endTranslateX: -80,
+};
+
 const propConfigs: ParallaxProps[] = [
   {
     translateY: [`100%`, `-100%`],
