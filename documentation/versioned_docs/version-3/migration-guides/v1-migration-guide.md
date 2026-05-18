@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# V1 Migration Guide
+# Upgrade to V2
 
 Some breaking changes were introduced in v2. Here's the simple changes that need to be made if you're coming from v1.
 
