@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
-# V2 Migration Guide
+# Upgrade to V3
 
 With mostly just new features, V3 also makes a few breaking changes. See the following and migrate any code that is affected.
 

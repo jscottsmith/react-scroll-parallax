@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
-# V3 Migration Guide
+# Upgrade to V4
 
 V3 aligns the public API with scroll-driven WAAPI behavior. If you used legacy easing presets, per-effect tuple easing, or `rootMargin`, update your code as described below.
 
