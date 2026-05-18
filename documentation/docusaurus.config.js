@@ -61,6 +61,14 @@ const config = {
         externalUrlRegex: 'external\\.com|domain\\.com',
         searchParameters: {},
       },
+      announcementBar: {
+        id: 'v4_waapi_scroll',
+        content:
+          '🕹️ <a href="/docs/v4/intro">React Scroll Parallax <strong>4.0 Beta</strong></a> uses the Web Animations API (WAAPI) for scroll-driven animations.',
+        backgroundColor: 'var(--ifm-color-primary)',
+        textColor: 'white',
+        isCloseable: true,
+      },
       navbar: {
         hideOnScroll: true,
         title: 'React Scroll Parallax',
