@@ -1,5 +1,5 @@
 import React from 'react';
-import { Parallax } from '../../src';
+import { Parallax } from 'react-scroll-parallax';
 import { Container } from '../Container';
 import { Image } from '../Image/Image';
 

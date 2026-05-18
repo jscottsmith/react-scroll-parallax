@@ -1,5 +1,6 @@
 import React from 'react';
-import { ParallaxProps, useParallax } from '../../src';
+import { useParallax } from 'react-scroll-parallax';
+import type { ParallaxProps } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from '../Parallax/Parallax.module.css';

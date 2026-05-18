@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
   framework: {
@@ -27,7 +29,11 @@ module.exports = {
     reactDocgen: false, // Disable to fix TypeScript 5.9.2 compatibility issue
   },
   viteFinal: async (config) => {
-    // Vite handles CSS modules natively, no additional configuration needed
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'react-scroll-parallax': path.resolve(__dirname, '../src/index.ts'),
+    };
     return config;
   },
 };
