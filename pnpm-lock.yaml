@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       parallax-controller:
-        specifier: ^1.7.1
-        version: 1.7.1
+        specifier: ^2.0.0-beta.0
+        version: 2.0.0-beta.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.4
@@ -1927,9 +1927,6 @@ packages:
     resolution: {integrity: sha512-aVNobHnJqLiUelTaHat9DZ1qM2w0C0Eym4LPI/3JxOnSokGVdsl1T1kN7TFvsEAD8G47A6VKQ0TVHqbBnYMJlQ==}
     engines: {node: '>=12.0.0'}
 
-  bezier-easing@2.1.0:
-    resolution: {integrity: sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==}
-
   bidi-js@1.0.3:
     resolution: {integrity: sha512-RKshQI1R3YQ+n9YJz2QQ147P66ELpa1FQEg20Dk8oW9t2KgLbpDLLp9aGZ7y8WHSshDknG0bknqGw5/tyCs5tw==}
 
@@ -2916,9 +2913,9 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  parallax-controller@1.7.1:
-    resolution: {integrity: sha512-facVMEBnUynzMN7hCSqyNpF6uyCpVIl4XAUyTR9D8q2JlhgyPY6bZtj/OkFk3+Cpka1TnYCppQb8BzDWHtSaZg==}
-    engines: {node: '>=12'}
+  parallax-controller@2.0.0-beta.0:
+    resolution: {integrity: sha512-oxiIzeG3r4Iax2R6ZnUqst66ue9Y/MpvS/jA179s3ibNkcl2EiAgvfr/VD/xtKLdH5UgS4ym8U3lDU0zOkcb0w==}
+    engines: {node: '>=20'}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -5386,8 +5383,6 @@ snapshots:
     dependencies:
       open: 8.4.2
 
-  bezier-easing@2.1.0: {}
-
   bidi-js@1.0.3:
     dependencies:
       require-from-string: 2.0.2
@@ -6362,9 +6357,7 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  parallax-controller@1.7.1:
-    dependencies:
-      bezier-easing: 2.1.0
+  parallax-controller@2.0.0-beta.0: {}
 
   parent-module@1.0.1:
     dependencies:
