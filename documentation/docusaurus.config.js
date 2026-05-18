@@ -26,6 +26,17 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/jscottsmith/react-scroll-parallax/tree/master/documentation',
+          lastVersion: '3',
+          versions: {
+            current: {
+              label: '4.0 Beta',
+              path: 'v4',
+              banner: 'unreleased',
+            },
+            3: {
+              label: '3.x',
+            },
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -58,6 +69,10 @@ const config = {
           src: 'img/icon-logo.png',
         },
         items: [
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+          },
           {
             type: 'doc',
             docId: 'usage/usage',

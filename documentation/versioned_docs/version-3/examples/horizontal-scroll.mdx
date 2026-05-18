@@ -1,0 +1,90 @@
+---
+sidebar_position: 6
+---
+
+import { ExampleHorizontalScroll } from '/src/components/example-horizontal-scroll';
+
+# Horizontal Scroll
+
+The controller isn't limited to the typical vertical scrolling. To setup a horizontal scrolling document you'll need to set the `scrollAxis` in the [`<ParallaxProvider>`](/docs/usage/components/parallax-provider) to `horizontal`.
+
+```tsx
+const App = () => (
+  <ParallaxProvider scrollAxis="horizontal">
+    <HorizontalContainer />
+  </ParallaxProvider>
+);
+```
+
+Once the provider is setup, you can start creating effects as usual. Here's an example that uses a few layers with repeating backgrounds.
+
+:::info
+
+"Demon Woods" parallax art by [Aethrall](https://aethrall.itch.io/)
+
+:::
+
+<ExampleHorizontalScroll />
+
+:::note
+
+[Open the above example](https://react-scroll-parallax-horizontal-scroll.surge.sh/) or view the entire [source code](https://github.com/jscottsmith/react-scroll-parallax-examples/tree/master/horizontal-scroll).
+
+:::
+
+## Source Code
+
+To achieve the above effect, layers are stacked absolutely in a container. A `speed` is assigned to the middle and closest tree images - the closest moves the fastest. Then the `left` and `right` are extended so the edges are never seen. A `targetElement` is also assigned to the containing `div` and passed to each parallax layer so that the progress rate is calculated equally. Here's the setup:
+
+```tsx
+function DemonWoods() {
+  const target = useRef(null);
+
+  const mid = useParallax({
+    speed: 50,
+    targetElement: target.current,
+  });
+  const close = useParallax({
+    speed: 100,
+    targetElement: target.current,
+  });
+
+  const midExtend = 50 * 5 * -1;
+  const closeExtend = 100 * 5 * -1;
+
+  return (
+    <div className={styles.root} ref={target}>
+      <div
+        style={{ backgroundImage: `url(${imageBg})`, left: 0, right: 0 }}
+        className={styles.layer}
+      />
+      <div
+        style={{
+          backgroundImage: `url(${imageFar})`,
+          left: 0,
+          right: 0,
+        }}
+        className={styles.layer}
+      />
+      <div
+        style={{
+          backgroundImage: `url(${imageMid})`,
+          left: midExtend,
+          right: midExtend,
+        }}
+        className={styles.layer}
+        ref={mid.ref}
+      />
+      <div
+        style={{
+          backgroundImage: `url(${imageClose})`,
+          left: closeExtend,
+          right: closeExtend,
+        }}
+        className={styles.layer}
+        ref={close.ref}
+      />
+    </div>
+  );
+}
+```
