@@ -1,8 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
 import { useParallax } from 'react-scroll-parallax';
-import { easeInQuad } from '../../../../src/easingPresets';
 import { BgContainer } from '../bg-container';
+
+const easeInQuad = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
 
 const shared =
   'bg-blue-100 border-2 border-blue-500 border-solid rounded-lg h-32 w-32 flex items-center justify-center';

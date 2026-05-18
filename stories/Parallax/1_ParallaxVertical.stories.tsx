@@ -8,12 +8,11 @@ import { useRef } from 'react';
 import { CSSEffect } from 'parallax-controller';
 import { useState } from 'react';
 import type { ParallaxProps } from 'react-scroll-parallax';
-import {
-  easeInCubic,
-  easeInExpo,
-  easeInOutBack,
-  easeInOutQuad,
-} from '../../src/easingPresets';
+
+const easeInCubic = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
+const easeInExpo = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
+const easeInOutBack = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+const easeInOutQuad = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');
