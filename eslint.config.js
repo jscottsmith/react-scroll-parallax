@@ -54,5 +54,17 @@ export default [js.configs.recommended, {
     'no-redeclare': 'off', // Vitest globals conflict with built-ins
   },
 }, {
+  files: ['documentation/**/*.{js,cjs,mjs}'],
+  languageOptions: {
+    globals: {
+      require: 'readonly',
+      module: 'readonly',
+      exports: 'readonly',
+      __dirname: 'readonly',
+      __filename: 'readonly',
+      process: 'readonly',
+    },
+  },
+}, {
   ignores: ['dist/', 'node_modules/', 'coverage/', 'storybook-static/'],
 }, ...storybook.configs["flat/recommended"]];

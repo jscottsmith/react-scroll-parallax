@@ -2,5 +2,13 @@
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
     "baseUrl": "."
-  }
+  },
+  "include": [
+    "src",
+    "docs",
+    "versioned_docs",
+    "docusaurus.config.js",
+    "sidebars.js",
+    "babel.config.js"
+  ]
 }
