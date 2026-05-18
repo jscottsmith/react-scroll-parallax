@@ -1,0 +1,95 @@
+---
+sidebar_position: 2
+---
+
+import { ExampleRotation } from '/src/components/example-rotation';
+import { RotationAxis } from '/src/components/rotation-axis';
+import { ExampleScale } from '/src/components/example-scale';
+
+# Scroll Effects
+
+More than just translate effects are possible. Here's some examples of the various effects possible.
+
+## Rotation
+
+You can spin an element around it's axis using the [rotate props](/docs/usage/parallax-props#available-css-effects).
+
+### Around the default axis (z-axis)
+
+Use the `rotate` prop to rotate an element around the z-axis. You can pass the `start` and `end` values as `deg` or `turns`. Numbers default to `deg`.
+
+```tsx
+const Component = () => {
+  const parallax = useParallax<HTMLDivElement>({
+    rotate: [0, 360],
+  });
+  return (
+    <div ref={parallax.ref} className="spinner">
+      😵‍💫
+      <div className="diamond">💎</div>
+      <div className="clown">🤡</div>
+      <div className="money">💰</div>
+      <div className="hand">👌🏻</div>
+    </div>
+  );
+};
+```
+
+<ExampleRotation />
+
+### Around the y-axis
+
+Rotations can be applied to any axis, `x`, `y`, or `z`. Here's an example of a rotation around the `y-axis` for perspective:
+
+```tsx
+const Component = () => {
+  const parallax = useParallax<HTMLDivElement>({
+    rotateY: [0, 360],
+  });
+  return (
+    <div ref={parallax.ref} className="spinner">
+      <div className="thumbsup">👍🏻</div>
+      <div className="clap">👏🏻</div>
+      <div className="handsup">🙌🏻</div>
+      <div className="thumbsdown">👎🏻</div>
+    </div>
+  );
+};
+```
+
+<RotationAxis />
+
+## Scale
+
+You can [scale](/docs/usage/parallax-props#available-css-effects) an element up or down and along any axis.
+
+```tsx
+const Component = () => {
+  const mage = useParallax<HTMLDivElement>({
+    scale: [0.5, 1, 'easeInQuad'],
+  });
+
+  const frog = useParallax<HTMLDivElement>({
+    scaleX: [1, 0, 'easeInQuad'],
+  });
+
+  const moon = useParallax<HTMLDivElement>({
+    scale: [1.5, 1, 'easeInQuad'],
+  });
+  return (
+    <div className="spinner">
+      <div className="mage" ref={mage.ref}>
+        🧙🏻‍♂️
+      </div>
+      <div className="frog" ref={frog.ref}>
+        🐸
+      </div>
+      <div className="moon" ref={moon.ref}>
+        🌚
+      </div>
+    </div>
+  );
+};
+```
+
+<ExampleScale />
