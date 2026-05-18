@@ -31,7 +31,7 @@ const config = {
             current: {
               label: '4.0 Beta',
               path: 'v4',
-              banner: 'unreleased',
+              banner: 'none',
             },
             3: {
               label: '3.x',
