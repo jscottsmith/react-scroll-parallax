@@ -2,6 +2,15 @@ packages:
   - '.'
   - 'documentation'
 
+# Companion library; betas often publish <24h before CI runs. pnpm 11 defaults
+# minimumReleaseAge to 1440 minutes for supply-chain verification.
+minimumReleaseAgeExclude:
+  - parallax-controller
+
+overrides:
+  lodash: 4.18.1
+  webpack: 5.97.1
+
 # Allow install-time build scripts for native/tooling deps (pnpm strictDepBuilds).
 allowBuilds:
   esbuild: true
