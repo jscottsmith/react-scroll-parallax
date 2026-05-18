@@ -104,19 +104,6 @@ exports[`given a <ParallaxBanner> component > when the prop { opacity: [ +0, 1 ]
 </DocumentFragment>
 `;
 
-exports[`given a <ParallaxBanner> component > when the prop { rootMargin: { top: +0, right: +0, bottom: +0, left: +0 } } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div
-    style="position: relative; overflow: hidden; width: 100%;"
-  >
-    <div
-      data-testid="layer-0"
-      style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;"
-    />
-  </div>
-</DocumentFragment>
-`;
-
 exports[`given a <ParallaxBanner> component > when the prop { rotate: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div

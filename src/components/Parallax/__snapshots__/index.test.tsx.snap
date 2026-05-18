@@ -61,12 +61,6 @@ exports[`given the <Parallax> component > when the prop { opacity: [ +0, 1 ] } i
 </DocumentFragment>
 `;
 
-exports[`given the <Parallax> component > when the prop { rootMargin: { top: +0, right: +0, bottom: +0, left: +0 } } is given > then it renders without issue and calls create element with props 1`] = `
-<DocumentFragment>
-  <div />
-</DocumentFragment>
-`;
-
 exports[`given the <Parallax> component > when the prop { rotate: [ '0turn', '1turn' ] } is given > then it renders without issue and calls create element with props 1`] = `
 <DocumentFragment>
   <div />
