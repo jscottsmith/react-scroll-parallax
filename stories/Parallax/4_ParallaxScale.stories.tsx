@@ -1,43 +1,35 @@
 import React from 'react';
-import { Parallax } from 'react-scroll-parallax';
+import { Parallax, type ParallaxProps } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from './Parallax.module.css';
+import { bindStory, type StoryFn } from '../storyHelpers';
 
-const Template = (args) => {
-  const props = args;
+const Template: StoryFn<ParallaxProps> = (args) => {
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax {...props} className={styles.parallax}>
+      <Parallax {...args} className={styles.parallax}>
         <Element name="A" />
       </Parallax>
     </Container>
   );
 };
 
-export const WithScale = Template.bind({});
+export const WithScale = bindStory(Template, {
+  args: { scale: [0, 1] },
+});
 
-WithScale.args = {
-  scale: [0, 1],
-};
+export const WithScaleX = bindStory(Template, {
+  args: { scaleX: [0, 1] },
+});
 
-export const WithScaleX = Template.bind({});
+export const WithScaleY = bindStory(Template, {
+  args: { scaleY: [0, 1] },
+});
 
-WithScaleX.args = {
-  scaleX: [0, 1],
-};
-
-export const WithScaleY = Template.bind({});
-
-WithScaleY.args = {
-  scaleY: [0, 1],
-};
-
-export const WithScaleZ = Template.bind({});
-
-WithScaleZ.args = {
-  scaleZ: [0, 1],
-};
+export const WithScaleZ = bindStory(Template, {
+  args: { scaleZ: [0, 1] },
+});
 
 export default {
   title: 'Components / <Parallax> / Scale Props',

@@ -1,25 +1,23 @@
 import React from 'react';
-import { Parallax } from 'react-scroll-parallax';
+import { Parallax, type ParallaxProps } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from './Parallax.module.css';
+import { bindStory, type StoryFn } from '../storyHelpers';
 
-const Template = (args) => {
-  const props = args;
+const Template: StoryFn<ParallaxProps> = (args) => {
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax {...props} className={styles.parallax}>
+      <Parallax {...args} className={styles.parallax}>
         <Element name="A" />
       </Parallax>
     </Container>
   );
 };
 
-export const WithOpacity = Template.bind({});
-
-WithOpacity.args = {
-  opacity: [0, 1],
-};
+export const WithOpacity = bindStory(Template, {
+  args: { opacity: [0, 1] },
+});
 
 export default {
   title: 'Components / <Parallax> / Opacity Prop',
