@@ -1,7 +1,8 @@
 import React from 'react';
 import { ParallaxBanner } from 'react-scroll-parallax';
-import { easeOutCubic } from '../../../../src/easingPresets';
 import { BannerLayer } from 'react-scroll-parallax/dist/components/ParallaxBanner/types';
+
+const easeOutCubic = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
 
 export const AdvancedBannerTop = () => {
   const background: BannerLayer = {

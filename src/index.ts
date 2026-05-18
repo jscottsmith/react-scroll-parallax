@@ -1,7 +1,5 @@
 export type { EasingParam } from 'parallax-controller';
 
-export * from './easingPresets';
-
 export * from './components/Parallax';
 export * from './components/ParallaxBanner';
 export * from './components/ParallaxProvider';
