@@ -10,6 +10,6 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 
 ## Documentation
 
-- [`<Parallax>`](/docs/usage/components/parallax-component)
-- [`<ParallaxBanner>`](/docs/usage/components/parallax-banner-component)
-- [`<ParallaxProvider>`](/docs/usage/components/parallax-provider)
+- [`<Parallax>`](/docs/v4/usage/components/parallax-component)
+- [`<ParallaxBanner>`](/docs/v4/usage/components/parallax-banner-component)
+- [`<ParallaxProvider>`](/docs/v4/usage/components/parallax-provider)

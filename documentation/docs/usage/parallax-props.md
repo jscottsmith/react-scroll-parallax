@@ -6,9 +6,9 @@ sidebar_position: 1
 
 The following hooks and components accept the parallax prop configurations that setup scroll effects in the [Parallax Controller](https://parallax-controller.damnthat.tv/docs/usage/props).
 
-- [`useParallax()`](/docs/usage/hooks/use-parallax)
-- [`<Parallax>`](/docs/usage/components/parallax-component)
-- [`<ParallaxBanner>`](/docs/usage/components/parallax-banner-component)
+- [`useParallax()`](/docs/v4/usage/hooks/use-parallax)
+- [`<Parallax>`](/docs/v4/usage/components/parallax-component)
+- [`<ParallaxBanner>`](/docs/v4/usage/components/parallax-banner-component)
 
 Example with: **`useParallax()`**
 
@@ -72,7 +72,7 @@ The **end** of an effect begins when the bottom of the element exits the top of 
 
 :::info
 
-See a demo of [how progress is determined](/docs/examples/how-it-works#progress-is-relative-to-the-view).
+See a demo of [how progress is determined](/docs/v4/examples/how-it-works#progress-is-relative-to-the-view).
 
 :::
 
