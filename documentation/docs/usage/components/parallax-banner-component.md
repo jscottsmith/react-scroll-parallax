@@ -12,7 +12,7 @@ import { ParallaxBanner, ParallaxBannerLayer } from 'react-scroll-parallax';
 
 ### Working Demos
 
-See some example [code with demos](/docs/examples/banners).
+See some example [code with demos](/docs/v4/examples/banners).
 
 ## Examples
 
@@ -142,7 +142,7 @@ The following are all props that can be passed to the `<ParallaxBanner>` compone
 | Name         |       Type       | Description                                                                                                                |
 | ------------ | :--------------: | -------------------------------------------------------------------------------------------------------------------------- |
 | **disabled** |    `boolean`     | Disables _all_ parallax layers when enabled.                                                                               |
-| **layers**   |     `array`      | Optional `array` of layers -- [see layer props below](/docs/usage/components/parallax-banner-component#banner-layers-prop) |
+| **layers**   |     `array`      | Optional `array` of layers -- [see layer props below](/docs/v4/usage/components/parallax-banner-component#banner-layers-prop) |
 | `...rest`    | `HTMLDivElement` | All other properties are spread to the `<div>`.                                                                            |
 
 :::info
@@ -166,7 +166,7 @@ The `layers` prop takes an array of objects that represent each image (or custom
 | **children** |     `ReactElement`      |         | Custom layer children provided as a React element, for example `<Video />`                                                                                                                                            |
 | **expanded** |        `boolean`        | `true`  | Indicate if the layer should be expanded with negative top/bottom margins so the edges will never be visible.                                                                                                         |
 | **image**    |        `string`         |         | Image source that will be applied as a CSS `background-image` on the layer set to `cover`.                                                                                                                            |
-| `...rest`    | `ParallaxElementConfig` |         | All known parallax props will be passed to `useParallax`. [See all the parallax props](/docs/usage/parallax-props) that this hook will accept. All other properties are spread to the `<div>` representing the layer. |
+| `...rest`    | `ParallaxElementConfig` |         | All known parallax props will be passed to `useParallax`. [See all the parallax props](/docs/v4/usage/parallax-props) that this hook will accept. All other properties are spread to the `<div>` representing the layer. |
 
 ### Example Using ParallaxBannerLayer
 

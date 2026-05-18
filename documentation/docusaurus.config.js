@@ -126,11 +126,11 @@ const config = {
             title: 'Introduction',
             items: [
               {
-                to: '/docs/usage',
+                to: '/docs/v4/usage',
                 label: 'Usage',
               },
               {
-                to: '/docs/examples/how-it-works',
+                to: '/docs/v4/examples/how-it-works',
                 label: 'Examples',
               },
             ],
@@ -139,15 +139,15 @@ const config = {
             title: 'Reference',
             items: [
               {
-                to: '/docs/usage/parallax-props',
+                to: '/docs/v4/usage/parallax-props',
                 label: 'Props',
               },
               {
-                to: '/docs/usage/hooks',
+                to: '/docs/v4/usage/hooks',
                 label: 'Hooks',
               },
               {
-                to: '/docs/usage/components',
+                to: '/docs/v4/usage/components',
                 label: 'Components',
               },
             ],

@@ -80,9 +80,9 @@ The `rootMargin` prop is no longer supported. It previously adjusted measured el
 
 ### What to use instead
 
-- Use [`startScroll` and `endScroll`](/docs/usage/parallax-props#configuration-props) for explicit scroll-range control.
-- Use [`targetElement`](/docs/usage/parallax-props#configuration-props) to drive progress from another element’s visibility.
-- Use [`shouldAlwaysCompleteAnimation`](/docs/usage/parallax-props#configuration-props) when the element should complete its effect range even when it starts or ends inside the viewport.
+- Use [`startScroll` and `endScroll`](/docs/v4/usage/parallax-props#configuration-props) for explicit scroll-range control.
+- Use [`targetElement`](/docs/v4/usage/parallax-props#configuration-props) to drive progress from another element’s visibility.
+- Use [`shouldAlwaysCompleteAnimation`](/docs/v4/usage/parallax-props#configuration-props) when the element should complete its effect range even when it starts or ends inside the viewport.
 
 ```ts
 // before

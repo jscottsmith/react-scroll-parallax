@@ -14,7 +14,7 @@ import { Parallax } from 'react-scroll-parallax';
 
 All props to configure the parallax element, like CSS effects, are documented and managed by the `parallax-controller`.
 
-[See all the parallax props](/docs/usage/parallax-props) that this component will accept.
+[See all the parallax props](/docs/v4/usage/parallax-props) that this component will accept.
 
 ### Non Parallax Props
 
@@ -61,7 +61,7 @@ const SlowAndFast = () => (
 
 :::info
 
-The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See `<ParallaxProvider />` Props](/docs/usage/components/parallax-provider#parallaxprovider-props)
+The `speed` prop simplifies the application of a `translateX` or `translateY` effect based on the `ParallaxController` scroll axis – [See `<ParallaxProvider />` Props](/docs/v4/usage/components/parallax-provider#parallaxprovider-props)
 
 :::
 
