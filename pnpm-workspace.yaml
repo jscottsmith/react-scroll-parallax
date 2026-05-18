@@ -11,7 +11,10 @@ overrides:
   lodash: 4.18.1
   webpack: 5.97.1
 
-# Allow install-time build scripts for native/tooling deps (pnpm strictDepBuilds).
+# pnpm v11+ (strictDepBuilds): list every dep with lifecycle scripts as true
+# (run) or false (skip). core-js postinstall is optional for this repo.
 allowBuilds:
   esbuild: true
   '@parcel/watcher': true
+  core-js: false
+  core-js-pure: false
