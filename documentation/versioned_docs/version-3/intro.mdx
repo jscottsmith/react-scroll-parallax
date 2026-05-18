@@ -17,22 +17,28 @@ import { IntroLogo } from '@site/src/components/intro-logo';
 [![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/surge.yml)
 [![Storybook](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml/badge.svg)](https://github.com/jscottsmith/react-scroll-parallax/actions/workflows/coverage.yml)
 
-React hooks and components to create parallax scroll effects for banners, images or any other DOM elements. Utilizes [Parallax Controller](https://parallax-controller.v1.damnthat.tv) to add vertical or horizontal scrolling based effects to elements. [Optimized](https://parallax-controller.v1.damnthat.tv/docs/performance) to _reduce_ jank on scroll and works with SSR and SSG rendered React apps.
+React hooks and components to create scroll-driven parallax effects for banners, images, or any other DOM elements. Built on [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro), powered by the Web Animations API where each element is driven by a ScrollTimeline or ViewTimeline. Apply translate, rotate, scale, and opacity keyframes with scroll progress on the compositor and don't block the main thread.
 
 If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](/docs/migration-guides/v2-migration-guide).
 
 ## Install
 
+:::tip 4.0 Beta
+
+Drives parallax with the [Web Animations API](https://parallax-controller.damnthat.tv/docs/v2/intro) for scroll-linked animations.
+
+Install the beta tag to try it:
+
+```bash
+npm install react-scroll-parallax@beta
+```
+
+:::
+
 With npm
 
 ```
 npm install react-scroll-parallax
-```
-
-or pnpm
-
-```
-pnpm add react-scroll-parallax
 ```
 
 ## Example

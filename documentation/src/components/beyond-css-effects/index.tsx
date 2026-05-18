@@ -1,5 +1,6 @@
 import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
+import { easeInQuad } from '../../../../src/easingPresets';
 import { BgContainer } from '../bg-container';
 
 export const BeyondCSSEffects = () => {
@@ -9,7 +10,7 @@ export const BeyondCSSEffects = () => {
         translateX={['-400px', '0px']}
         scale={[0.75, 1]}
         rotate={[-180, 0]}
-        easing="easeInQuad"
+        easing={easeInQuad}
         className="rounded-lg bg-gray-600 bg-opacity-50"
         shouldAlwaysCompleteAnimation
       >

@@ -8,6 +8,12 @@ import { useRef } from 'react';
 import { CSSEffect } from 'parallax-controller';
 import { useState } from 'react';
 import type { ParallaxProps } from 'react-scroll-parallax';
+import {
+  easeInCubic,
+  easeInExpo,
+  easeInOutBack,
+  easeInOutQuad,
+} from '../../src/easingPresets';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');
@@ -178,18 +184,18 @@ StartAnimationAtInitialPosition.args = {
 
 const propConfigs: ParallaxProps[] = [
   {
-    translateY: [`100%`, `-100%`, 'easeInOutQuad'],
+    translateY: [`100%`, `-100%`, easeInOutQuad],
     translateX: [`100%`, `-100%`],
   },
   { translateY: [`-100%`, `100%`], translateX: [`-100%`, `100%`] },
   { scale: [0, 1], translateX: [`-100%`, `100%`] },
-  { scale: [1, 0, 'easeInCubic'], translateY: [`-100%`, `100%`] },
-  { rotate: [0, 360], scale: [1, 0, 'easeInOutBack'] },
-  { rotate: [0, -360, 'easeInExpo'], scale: [0, 1] },
+  { scale: [1, 0, easeInCubic], translateY: [`-100%`, `100%`] },
+  { rotate: [0, 360], scale: [1, 0, easeInOutBack] },
+  { rotate: [0, -360, easeInExpo], scale: [0, 1] },
   { translateY: [`-100%`, `100%`], rotateY: [0, 360] },
   {
-    translateX: [`-100%`, `100%`, 'easeInCubic'],
-    opacity: [0, 1, 'easeInCubic'],
+    translateX: [`-100%`, `100%`, easeInCubic],
+    opacity: [0, 1, easeInCubic],
   },
 ];
 

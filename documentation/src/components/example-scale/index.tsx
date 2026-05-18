@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { useParallax } from 'react-scroll-parallax';
+import { easeInQuad } from '../../../../src/easingPresets';
 import { BgContainer } from '../bg-container';
 
 const shared =
@@ -8,17 +9,17 @@ const shared =
 
 export const ExampleScale = () => {
   const parallaxUp = useParallax<HTMLDivElement>({
-    scale: [0.5, 1, 'easeInQuad'],
+    scale: [0.5, 1, easeInQuad],
     shouldAlwaysCompleteAnimation: true,
   });
 
   const parallaxAxisX = useParallax<HTMLDivElement>({
-    scaleX: [1, 0, 'easeInQuad'],
+    scaleX: [1, 0, easeInQuad],
     shouldAlwaysCompleteAnimation: true,
   });
 
   const parallaxDown = useParallax<HTMLDivElement>({
-    scale: [1.5, 1, 'easeInQuad'],
+    scale: [1.5, 1, easeInQuad],
     shouldAlwaysCompleteAnimation: true,
   });
   return (

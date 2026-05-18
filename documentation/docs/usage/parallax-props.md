@@ -45,7 +45,7 @@ The following properties can be provided to configure the scroll animation:
 | Name                                 |          Type          | Default | Description                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------------------------------ | :--------------------: | :------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **speed**                            |        `number`        |         | A value representing the elements scroll speed. If less than zero scroll will appear slower. If greater than zero scroll will appear faster.                                                                                                                                                                                                                                             |
-| **easing**                           | `string` or `number[]` |         | String representing an [easing preset](#easing-presets) or array of params to supply to a [cubic bezier easing function](#cubic-bezier-easing-function).                                                                                                                                                                                                                                 |
+| **easing**                           | `string`               |         | CSS [timing function](#timing-functions) string (e.g. `ease-in-out` or `cubic-bezier(...)`) applied to all CSS effects.                                                                                                                                                                                                                                                                    |
 | **rootMargin**                       |        `object`        |         | Margin to be applied as the bounds around an element. This will affect when an element is determined to be in the viewport. Example: `{ top: 100, right: 100, bottom: 100, left: 100 }`. N.B. You must provide all fields of the rootMargin object for this to work properly, even if those values are 0. Example:✅ `{ top: 0, right: 0, bottom: 100, left: 0 }`, ❌ `{ bottom: 100 }`. |
 | **disabled**                         |       `boolean`        | `false` | Disables parallax effects on individual elements when `true`.                                                                                                                                                                                                                                                                                                                            |
 | **shouldAlwaysCompleteAnimation**    |       `boolean`        | `false` | Always start and end animations at the given effect values - if the element is positioned inside the view when scroll is at zero or ends in view at final scroll position, the initial and final positions are used to determine progress instead of the scroll view size.                                                                                                               |
@@ -113,67 +113,69 @@ All available callbacks:
 | **onEnter**          | `function` | Callback for when an element enters the viewport.                                                            |
 | **onExit**           | `function` | Callback for when an element exits the viewport.                                                             |
 
-## Easing Presets
+## Timing Functions
 
-Example of setting easing:
+Set a CSS timing function on the `easing` prop. Use standard keywords or a `cubic-bezier(...)` string (WAAPI accepts the same values as CSS).
 
 ```ts
 useParallax({
-  easing: 'easeInCubic',
+  easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)', // formerly "easeInCubic"
 });
 ```
 
-The following easing values are preset and can be used as easing
+Common timing functions:
 
-```
-ease
-easeIn
-easeOut
-easeInOut
-easeInQuad
-easeInCubic
-easeInQuart
-easeInQuint
-easeInSine
-easeInExpo
-easeInCirc
-easeOutQuad
-easeOutCubic
-easeOutQuart
-easeOutQuint
-easeOutSine
-easeOutExpo
-easeOutCirc
-easeInOutQuad
-easeInOutCubic
-easeInOutQuart
-easeInOutQuint
-easeInOutSine
-easeInOutExpo
-easeInOutCirc
-easeInBack
-easeOutBack
-easeInOutBack
-```
+| Keyword (legacy name) | Timing function |
+| --------------------- | --------------- |
+| `ease` | `ease` |
+| `easeIn` | `ease-in` |
+| `easeOut` | `ease-out` |
+| `easeInOut` | `ease-in-out` |
+| `easeInQuad` | `cubic-bezier(0.55, 0.085, 0.68, 0.53)` |
+| `easeInCubic` | `cubic-bezier(0.55, 0.055, 0.675, 0.19)` |
+| `easeInQuart` | `cubic-bezier(0.895, 0.03, 0.685, 0.22)` |
+| `easeInQuint` | `cubic-bezier(0.755, 0.05, 0.855, 0.06)` |
+| `easeInSine` | `cubic-bezier(0.47, 0, 0.745, 0.715)` |
+| `easeInExpo` | `cubic-bezier(0.95, 0.05, 0.795, 0.035)` |
+| `easeInCirc` | `cubic-bezier(0.6, 0.04, 0.98, 0.335)` |
+| `easeOutQuad` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` |
+| `easeOutCubic` | `cubic-bezier(0.215, 0.61, 0.355, 1)` |
+| `easeOutQuart` | `cubic-bezier(0.165, 0.84, 0.44, 1)` |
+| `easeOutQuint` | `cubic-bezier(0.23, 1, 0.32, 1)` |
+| `easeOutSine` | `cubic-bezier(0.39, 0.575, 0.565, 1)` |
+| `easeOutExpo` | `cubic-bezier(0.19, 1, 0.22, 1)` |
+| `easeOutCirc` | `cubic-bezier(0.075, 0.82, 0.165, 1)` |
+| `easeInOutQuad` | `cubic-bezier(0.455, 0.03, 0.515, 0.955)` |
+| `easeInOutCubic` | `cubic-bezier(0.645, 0.045, 0.355, 1)` |
+| `easeInOutQuart` | `cubic-bezier(0.77, 0, 0.175, 1)` |
+| `easeInOutQuint` | `cubic-bezier(0.86, 0, 0.07, 1)` |
+| `easeInOutSine` | `cubic-bezier(0.445, 0.05, 0.55, 0.95)` |
+| `easeInOutExpo` | `cubic-bezier(0.87, 0, 0.13, 1)` |
+| `easeInOutCirc` | `cubic-bezier(0.785, 0.135, 0.15, 0.86)` |
+| `easeInBack` | `cubic-bezier(0.6, -0.28, 0.735, 0.045)` |
+| `easeOutBack` | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` |
+| `easeInOutBack` | `cubic-bezier(0.68, -0.55, 0.265, 1.55)` |
+
+Named exports are also available from `react-scroll-parallax` (e.g. `easeInCubic`).
 
 ### Easing Individual Effects
 
-You can provide various easing values to each effect by defining it as the third element in the array
+Pass a timing function as the third element in an effect tuple:
 
 ```ts
 useParallax({
-  translateY: [-100, 100, 'easeInOut'],
-  scale: [0, 1, 'easeOutBack'],
+  translateY: [-100, 100, 'ease-in-out'],
+  scale: [0, 1, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'],
 });
 ```
 
 ### Cubic Bezier Easing Function
 
-Just like with CSS `cubic-bezier(0.2,-0.67,1,-0.62);`, you can supply the 4 params to a custom bezier function.
+Provide a full `cubic-bezier(...)` string on `easing` or on an effect tuple:
 
 ```ts
 useParallax({
   translateY: [-100, 100],
-  easing: [0.2, -0.6, 1, -0.6],
+  easing: 'cubic-bezier(0.2, -0.6, 1, -0.6)',
 });
 ```

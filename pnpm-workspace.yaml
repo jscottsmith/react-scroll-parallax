@@ -1,5 +1,6 @@
 packages:
   - '.'
+  - 'documentation'
 
 # Allow install-time build scripts for native/tooling deps (pnpm strictDepBuilds).
 allowBuilds:
