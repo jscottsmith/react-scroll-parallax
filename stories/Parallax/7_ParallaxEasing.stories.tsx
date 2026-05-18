@@ -2,6 +2,7 @@ import React from 'react';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import styles from './Parallax.module.css';
+import { bindStory, type StoryFn } from '../storyHelpers';
 
 /** Storybook-only: demo labels mapped to valid CSS/WAAPI timing values. */
 const EASING_OPTIONS = [
@@ -110,7 +111,7 @@ const EASING_OPTIONS = [
 
 const easingLabels = EASING_OPTIONS.map((option) => option.label);
 
-const Template = (args) => {
+const Template: StoryFn<{ easing?: string }> = (args) => {
   const selected = EASING_OPTIONS.find((option) => option.label === args.easing);
   const amount = 5;
   const offA = -50;
@@ -141,17 +142,18 @@ const Template = (args) => {
   );
 };
 
-export const WithEasing = Template.bind({});
-WithEasing.argTypes = {
-  easing: {
-    control: { type: 'select', options: easingLabels },
+export const WithEasing = bindStory(Template, {
+  argTypes: {
+    easing: {
+      control: { type: 'select', options: easingLabels },
+    },
   },
-};
-WithEasing.args = {
-  easing: easingLabels[0],
-};
+  args: {
+    easing: easingLabels[0],
+  },
+});
 
-const Template2 = () => {
+const Template2: StoryFn = () => {
   const amount = 16;
   const offA = 0;
   const offB = 500;
@@ -214,7 +216,7 @@ const Template2 = () => {
   );
 };
 
-export const WithAllEasing = Template2.bind({});
+export const WithAllEasing = Template2;
 
 export default {
   title: 'Components / <Parallax> / Easing Prop',

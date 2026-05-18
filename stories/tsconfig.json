@@ -1,7 +1,15 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "react-scroll-parallax": ["../src/index.ts"]

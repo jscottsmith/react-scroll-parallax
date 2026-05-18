@@ -1,14 +1,21 @@
 import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
+import type { CSSEffect } from 'parallax-controller';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from './Parallax.module.css';
+import { bindStory, splitEffect, type StoryFn } from '../storyHelpers';
 
-const Template = (args) => {
-  const props = Object.entries(args).reduce((acc: any, entry: any) => {
-    acc[entry[0]] = entry[1].split(',');
-    return acc;
-  }, {} as any);
+type RotationStoryArgs = Record<string, string>;
+
+const Template: StoryFn<RotationStoryArgs> = (args) => {
+  const props = Object.entries(args).reduce<Record<string, CSSEffect>>(
+    (acc, [key, value]) => {
+      acc[key] = splitEffect(value);
+      return acc;
+    },
+    {}
+  );
   return (
     <Container scrollAxis="vertical" className={styles.elements}>
       <Parallax {...props} className={styles.parallax}>
@@ -18,56 +25,45 @@ const Template = (args) => {
   );
 };
 
-export const WithRotation = Template.bind({});
-WithRotation.args = {
-  rotate: '0deg,360deg',
-};
+export const WithRotation = bindStory(Template, {
+  args: { rotate: '0deg,360deg' },
+});
 
-export const WithRotationX = Template.bind({});
-WithRotationX.args = {
-  rotateX: '0deg,360deg',
-};
+export const WithRotationX = bindStory(Template, {
+  args: { rotateX: '0deg,360deg' },
+});
 
-export const WithRotationY = Template.bind({});
-WithRotationY.args = {
-  rotateY: '0deg,360deg',
-};
+export const WithRotationY = bindStory(Template, {
+  args: { rotateY: '0deg,360deg' },
+});
 
-export const WithRotationZ = Template.bind({});
-WithRotationZ.args = {
-  rotateZ: '0deg,360deg',
-};
+export const WithRotationZ = bindStory(Template, {
+  args: { rotateZ: '0deg,360deg' },
+});
 
-export const WithRotationXY = Template.bind({});
-WithRotationXY.args = {
-  rotateX: '0deg,360deg',
-  rotateY: '0deg,360deg',
-};
+export const WithRotationXY = bindStory(Template, {
+  args: { rotateX: '0deg,360deg', rotateY: '0deg,360deg' },
+});
 
-export const WithRotationXZ = Template.bind({});
-WithRotationXZ.args = {
-  rotateX: '0deg,360deg',
-  rotateZ: '0deg,360deg',
-};
+export const WithRotationXZ = bindStory(Template, {
+  args: { rotateX: '0deg,360deg', rotateZ: '0deg,360deg' },
+});
 
-export const WithRotationYZ = Template.bind({});
-WithRotationYZ.args = {
-  rotateY: '0deg,360deg',
-  rotateZ: '0deg,360deg',
-};
+export const WithRotationYZ = bindStory(Template, {
+  args: { rotateY: '0deg,360deg', rotateZ: '0deg,360deg' },
+});
 
-export const WithRotationXYZ = Template.bind({});
-WithRotationXYZ.args = {
-  rotateX: '0deg,360deg',
-  rotateY: '0deg,360deg',
-  rotateZ: '0deg,360deg',
-};
+export const WithRotationXYZ = bindStory(Template, {
+  args: {
+    rotateX: '0deg,360deg',
+    rotateY: '0deg,360deg',
+    rotateZ: '0deg,360deg',
+  },
+});
 
-export const WithTranslateYAndRotation = Template.bind({});
-WithTranslateYAndRotation.args = {
-  translateY: '-100,100',
-  rotate: '0deg,360deg',
-};
+export const WithTranslateYAndRotation = bindStory(Template, {
+  args: { translateY: '-100,100', rotate: '0deg,360deg' },
+});
 
 export default {
   title: 'Components / <Parallax> / Rotate Props',

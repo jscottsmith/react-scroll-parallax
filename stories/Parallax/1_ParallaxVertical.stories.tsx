@@ -1,185 +1,201 @@
-import React, { useEffect } from 'react';
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import React, { useEffect, useRef, useState } from 'react';
+import { Parallax, ParallaxProvider, type ParallaxProps } from 'react-scroll-parallax';
+import { CSSEffect } from 'parallax-controller';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
 import styles from './Parallax.module.css';
-import { useRef } from 'react';
-import { CSSEffect } from 'parallax-controller';
-import { useState } from 'react';
-import type { ParallaxProps } from 'react-scroll-parallax';
+import { createStory, splitEffect } from '../storyHelpers';
 
 const easeInCubic = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
 const easeInExpo = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
 const easeInOutBack = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
 const easeInOutQuad = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
 
-export const WithYOffsets = (args) => {
-  const a = args.y1.split(',');
-  const b = args.y2.split(',');
-  return (
-    <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax translateY={a} className={styles.parallax}>
-        <Element name="1" />
-      </Parallax>
-      <Parallax translateY={b} className={styles.parallax}>
-        <Element name="2" />
-      </Parallax>
-    </Container>
-  );
-};
+export const WithYOffsets = createStory(
+  (args: { y1: string; y2: string }) => {
+    const a = splitEffect(args.y1);
+    const b = splitEffect(args.y2);
+    return (
+      <Container scrollAxis="vertical" className={styles.elements}>
+        <Parallax translateY={a} className={styles.parallax}>
+          <Element name="1" />
+        </Parallax>
+        <Parallax translateY={b} className={styles.parallax}>
+          <Element name="2" />
+        </Parallax>
+      </Container>
+    );
+  },
+  {
+    args: {
+      y1: '-50%,50%',
+      y2: '50%,-50%',
+    },
+  }
+);
 
-WithYOffsets.args = {
-  y1: '-50%,50%',
-  y2: '50%,-50%',
-};
+export const WithXOffsets = createStory(
+  (args: { x1: string; x2: string }) => {
+    const a = splitEffect(args.x1);
+    const b = splitEffect(args.x2);
+    return (
+      <Container scrollAxis="vertical" className={styles.elements}>
+        <Parallax translateX={a} className={styles.parallax}>
+          <Element name="1" />
+        </Parallax>
+        <Parallax translateX={b} className={styles.parallax}>
+          <Element name="2" />
+        </Parallax>
+      </Container>
+    );
+  },
+  {
+    args: {
+      x1: '-50%,50%',
+      x2: '50%,-50%',
+    },
+  }
+);
 
-export const WithXOffsets = (args) => {
-  const a = args.x1.split(',');
-  const b = args.x2.split(',');
-  return (
-    <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax translateX={a} className={styles.parallax}>
-        <Element name="1" />
-      </Parallax>
-      <Parallax translateX={b} className={styles.parallax}>
-        <Element name="2" />
-      </Parallax>
-    </Container>
-  );
-};
+export const WithXAndYOffsets = createStory(
+  (args: { x1: string; x2: string; y1: string; y2: string }) => {
+    const xa = splitEffect(args.x1);
+    const xb = splitEffect(args.x2);
+    const ya = splitEffect(args.y1);
+    const yb = splitEffect(args.y2);
+    return (
+      <Container scrollAxis="vertical" className={styles.elements}>
+        <Parallax translateX={xa} translateY={ya} className={styles.parallax}>
+          <Element name="1" />
+        </Parallax>
+        <Parallax translateX={xb} translateY={yb} className={styles.parallax}>
+          <Element name="2" />
+        </Parallax>
+      </Container>
+    );
+  },
+  {
+    args: {
+      x1: '-50%,50%',
+      x2: '50%,-50%',
+      y1: '-50%,50%',
+      y2: '50%,-50%',
+    },
+  }
+);
 
-WithXOffsets.args = {
-  x1: '-50%,50%',
-  x2: '50%,-50%',
-};
+export const WithVaryingYOffsets = createStory(
+  (args: { MinOffset: number; MaxOffset: number }) => {
+    const amount = 5;
+    const offA = args.MinOffset;
+    const offB = args.MaxOffset;
+    const unit = '%';
+    const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
 
-export const WithXAndYOffsets = (args) => {
-  const xa = args.x1.split(',');
-  const xb = args.x2.split(',');
-  const ya = args.y1.split(',');
-  const yb = args.y2.split(',');
-  return (
-    <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax translateX={xa} translateY={ya} className={styles.parallax}>
-        <Element name="1" />
-      </Parallax>
-      <Parallax translateX={xb} translateY={yb} className={styles.parallax}>
-        <Element name="2" />
-      </Parallax>
-    </Container>
-  );
-};
-
-WithXAndYOffsets.args = {
-  x1: '-50%,50%',
-  x2: '50%,-50%',
-  y1: '-50%,50%',
-  y2: '50%,-50%',
-};
-
-export const WithVaryingYOffsets = (args) => {
-  const amount = 5;
-  const offA = args.MinOffset;
-  const offB = args.MaxOffset;
-  const unit = '%';
-  const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
-
-  return (
-    <ParallaxProvider>
-      <div className="vertical">
-        <div className={`${styles.elements} ${styles.linear}`}>
-          {elements.map((_, i) => {
-            const n = i - amount;
-            return (
-              <Parallax
-                key={n}
-                className={styles.smallLinear}
-                translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
-              >
-                <Element name={n * -1} />
-              </Parallax>
-            );
-          })}
+    return (
+      <ParallaxProvider>
+        <div className="vertical">
+          <div className={`${styles.elements} ${styles.linear}`}>
+            {elements.map((_, i) => {
+              const n = i - amount;
+              return (
+                <Parallax
+                  key={n}
+                  className={styles.smallLinear}
+                  translateY={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                >
+                  <Element name={n * -1} />
+                </Parallax>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </ParallaxProvider>
-  );
-};
+      </ParallaxProvider>
+    );
+  },
+  {
+    args: {
+      MaxOffset: 50,
+      MinOffset: -50,
+    },
+  }
+);
 
-WithVaryingYOffsets.args = {
-  MaxOffset: 50,
-  MinOffset: -50,
-};
+export const WithVaryingXOffsets = createStory(
+  (args: { MinOffset: number; MaxOffset: number }) => {
+    const amount = 5;
+    const offA = args.MinOffset;
+    const offB = args.MaxOffset;
+    const unit = '%';
+    const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
 
-export const WithVaryingXOffsets = (args) => {
-  const amount = 5;
-  const offA = args.MinOffset;
-  const offB = args.MaxOffset;
-  const unit = '%';
-  const elements = new Array(amount * 2 + 1).fill(null).map((x, i) => i);
-
-  return (
-    <ParallaxProvider>
-      <div className="vertical">
-        <div className={`${styles.elements} ${styles.linear}`}>
-          {elements.map((_, i) => {
-            const n = i - amount;
-            return (
-              <Parallax
-                key={n}
-                className={styles.smallLinear}
-                translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
-              >
-                <Element name={n * -1} />
-              </Parallax>
-            );
-          })}
+    return (
+      <ParallaxProvider>
+        <div className="vertical">
+          <div className={`${styles.elements} ${styles.linear}`}>
+            {elements.map((_, i) => {
+              const n = i - amount;
+              return (
+                <Parallax
+                  key={n}
+                  className={styles.smallLinear}
+                  translateX={[`${offA * n}${unit}`, `${offB * n}${unit}`]}
+                >
+                  <Element name={n * -1} />
+                </Parallax>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </ParallaxProvider>
-  );
-};
+      </ParallaxProvider>
+    );
+  },
+  {
+    args: {
+      MaxOffset: 50,
+      MinOffset: -50,
+    },
+  }
+);
 
-WithVaryingXOffsets.args = {
-  MaxOffset: 50,
-  MinOffset: -50,
-};
+export const StartAnimationAtInitialPosition = createStory(
+  (args: { startTranslateX: number; endTranslateX: number }) => {
+    const amount = 10;
+    const unit = 'px';
+    const elements = new Array(amount).fill(null).map((x, i) => i);
 
-export const StartAnimationAtInitialPosition = (args) => {
-  const amount = 10;
-  const unit = 'px';
-  const elements = new Array(amount).fill(null).map((x, i) => i);
-
-  return (
-    <ParallaxProvider>
-      <div className="w-full flex" style={{ height: '300vh' }}>
-        <div className="w-full flex flex-col items-center">
-          {elements.map((_, i) => {
-            return (
-              <Parallax
-                key={i}
-                className={styles.smallLinear}
-                translateX={[
-                  `${args.startTranslateX}${unit}`,
-                  `${args.endTranslateX}${unit}`,
-                ]}
-                shouldAlwaysCompleteAnimation
-              >
-                <Element name={i} />
-              </Parallax>
-            );
-          })}
+    return (
+      <ParallaxProvider>
+        <div className="w-full flex" style={{ height: '300vh' }}>
+          <div className="w-full flex flex-col items-center">
+            {elements.map((_, i) => {
+              return (
+                <Parallax
+                  key={i}
+                  className={styles.smallLinear}
+                  translateX={[
+                    `${args.startTranslateX}${unit}`,
+                    `${args.endTranslateX}${unit}`,
+                  ]}
+                  shouldAlwaysCompleteAnimation
+                >
+                  <Element name={i} />
+                </Parallax>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </ParallaxProvider>
-  );
-};
-
-StartAnimationAtInitialPosition.args = {
-  startTranslateX: 80,
-  endTranslateX: -80,
-};
+      </ParallaxProvider>
+    );
+  },
+  {
+    args: {
+      startTranslateX: 80,
+      endTranslateX: -80,
+    },
+  }
+);
 
 const propConfigs: ParallaxProps[] = [
   {
@@ -220,31 +236,34 @@ export const WithAHundredElements = () => {
   );
 };
 
-export const WithParallaxElementsGloballyDisabled = (args) => {
-  const amount = 100;
-  const elements = new Array(amount).fill(null).map((x, i) => i);
+export const WithParallaxElementsGloballyDisabled = createStory(
+  (args: { isDisabled: boolean }) => {
+    const amount = 100;
+    const elements = new Array(amount).fill(null).map((x, i) => i);
 
-  return (
-    <Container scrollAxis="vertical" isDisabled={args.isDisabled}>
-      <div className={styles.elements}>
-        {elements.map((_, i) => {
-          const props: ParallaxProps = propConfigs[i % propConfigs.length];
-          return (
-            <div key={i} className={styles.small} style={{ perspective: 800 }}>
-              <Parallax {...props}>
-                <Element name={i + 1} />
-              </Parallax>
-            </div>
-          );
-        })}
-      </div>
-    </Container>
-  );
-};
-
-WithParallaxElementsGloballyDisabled.args = {
-  isDisabled: true,
-};
+    return (
+      <Container scrollAxis="vertical" isDisabled={args.isDisabled}>
+        <div className={styles.elements}>
+          {elements.map((_, i) => {
+            const props: ParallaxProps = propConfigs[i % propConfigs.length];
+            return (
+              <div key={i} className={styles.small} style={{ perspective: 800 }}>
+                <Parallax {...props}>
+                  <Element name={i + 1} />
+                </Parallax>
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    );
+  },
+  {
+    args: {
+      isDisabled: true,
+    },
+  }
+);
 
 export const InsideADiv = () => {
   const amount = 2;
@@ -274,44 +293,47 @@ export const InsideADiv = () => {
   );
 };
 
-export const WithDefinedStartEndScroll = (args) => {
-  const a = [0, window.innerWidth / 2];
-  const b = [0, -window.innerWidth / 2];
-  return (
-    <Container scrollAxis="vertical" className={styles.elements}>
-      <Parallax
-        translateX={a}
-        startScroll={args.startScroll}
-        endScroll={args.endScroll}
-        className="fixed top-0 left-0 w-32 h-32"
-      >
-        <Element name="1" />
-      </Parallax>
-      <Parallax
-        translateX={b}
-        startScroll={args.startScroll}
-        endScroll={args.endScroll}
-        className="fixed top-0 right-0 w-32 h-32"
-      >
-        <Element name="2" />
-      </Parallax>
-    </Container>
-  );
-};
-
-WithDefinedStartEndScroll.args = {
-  startScroll: 0,
-  endScroll: 1000,
-};
+export const WithDefinedStartEndScroll = createStory(
+  (args: { startScroll: number; endScroll: number }) => {
+    const a: CSSEffect = [0, window.innerWidth / 2];
+    const b: CSSEffect = [0, -window.innerWidth / 2];
+    return (
+      <Container scrollAxis="vertical" className={styles.elements}>
+        <Parallax
+          translateX={a}
+          startScroll={args.startScroll}
+          endScroll={args.endScroll}
+          className="fixed top-0 left-0 w-32 h-32"
+        >
+          <Element name="1" />
+        </Parallax>
+        <Parallax
+          translateX={b}
+          startScroll={args.startScroll}
+          endScroll={args.endScroll}
+          className="fixed top-0 right-0 w-32 h-32"
+        >
+          <Element name="2" />
+        </Parallax>
+      </Container>
+    );
+  },
+  {
+    args: {
+      startScroll: 0,
+      endScroll: 1000,
+    },
+  }
+);
 
 export const WithDefinedTargetElement = () => {
   const a: CSSEffect = [0, 200];
   const b: CSSEffect = [0, -200];
-  const targetRef = useRef();
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [targetElement, setElement] = useState<HTMLElement | undefined>();
 
-  const [targetElement, setElement] = useState();
   useEffect(() => {
-    setElement(targetRef.current);
+    setElement(targetRef.current ?? undefined);
   }, []);
 
   return (
