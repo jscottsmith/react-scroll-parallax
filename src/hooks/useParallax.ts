@@ -56,7 +56,6 @@ export function useParallax<T extends HTMLElement>(props: ParallaxProps) {
     props.onExit,
     props.onProgressChange,
     props.opacity,
-    props.rootMargin,
     props.rotate,
     props.rotateX,
     props.rotateY,
