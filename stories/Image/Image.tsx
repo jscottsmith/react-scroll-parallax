@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParallaxController } from '../../src';
+import { useParallaxController } from 'react-scroll-parallax';
 import styles from './Image.module.scss';
 
 export const Image = (props) => {

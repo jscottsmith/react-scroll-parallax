@@ -1,5 +1,5 @@
 import React from 'react';
-import { Parallax } from '../../src';
+import { Parallax } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import styles from './Parallax.module.css';

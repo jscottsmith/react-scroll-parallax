@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropsWithChildren } from 'react';
-import { ParallaxProvider } from '../src';
-import { ParallaxProviderProps } from '../src/components/ParallaxProvider/types';
+import { ParallaxProvider } from 'react-scroll-parallax';
+import type { ParallaxProviderProps } from 'react-scroll-parallax';
 
 type ContainerProps = PropsWithChildren<{
   className?: string;

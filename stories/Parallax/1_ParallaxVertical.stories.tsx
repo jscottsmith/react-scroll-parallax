@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Parallax, ParallaxProvider } from '../../src';
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Element } from '../Element/Element';
 import { Container } from '../Container';
 import { ScrollContainer } from '../ScrollContainer';
@@ -7,7 +7,7 @@ import styles from './Parallax.module.css';
 import { useRef } from 'react';
 import { CSSEffect } from 'parallax-controller';
 import { useState } from 'react';
-import { ParallaxProps } from '../../src/components/Parallax/types';
+import type { ParallaxProps } from 'react-scroll-parallax';
 
 export const WithYOffsets = (args) => {
   const a = args.y1.split(',');

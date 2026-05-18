@@ -1,6 +1,9 @@
 import React from 'react';
-import { ParallaxBanner, ParallaxProvider } from '../../src';
-import { ParallaxBannerLayer } from '../../src/components/ParallaxBanner/components/ParallaxBannerLayer';
+import {
+  ParallaxBanner,
+  ParallaxBannerLayer,
+  ParallaxProvider,
+} from 'react-scroll-parallax';
 import styles from './ParallaxBanner.module.scss';
 
 const Log = () => {
