@@ -12,24 +12,24 @@
 
 React hooks and components to create scroll-driven parallax effects for banners, images, or any other DOM elements. Built on [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro), powered by the Web Animations API where each element is driven by a ScrollTimeline or ViewTimeline. Apply translate, rotate, scale, and opacity keyframes with scroll progress on the compositor and don't block the main thread.
 
-If you're coming from [V2](https://github.com/jscottsmith/react-scroll-parallax/tree/v2), here's a [migration guide](https://react-scroll-parallax.damnthat.tv/docs/migration-guides/v2-migration-guide).
-
 ## Install
-
-### 4.0 Beta
-
-Drives parallax with the [Web Animations API](https://parallax-controller.damnthat.tv/docs/v2/intro) for scroll-linked animations.
-
-Install the beta tag to try it:
-
-```bash
-npm install react-scroll-parallax@beta
-```
 
 With npm
 
 ```
 npm install react-scroll-parallax
+```
+
+:::tip Try 4.0 Beta
+
+Uses the latest [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro) built with **Web Animations API** for scroll-driven animations.
+
+If you're upgrading from V3, here's a [migration guide to the v4 beta](/docs/v4/migration-guides/v3-migration-guide).
+
+:::
+
+```
+npm install react-scroll-parallax@beta
 ```
 
 ## Example
