@@ -6,7 +6,7 @@ import { EasingDemo } from '/src/components/easing-demo';
 
 # Easing Animation
 
-You can provide [CSS timing functions](/docs/v4/usage/parallax-props#timing-functions) or [cubic-bezier curve params](/docs/v4/usage/parallax-props#cubic-bezier-easing-function) to the `useParallax` hook or `<Parallax />` component.
+You can provide [CSS timing functions](/docs/v4/usage/parallax-props#easing) or `cubic-bezier(...)` curves to the `useParallax` hook or `<Parallax />` component.
 
 ## Example using a timing function
 
@@ -32,19 +32,19 @@ When defining an `easing` prop like above, ALL provided CSS effects will be ease
 
 ## Custom cubic-bezier
 
-Define a custom cubic-bezier curve by providing the 4 params to the `easing` prop.
+Define a custom cubic-bezier curve by providing the 4 params as a CSS `cubic-bezier(...)` string.
 
 ```tsx
 function Component() {
   const parallax = useParallax<HTMLDivElement>({
-    easing: [1, -0.75, 0.5, 1.34],
+    easing: 'cubic-bezier(1, -0.75, 0.5, 1.34)',
     translateX: [0, 100],
   });
   return <div ref={parallax.ref} />;
 }
 ```
 
-<EasingDemo eased={{ easing: [1, -0.75, 0.5, 1.34] }} />
+<EasingDemo eased={{ easing: 'cubic-bezier(1, -0.75, 0.5, 1.34)' }} />
 
 ## Independent Easing
 
