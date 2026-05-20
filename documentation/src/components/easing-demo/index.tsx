@@ -1,6 +1,5 @@
 import React from 'react';
-import { useParallax } from 'react-scroll-parallax';
-import { ParallaxProps } from 'react-scroll-parallax/dist/types';
+import { useParallax, type ParallaxProps } from 'react-scroll-parallax';
 import { BgContainer } from '../bg-container';
 
 export const EasingDemo = (props: {
