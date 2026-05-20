@@ -17,7 +17,44 @@ const config = {
   organizationName: 'jscottsmith', // Usually your GitHub org/user name.
   projectName: 'react-scroll-parallax', // Usually your repo name.
 
-  plugins: [require.resolve('./src/plugins/tailwind-config.js')],
+  plugins: [
+    require.resolve('./src/plugins/tailwind-config.js'),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/docs/v4/examples/how-it-works',
+            from: '/docs/examples/how-it-works',
+          },
+          {
+            to: '/docs/v4/examples/banners',
+            from: '/docs/examples/banners',
+          },
+          {
+            to: '/docs/v4/examples/advanced-banners',
+            from: '/docs/examples/advanced-banners',
+          },
+          {
+            to: '/docs/v4/examples/custom-effects',
+            from: '/docs/examples/custom-effects',
+          },
+          {
+            to: '/docs/v4/examples/easing',
+            from: '/docs/examples/easing',
+          },
+          {
+            to: '/docs/v4/examples/horizontal-scroll',
+            from: '/docs/examples/horizontal-scroll',
+          },
+          {
+            to: '/docs/v4/examples/scroll-effects',
+            from: '/docs/examples/scroll-effects',
+          },
+        ],
+      },
+    ],
+  ],
 
   presets: [
     [
