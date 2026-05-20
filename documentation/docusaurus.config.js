@@ -17,6 +17,8 @@ const config = {
   organizationName: 'jscottsmith', // Usually your GitHub org/user name.
   projectName: 'react-scroll-parallax', // Usually your repo name.
 
+  plugins: [require.resolve('./src/plugins/tailwind-config.js')],
+
   presets: [
     [
       'classic',

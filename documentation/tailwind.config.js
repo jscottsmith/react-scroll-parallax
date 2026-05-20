@@ -1,5 +1,11 @@
+const path = require('path');
+
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    path.join(__dirname, 'src/**/*.{js,jsx,ts,tsx}'),
+    path.join(__dirname, 'docs/**/*.mdx'),
+    path.join(__dirname, 'versioned_docs/**/*.mdx'),
+  ],
   theme: {
     extend: {
       borderRadius: {
