@@ -27,6 +27,16 @@
   border: 1px solid #eee;
 }
 
+/*
+ * Clip demo content without creating a scroll container (unlike overflow: hidden).
+ * clip-path paints a hard clip that still works when WAAPI applies compositor
+ * transforms; overflow: clip alone is unreliable with 3D rendering contexts.
+ */
+.demo-bg-clip {
+  overflow: clip;
+  clip-path: inset(0 round 0.375rem);
+}
+
 html[data-theme='dark'] .px-bg {
   background-image: url(/static/img/bg-px.svg);
   background-color: rgb(40, 42, 54);

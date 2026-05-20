@@ -13,14 +13,16 @@ export const RotationAxis = () => {
   });
   return (
     <BgContainer>
-      <div
-        ref={parallax.ref}
-        className="flex items-center gap-sm md:gap-lg justify-center text-4xl"
-      >
-        <div className={cx(shared)}>👍🏻</div>
-        <div className={cx(shared)}>👏🏻</div>
-        <div className={cx(shared)}>🙌🏻</div>
-        <div className={cx(shared)}>👎🏻</div>
+      <div style={{ perspective: '250px' }}>
+        <div
+          ref={parallax.ref}
+          className="flex items-center gap-sm md:gap-lg justify-center text-4xl"
+        >
+          <div className={cx(shared)}>👍🏻</div>
+          <div className={cx(shared)}>👏🏻</div>
+          <div className={cx(shared)}>🙌🏻</div>
+          <div className={cx(shared)}>👎🏻</div>
+        </div>
       </div>
     </BgContainer>
   );
