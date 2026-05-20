@@ -108,8 +108,7 @@ const config = {
             label: 'Components',
           },
           {
-            type: 'doc',
-            docId: 'examples/how-it-works',
+            to: '/docs/v4/examples/how-it-works',
             position: 'left',
             label: 'Examples',
           },

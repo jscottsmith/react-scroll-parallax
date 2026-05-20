@@ -112,4 +112,4 @@ export default function Page() {
 }
 ```
 
-That's it! Now that `react-scroll-parallax` is working in your Next.js application, you can add your own effects. See more on [how it works](/docs/examples/how-it-works).
+That's it! Now that `react-scroll-parallax` is working in your Next.js application, you can add your own effects. See the [usage guide](/docs/usage/) for more.
