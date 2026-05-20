@@ -10,10 +10,6 @@ Component that sets up layers of `useParallax` elements to achieve a parallaxing
 import { ParallaxBanner, ParallaxBannerLayer } from 'react-scroll-parallax';
 ```
 
-### Working Demos
-
-See some example [code with demos](/docs/examples/banners).
-
 ## Examples
 
 There are two ways to setup a banner:

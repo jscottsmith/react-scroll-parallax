@@ -70,12 +70,6 @@ The **start** of an effect begins when the top of the element enters the bottom 
 
 The **end** of an effect begins when the bottom of the element exits the top of the view.
 
-:::info
-
-See a demo of [how progress is determined](/docs/examples/how-it-works#progress-is-relative-to-the-view).
-
-:::
-
 ### Available CSS Effects
 
 These are all the supported CSS effects:
