@@ -13,6 +13,7 @@ export const ElementProgress = () => {
         onProgressChange={(progress) => setProgress(progress)}
         onEnter={() => setEntered(true)}
         onExit={() => setEntered(false)}
+        translateX={[0, 0]}
         className="relative rounded-lg bg-gray-600 bg-opacity-50"
       >
         <div className="absolute inset-0 z-10 flex items-center justify-center border-2 border-gray-400 border-solid bg-gray-600 rounded-lg">
