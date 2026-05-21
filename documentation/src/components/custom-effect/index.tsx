@@ -5,6 +5,7 @@ import './index.css';
 
 export function CustomEffect() {
   const parallax = useParallax<HTMLHeadingElement>({
+    translateX: [0, 0], // required to trigger progress change
     onProgressChange: (progress) => {
       if (parallax.ref.current) {
         // set progress to CSS variable
