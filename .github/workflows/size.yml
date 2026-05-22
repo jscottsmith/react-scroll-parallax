@@ -7,6 +7,10 @@ jobs:
       CI_JOB_NUMBER: 1
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
       - name: Install PNPM
         run: npm install -g pnpm
       - name: Install dependencies
