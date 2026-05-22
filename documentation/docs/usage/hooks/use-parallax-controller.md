@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: React hook to access the ParallaxController instance for cache updates and advanced control.
 ---
 
 # useParallaxController

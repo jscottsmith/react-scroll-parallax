@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: v3 to v4 migration guide — WAAPI easing changes, rootMargin removal, and API updates.
 ---
 
 # Upgrade to V4

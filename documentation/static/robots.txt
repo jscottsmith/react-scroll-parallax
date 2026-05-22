@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://react-scroll-parallax.damnthat.tv/sitemap.xml

@@ -20,6 +20,42 @@ const config = {
   plugins: [
     require.resolve('./src/plugins/tailwind-config.js'),
     [
+      'docusaurus-plugin-llms',
+      {
+        title: 'React Scroll Parallax',
+        description:
+          'React hooks and components for scroll-driven parallax effects via WAAPI (v4 beta).',
+        version: '4.0.0-beta.1',
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        generateMarkdownFiles: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        docsDir: 'docs',
+        ignoreFiles: [
+          'migration-guides/v1-migration-guide.md',
+          'migration-guides/v2-migration-guide.md',
+        ],
+        includeOrder: [
+          'intro',
+          'usage/usage',
+          'usage/parallax-props',
+          'usage/hooks/*',
+          'usage/components/*',
+          'usage/next-13',
+          'migration-guides/v3-migration-guide',
+          'examples/how-it-works',
+          'examples/*',
+        ],
+        includeUnmatchedLast: true,
+        rootContent:
+          'Current docs target v4 beta (WAAPI / ScrollTimeline). Wrap your app in ParallaxProvider before using hooks or components. For v3 docs, use the version dropdown on the site.',
+        pathTransformation: {
+          addPaths: ['v4'],
+        },
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [

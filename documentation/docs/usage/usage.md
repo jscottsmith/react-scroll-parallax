@@ -1,3 +1,7 @@
+---
+description: Setup guide — wrap your app in ParallaxProvider, then create effects with useParallax or Parallax.
+---
+
 # Usage
 
 :::info

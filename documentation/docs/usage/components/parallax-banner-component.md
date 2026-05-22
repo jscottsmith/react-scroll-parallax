@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: ParallaxBanner component for layered parallax images and custom markup in a banner container.
 ---
 
 # ParallaxBanner

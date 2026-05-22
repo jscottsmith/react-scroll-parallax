@@ -1,3 +1,7 @@
+---
+description: Index of React hooks — useParallax and useParallaxController.
+---
+
 # Hooks
 
 All provided React hooks.

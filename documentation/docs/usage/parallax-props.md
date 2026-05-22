@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Complete reference for parallax configuration props and CSS effect props accepted by hooks and components.
 ---
 
 # Parallax Props

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: React hook to apply scroll-driven parallax effects to a DOM element via ref.
 ---
 
 # useParallax

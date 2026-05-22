@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: v2 to v3 migration guide — Parallax component prop changes and new features.
 ---
 
 # Upgrade to V3

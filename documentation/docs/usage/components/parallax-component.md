@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Parallax component for applying scroll-driven CSS effects to a wrapper div around children.
 ---
 
 # Parallax
