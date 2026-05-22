@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Root context provider required for all parallax hooks and components; configures scroll axis and container.
 ---
 
 # ParallaxProvider

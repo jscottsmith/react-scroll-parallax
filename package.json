@@ -13,6 +13,7 @@
     "component"
   ],
   "homepage": "https://react-scroll-parallax.damnthat.tv",
+  "documentation": "https://react-scroll-parallax.damnthat.tv/llms.txt",
   "bugs": "https://github.com/jscottsmith/react-scroll-parallax/issues",
   "repository": {
     "type": "git",

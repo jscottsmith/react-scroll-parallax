@@ -1,3 +1,7 @@
+---
+description: Next.js 13+ App Router setup with ParallaxProvider as a client component.
+---
+
 # Usage with Next.js
 
 This guide will show you how to set up `react-scroll-parallax` using the [Next 13](https://nextjs.org/blog/next-13) App router.

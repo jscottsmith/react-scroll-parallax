@@ -24,7 +24,7 @@ npm install react-scroll-parallax
 
 Uses the latest [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro) built with **Web Animations API** for scroll-driven animations.
 
-If you're upgrading from V3, here's a [migration guide to the v4 beta](/docs/v4/migration-guides/v3-migration-guide).
+If you're upgrading from V3, here's a [migration guide to the v4 beta](https://react-scroll-parallax.damnthat.tv/docs/migration-guides/upgrade-to-v4).
 
 ```
 npm install react-scroll-parallax@beta
@@ -32,7 +32,7 @@ npm install react-scroll-parallax@beta
 
 ## Example
 
-[Create effects](https://react-scroll-parallax.damnthat.tv/docs/examples/how-it-works) with a hook:
+[Create effects](https://react-scroll-parallax.damnthat.tv/docs/v4/examples/how-it-works) with a hook:
 
 ```jsx
 function Component() {
@@ -59,23 +59,25 @@ function Component() {
 
 Read the [documentation](https://react-scroll-parallax.damnthat.tv/) for setup and usage instructions.
 
-- [Usage](https://react-scroll-parallax.damnthat.tv/docs/usage/)
-- [Usage with NextJS 13](https://react-scroll-parallax.damnthat.tv/docs/usage/next-13)
-- [How it works](https://react-scroll-parallax.damnthat.tv/docs/examples/how-it-works)
+- [Usage](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/)
+- [Usage with NextJS 13](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/next-13)
+- [How it works](https://react-scroll-parallax.damnthat.tv/docs/v4/examples/how-it-works)
 
 ### Demos
 
 - [Storybook v3](https://react-scroll-parallax-v3.surge.sh/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax/tree/v3/stories)
 - [Demo 1](https://react-scroll-parallax-examples.vercel.app/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax-examples)
+- [Horizontal Scroll](https://react-scroll-parallax-horizontal-scroll.surge.sh/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax-examples/tree/master/horizontal-scroll)
+- [Full Page Banner](https://mvzp1.csb.app/) - [Source Code](https://codesandbox.io/s/mvzp1)
 - [Demo 2](https://react-scroll-parallax.netlify.app/) - [Source Code (old 2.x version)](https://github.com/jscottsmith/react-parallax-site)
 
 ### Docs: Hooks
 
-- [`useParallax()`](https://react-scroll-parallax.damnthat.tv/docs/usage/hooks/use-parallax)
-- [`useParallaxController()`](https://react-scroll-parallax.damnthat.tv/docs/usage/hooks/use-parallax-controller)
+- [`useParallax()`](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/hooks/use-parallax)
+- [`useParallaxController()`](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/hooks/use-parallax-controller)
 
 ### Docs: Components
 
-- [`<Parallax>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-component)
-- [`<ParallaxBanner>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-banner-component)
-- [`<ParallaxProvider>`](https://react-scroll-parallax.damnthat.tv/docs/usage/components/parallax-provider)
+- [`<Parallax>`](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/components/parallax-component)
+- [`<ParallaxBanner>`](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/components/parallax-banner-component)
+- [`<ParallaxProvider>`](https://react-scroll-parallax.damnthat.tv/docs/v4/usage/components/parallax-provider)

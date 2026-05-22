@@ -1,5 +1,6 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
+description: v1 to v2 migration guide — offset prop changes and progress calculation updates.
 ---
 
 # Upgrade to V2

@@ -3,11 +3,18 @@ hide_title: true
 title: 'React Scroll Parallax'
 sidebar_label: 'Intro'
 sidebar_position: 1
+description: Introduction to React Scroll Parallax v4 beta — install, quick examples, and links to usage docs.
 ---
 
 import { IntroLogo } from '@site/src/components/intro-logo';
 
 <IntroLogo />
+
+:::info Version
+
+These docs describe **v4 beta** (WAAPI / ScrollTimeline). v3 docs are available via the version dropdown or by clicking the [v3 docs](/docs/intro) link.
+
+:::
 
 [![NPM Version Latest](https://img.shields.io/npm/v/react-scroll-parallax/latest)](https://www.npmjs.com/package/react-scroll-parallax)
 [![NPM Downloads](https://img.shields.io/npm/dm/react-scroll-parallax)](https://www.npmjs.com/package/react-scroll-parallax)
@@ -21,23 +28,25 @@ React hooks and components to create scroll-driven parallax effects for banners,
 
 ## Install
 
-With npm
-
-```
-npm install react-scroll-parallax
-```
-
-:::tip Try 4.0 Beta
+:::tip 4.0 Beta
 
 Uses the latest [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro) built with **Web Animations API** for scroll-driven animations.
 
-If you're upgrading from V3, here's a [migration guide to the v4 beta](/docs/v4/migration-guides/v3-migration-guide).
+If you're upgrading from V3, here's a [migration guide to the v4 beta](/docs/migration-guides/upgrade-to-v4).
+
+Note that **Firefox does not support the** [Web Animations ViewTimeline API](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view#browser_compatibility). You will need to use a [polyfill](https://github.com/flackr/scroll-timeline).
 
 :::
 
 ```
 npm install react-scroll-parallax@beta
 ```
+
+:::warning Browser Support
+
+Note that **Firefox does not support the** [Web Animations ViewTimeline API](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view#browser_compatibility). You will need to use a [polyfill](https://github.com/flackr/scroll-timeline). It's currently behind a flag in Firefox and enabled by default in Firefox Nightly if you want to try it out.
+
+:::
 
 ## Example
 
@@ -74,6 +83,8 @@ function Component() {
 
 - [Storybook v3](https://react-scroll-parallax-v3.surge.sh/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax/tree/v3/stories)
 - [Demo 1](https://react-scroll-parallax-examples.vercel.app/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax-examples)
+- [Horizontal Scroll](https://react-scroll-parallax-horizontal-scroll.surge.sh/) - [Source Code](https://github.com/jscottsmith/react-scroll-parallax-examples/tree/master/horizontal-scroll)
+- [Full Page Banner](https://mvzp1.csb.app/) - [Source Code](https://codesandbox.io/s/mvzp1)
 - [Demo 2](https://react-scroll-parallax.netlify.app/) - [Source Code (old 2.x version)](https://github.com/jscottsmith/react-parallax-site)
 
 ### Docs: Hooks

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: v3 to v4 migration guide — WAAPI easing changes, rootMargin removal, and API updates.
 ---
 
 # Upgrade to V4
@@ -98,7 +99,7 @@ The `rootMargin` prop is no longer supported. It previously adjusted measured el
 
 If you want a direct translation from the old preset strings you can replace them with the following cubic-bezier values:
 
-| Legacy preset    | Use this in V3                            |
+| Legacy preset    | Use this in V4                            |
 | ---------------- | ----------------------------------------- |
 | `easeInQuad`     | `cubic-bezier(0.55, 0.085, 0.68, 0.53)`   |
 | `easeInCubic`    | `cubic-bezier(0.55, 0.055, 0.675, 0.19)`  |

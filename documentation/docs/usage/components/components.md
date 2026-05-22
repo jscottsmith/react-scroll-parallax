@@ -1,3 +1,7 @@
+---
+description: Index of React components — Parallax, ParallaxBanner, and ParallaxProvider.
+---
+
 # Components
 
 All provided React components.

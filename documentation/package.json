@@ -9,7 +9,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "docusaurus build && node scripts/postprocess-llms.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -46,6 +46,7 @@
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
     "@types/react": "^19.1.0",
+    "docusaurus-plugin-llms": "^0.3.0",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.9.2"
   }
