@@ -12,7 +12,7 @@ import { IntroLogo } from '@site/src/components/intro-logo';
 
 :::info Version
 
-These docs describe **v4 beta** (WAAPI / ScrollTimeline). v3 docs are available via the version dropdown.
+These docs describe **v4 beta** (WAAPI / ScrollTimeline). v3 docs are available via the version dropdown or by clicking the [v3 docs](/docs/intro) link.
 
 :::
 
@@ -28,23 +28,25 @@ React hooks and components to create scroll-driven parallax effects for banners,
 
 ## Install
 
-With npm
-
-```
-npm install react-scroll-parallax
-```
-
-:::tip Try 4.0 Beta
+:::tip 4.0 Beta
 
 Uses the latest [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro) built with **Web Animations API** for scroll-driven animations.
 
 If you're upgrading from V3, here's a [migration guide to the v4 beta](/docs/v4/migration-guides/v3-migration-guide).
+
+Note that **Firefox does not support the** [Web Animations ViewTimeline API](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view#browser_compatibility). You will need to use a [polyfill](https://github.com/flackr/scroll-timeline).
 
 :::
 
 ```
 npm install react-scroll-parallax@beta
 ```
+
+:::warning Browser Support
+
+Note that **Firefox does not support the** [Web Animations ViewTimeline API](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view#browser_compatibility). You will need to use a [polyfill](https://github.com/flackr/scroll-timeline). It's currently behind a flag in Firefox and enabled by default in Firefox Nightly if you want to try it out.
+
+:::
 
 ## Example
 
