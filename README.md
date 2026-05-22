@@ -24,7 +24,7 @@ npm install react-scroll-parallax
 
 Uses the latest [Parallax Controller](https://parallax-controller.damnthat.tv/docs/v2/intro) built with **Web Animations API** for scroll-driven animations.
 
-If you're upgrading from V3, here's a [migration guide to the v4 beta](https://react-scroll-parallax.damnthat.tv/docs/v4/migration-guides/v3-migration-guide).
+If you're upgrading from V3, here's a [migration guide to the v4 beta](https://react-scroll-parallax.damnthat.tv/docs/migration-guides/upgrade-to-v4).
 
 ```
 npm install react-scroll-parallax@beta

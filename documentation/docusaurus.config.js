@@ -19,6 +19,11 @@ const config = {
 
   plugins: [
     require.resolve('./src/plugins/tailwind-config.js'),
+    // LLM output: docusaurus-plugin-llms accepts one docsDir per instance. Versioned
+    // v4 docs live in documentation/docs/; unversioned migration guides live in
+    // documentation/migration-guides/ (separate docs plugin below). A second LLM
+    // instance scans migration-guides/; scripts/postprocess-llms.js merges its
+    // links into llms.txt and places .md files under build/docs/migration-guides/.
     [
       'docusaurus-plugin-llms',
       {
@@ -33,10 +38,6 @@ const config = {
         excludeImports: false,
         removeDuplicateHeadings: true,
         docsDir: 'docs',
-        ignoreFiles: [
-          'migration-guides/v1-migration-guide.md',
-          'migration-guides/v2-migration-guide.md',
-        ],
         includeOrder: [
           'intro',
           'usage/usage',
@@ -44,7 +45,6 @@ const config = {
           'usage/hooks/*',
           'usage/components/*',
           'usage/next-13',
-          'migration-guides/v3-migration-guide',
           'examples/how-it-works',
           'examples/*',
         ],
@@ -56,10 +56,67 @@ const config = {
         },
       },
     ],
+    // Second LLM instance — see comment above. Writes llms-migration-guides.txt for postprocess.
+    [
+      'docusaurus-plugin-llms',
+      {
+        id: 'migration-llms',
+        docsDir: 'migration-guides',
+        title: 'Migration Guides',
+        description:
+          'Upgrade guides for React Scroll Parallax across major versions.',
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: false,
+        llmsTxtFilename: 'llms-migration-guides.txt',
+        generateMarkdownFiles: true,
+        excludeImports: false,
+        removeDuplicateHeadings: true,
+        includeOrder: ['upgrade-to-v4', 'upgrade-to-v3', 'upgrade-to-v2'],
+        pathTransformation: {
+          addPaths: ['docs', 'migration-guides'],
+        },
+      },
+    ],
+    // Unversioned docs at /docs/migration-guides/* (not under /docs/v4). Shared across all versions.
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'migration',
+        path: 'migration-guides',
+        routeBasePath: 'docs/migration-guides',
+        sidebarPath: require.resolve('./sidebarsMigration.js'),
+        editUrl:
+          'https://github.com/jscottsmith/react-scroll-parallax/tree/master/documentation',
+      },
+    ],
     [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
+          {
+            to: '/docs/migration-guides/upgrade-to-v2',
+            from: '/docs/migration-guides/v1-migration-guide',
+          },
+          {
+            to: '/docs/migration-guides/upgrade-to-v3',
+            from: '/docs/migration-guides/v2-migration-guide',
+          },
+          {
+            to: '/docs/migration-guides/upgrade-to-v4',
+            from: '/docs/migration-guides/v3-migration-guide',
+          },
+          {
+            to: '/docs/migration-guides/upgrade-to-v2',
+            from: '/docs/v4/migration-guides/v1-migration-guide',
+          },
+          {
+            to: '/docs/migration-guides/upgrade-to-v3',
+            from: '/docs/v4/migration-guides/v2-migration-guide',
+          },
+          {
+            to: '/docs/migration-guides/upgrade-to-v4',
+            from: '/docs/v4/migration-guides/v3-migration-guide',
+          },
           {
             to: '/docs/v4/examples/how-it-works',
             from: '/docs/examples/how-it-works',
@@ -229,6 +286,10 @@ const config = {
               {
                 to: '/docs/v4/usage/components',
                 label: 'Components',
+              },
+              {
+                to: '/docs/migration-guides',
+                label: 'Migration Guides',
               },
             ],
           },

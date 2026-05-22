@@ -17,8 +17,11 @@ Prefer machine-readable docs over scraping the site:
 - Index: https://react-scroll-parallax.damnthat.tv/llms.txt
 - Full bundle: https://react-scroll-parallax.damnthat.tv/llms-full.txt
 - Per-page markdown: https://react-scroll-parallax.damnthat.tv/docs/v4/**/*.md
+- Migration guides (unversioned): https://react-scroll-parallax.damnthat.tv/docs/migration-guides/**/*.md
 
 Current docs target **v4 beta**. v3 docs remain on the site via the version dropdown.
+
+Migration guides are **not versioned** — they live in `documentation/migration-guides/` with their own docs plugin (`/docs/migration-guides/*`), not under `/docs/v4/`. LLM output uses two `docusaurus-plugin-llms` instances (one per content root); see `documentation/docusaurus.config.js` and `documentation/scripts/postprocess-llms.js`.
 
 ## Quick start
 
@@ -60,7 +63,7 @@ function MyContent() {
 | `<ParallaxBanner>` | https://react-scroll-parallax.damnthat.tv/docs/v4/usage/components/parallax-banner-component |
 | `<ParallaxProvider>` | https://react-scroll-parallax.damnthat.tv/docs/v4/usage/components/parallax-provider |
 | Next.js App Router | https://react-scroll-parallax.damnthat.tv/docs/v4/usage/next-13 |
-| v3 → v4 migration | https://react-scroll-parallax.damnthat.tv/docs/v4/migration-guides/v3-migration-guide |
+| v3 → v4 migration | https://react-scroll-parallax.damnthat.tv/docs/migration-guides/upgrade-to-v4 |
 
 ## Source layout
 
@@ -76,6 +79,9 @@ src/
 dist/                      # Build output (published to npm)
 stories/                   # Storybook examples
 documentation/             # Docusaurus docs site
+  docs/                      # v4 (current) versioned docs → /docs/v4/*
+  migration-guides/          # Unversioned migration guides → /docs/migration-guides/*
+  versioned_docs/version-3/  # Frozen v3 docs → /docs/*
 ```
 
 Underlying scroll engine: [parallax-controller](https://parallax-controller.damnthat.tv/docs/v2/intro).
