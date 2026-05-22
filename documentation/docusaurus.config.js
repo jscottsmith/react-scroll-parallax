@@ -91,6 +91,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
       algolia: {
         appId: 'GKA17TPGZY',
         // Public API key: it is safe to commit it
