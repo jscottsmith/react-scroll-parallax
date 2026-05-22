@@ -29,7 +29,8 @@ const config = {
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
         generateMarkdownFiles: true,
-        excludeImports: true,
+        // Stripped in scripts/postprocess-llms.js so example imports in code blocks are kept.
+        excludeImports: false,
         removeDuplicateHeadings: true,
         docsDir: 'docs',
         ignoreFiles: [
